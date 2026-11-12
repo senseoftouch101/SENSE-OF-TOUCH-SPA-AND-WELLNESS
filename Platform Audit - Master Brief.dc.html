@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Platform audit · Master implementation brief</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126}a:hover{color:#536B4E}code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:#F3EEE6;padding:1px 4px}</style>
+</helmet>
+<article data-screen-label="Platform audit" style="max-width:1080px;margin:0 auto;padding:clamp(32px,6vw,72px) clamp(16px,4vw,40px) 96px;display:flex;flex-direction:column;gap:48px;font-size:15px;line-height:1.7">
+
+<header style="display:flex;flex-direction:column;gap:14px;border-bottom:1px solid #493126;padding-bottom:28px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Phase 1 · Existing project audit</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,62px);line-height:1.02;color:#493126">Platform audit against the master brief</h1>
+<p style="margin:0;max-width:70ch;text-wrap:pretty">The 24-part brief, checked against the 95 files in this project on 8 November 2026. Nothing was changed. Status describes the <strong>working prototype</strong>: every screen runs, but all data lives in the visitor’s browser. No item below counts as live, secure or integrated until a developer moves it onto a real server.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">
+<span style="color:#2F4A2B">● Built (prototype)</span><span style="color:#6B4A12">● Partial</span><span style="color:#9A3B2A">● Missing</span><span style="color:#24221D">● Server only</span>
+</div>
+</header>
+
+<section data-screen-label="Progress" style="background:#FFFDF9;border:1px solid #536B4E;padding:clamp(18px,3vw,28px);display:flex;flex-direction:column;gap:10px;font-size:14px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#2F4A2B">Built since the audit · 8 Nov 2026</h2>
+<span><strong>1 Identity.</strong> <code>admin@senseoftouch.co</code> is now the main admin, with the Gmail account kept as backup. One list of 20 roles in <code>sot-auth.js</code>, which the CRM, Institute and Shop now all use. Each role lands on its own dashboard. Admin tabs are limited by role. Staff are signed out after 30 minutes idle and customers after 30 days. Signed-in devices can be signed out from the Sign In page.</span>
+<span><strong>2 Policies.</strong> <a href="Policy%20Centre.dc.html">Legal &amp; Policies Centre</a>: all 22 policies, with drafts, publishing, version history, effective dates and who must accept each one. Acceptances are recorded at customer and student registration, with optional consents kept as separate rows.</span>
+<span><strong>3 Dashboards.</strong> <a href="Executive%20Dashboard.dc.html">Executive, Finance and Marketing dashboards</a>. Every figure is counted from stored records and shows how it’s calculated.</span>
+<span><strong>4 Customer Portal.</strong> <a href="Account.dc.html">Account</a> now shows bookings, shop orders, gift cards, rewards, support and preferences, with a switch to the Student Portal.</span>
+<span><strong>5 Pages.</strong> <a href="Events.dc.html">Events</a>, <a href="Team.dc.html">Team &amp; community</a>, <a href="Delivery.dc.html">Delivery &amp; returns</a>, <a href="Collection.dc.html">Collection</a>. All are linked from the footer. The spa FAQ already existed in Contact.</span>
+<span><strong>6 Handover.</strong> <code>handoff/schema-002-platform.sql</code>, <code>DEPLOYMENT.md</code>, <code>ADMIN-HANDBOOK.md</code>; README updated.</span>
+<span><strong>7 Operations.</strong> <a href="Operations.dc.html">Operations console</a>: a therapist schedule where blocked times close slots on the booking page; suppliers and purchase orders; spa invoices, with receipts issued only once a payment is recorded with its reference; an announcement bar and a media library that requires alt text and photo consent; one combined activity, message, sign-in and error log; backup download and restore.</span>
+<span style="color:#6B2A1E"><strong>Still open:</strong> the backup admin’s password hash is still in the code, because removing it would lock everyone out of the prototype. It must not ship. The real server, payments and message delivery still need a developer.</span>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;color:#493126">1 · Fix first</h2>
+<p style="margin:0;max-width:70ch">These conflict with the brief’s security and identity rules.</p>
+<div style="display:flex;flex-direction:column;font-size:14px">
+<div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid #E9DDC9"><strong style="color:#9A3B2A">Wrong main admin</strong><span><code>sot-auth.js</code> and <code>handoff/README.md</code> make <code>senseoftouch101@gmail.com</code> the built-in administrator. The brief names <code>admin@senseoftouch.co</code>. Today that address only exists once the Gmail admin creates it under Admin → Official accounts.</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid #E9DDC9"><strong style="color:#9A3B2A">Password in the code</strong><span><code>sot-auth.js</code> contains a hash of the admin password. It is unsalted and short, so anyone who views the page source could recover it. Retire that password now. Never reuse it.</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid #E9DDC9"><strong style="color:#9A3B2A">Two role systems</strong><span><code>sot-auth.js</code> uses free-text staff roles. <code>academy-core.js</code> has its own list of 9 Institute roles. The brief asks for one system with 20 roles. The two need merging into one roles and permissions list.</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid #E9DDC9"><strong style="color:#9A3B2A">Access is checked only in the browser</strong><span>Every page hides admin screens on the visitor’s device, so anyone with technical skill can get past it. Fine for a prototype. Not acceptable once real data goes in.</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid #E9DDC9"><strong style="color:#6B4A12">Brand name</strong><span>The brief says <strong>“Aftercare”</strong>. The site, shop and 3D product viewer say <strong>“Aftercare”</strong>. Which is correct?</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:18px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;color:#493126">2 · Coverage by part</h2>
+<sc-for list="{{ parts }}" as="p" hint-placeholder-count="12">
+<div style="display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:8px 24px;padding:16px 0;border-top:1px solid #E9DDC9;font-size:14px">
+<div style="display:flex;flex-direction:column;gap:4px"><strong style="color:#493126;font-size:15px">{{ p.name }}</strong><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:{{ p.color }}">● {{ p.status }}</span></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<span><strong>Exists:</strong> {{ p.have }}</span>
+<sc-if value="{{ p.hasGap }}" hint-placeholder-val="{{ true }}"><span style="color:#6B2A1E"><strong>Gap:</strong> {{ p.gap }}</span></sc-if>
+</div>
+</div>
+</sc-for>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;color:#493126">3 · Database</h2>
+<p style="margin:0;max-width:72ch"><code>handoff/schema.sql</code> sets up 23 tables with access rules on each one. It covers shop, bookings, consultations, gift cards and support. Of the brief’s suggested entities, these are not in the schema yet:</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:#E9DDC9;border:1px solid #E9DDC9;font-size:13.5px">
+<sc-for list="{{ schemaGaps }}" as="g" hint-placeholder-count="6"><div style="background:#FFFDF9;padding:16px;display:flex;flex-direction:column;gap:4px"><strong style="color:#493126">{{ g.group }}</strong><span>{{ g.tables }}</span></div></sc-for>
+</div>
+<p style="margin:0;max-width:72ch;font-size:14px;color:#4A453C">The Institute and CRM already have well-defined data shapes in <code>academy-core.js</code> and <code>crm-core.js</code>. A developer can convert those to tables directly, so they don’t need redesigning.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;color:#493126">4 · What can and can’t be done here</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;font-size:14px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:22px;display:flex;flex-direction:column;gap:8px"><strong style="color:#536B4E;font-size:11px;letter-spacing:0.2em;text-transform:uppercase">In this project</strong><span>Every missing page, portal and dashboard as a working prototype. One merged role system and dashboard routing. The policy centre, with version history and a record of who accepted what. A full schema update and a developer handover.</span></div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:22px;display:flex;flex-direction:column;gap:8px"><strong style="color:#24221D;font-size:11px;letter-spacing:0.2em;text-transform:uppercase">Needs a developer &amp; hosting</strong><span>Real sign-in and MFA (Supabase Auth). Server-enforced permissions. Paystack and Hubtel payment confirmations. Email, SMS and WhatsApp delivery. File scanning, backups, deployment. Registration with Ghana’s Data Protection Commission and a legal review of every policy.</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;color:#493126">5 · Proposed build order</h2>
+<div style="display:flex;flex-direction:column;font-size:14px">
+<sc-for list="{{ order }}" as="o" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid #E9DDC9"><strong style="font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1;color:#C6A15B">{{ o.n }}</strong><span><strong style="color:#493126">{{ o.t }}</strong> · {{ o.d }}</span></div></sc-for>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;color:#493126">6 · Owner decisions still open</h2>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px">
+<li>Brand name: resolved 11 Nov 2026 as AFTERCARE.</li>
+<li>Gmail account: resolved 11 Nov 2026 as Founder / Owner / Super Admin.</li>
+<li>Prices, durations and deposits for treatments, packages and memberships.</li>
+<li>Course durations, fees and intake dates. None will be invented.</li>
+<li>Real product catalogue. Demo products are flagged <code>demo: true</code>.</li>
+<li>Real facility photos for the virtual tour, and verified student testimonials.</li>
+<li>The <strong>[To confirm]</strong> blanks in the policies, plus a Ghanaian lawyer’s review.</li>
+</ul>
+</section>
+</article>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const C = { b: ['Built (prototype)', '#2F4A2B'], p: ['Partial', '#6B4A12'], m: ['Missing', '#9A3B2A'], s: ['Server only', '#24221D'] };
+    const P = [
+      ['1 · Brand architecture', 'b', 'Spa homepage, Institute, The Lip Bar, Aftercare, Shop, Corporate, Occasions, Foundation, Podcast. Unconfirmed items are marked “coming soon”.', 'Sense of Touch Collection has no page yet.'],
+      ['2 · Design system', 'b', 'The exact brand palette, Cormorant Garamond with Montserrat, Brand Identity Kit, shared header and footer, site-base.css.', ''],
+      ['3 · 3D & animation', 'b', 'splash3d (logo reveal), hero3d, scene3d, product3d, institute3d (learning lab), motion.js. Each one checks for WebGL, respects reduced-motion settings, has a plain fallback and loads only when needed.', 'The virtual tour is set up but needs real facility photos. No GLB models yet; the objects are built in code.'],
+      ['4 · Public website', 'p', 'Home, About, Founder, Services, Treatment, Institute (28 sections incl. courses, admissions, certificate check), Lip Bar, Aftercare, Shop, Gallery, Journal, Contact, Packages, Membership, Gift cards.', 'No standalone Events page for the whole brand. No Leadership/Team, Community Impact, spa FAQ, Delivery information or Returns pages.'],
+      ['5 · Sign-in & accounts', 'p', 'Sign In page: show/hide password, remember me, forgot password, 6-digit code step, sign-out, blocks the malformed admin address. Account page handles registration.', 'Covers 3 kinds of account (admin, staff, member), not 20. No session timeout and no list of signed-in devices. Routing to dashboards only covers Admin, Institute Admin and Account.'],
+      ['6 · Admin console', 'p', 'Admin has 15 tabs: Overview, Bookings, Customers, Staff, Inventory, Inbox, Reports, WhatsApp, Social, Investors, Partners, Podcast, Foundation, Careers, Reviews. Institute Admin has its own 18 sections.', 'No executive dashboard combining spa, shop and Institute figures. No management of departments and divisions. No site-wide content editor with drafts and revision history (the Institute has one). No suppliers, expenses or therapist schedules.'],
+      ['7 · Admissions', 'b', 'Institute Registration plus the admissions screens in Institute Admin. All 9 application statuses, application reference, onboarding, student ID, handbook, orientation. Applicants can save and come back.', ''],
+      ['8 · Courses & LMS', 'b', 'Student and instructor sides of Institute Portal: modules, library, discussions, attendance, grading, practical assessments. Certificates have QR codes, a public check page and can be revoked. Hybrid and self-paced learning supported.', 'Course facts are placeholders until the owner confirms them.'],
+      ['9 · CRM', 'b', 'CRM.dc.html with crm-core.js: dashboard, client profile, leads, follow-ups, automations. Messages check consent first.', 'Not yet linked to Institute applications and students.'],
+      ['10 · Customer portal', 'p', 'Account page (profile, bookings, rewards) and the shop’s own account area.', 'These are two separate customer areas. There is no single portal for one person who is both a customer and a student.'],
+      ['11 · E-commerce', 'b', 'Shop: categories, product pages, reviews, compare, checkout, order tracking, coupons, stock checks, shop admin.', 'All products are demo items.'],
+      ['12 · Bookings', 'p', 'Book, Consultation (health questions), a limit on bookings per time slot and per therapist.', 'No calendar for managing therapists. No online consent to treatment. No rescheduling flow.'],
+      ['13 · Payments', 's', 'The handoff spells out the Paystack process step by step: create order, confirm the payment on the server, refunds. Institute tuition has a manual verification screen.', 'No payment provider is connected. Nothing can be marked paid until the server confirms it.'],
+      ['14 · Automation', 'p', 'CRM automations, Institute message queue, WhatsApp templates. Each one shows the real status: queued or not sent.', 'No email, SMS or WhatsApp provider is connected.'],
+      ['15 · Policy centre', 'p', 'Legal has 8 policies: privacy, terms, refunds, cookies, student terms, donations, investor privacy, accessibility.', 'The brief lists 22 policies, so 14 are missing. No version history, effective dates or acceptance records. Optional marketing and photo consent are not yet separate from required terms everywhere.'],
+      ['16–18 · Backend, roles & security', 's', 'schema.sql with access rules on every table. A trigger means only an admin can change someone’s role. Health data has restricted access.', 'See sections 1 and 3.'],
+      ['19 · Analytics', 'p', 'Reports tab in Admin, Institute reports, CRM dashboard. Every number is calculated from stored records.', 'No combined executive, finance or e-commerce dashboards. Metric definitions are not shown on screen.'],
+      ['20 · Responsive', 'b', 'QA Responsive Audit, with screenshots at the brief’s sizes.', 'Run it again after each new phase.'],
+      ['21 · SEO', 'p', 'Every page has a title, description, social-sharing tags and admin pages are hidden from search engines.', 'sitemap.xml and robots.txt are not generated. No structured data.'],
+      ['22–25 · Testing & docs', 'p', 'handoff/README.md, Institute Developer Handover, Institute Implementation Plan.', 'No end-to-end test report, administrator handbook or deployment guide.']
+    ];
+    return {
+      parts: P.map(([name, s, have, gap]) => ({ name, status: C[s][0], color: C[s][1], have, gap, hasGap: !!gap })),
+      schemaGaps: [
+        { group: 'Identity & roles', tables: 'roles, permissions, user_roles, role_permissions, sessions, audit_logs' },
+        { group: 'Organisation', tables: 'departments, divisions, staff, locations, services, service_categories' },
+        { group: 'CRM', tables: 'leads, activities, tasks, communications, customer_consents, customer_segments, loyalty_accounts' },
+        { group: 'Academy', tables: 'students, instructors, applications, courses, modules, lessons, enrolments, classes, attendance, assessments, practical_evaluations, certificates' },
+        { group: 'Operations', tables: 'therapists, schedules, appointments, memberships, refunds, suppliers, expenses' },
+        { group: 'Content & comms', tables: 'pages, posts, media_assets, events, policy_documents, policy_versions, notification_templates, notification_logs, automation_rules' }
+      ],
+      order: [
+        { n: '1', t: 'Identity clean-up', d: 'Make admin@senseoftouch.co the main admin. Take the password hash out of the code. Merge the role lists into the brief’s 20 roles. Send each role to its own dashboard after sign-in. Add session timeout.' },
+        { n: '2', t: 'Policy centre', d: 'Add the 14 missing policies as drafts marked [To confirm]. Add versions, effective dates and acceptance records. Keep optional consent separate.' },
+        { n: '3', t: 'Executive & finance dashboards', d: 'Combine spa, shop and Institute figures, each with its definition and date range.' },
+        { n: '4', t: 'Unified customer portal', d: 'Join the Account page and shop account. Let one person switch between customer and student.' },
+        { n: '5', t: 'Missing public pages', d: 'Events, Team, Community Impact, spa FAQ, Delivery, Returns, Sense of Touch Collection.' },
+        { n: '6', t: 'Schema & handover', d: 'Update schema.sql. Write the deployment guide and administrator handbook.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

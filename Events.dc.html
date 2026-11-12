@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Events · Sense of Touch</title>
+<meta name="description" content="Workshops, masterclasses, open days and wellness events from Sense of Touch, Tema Community 25.">
+<meta property="og:title" content="Events · Sense of Touch">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}*{box-sizing:border-box}a{color:#493126;text-underline-offset:3px}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./academy-core.js"></script>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh">
+<dc-import name="SiteHeader" active="" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+<section data-screen-label="Events hero" style="background:#493126;color:#F8F4ED">
+<div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:16px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">Events</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(46px,6vw,84px);line-height:0.98">Gather, learn, unwind</h1>
+<p style="margin:0;font-size:16px;line-height:1.75;max-width:620px;color:#E9DDC9;text-wrap:pretty">Workshops, masterclasses and open days at the spa and the Institute in Tema Community 25.</p>
+</div>
+</section>
+<main data-screen-label="Event list" style="max-width:1180px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:36px;color:#493126">Upcoming</h2>
+<sc-if value="{{ none }}" hint-placeholder-val="{{ true }}">
+<div style="background:#E9DDC9;padding:clamp(24px,4vw,40px);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126;max-width:30ch">No events are announced yet. New dates are shared here first.</span>
+<a href="Contact.dc.html" style="min-height:48px;padding:0 22px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;text-decoration:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Ask about events</a>
+</div>
+</sc-if>
+<sc-for list="{{ events }}" as="e" hint-placeholder-count="0">
+<a href="Institute.dc.html#events" style="display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:8px 24px;align-items:center;padding:22px 0;border-top:1px solid #E9DDC9;color:#24221D;text-decoration:none">
+<span style="display:flex;flex-direction:column;line-height:1"><span style="font-family:'Cormorant Garamond',serif;font-size:44px;color:#493126">{{ e.d }}</span><span style="font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ e.m }}</span></span>
+<span style="display:flex;flex-direction:column;gap:4px"><strong style="font-size:17px;font-weight:600;color:#493126">{{ e.title }}</strong><span style="font-size:14px;color:#4A453C">{{ e.meta }}</span></span>
+<span style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Register →</span>
+</a>
+</sc-for>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:28px">
+<a href="Occasions.dc.html" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#24221D"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Private occasions</span><span style="font-size:14px;line-height:1.6">Bridal, birthday and celebration bookings at the spa.</span></a>
+<a href="Corporate.dc.html" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#24221D"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Corporate wellness</span><span style="font-size:14px;line-height:1.6">Wellness days and workshops for teams.</span></a>
+<a href="Institute.dc.html#events" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#24221D"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Institute events</span><span style="font-size:14px;line-height:1.6">Masterclasses, open days and graduation.</span></a>
+</div>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() { this.iv = setInterval(() => { if (window.ACAD) { clearInterval(this.iv); this.forceUpdate(); } }, 80); }
+  componentWillUnmount() { clearInterval(this.iv); }
+  renderVals() {
+    const A = window.ACAD, today = new Date().toISOString().slice(0, 10);
+    const ev = A ? A.list('events').filter(e => e.status === 'Published' && !e.sample && String(e.date || '') >= today).sort((a, b) => String(a.date).localeCompare(String(b.date))) : [];
+    return { none: !ev.length, events: ev.map(e => { const d = new Date(e.date + 'T00:00'); return { title: e.title, d: d.getDate(), m: d.toLocaleDateString('en-GB', { month: 'short' }), meta: [e.type, e.time, e.mode || e.location].filter(Boolean).join(' · ') }; }) };
+  }
+}
+</script>
+</body>
+</html>

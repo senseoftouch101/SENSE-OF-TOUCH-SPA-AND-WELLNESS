@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-social.js"></script>
+</helmet>
+<sc-if value="{{ isFooter }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ hasPosts }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Footer social strip" style="display:flex;flex-direction:column;gap:14px;font-family:Montserrat,sans-serif">
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between"><span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C6A15B;font-weight:600">Latest on social</span><div style="display:flex;flex-wrap:wrap;gap:4px 14px"><sc-for list="{{ accounts }}" as="a" hint-placeholder-count="3"><a href="{{ a.url }}" target="_blank" rel="noopener" style="font-size:12px;color:#E9DDC9;text-decoration:none;min-height:32px;display:inline-flex;align-items:center" style-hover="color:#C6A15B">{{ a.platform }} {{ a.handle }}</a></sc-for></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,120px),1fr));gap:8px">
+<sc-for list="{{ posts }}" as="p" hint-placeholder-count="3">
+<button onClick="{{ p.open }}" aria-label="{{ p.aria }}" style="all:unset;cursor:pointer;position:relative;aspect-ratio:1/1;background:#3A362F;overflow:hidden;display:block">
+<sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ p.image }}" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+<sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset:0;padding:10px;font-size:11px;line-height:1.45;color:#E9DDC9;overflow:hidden">{{ p.short }}</span></sc-if>
+<span style="position:absolute;left:0;bottom:0;background:rgba(36,34,29,0.82);color:#F8F4ED;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;padding:4px 7px">{{ p.platform }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ isSection }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Social feed" style="background:#F3EEE6;font-family:Montserrat,sans-serif;color:#24221D">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:560px">
+<span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:600;color:#536B4E">On social</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3.4vw + 14px,52px);line-height:1.05;color:#493126;text-wrap:balance">{{ heading }}</h2>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ accounts }}" as="a" hint-placeholder-count="3"><a href="{{ a.url }}" target="_blank" rel="noopener" style="min-height:44px;padding:0 14px;display:inline-flex;align-items:center;gap:8px;border:1px solid #493126;color:#493126;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:0.04em" style-hover="background:#493126;color:#F8F4ED"><span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase">{{ a.platform }}</span><span style="font-weight:500">{{ a.handle }}</span></a></sc-for>
+</div>
+</div>
+<sc-if value="{{ hasPosts }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:14px">
+<sc-for list="{{ posts }}" as="p" hint-placeholder-count="6">
+<button onClick="{{ p.open }}" aria-label="{{ p.aria }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;background:#FFFDF9;border:1px solid #E9DDC9" style-hover="border-color:#C6A15B">
+<span style="position:relative;display:block;aspect-ratio:1/1;background:#E9DDC9;overflow:hidden">
+<sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ p.image }}" alt="{{ p.alt }}" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+<sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset:0;padding:22px;display:flex;align-items:center;font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.3;color:#493126;background:#E9DDC9">{{ p.short }}</span></sc-if>
+<sc-if value="{{ p.isVideo }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(36,34,29,0.72);display:flex;align-items:center;justify-content:center"><span style="width:0;height:0;border-left:16px solid #F8F4ED;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px"></span></span></sc-if>
+</span>
+<span style="display:flex;flex-direction:column;gap:6px;padding:12px 14px 14px">
+<span style="font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ p.platform }}</span>
+<span style="font-size:13px;line-height:1.5;color:#3A362F;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ p.caption }}</span>
+</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ useElfsight }}" hint-placeholder-val="{{ false }}"><div ref="{{ elfRef }}" style="min-height:200px"></div></sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="{{ openAria }}" onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;background:rgba(36,34,29,0.86);display:flex;align-items:center;justify-content:center;padding:16px;font-family:Montserrat,sans-serif">
+<div onClick="{{ stop }}" style="background:#FFFDF9;width:min(100%,{{ openW }});max-height:calc(100vh - 32px);display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 8px 8px 16px;border-bottom:1px solid #E9DDC9"><span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ openPlatform }}</span><div style="display:flex;gap:6px"><a href="{{ openUrl }}" target="_blank" rel="noopener" style="min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#493126;border:1px solid #493126;text-decoration:none">Open on {{ openPlatform }}</a><button onClick="{{ close }}" aria-label="Close" style="all:unset;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#493126">×</button></div></div>
+<div style="position:relative;width:100%;aspect-ratio:{{ openRatio }};max-height:calc(100vh - 100px);background:#24221D"><iframe src="{{ openEmbed }}" title="{{ openAria }}" allow="autoplay; encrypted-media; picture-in-picture; clipboard-write" allowFullScreen="{{ true }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>
+<span style="font-size:11px;color:#6B665C;padding:8px 16px">Loaded from {{ openPlatform }} — their privacy policy applies. If it doesn’t appear, use “Open on {{ openPlatform }}”.</span>
+</div>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:760},&quot;placement&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;institute&quot;,&quot;gallery&quot;,&quot;journal&quot;,&quot;footer&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Follow along&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { auto: [], open: null, tick: 0 };
+  elfRef = React.createRef();
+  componentDidMount() {
+    const X = window.SOTSocial;
+    if (!X) { let n = 0; this._wait = setInterval(() => { if (window.SOTSocial || ++n > 100) { clearInterval(this._wait); if (window.SOTSocial) { this.forceUpdate(); this.componentDidMount(); } } }, 100); return; }
+    if (this._ready) return; this._ready = true;
+    X.feed().then(auto => this.setState({ auto }));
+    this._on = () => this.setState(s => ({ tick: s.tick + 1 }));
+    window.addEventListener('storage', this._on); window.addEventListener('sot-change', this._on);
+    this._esc = e => { if (e.key === 'Escape' && this.state.open) this.setState({ open: null }); }; window.addEventListener('keydown', this._esc);
+    this.mountElf();
+  }
+  componentDidUpdate() { this.mountElf(); }
+  componentWillUnmount() { clearInterval(this._wait); window.removeEventListener('storage', this._on); window.removeEventListener('sot-change', this._on); window.removeEventListener('keydown', this._esc); }
+  mountElf() {
+    const X = window.SOTSocial, el = this.elfRef.current; if (!X || !el || el.dataset.done) return;
+    const c = X.cfg(); if (c.provider !== 'elfsight' || !/^[\w-]{8,}$/.test(c.elfsightId)) return;
+    el.dataset.done = '1'; const d = document.createElement('div'); d.className = 'elfsight-app-' + c.elfsightId; d.setAttribute('data-elfsight-app-lazy', ''); el.appendChild(d);
+    if (!document.querySelector('script[src*="elfsightcdn.com/platform.js"]')) { const s = document.createElement('script'); s.src = 'https://elfsightcdn.com/platform.js'; s.async = true; document.body.appendChild(s); }
+  }
+  renderVals() {
+    const X = window.SOTSocial, pl = this.props.placement || 'home', isFooter = pl === 'footer';
+    const base = { isFooter, isSection: !isFooter, heading: this.props.heading || 'Follow along', elfRef: this.elfRef, close: () => this.setState({ open: null }), stop: e => e.stopPropagation() };
+    if (!X) return { ...base, accounts: [], posts: [], hasPosts: false, isOpen: false };
+    const c = X.cfg(), items = X.forPlacement(pl, this.state.auto, isFooter ? 6 : 6);
+    const posts = items.map(p => { const cap = p.caption || ''; return { platform: p.meta.platform, image: p.image, hasImg: !!p.image, noImg: !p.image, caption: cap || 'View on ' + p.meta.platform, short: cap ? (cap.length > 110 ? cap.slice(0, 107) + '…' : cap) : p.meta.platform + ' post', alt: cap ? cap.slice(0, 120) : p.meta.platform + ' post from Sense of Touch', aria: 'Open ' + p.meta.platform + ' post' + (cap ? ': ' + cap.slice(0, 60) : ''), isVideo: ['YouTube', 'TikTok'].includes(p.meta.platform) || /reel/.test(p.url), open: () => p.meta.embed ? this.setState({ open: p }) : X.openLink(p.url) }; });
+    const o = this.state.open, wide = o && o.meta.ratio === '16/9';
+    return { ...base, accounts: c.accounts.filter(a => a.url && a.handle), posts, hasPosts: posts.length > 0, useElfsight: !isFooter && c.provider === 'elfsight' && !!c.elfsightId,
+      isOpen: !!o, openEmbed: o ? o.meta.embed : '', openUrl: o ? o.url : '', openPlatform: o ? o.meta.platform : '', openRatio: o ? o.meta.ratio : '4/5', openW: wide ? '960px' : o && o.meta.ratio === '9/16' ? '380px' : '520px', openAria: o ? o.meta.platform + ' post' : '' };
+  }
+}
+</script>
+</body>
+</html>

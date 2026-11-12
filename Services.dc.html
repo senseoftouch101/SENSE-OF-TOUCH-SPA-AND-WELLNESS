@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Services · Sense of Touch</title>
+<meta name="description" content="Facials, body therapy and massage, wood therapy, scalp and hair care, waxing and the Lip Bar. Every treatment begins with a consultation.">
+<meta property="og:title" content="Services · Sense of Touch">
+<meta property="og:description" content="Facials, body therapy and massage, wood therapy, scalp and hair care, waxing and the Lip Bar. Every treatment begins with a consultation.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>html,body{overflow-x:hidden}a[href^="https://wa.me"],a[href^="tel:"],a[href^="mailto:"],a[href*="instagram"],a[style*="border-bottom"],a[style*="text-transform: uppercase"],button,[type=submit]{min-height:44px!important;display:inline-flex;align-items:center}[style*="font-size: 8px"],[style*="font-size: 9px"],[style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"]{font-size:11px!important}p{max-width:min(100%,72ch)!important}p[style*="text-align: center"]{margin-inline:auto!important}h1,h2,h3,p,span,a{overflow-wrap:break-word}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}@media (pointer:coarse){a[style*="border-bottom"],button{min-height:44px}a[style*="border-bottom"]{display:inline-flex;align-items:center}}img,video,iframe{max-width:100%}@media (max-width:720px){[style*="padding: 112px 32px"]{padding:72px 20px!important}[style*="padding: 96px 32px"]{padding:64px 20px!important}[style*="padding: 80px 32px"]{padding:56px 20px!important}[style*="padding: 72px 32px"]{padding:56px 20px!important}[style*="padding: 96px 56px"]{padding:56px 24px!important}[style*="position: sticky; top: 1"]{position:static!important}[style*="grid-column: span 2"]{grid-column:auto!important}[style*="min-height: 720px"]{min-height:440px!important}[style*="padding: 40px;"]{padding:24px!important}}
+@media (max-width:900px){[data-3d="stones"]{width:34%!important;height:52%!important;opacity:0.6}}@media (max-width:640px){[data-3d="stones"]{display:none!important}}
+html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}</style>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="services" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<section data-screen-label="Services hero" style="position:relative;isolation:isolate;overflow:hidden;background:#E9DDC9">
+<div data-3d="stones" data-no-reveal="1" style="position:absolute;top:0;right:0;height:68%;width:min(40%,500px);pointer-events:none;z-index:-1"></div>
+<div style="max-width:1280px;margin:0 auto;padding:96px 32px 64px;display:flex;flex-direction:column;gap:24px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Treatment menu</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(48px,6.5vw,88px);line-height:1;color:#493126">Our services</h1>
+<p style="margin:0;font-size:17px;line-height:1.75;max-width:640px;text-wrap:pretty">Six departments of professional care. Every treatment begins with a consultation; durations and pricing are confirmed at booking.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+<sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+<a href="{{ s.anchor }}" style="border:1px solid #493126;background:#E9DDC9;padding:10px 16px;min-height:44px;box-sizing:border-box;font-size:13px;color:#493126;display:flex;gap:10px;align-items:center" style-hover="background:#493126;color:#F8F4ED"><span style="font-family:'Cormorant Garamond',serif;font-style:italic">{{ s.num }}</span>{{ s.name }}</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+<section id="{{ s.id }}" style="max-width:1280px;margin:0 auto;padding:96px 32px;border-bottom:1px solid #E9DDC9;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:64px;align-items:start">
+<div style="position:relative;aspect-ratio:5/4;width:100%;order:{{ s.order }}">
+<sc-if value="{{ s.pFacial }}" hint-placeholder-val="{{ false }}"><img src="assets/web/facial-treatment.jpg" alt="Facial treatment at Sense of Touch" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block"></sc-if>
+<sc-if value="{{ s.pBody }}" hint-placeholder-val="{{ false }}"><img src="assets/web/body-therapy-session.jpeg" alt="A Sense of Touch therapist giving a body treatment" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block"></sc-if>
+<sc-if value="{{ s.pWood }}" hint-placeholder-val="{{ false }}"><img src="assets/web/wood-therapy-session.jpeg" alt="A Sense of Touch therapist using a wooden roller during wood therapy" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block"></sc-if>
+<sc-if value="{{ s.pMassage }}" hint-placeholder-val="{{ false }}"><img src="assets/web/body-massage.jpg" alt="A Sense of Touch therapist giving a massage" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block"></sc-if>
+<sc-if value="{{ s.pLips }}" hint-placeholder-val="{{ false }}"><img src="assets/web/lips/lip-mapping.jpg" alt="Lip care at the Sense of Touch Lip Bar" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block"></sc-if>
+<sc-if value="{{ s.pScalp }}" hint-placeholder-val="{{ false }}"><img src="assets/web/scalp-steam-hair-loc.jpg" alt="Hair Wash with Steam and Loc Detox with Steam at Sense of Touch" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#24221D;display:block"></sc-if>
+<sc-if value="{{ s.pWax }}" hint-placeholder-val="{{ false }}"><img src="assets/web/waxing-before-after.jpg" alt="Before and after underarm hair removal with wax at Sense of Touch" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#24221D;display:block"></sc-if>
+<sc-if value="{{ s.noPhoto }}" hint-placeholder-val="{{ true }}"><image-slot id="{{ s.slot }}" shape="rect" placeholder="{{ s.ph }}" style="position:absolute;inset:0"></image-slot></sc-if>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:64px;font-style:italic;color:#C6A15B;line-height:0.8">{{ s.num }}</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4vw,52px);color:#493126;line-height:1.05">{{ s.name }}</h2>
+<p style="margin:0;font-size:15px;line-height:1.75;text-wrap:pretty">{{ s.intro }}</p>
+<div style="display:flex;flex-direction:column;border-top:1px solid #493126">
+<sc-for list="{{ s.items }}" as="it" hint-placeholder-count="5">
+<a href="{{ it.href }}" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:15px 0;border-bottom:1px solid #E9DDC9;flex-wrap:wrap;color:#24221D;transition:padding .25s" style-hover="padding-left:8px;color:#24221D">
+<span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#493126">{{ it.t }}</span>
+<span style="font-size:13px;color:#24221D;display:flex;gap:12px;align-items:center">{{ it.d }}<span style="font-weight:600;color:#493126">{{ it.p }}</span><span style="color:#C6A15B">→</span></span>
+</a>
+</sc-for>
+</div>
+<sc-if value="{{ s.note }}" hint-placeholder-val="{{ false }}">
+<p style="margin:0;font-size:12px;line-height:1.6;color:#493126">{{ s.note }}</p>
+</sc-if>
+<a href="{{ s.bookHref }}" style="align-self:flex-start;background:#493126;color:#F8F4ED;padding:15px 28px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600" style-hover="background:#24221D;color:#F8F4ED">Book {{ s.short }}</a>
+</div>
+</section>
+</sc-for>
+
+<section style="position:relative;isolation:isolate;overflow:hidden;background:#536B4E;color:#F8F4ED">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;pointer-events:none;z-index:-1"></div>
+<div style="max-width:1280px;margin:0 auto;padding:80px 32px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,4vw,48px);line-height:1.1">Not sure where to begin?</h2>
+<span style="font-size:15px;color:#E9DDC9">Our curated packages combine treatments into a single ritual.</span>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><a href="Packages.dc.html" style="background:#C6A15B;color:#24221D;padding:17px 32px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#F8F4ED;color:#24221D">View packages</a><a href="Brochures.dc.html?b=menu" style="border:1px solid #F8F4ED;color:#F8F4ED;padding:17px 28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#F8F4ED;color:#24221D">Download the menu</a></div>
+</div>
+</section>
+<section data-screen-label="Hygiene and care" style="background:#F8F4ED">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:720px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Hygiene &amp; care standards</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4vw,52px);line-height:1.05;color:#493126">Clean, calm and considered</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 32px">
+<div style="border-top:1px solid #493126;padding:20px 0;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Fresh for every guest</span><span style="font-size:14px;line-height:1.65">Clean linen and towels for each client; treatment beds and surfaces cleaned between appointments.</span></div>
+<div style="border-top:1px solid #493126;padding:20px 0;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Tools &amp; equipment</span><span style="font-size:14px;line-height:1.65">Reusable tools cleaned and disinfected after each use; single-use items used once and discarded.</span></div>
+<div style="border-top:1px solid #493126;padding:20px 0;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Consultation first</span><span style="font-size:14px;line-height:1.65">We ask about allergies, sensitivities and health before treatment, and adjust or decline where a treatment isn’t suitable.</span></div>
+<div style="border-top:1px solid #493126;padding:20px 0;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Your comfort &amp; privacy</span><span style="font-size:14px;line-height:1.65">Professional draping, your consent at every step, and your information kept confidential.</span></div>
+</div>
+<a href="Consultation.dc.html" style="align-self:flex-start;background:#493126;color:#F8F4ED;padding:0 28px;min-height:48px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Complete your consultation form</a>
+</div>
+</section>
+<dc-import name="Reviews" background="#F3EEE6" hint-size="100%,520px"></dc-import>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const S = [
+  ['facial', 'Facials', 'facials', 'Personalised facials that cleanse, renew and restore — each shaped by a consultation with our aesthetician.', 'Facial treatment photo', [['Essential Facial', 'Cleanse, exfoliate, mask and moisturise', 'GH₵300'], ['Signature Glow Facial', 'Our tailored house facial', 'GH₵450'], ['Dermaplaning Facial', 'Gentle blade exfoliation', 'GH₵500'], ['Back Facial', 'Deep cleansing care for the back', 'GH₵450'], ['Chemical Peel', 'Chosen after skin assessment', 'From GH₵600']]],
+  ['body', 'Massage Therapy', 'a massage', 'From classic Swedish to focused deep tissue work, delivered by a qualified massage therapist.', 'Massage photo', [['Swedish Massage', '60 min GH₵350 · 90 min', 'GH₵500'], ['Deep Tissue Massage', '60 min GH₵400 · 90 min', 'GH₵550'], ['Prenatal Massage', '60 min GH₵400 · 90 min', 'GH₵550'], ['Foot Therapy', '30 min GH₵200 · 60 min', 'GH₵300']], 'Enhancements: additional 30 minutes +GH₵150 · hot stone therapy +GH₵100 · aromatherapy +GH₵50.'],
+  ['wood', 'Wood Therapy', 'wood therapy', 'A traditional technique using shaped wooden tools to massage, relax and contour the body.', 'Wood therapy tools photo', [['Wood Therapy', '90 minutes', 'GH₵500']], 'Wood therapy is a massage and relaxation treatment. Results vary; it is not a weight-loss or medical procedure.'],
+  ['scalp', 'Scalp & Hair Therapy', 'scalp therapy', 'A restorative ritual for the scalp and hair — cleansing, massage and steam.', 'Scalp treatment photo', [['Scalp & Hair Wash Therapy + Steam', 'Cleanse, massage and steam', 'GH₵300']]],
+  ['waxing', 'Waxing & Grooming', 'waxing', 'Precise, hygienic waxing for every body, in a private and respectful setting.', 'Waxing suite photo', [['Brows', 'Shaped and defined', 'GH₵70'], ['Upper Lip', 'Quick and clean', 'GH₵50'], ['Chin', 'Quick and clean', 'GH₵70'], ['Underarms', 'Smooth for longer', 'GH₵100'], ['Bikini Line', 'Discreet and hygienic', 'GH₵150'], ['Brazilian', 'Discreet and hygienic', 'GH₵250'], ['Half Leg', 'Lower legs', 'GH₵200'], ['Full Leg', 'Ankle to thigh', 'GH₵300']], 'Intimate-area waxing is performed only by trained staff following strict hygiene protocols.'],
+  ['lips', 'The Lip Bar', 'the Lip Bar', 'Lip hydration, plumping and care in our dedicated Lip Bar — all non-invasive, no needles.', 'Lip Bar photo', [['Lip Plumping · Subtle', 'Soft, natural-looking fullness', 'GH₵2,000'], ['Lip Plumping · Defined', 'Fuller, more defined lips', 'GH₵2,800'], ['Lip Plumping · Full', 'Our most pronounced plumping', 'GH₵4,800'], ['Lip Hydration Treatment', 'Moisture-focused care', 'GH₵300'], ['Lip Aftercare Kit', 'Take-home care', 'GH₵150'], ['Wosè Lip Gloss', 'Our signature gloss', 'GH₵120']], 'All Lip Bar treatments are non-invasive and use no needles.']
+];
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      services: S.map(([id, name, short, intro, ph, items, note], i) => ({
+        id, name, short, intro, ph, note: note || '', bookHref: 'Book.dc.html?service=' + encodeURIComponent({ facial: 'Facial & Skin', body: 'Massage', wood: 'Wood Therapy', scalp: 'Scalp & Hair', waxing: 'Waxing', lips: 'The Lip Bar' }[id]), anchor: '#' + id, slot: 'svc-' + id,
+        num: String(i + 1).padStart(2, '0'), order: i % 2 ? 1 : 0, pFacial: id === 'facial', pBody: false, pMassage: id === 'body', pLips: id === 'lips', pWood: id === 'wood', pScalp: id === 'scalp', pWax: id === 'waxing', noPhoto: false,
+        items: items.map(([t, d, p]) => ({ t, d, p, href: 'Treatment.dc.html?t=' + t.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') }))
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

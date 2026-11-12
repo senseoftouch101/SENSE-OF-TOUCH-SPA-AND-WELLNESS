@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Sense of Touch Foundation</title>
+<meta name="description" content="The Sense of Touch Foundation — scholarships, skills for women and youth, community wellness and safe-beauty education in Ghana.">
+<meta property="og:title" content="Sense of Touch Foundation">
+<meta property="og:description" content="Scholarships, skills for women and youth, community wellness and safe-beauty education in Ghana.">
+<meta property="og:image" content="assets/logo.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<section data-screen-label="Foundation hero" style="background:#536B4E;color:#F8F4ED">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,3vw,32px) clamp(56px,7vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:32px 64px;align-items:end">
+<div style="display:flex;flex-direction:column;gap:20px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#E9DDC9;font-weight:600">Sense of Touch Foundation</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,6vw,88px);line-height:0.96;text-wrap:balance">Care that reaches further</h1></div>
+<div style="display:flex;flex-direction:column;gap:22px">
+<p style="margin:0;font-size:17px;line-height:1.75;color:#F3EEE6;max-width:52ch;text-wrap:pretty">The Foundation is the giving arm of Sense of Touch. It opens doors to professional training, brings wellness and self-care education to communities, and helps women and young people build livelihoods in beauty and wellness.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><a href="#support" style="min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#F8F4ED;color:#24221D;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;white-space:nowrap" style-hover="background:#C6A15B">Get involved</a><a href="#programmes" style="min-height:50px;padding:0 24px;display:inline-flex;align-items:center;border:1px solid #F8F4ED;color:#F8F4ED;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;white-space:nowrap" style-hover="background:#F8F4ED;color:#536B4E">Our programmes</a></div>
+</div>
+</div>
+</section>
+
+<sc-if value="{{ notOpen }}" hint-placeholder-val="{{ true }}"><section data-screen-label="Foundation status" style="background:#F3E3C4">
+<div style="max-width:1280px;margin:0 auto;padding:16px clamp(20px,3vw,32px);font-size:14px;line-height:1.6;color:#6B4A12">The Foundation is being established. We are not accepting donations until registration in Ghana is complete — you can register your interest, pledge support or volunteer today, and we’ll contact you when giving opens.</div>
+</section></sc-if>
+<sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}"><section data-screen-label="Foundation registered" style="background:#EEF2EC">
+<div style="max-width:1280px;margin:0 auto;padding:14px clamp(20px,3vw,32px);display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between;font-size:14px;color:#2F4A2B"><span>{{ regLine }}</span><a href="#give" style="font-weight:600;color:#2F4A2B;text-decoration:underline">Give now</a></div>
+</section></sc-if>
+
+<section data-screen-label="Mission" style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:32px 64px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Our purpose</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3.4vw + 14px,52px);line-height:1.05;color:#493126;text-wrap:balance">Every touch tells a story of care</h2></div>
+<div style="display:flex;flex-direction:column;gap:16px;font-size:16px;line-height:1.8;color:#3A362F"><p style="margin:0">Talent for care is everywhere; access to training, safe products and good information is not. The Foundation exists to close that gap — so more people can earn a living through skilled, professional work, and more communities can look after their wellbeing safely.</p><p style="margin:0">It works alongside the spa and the Sense of Touch Institute, using their trainers, rooms and standards, while keeping its own funds, decisions and reporting separate.</p></div>
+</section>
+
+<section id="programmes" data-screen-label="Programmes" style="background:#F3EEE6;scroll-margin-top:90px">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Programmes</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3.4vw + 14px,52px);line-height:1.05;color:#493126">Four ways we help</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1px;background:#E9DDC9;border:1px solid #E9DDC9">
+<div style="background:#FFFDF9;padding:30px 26px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:52px;line-height:1;color:#C6A15B">01</span><span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1;color:#493126">Scholarships</span><span style="font-size:14px;line-height:1.7;color:#4A453C">Full and part tuition at the Sense of Touch Institute for students with talent and limited means, including kits and transport support.</span></div>
+<div style="background:#FFFDF9;padding:30px 26px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:52px;line-height:1;color:#C6A15B">02</span><span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1;color:#493126">Skills for women &amp; youth</span><span style="font-size:14px;line-height:1.7;color:#4A453C">Short practical courses with business and entrepreneurship training, so graduates can work professionally or start their own business.</span></div>
+<div style="background:#FFFDF9;padding:30px 26px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:52px;line-height:1;color:#C6A15B">03</span><span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1;color:#493126">Community wellness days</span><span style="font-size:14px;line-height:1.7;color:#4A453C">Free self-care sessions and relaxation for communities, carers and frontline workers in Tema and beyond.</span></div>
+<div style="background:#FFFDF9;padding:30px 26px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:52px;line-height:1;color:#C6A15B">04</span><span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1;color:#493126">Safe beauty education</span><span style="font-size:14px;line-height:1.7;color:#4A453C">Talks and materials on skin health, hygiene and recognising unsafe or unregistered products, for schools and community groups.</span></div>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Transparency" style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:32px 64px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Our commitments</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3.4vw + 14px,52px);line-height:1.05;color:#493126;text-wrap:balance">Open about every cedi</h2></div>
+<div style="display:flex;flex-direction:column;border-top:1px solid #493126">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:16px;padding:18px 0;border-bottom:1px solid #E9DDC9"><strong style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;color:#493126">Separate funds</strong><span style="font-size:14px;line-height:1.7;color:#4A453C">Foundation money is kept apart from the business and used only for its programmes.</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:16px;padding:18px 0;border-bottom:1px solid #E9DDC9"><strong style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;color:#493126">Fair selection</strong><span style="font-size:14px;line-height:1.7;color:#4A453C">Published criteria for scholarships and programme places, reviewed by more than one person.</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:16px;padding:18px 0;border-bottom:1px solid #E9DDC9"><strong style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;color:#493126">Annual report</strong><span style="font-size:14px;line-height:1.7;color:#4A453C">Money in, money out and what it achieved, published every year.</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:16px;padding:18px 0;border-bottom:1px solid #E9DDC9"><strong style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;color:#493126">Dignity first</strong><span style="font-size:14px;line-height:1.7;color:#4A453C">Beneficiaries’ stories and photos are shared only with their written consent.</span></div>
+</div>
+</section>
+
+<sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}">
+<section id="give" data-screen-label="Give" style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px 64px;align-items:start;scroll-margin-top:90px">
+<div style="display:flex;flex-direction:column;gap:16px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Give</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3.4vw + 14px,52px);line-height:1.05;color:#493126;text-wrap:balance">Make a gift</h2><p style="margin:0;font-size:15px;line-height:1.75;color:#4A453C;max-width:44ch">Choose an amount and, if you like, the programme you’d like it to support. You’ll receive a receipt once your gift is confirmed.</p>
+<div style="display:flex;flex-direction:column;border-top:1px solid #493126;font-size:14px;line-height:1.6"><span style="padding:12px 0;border-bottom:1px solid #E9DDC9"><strong>GH₵ 100</strong> — a starter kit for a scholarship student</span><span style="padding:12px 0;border-bottom:1px solid #E9DDC9"><strong>GH₵ 250</strong> — a place at a community wellness day for ten people</span><span style="padding:12px 0;border-bottom:1px solid #E9DDC9"><strong>GH₵ 500</strong> — towards a short-course place for a young woman</span></div>
+<span style="font-size:12px;color:#6B665C">Illustrative examples — confirm costs before publishing.</span></div>
+<sc-if value="{{ gDone }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#FFFDF9;border:1px solid #536B4E;padding:28px;display:flex;flex-direction:column;gap:10px"><span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#536B4E">Reference {{ gRef }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#493126">Thank you for your gift.</span><span style="font-size:15px;line-height:1.7">{{ gNext }}</span><button onClick="{{ gAgain }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">Give again</button></div></sc-if>
+<sc-if value="{{ gForm }}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{ give }}" noValidate="{{ true }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:16px">
+<fieldset style="border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px"><legend style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126;padding:0 0 8px">Amount (GH₵)</legend><div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px"><sc-for list="{{ amounts }}" as="a" hint-placeholder-count="4"><button type="button" onClick="{{ a.go }}" aria-pressed="{{ a.on }}" style="all:unset;cursor:pointer;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;border:1px solid {{ a.bd }};background:{{ a.bg }};color:{{ a.fg }}">{{ a.l }}</button></sc-for></div>
+<input inputMode="decimal" aria-label="Other amount" value="{{ g.custom }}" onChange="{{ setCustom }}" placeholder="Other amount" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"><span style="font-size:12px;font-weight:500;color:#9A3B2A">{{ gErrAmount }}</span></fieldset>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Support<select value="{{ g.programme }}" onChange="{{ setProgramme }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit;min-height:48px"><sc-for list="{{ programmes }}" as="p" hint-placeholder-count="5"><option value="{{ p }}">{{ p }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Frequency<select value="{{ g.freq }}" onChange="{{ setFreq }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit;min-height:48px"><option value="One-off">One-off</option><option value="Monthly">Monthly</option></select></label>
+<sc-for list="{{ gFields }}" as="x" hint-placeholder-count="3"><label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">{{ x.l }}<input type="{{ x.type }}" autoComplete="{{ x.ac }}" value="{{ x.v }}" onChange="{{ x.set }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit;border-color:{{ x.bd }}"><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ x.err }}</span></label></sc-for>
+</div>
+<fieldset style="border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px"><legend style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126;padding:0 0 8px">Pay with</legend><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:8px"><sc-for list="{{ methods }}" as="m" hint-placeholder-count="2"><button type="button" onClick="{{ m.go }}" aria-pressed="{{ m.on }}" style="all:unset;cursor:pointer;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;border:1px solid {{ m.bd }};background:{{ m.bg }};color:{{ m.fg }}">{{ m.l }}</button></sc-for></div></fieldset>
+<sc-if value="{{ isMomo }}" hint-placeholder-val="{{ false }}"><div style="background:#F3EEE6;padding:14px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.6"><span>Send <strong>{{ amountTxt }}</strong> to <strong>{{ momoLine }}</strong> with reference <strong>{{ refHint }}</strong>, then enter the transaction ID.</span><input aria-label="Transaction ID" value="{{ g.txn }}" onChange="{{ setTxn }}" placeholder="Mobile money transaction ID" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit;background:#FFFDF9"><span style="font-size:12px;font-weight:500;color:#9A3B2A">{{ gErrTxn }}</span></div></sc-if>
+<sc-if value="{{ isBank }}" hint-placeholder-val="{{ false }}"><div style="background:#F3EEE6;padding:14px;font-size:14px;line-height:1.6;white-space:pre-line">{{ bankLine }}</div></sc-if>
+<label style="display:flex;gap:12px;align-items:center;min-height:44px;font-size:14px"><input type="checkbox" checked="{{ g.anon }}" onChange="{{ setAnon }}" style="width:20px;height:20px;accent-color:#536B4E;flex:none">Keep my gift anonymous in reports</label>
+<label style="display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.6;color:#4A453C"><input type="checkbox" checked="{{ g.consent }}" onChange="{{ setGConsent }}" style="width:20px;height:20px;accent-color:#536B4E;flex:none;margin-top:1px"><span>I confirm this is my own money and agree to the <a href="Legal.dc.html" style="text-decoration:underline">privacy policy</a>.</span></label>
+<span style="font-size:12px;font-weight:500;color:#9A3B2A">{{ gErrConsent }}</span>
+<button type="submit" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:52px;padding:0 26px;align-self:flex-start;background:#536B4E;color:#F8F4ED;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600" style-hover="background:#493126">{{ giveLabel }}</button>
+</form>
+</sc-if>
+</section>
+</sc-if>
+
+<section id="support" data-screen-label="Foundation support" style="background:#493126;color:#F8F4ED;scroll-margin-top:90px">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px 64px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:16px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">Get involved</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3.4vw + 14px,52px);line-height:1.05;text-wrap:balance">Be part of it from the start</h2><p style="margin:0;font-size:15px;line-height:1.75;color:#E9DDC9;max-width:44ch">Pledge support, volunteer your skills, nominate someone for a scholarship or partner on a programme. Organisations can also see our <a href="Partners.dc.html" style="color:#C6A15B;text-decoration:underline">partnership options</a>.</p></div>
+<sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#FFFDF9;color:#24221D;padding:28px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#493126">Thank you, {{ first }}.</span><span style="font-size:15px;line-height:1.7">We’ve noted your interest and will be in touch as the Foundation opens.</span><button onClick="{{ again }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">Send another</button></div></sc-if>
+<sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{ send }}" noValidate="{{ true }}" style="background:#FFFDF9;color:#24221D;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:16px">
+<fieldset style="border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px"><legend style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126;padding:0 0 8px">I’d like to</legend><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ ways }}" as="w" hint-placeholder-count="5"><button type="button" onClick="{{ w.toggle }}" aria-pressed="{{ w.on }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 14px;display:inline-flex;align-items:center;font-size:13px;font-weight:500;border:1px solid {{ w.bd }};background:{{ w.bg }};color:{{ w.fg }}">{{ w.l }}</button></sc-for></div><span style="font-size:12px;font-weight:500;color:#9A3B2A">{{ errWays }}</span></fieldset>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+<sc-for list="{{ fields }}" as="x" hint-placeholder-count="4"><label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">{{ x.l }}<input type="{{ x.type }}" autoComplete="{{ x.ac }}" value="{{ x.v }}" onChange="{{ x.set }}" style="padding:12px;border:1px solid {{ x.bd }};background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ x.err }}</span></label></sc-for>
+</div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Message (optional)<textarea rows="3" value="{{ f.message }}" onChange="{{ setMessage }}" placeholder="How you’d like to help, or who you’d like to nominate" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit;resize:vertical;line-height:1.6"></textarea></label>
+<label style="display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.6;color:#4A453C"><input type="checkbox" checked="{{ f.consent }}" onChange="{{ setConsent }}" style="width:20px;height:20px;accent-color:#536B4E;flex:none;margin-top:1px"><span>I agree that Sense of Touch may contact me about the Foundation, as described in the <a href="Legal.dc.html" style="text-decoration:underline">privacy policy</a>.</span></label>
+<span style="font-size:12px;font-weight:500;color:#9A3B2A">{{ errConsent }}</span>
+<button type="submit" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:50px;padding:0 26px;align-self:flex-start;background:#536B4E;color:#F8F4ED;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600" style-hover="background:#493126">Register interest</button>
+</form>
+</sc-if>
+</div>
+</section>
+
+<dc-import name="SiteFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const WAYS = ['Pledge future support', 'Volunteer my skills', 'Nominate a scholar', 'Partner on a programme', 'Host a wellness day'];
+const BLANK = { ways: [], name: '', email: '', phone: '', org: '', message: '', consent: false };
+const PROGS = ['Where it’s needed most', 'Scholarships', 'Skills for women & youth', 'Community wellness days', 'Safe beauty education'];
+const GBLANK = { amount: 100, custom: '', programme: PROGS[0], freq: 'One-off', name: '', email: '', phone: '', method: '', txn: '', anon: false, consent: false };
+class Component extends DCLogic {
+  state = { f: { ...BLANK }, err: {}, sent: null, g: { ...GBLANK }, gErr: {}, gDone: null, tick: 0 };
+  componentDidMount() { this.off = window.SOT && window.SOT.on(() => this.setState(s => ({ tick: s.tick + 1 }))); }
+  componentWillUnmount() { this.off && this.off(); }
+  giveVals(S) {
+    const c = (S.list('foundation-settings')[0]) || {}, open = !!(c.open && c.regNo), st = this.state, g = st.g, ge = st.gErr;
+    const setG = p => this.setState({ g: { ...g, ...p }, gErr: {} });
+    const methods = [c.paystack ? ['card', 'Card or MoMo (Paystack)'] : null, c.momo ? ['momo', 'Mobile money'] : null, c.bank ? ['bank', 'Bank transfer'] : null].filter(Boolean);
+    const method = methods.some(m => m[0] === g.method) ? g.method : (methods[0] || [''])[0];
+    const amt = g.custom ? parseFloat(g.custom) : g.amount, ref = 'SOTF-' + String(Date.now()).slice(-6);
+    const d = st.gDone;
+    return { isOpen: open, notOpen: !open, regLine: 'Registered ' + (c.body ? 'with ' + c.body + ' · ' : '') + 'No. ' + (c.regNo || ''),
+      gDone: !!d, gForm: !d, gRef: d ? d.id : '', gNext: d ? (d.method === 'card' ? 'Complete your payment in the Paystack window. Your receipt follows once it’s confirmed.' : 'We’ll confirm your gift and email your receipt to ' + d.email + '.') : '', gAgain: () => this.setState({ gDone: null, g: { ...GBLANK } }),
+      g, gErrAmount: ge.amount || '', gErrTxn: ge.txn || '', gErrConsent: ge.consent || '',
+      amounts: [50, 100, 250, 500].map(v => { const on = !g.custom && g.amount === v; return { l: String(v), on: on ? 'true' : 'false', bd: on ? '#536B4E' : '#E9DDC9', bg: on ? '#536B4E' : '#F8F4ED', fg: on ? '#F8F4ED' : '#24221D', go: () => setG({ amount: v, custom: '' }) }; }),
+      setCustom: e => setG({ custom: e.target.value }), programmes: PROGS, setProgramme: e => setG({ programme: e.target.value }), setFreq: e => setG({ freq: e.target.value }),
+      gFields: [['name', 'Name', 'text', 'name'], ['email', 'Email', 'email', 'email'], ['phone', 'Phone (optional)', 'tel', 'tel']].map(([k, l, type, ac]) => ({ l, type, ac, v: g[k], set: e => setG({ [k]: e.target.value }), err: ge[k] || '', bd: ge[k] ? '#9A3B2A' : '#E9DDC9' })),
+      methods: methods.map(([k, l]) => ({ l, on: method === k ? 'true' : 'false', bd: method === k ? '#493126' : '#E9DDC9', bg: method === k ? '#493126' : '#F8F4ED', fg: method === k ? '#F8F4ED' : '#24221D', go: () => setG({ method: k }) })),
+      isMomo: method === 'momo', isBank: method === 'bank', amountTxt: 'GH₵ ' + (isFinite(amt) ? amt : '—'), momoLine: (c.momo || '') + (c.momoName ? ' (' + c.momoName + ')' : ''), refHint: 'your name', bankLine: (c.bank || '') + '\nUse your name as the reference. We’ll confirm when it arrives.',
+      setTxn: e => setG({ txn: e.target.value }), setAnon: e => setG({ anon: e.target.checked }), setGConsent: e => setG({ consent: e.target.checked }),
+      giveLabel: g.freq === 'Monthly' ? 'Pledge monthly gift' : 'Give GH₵ ' + (isFinite(amt) && amt > 0 ? amt : ''),
+      give: ev => { ev.preventDefault(); const x = {};
+        if (!(amt >= 5 && amt <= 100000)) x.amount = 'Enter an amount between GH₵ 5 and GH₵ 100,000.';
+        if (g.name.trim().length < 2) x.name = 'Enter your name.';
+        if (!S.email(g.email)) x.email = 'Enter a valid email for your receipt.';
+        if (g.phone && !S.ghPhone(g.phone)) x.phone = 'Enter a valid Ghana phone number.';
+        if (!method) x.amount = 'Giving methods are not set up yet.';
+        if (method === 'momo' && String(g.txn).trim().length < 6) x.txn = 'Enter the transaction ID from your MoMo confirmation.';
+        if (method === 'momo' && S.list('donations').some(dn => dn.txn && dn.txn === g.txn.trim())) x.txn = 'That transaction ID has already been submitted.';
+        if (!g.consent) x.consent = 'Please confirm to continue.';
+        if (Object.keys(x).length) return this.setState({ gErr: x });
+        const r = S.add('donations', { amount: amt, programme: g.programme, freq: g.freq, name: g.name.trim(), email: g.email.trim().toLowerCase(), phone: g.phone ? S.ghPhone(g.phone) : '', method, txn: g.txn.trim(), anon: g.anon, status: 'Pending' }, 'SOTF');
+        S.add('inbox', { kind: 'Foundation gift', name: r.name, email: r.email, phone: r.phone, message: 'GH₵ ' + amt + ' · ' + g.freq + ' · ' + g.programme + ' · ' + method, status: 'New' }, 'IN');
+        if (method === 'card') window.open(c.paystack, '_blank', 'noopener');
+        this.setState({ gDone: r, gErr: {} }); } };
+  }
+  renderVals() {
+    const S = window.SOT, st = this.state, f = st.f, e = st.err;
+    const set = p => this.setState({ f: { ...f, ...p }, err: { ...e, ...Object.fromEntries(Object.keys(p).map(k => [k, ''])) } });
+    return { ...(S ? this.giveVals(S) : { notOpen: true }),
+      sent: !!st.sent, notSent: !st.sent, first: st.sent ? st.sent.split(' ')[0] : '', again: () => this.setState({ sent: null, f: { ...BLANK } }),
+      f, errWays: e.ways || '', errConsent: e.consent || '',
+      ways: WAYS.map(l => { const on = f.ways.includes(l); return { l, on: on ? 'true' : 'false', bd: on ? '#536B4E' : '#E9DDC9', bg: on ? '#536B4E' : '#F8F4ED', fg: on ? '#F8F4ED' : '#24221D', toggle: () => set({ ways: on ? f.ways.filter(x => x !== l) : [...f.ways, l] }) }; }),
+      fields: [['name', 'Name', 'text', 'name'], ['email', 'Email', 'email', 'email'], ['phone', 'Phone (optional)', 'tel', 'tel'], ['org', 'Organisation (optional)', 'text', 'organization']].map(([k, l, type, ac]) => ({ l, type, ac, v: f[k], set: ev => set({ [k]: ev.target.value }), err: e[k] || '', bd: e[k] ? '#9A3B2A' : '#E9DDC9' })),
+      setMessage: ev => set({ message: ev.target.value }), setConsent: ev => set({ consent: ev.target.checked }),
+      send: ev => { ev.preventDefault(); if (!S) return; const x = {};
+        if (!f.ways.length) x.ways = 'Choose at least one way to help.';
+        if (f.name.trim().length < 2) x.name = 'Enter your name.';
+        if (!S.email(f.email)) x.email = 'Enter a valid email address.';
+        if (f.phone && !S.ghPhone(f.phone) && !/^\+\d{8,15}$/.test(f.phone.replace(/[\s\-()]/g, ''))) x.phone = 'Enter a valid phone number.';
+        if (!f.consent) x.consent = 'Please agree so we can contact you.';
+        if (Object.keys(x).length) return this.setState({ err: x });
+        const r = S.add('foundation-interest', { ways: f.ways, name: f.name.trim(), email: f.email.trim().toLowerCase(), phone: f.phone ? (S.ghPhone(f.phone) || f.phone.trim()) : '', org: f.org.trim(), message: f.message.trim(), status: 'New' }, 'FDN');
+        S.add('inbox', { kind: 'Foundation interest', name: r.name, email: r.email, phone: r.phone, message: r.ways.join(', ') + (r.org ? ' · ' + r.org : '') + (r.message ? ' — ' + r.message : ''), status: 'New' }, 'IN');
+        this.setState({ sent: r.name, err: {} }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Site map · Sense of Touch</title>
+<meta name="description" content="Every page on the Sense of Touch website.">
+<meta property="og:title" content="Site map · Sense of Touch">
+<meta property="og:description" content="Every page on the Sense of Touch website.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}</style>
+<script src="./sot-auth.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<div style="background:#24221D;color:#E9DDC9">
+<div style="max-width:1280px;margin:0 auto;padding:14px clamp(16px,3vw,32px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+<a href="Sense%20of%20Touch%20Homepage.dc.html" style="display:flex;flex-direction:column;line-height:1;color:#F8F4ED"><span style="font-family:'Cormorant Garamond',serif;font-size:24px">Sense of Touch</span><span style="font-size:10px;letter-spacing:0.3em;color:#C6A15B;margin-top:4px">SITE MAP</span></a>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<a href="Sense%20of%20Touch%20Homepage.dc.html" style="min-height:40px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #C6A15B;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Website</a>
+<a href="Shop.dc.html" style="min-height:40px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #C6A15B;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Shop</a>
+<a href="Admin.dc.html" style="min-height:40px;padding:0 14px;display:inline-flex;align-items:center;background:#C6A15B;color:#24221D;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Admin</a>
+</div>
+</div>
+</div>
+<main style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,3vw,32px) 96px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:12px;max-width:720px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Every page, in one place</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,6vw,76px);line-height:0.95;color:#493126">Site map</h1>
+<p style="margin:0;font-size:15px;line-height:1.7;text-wrap:pretty">The public website, the shop, the staff tools and the brand and business documents. Staff tools open after you sign in.</p>
+</div>
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+<section data-screen-label="{{ g.title }}" style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px solid #493126;padding-bottom:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(28px,3vw,38px);color:#493126">{{ g.title }}</h2>
+<span style="font-size:12px;color:#6B665C">{{ g.note }}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:10px">
+<sc-for list="{{ g.items }}" as="p" hint-placeholder-count="6">
+<a href="{{ p.href }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-height:92px;transition:border-color .25s, transform .25s" style-hover="border-color:#C6A15B;transform:translateY(-2px)">
+<span style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.1;color:#493126">{{ p.label }}</span><span style="color:#C6A15B;font-size:14px">→</span></span>
+<span style="font-size:13px;line-height:1.5;color:#4A453C">{{ p.desc }}</span>
+</a>
+</sc-for>
+</div>
+</section>
+</sc-for>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const E = f => encodeURI(f).replace(/&/g, '%26');
+const G = [
+  ['Website', 'Public pages, shared header and footer', [
+    ['Sense of Touch Homepage.dc.html', 'Homepage', 'The front door: hero, rituals, brochures'], ['About.dc.html', 'About', 'Our story and philosophy'], ['Founder.dc.html', 'Meet the founder', 'Woselande Carmelle Theus'],
+    ['Services.dc.html', 'Services', 'Full treatment menu'], ['Aftercare.dc.html', 'AFTERCARE', 'Signature facial ritual'], ['LipBar.dc.html', 'The Lip Bar', 'Lip care treatments'],
+    ['Packages.dc.html', 'Packages', 'Bundled experiences'], ['Ritual.dc.html?r=reset', 'The Reset', 'Package · Relax'], ['Ritual.dc.html?r=glow', 'The Glow', 'Package · Skin'], ['Ritual.dc.html?r=african-pure', 'African Pure Ritual', 'Package · Signature'], ['Ritual.dc.html?r=body-renewal', 'Body Renewal', 'Package · Body'], ['Ritual.dc.html?r=lip-experience', 'The Lip Experience', 'Package · Lip Bar'], ['Ritual.dc.html?r=total-wellness', 'Total Wellness', 'Package · Complete'], ['Ritual.dc.html?r=couples-escape', 'Couples’ Escape', 'Package · For two'], ['Membership.dc.html', 'Membership', 'Monthly wellness plans'], ['Occasions.dc.html', 'Occasions', 'Bridal, couples and birthdays'],
+    ['Corporate.dc.html', 'Corporate wellness', 'Team and company packages'], ['Gallery.dc.html', 'Gallery', 'The spa in pictures'], ['Journal.dc.html', 'Wellness journal', 'Articles and rituals'],
+    ['Contact.dc.html', 'Contact', 'Directions, hours and FAQ'], ['Reviews.dc.html', 'Reviews', 'Client reviews and Google reviews'], ['Team.dc.html', 'Team & community', 'The people behind the spa'], ['Events.dc.html', 'Events', 'Spa events and pop-ups'], ['Collection.dc.html', 'Sense of Touch Collection', 'Robes, slippers and merchandise'], ['Brochures.dc.html', 'Brochures', 'Download our brochures'], ['Delivery.dc.html', 'Delivery & returns', 'Shipping zones and 7-day returns'], ['Book.dc.html', 'Book an appointment', 'Online booking'], ['Consultation.dc.html', 'Consultation form', 'Pre-visit health form'], ['Treatment.dc.html?t=signature-facial', 'Treatment pages', 'One page per treatment, e.g. Signature facial'], ['Legal.dc.html?p=privacy', 'Privacy policy', 'How we handle your data'], ['Legal.dc.html?p=terms', 'Terms & conditions', 'Using the site and booking'], ['Legal.dc.html?p=refunds', 'Cancellations & refunds', 'Deposits and returns'], ['Legal.dc.html?p=cookies', 'Cookies', 'What we store on your device'], ['Legal.dc.html?p=accessibility', 'Accessibility', 'Website and spa access'], ['Legal.dc.html?p=students', 'Student terms', 'Institute enrolment terms'], ['Legal.dc.html?p=donations', 'Donation terms', 'Foundation gifts'], ['Legal.dc.html?p=partners', 'Partner privacy', 'Partner and investor data'], ['Policy Centre.dc.html', 'All policies', 'Spa, Institute and shop policies'], ['404.dc.html', 'Page not found', 'Shown for broken links']]],
+  ['Institute of Beauty & Wellness', 'Training division — public pages, portals and admin', [
+    ['Institute.dc.html', 'Institute home', '3D intro, courses, ways to learn'], ['Institute.dc.html#about', 'About, mission & founder', 'Vision, values, leadership, stories'], ['Institute.dc.html#courses', 'Courses & programmes', 'Catalogue with filters'], ['Institute.dc.html#methods', 'Learning methods', 'Delivery modes + 3D learning lab'],
+    ['Institute.dc.html#workshops', 'Workshops & masterclasses', 'Short hands-on sessions'], ['Institute.dc.html#tour', 'Facilities & virtual tour', 'Our actual spaces'], ['Institute.dc.html#events', 'Events & graduation', 'Open days, orientation, sign-up'], ['Institute.dc.html#admissions', 'Admissions, tuition & FAQ', 'Requirements and process'],
+    ['Institute Registration.dc.html', 'Student registration', '5-step application'], ['Institute.dc.html#track', 'Track an application', 'Status, letter, payment'], ['Institute.dc.html#calendar', 'Training calendar', 'Intakes and class dates'], ['Institute.dc.html#instructors', 'Instructors', 'Teaching team'],
+    ['Institute.dc.html#news', 'News & articles', 'Institute updates'], ['Institute.dc.html#verify', 'Certificate verification', 'Check a certificate ID'], ['Institute.dc.html#contact', 'Contact the Institute', 'Enquiries and interest'], ['Institute Portal.dc.html', 'Student & instructor portal', 'Learning, classes, grading'],
+    ['Institute Alumni.dc.html', 'Alumni', 'Graduates, verification, continuing education'], ['Institute Admin.dc.html', 'Institute admin', 'Staff sign-in required'], ['Institute Developer Handover.dc.html', 'Developer handover', 'Data, permissions, providers'], ['Institute Audit & Build Plan.dc.html', 'Audit & build plan', 'Status against the brief']]],
+  ['Community, partners & investors', 'Foundation, podcast, partnerships and investor relations', [
+    ['Careers.dc.html', 'Careers', 'Open roles and applications'], ['Foundation.dc.html', 'Sense of Touch Foundation', 'Programmes, giving and volunteering'], ['Podcast.dc.html', 'SOT Podcast', 'Episodes, topics and guest requests'], ['Partners.dc.html', 'Partners & sponsors', 'Sponsors, organisations and institutions'], ['Partnership Prospectus.dc.html', 'Partnership prospectus', 'Printable 5-page prospectus'],
+    ['Investors.dc.html', 'Investors', 'Investor relations and access requests'], ['Investor Room.dc.html', 'Investor room', 'Approved investors only'], ['Investor One-Pager.dc.html', 'One-page summary', 'Overview'], ['Growth Deck.dc.html', 'Growth & use of funds deck', 'Confidential'], ['Financial Model.dc.html', 'Financial model', 'Confidential · interactive'], ['Due Diligence Pack.dc.html', 'Due diligence pack', 'Confidential']]],
+  ['Shop & accounts', 'For clients', [
+    ['Shop.dc.html', 'The Shop', 'Products, cart and checkout'], ['Account.dc.html', 'My account', 'Member sign-in, bookings and orders'], ['GiftCards.dc.html', 'Gift cards', 'Buy and send gift cards'], ['Rewards.dc.html', 'SOT Rewards', 'Loyalty points'], ['Sign In.dc.html', 'Sign in', 'Clients, students and staff'], ['Gift Card Print.dc.html', 'Print a gift card', 'Card with QR code and barcode']]],
+  ['Staff tools', 'Sign-in required', [
+    ['Admin.dc.html', 'Admin dashboard', 'Bookings, customers, staff accounts'], ['CRM.dc.html', 'Client CRM', 'Client profiles and follow-ups'], ['Shop.dc.html#/admin', 'Shop admin', 'Products, orders, discounts, delivery'], ['Access Control.dc.html', 'Access control', 'Roles, permissions, approvals, audit log'], ['Executive Dashboard.dc.html', 'Executive dashboard', 'Spa, shop and Institute figures'], ['Operations.dc.html', 'Operations', 'Daily running of the spa'], ['Connect Supabase.dc.html', 'Connect Supabase', 'Database and email setup'], ['Google Review Card.dc.html', 'Google review card', 'Printable QR card for reception'], ['Launch Checklist.dc.html', 'Launch checklist', 'What’s left before go-live']]],
+  ['Brochures', 'Printable A4', [
+    ['Brochure 01 - Corporate Brand Brochure.dc.html', 'Corporate brand brochure', '11 pages'], ['Brochure 02 - Spa Services Menu.dc.html', 'Spa services menu', '8 pages']]],
+  ['Brand & business', 'Internal documents', [
+    ['Brand Identity Kit.dc.html', 'Brand identity kit', 'Logo, colours, type'], ['Brand Film.dc.html', 'Brand film', 'The film'], ['Brand Film - Production Bible.dc.html', 'Brand film production bible', 'Shot list and production plan'],
+    ['Brand Commercial - The Art of Touch.dc.html', 'Brand commercial', 'The Art of Touch'], ['Business Plan.dc.html', 'Business plan', 'Strategy and financials'], ['Business & Launch Master Plan.dc.html', 'Business & launch master plan', 'Launch roadmap'],
+    ['Pitch Deck.dc.html', 'Pitch deck', 'Presentation'], ['VC Pitch Narrative.dc.html', 'VC pitch narrative', 'Investor story'], ['Investor & Sponsor Presentation.dc.html', 'Investor & sponsor presentation', 'Partnership deck'],
+    ['Merchandise Collection.dc.html', 'Merchandise collection', 'Branded robes, slippers and goods'], ['Merchandise Supplier Brief.dc.html', 'Merchandise supplier brief', 'Specs for manufacturers'], ['Skincare Line Naming.dc.html', 'Skincare line naming', 'Product name options'], ['Platform Audit - Master Brief.dc.html', 'Platform audit', 'Master brief and build order'], ['Institute Implementation Plan.dc.html', 'Institute implementation plan', 'Rollout plan'], ['QA Responsive Audit.dc.html', 'QA responsive audit', 'Layout checks across screens']]]
+];
+class Component extends DCLogic {
+  renderVals() {
+    return { groups: G.map(([title, note, items]) => ({ title, note, items: items.map(([f, label, desc]) => ({ href: f.includes('#') ? E(f.split('#')[0]) + '#' + f.split('#')[1] : f.includes('?') ? E(f.split('?')[0]) + '?' + f.split('?')[1] : E(f), label, desc })) })) };
+  }
+}
+</script>
+</body>
+</html>

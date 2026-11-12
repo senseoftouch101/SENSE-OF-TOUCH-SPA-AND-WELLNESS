@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Executive Dashboard · Sense of Touch</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F3EEE6;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-auth.js"></script>
+<script src="./academy-core.js"></script>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column">
+<header style="background:#24221D;color:#F8F4ED">
+<div style="max-width:1320px;margin:0 auto;padding:16px clamp(16px,3vw,32px);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between">
+<a href="Sense%20of%20Touch%20Homepage.dc.html" style="display:flex;align-items:center;gap:12px;color:#F8F4ED;text-decoration:none"><img src="assets/logo-transparent.png" alt="" style="width:36px;height:36px;object-fit:contain;filter:brightness(0) invert(1)"><span style="display:flex;flex-direction:column"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:0.06em;line-height:1">SENSE OF TOUCH</span><span style="font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:#C6A15B;font-weight:600">Leadership dashboards</span></span></a>
+<sc-if value="{{ ok }}" hint-placeholder-val="{{ false }}">
+<nav aria-label="Dashboards" style="display:flex;flex-wrap:wrap;gap:4px">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.go }}" aria-pressed="{{ t.on }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 14px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:{{ t.fg }};border-bottom:2px solid {{ t.line }}">{{ t.label }}</button></sc-for>
+</nav>
+<span style="display:flex;align-items:center;gap:14px;font-size:12px;color:#B8B2A6">{{ who }}<a href="Operations.dc.html" style="color:#C6A15B;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;text-decoration:none">Operations</a><button onClick="{{ out }}" style="all:unset;cursor:pointer;min-height:44px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#C6A15B">Sign out</button></span>
+</sc-if>
+</div>
+</header>
+
+<sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Dashboard locked" style="max-width:460px;margin:0 auto;padding:clamp(56px,10vw,120px) 20px;display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:42px;color:#493126">{{ lockTitle }}</h1>
+<p style="margin:0;font-size:15px;line-height:1.7">{{ lockText }}</p>
+<a href="Sign%20In.dc.html" style="align-self:flex-start;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;text-decoration:none;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600">Sign in</a>
+</section>
+</sc-if>
+
+<sc-if value="{{ ok }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1320px;width:100%;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(16px,3vw,32px) 80px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:4px"><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,48px);line-height:1;color:#493126">{{ pageTitle }}</h1><span style="font-size:13px;color:#4A453C">{{ periodLine }}</span></div>
+<div role="group" aria-label="Reporting period" style="display:flex;border:1px solid #493126">
+<sc-for list="{{ periods }}" as="p" hint-placeholder-count="4"><button onClick="{{ p.go }}" aria-pressed="{{ p.on }}" style="all:unset;cursor:pointer;min-height:42px;padding:0 14px;display:inline-flex;align-items:center;font-size:12px;font-weight:600;background:{{ p.bg }};color:{{ p.fg }}">{{ p.label }}</button></sc-for>
+</div>
+</div>
+
+<sc-if value="{{ hasSample }}" hint-placeholder-val="{{ false }}"><div role="note" style="background:#F3E3C4;border-left:3px solid #C6A15B;padding:12px 14px;font-size:13px;line-height:1.55;color:#6B4A12">{{ sampleNote }}</div></sc-if>
+
+<div data-screen-label="KPIs" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:1px;background:#E9DDC9;border:1px solid #E9DDC9">
+<sc-for list="{{ kpis }}" as="k" hint-placeholder-count="8">
+<div style="background:#FFFDF9;padding:20px;display:flex;flex-direction:column;gap:6px">
+<span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ k.label }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1;color:#493126">{{ k.value }}</span>
+<span style="font-size:12px;line-height:1.5;color:#6B665C">{{ k.def }}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;align-items:start">
+<sc-for list="{{ tables }}" as="t" hint-placeholder-count="2">
+<section style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(16px,2.5vw,24px);display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;flex-direction:column;gap:2px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">{{ t.title }}</h2><span style="font-size:12px;color:#6B665C">{{ t.note }}</span></div>
+<div style="overflow-x:auto"><div style="display:grid;grid-template-columns:{{ t.cols }};min-width:{{ t.minW }};font-size:13px">
+<sc-for list="{{ t.head }}" as="h" hint-placeholder-count="3"><span style="padding:8px 8px 8px 0;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#493126;border-bottom:1px solid #493126">{{ h }}</span></sc-for>
+<sc-for list="{{ t.cells }}" as="c" hint-placeholder-count="0"><span style="padding:9px 8px 9px 0;border-bottom:1px solid #E9DDC9;overflow-wrap:anywhere">{{ c }}</span></sc-for>
+</div></div>
+<sc-if value="{{ t.empty }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#6B665C">No records in this period.</span></sc-if>
+</section>
+</sc-for>
+</div>
+<p style="margin:0;font-size:12px;line-height:1.6;color:#6B665C;max-width:80ch">Every figure is counted from stored records. Nothing is estimated. In this prototype, records are saved in this browser only. After launch, the same calculations run on the database, and only the payment provider’s confirmation can mark money as received.</p>
+</main>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { tab: (location.hash || '#exec').slice(1), period: 30, tick: 0 };
+  componentDidMount() { this.iv = setInterval(() => { if (window.SOTAuth && window.SOT) { clearInterval(this.iv); this.offA = window.SOTAuth.on(() => this.setState(s => ({ tick: s.tick + 1 }))); this.offS = window.SOT.on(() => this.setState(s => ({ tick: s.tick + 1 }))); this.forceUpdate(); } }, 60); }
+  componentWillUnmount() { clearInterval(this.iv); this.offA && this.offA(); this.offS && this.offS(); }
+  renderVals() {
+    const A = window.SOTAuth, S = window.SOT, AC = window.ACAD, st = this.state;
+    if (!A || !S) return { locked: true, ok: false, lockTitle: 'Loading…', lockText: '' };
+    const areas = [['exec', 'Executive'], ['finance', 'Finance'], ['marketing', 'Marketing']].filter(([k]) => A.canArea(k));
+    if (!A.current() || !areas.length) return { locked: true, ok: false, lockTitle: A.current() ? 'No dashboard access' : 'Leadership sign-in', lockText: A.current() ? 'Your role doesn’t include these dashboards. Ask the Super Administrator to review your role in Admin → Staff.' : 'Sign in with an account that has Director, Finance, Marketing or Auditor access.' };
+    const tab = areas.some(a => a[0] === st.tab) ? st.tab : areas[0][0];
+    const now = Date.now(), from = st.period ? now - st.period * 864e5 : 0, inP = d => { const t = new Date(d || 0).getTime(); return t >= from && t <= now + 864e5; };
+    const GHS = n => 'GHS ' + Number(n || 0).toLocaleString('en-GH', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+    const day = d => d ? new Date(String(d).length === 10 ? d + 'T00:00' : d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '';
+    const L = k => S.list(k) || [];
+    const db = S.shopDb(), orders = db.orders || [], shopCust = db.customers || [];
+    const PAID = ['Paid', 'Processing', 'Ready for Dispatch', 'Shipped', 'Delivered'];
+    const bookings = L('bookings'), enq = L('enquiries'), leads = L('leads'), consents = L('consents'), clients = L('clients');
+    const apps = L('acad-applications'), pays = L('acad-payments'), refundReq = L('acad-refund-requests'), support = L('acad-support');
+    const M = AC ? AC.metrics() : {};
+    const sample = [...bookings, ...orders, ...apps, ...pays, ...leads, ...enq].filter(r => r && (r.demo || r.sample)).length;
+    const shopPaid = orders.filter(o => PAID.includes(o.status) && inP(o.created)), tuitionV = pays.filter(p => p.status === 'Verified' && inP(p.verifiedAt || p.created));
+    const shopRev = shopPaid.reduce((n, o) => n + Number(o.total || 0), 0), tuiRev = tuitionV.reduce((n, p) => n + Number(p.amount || 0), 0);
+    const people = new Set([...(A.members() || []).map(m => m.email), ...shopCust.map(c => c.email), ...clients.map(c => c.phone || c.email)].filter(Boolean));
+    const table = (title, note, head, rows, cols) => ({ title, note, head, cells: rows.flat().map(String), empty: !rows.length, cols: cols || 'repeat(' + head.length + ',minmax(0,1fr))', minW: head.length * 110 + 'px' });
+    let kpis = [], tables = [], pageTitle = '';
+    if (tab === 'exec') {
+      pageTitle = 'Executive overview';
+      const bkP = bookings.filter(b => b.status !== 'Cancelled' && inP(b.created)), upcoming = bookings.filter(b => b.date >= S.localDate() && ['Requested', 'Confirmed'].includes(b.status));
+      kpis = [
+        { label: 'Customers', value: people.size, def: 'Distinct people with a member account, shop account or CRM record (all time).' },
+        { label: 'New registrations', value: (A.members() || []).filter(m => inP(m.created)).length + shopCust.filter(c => inP(c.created)).length, def: 'Member and shop accounts created in the period.' },
+        { label: 'Active students', value: M.activeStudents ?? 0, def: 'Students with at least one active enrolment.' },
+        { label: 'Applications', value: apps.filter(a => a.status !== 'Draft' && inP(a.created)).length, def: 'Submitted in the period. ' + (M.pending || 0) + ' waiting for review now.' },
+        { label: 'Active courses', value: M.activeCourses ?? 0, def: 'Published courses. ' + (M.activeCohorts || 0) + ' cohorts open or running.' },
+        { label: 'Spa bookings', value: bkP.length, def: 'Requested in the period, excluding cancelled. ' + upcoming.length + ' upcoming.' },
+        { label: 'Product orders', value: orders.filter(o => o.status !== 'Cancelled' && inP(o.created)).length, def: 'Placed in the period, excluding cancelled.' },
+        { label: 'Revenue received', value: GHS(shopRev + tuiRev), def: 'Paid shop orders plus verified tuition payments in the period.' },
+        { label: 'Outstanding tuition', value: GHS(M.outstanding), def: 'Unpaid balance on current enrolments (now).' },
+        { label: 'Open enquiries', value: enq.filter(e => ['New', 'Open'].includes(e.status || 'New')).length, def: 'Website and portal enquiries not yet answered (now).' },
+        { label: 'Student support', value: support.filter(s => s.status !== 'Closed' && s.status !== 'Resolved').length, def: 'Open student support requests (now).' }
+      ];
+      const act = [...bookings.map(b => [b.created, 'Booking', b.service + ' · ' + (b.name || ''), b.status]), ...orders.map(o => [o.created, 'Order', o.id + ' · ' + GHS(o.total), o.status]), ...apps.filter(a => a.status !== 'Draft').map(a => [a.created, 'Application', (a.name || '') + ' · ' + (a.courseTitle || a.courseId || ''), a.status]), ...enq.map(e => [e.created, 'Enquiry', (e.type || 'General') + ' · ' + (e.name || ''), e.status || 'New'])]
+        .filter(r => inP(r[0])).sort((a, b) => String(b[0]).localeCompare(String(a[0]))).slice(0, 12).map(r => [day(r[0]), r[1], r[2], r[3]]);
+      tables = [table('Recent activity', 'Latest records across the spa, shop and Institute.', ['Date', 'Type', 'Detail', 'Status'], act, '70px 100px minmax(0,1fr) 110px')];
+    }
+    if (tab === 'finance') {
+      pageTitle = 'Finance';
+      const pendT = pays.filter(p => p.status === 'Pending verification'), pendS = orders.filter(o => o.status === 'Pending Payment');
+      const refS = orders.filter(o => o.status === 'Refunded' && inP(o.updated || o.created)), refT = refundReq.filter(r => inP(r.created));
+      kpis = [
+        { label: 'Shop revenue', value: GHS(shopRev), def: shopPaid.length + ' orders with status Paid through Delivered in the period.' },
+        { label: 'Tuition received', value: GHS(tuiRev), def: tuitionV.length + ' payments verified by Finance in the period.' },
+        { label: 'Total received', value: GHS(shopRev + tuiRev), def: 'Shop plus tuition. Spa treatments are paid at the spa and not recorded online yet.' },
+        { label: 'Awaiting verification', value: pendT.length + pendS.length, def: pendT.length + ' tuition (' + GHS(pendT.reduce((n, p) => n + Number(p.amount || 0), 0)) + ') and ' + pendS.length + ' shop orders. Not counted as revenue.' },
+        { label: 'Outstanding tuition', value: GHS(M.outstanding), def: 'Unpaid balance on current enrolments (now).' },
+        { label: 'Refunds', value: GHS(refS.reduce((n, o) => n + Number(o.total || 0), 0) + refT.filter(r => ['Approved', 'Paid', 'Refunded'].includes(r.status)).reduce((n, r) => n + Number(r.amount || 0), 0)), def: refS.length + ' shop refunds and ' + refT.length + ' tuition refund requests in the period.' }
+      ];
+      const months = []; for (let i = 5; i >= 0; i--) { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - i); const key = d.toISOString().slice(0, 7);
+        const sr = orders.filter(o => PAID.includes(o.status) && String(o.created).slice(0, 7) === key).reduce((n, o) => n + Number(o.total || 0), 0), tr = pays.filter(p => p.status === 'Verified' && String(p.verifiedAt || p.created).slice(0, 7) === key).reduce((n, p) => n + Number(p.amount || 0), 0);
+        months.push([d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }), GHS(sr), GHS(tr), GHS(sr + tr)]); }
+      tables = [table('By month', 'Last six calendar months.', ['Month', 'Shop', 'Tuition', 'Total'], months),
+        table('Tuition payments', 'Latest 12, any status.', ['Date', 'Payer', 'Amount', 'Status'], pays.slice().sort((a, b) => String(b.created).localeCompare(String(a.created))).slice(0, 12).map(p => [day(p.created), p.payer || p.studentId || '', GHS(p.amount), p.status]))];
+    }
+    if (tab === 'marketing') {
+      pageTitle = 'Marketing';
+      const lp = leads.filter(l => inP(l.created)), conv = lp.filter(l => l.status === 'Converted').length, base = lp.filter(l => l.status !== 'Archived').length;
+      const lastC = {}; consents.slice().reverse().forEach(c => { if (c.key === 'mkt') lastC[c.phone || c.email] = !!c.granted; });
+      const optIn = Object.values(lastC).filter(Boolean).length;
+      const by = (arr, f) => Object.entries(arr.reduce((m, x) => { const k = f(x) || 'Not recorded'; m[k] = (m[k] || 0) + 1; return m; }, {})).sort((a, b) => b[1] - a[1]);
+      kpis = [
+        { label: 'New leads', value: lp.length, def: 'CRM leads created in the period.' },
+        { label: 'Converted', value: conv, def: 'Leads from the period now marked Converted.' },
+        { label: 'Conversion rate', value: base ? Math.round(conv / base * 100) + '%' : '—', def: 'Converted ÷ leads in the period (archived excluded).' },
+        { label: 'Marketing opt-ins', value: optIn, def: 'People whose latest marketing choice is “yes” (now). Only they may receive offers.' },
+        { label: 'Enquiries', value: enq.filter(e => inP(e.created)).length, def: 'Website and portal enquiries in the period.' }
+      ];
+      tables = [table('Leads by source', 'Period.', ['Source', 'Leads'], by(lp, l => l.source)), table('Pipeline', 'Period.', ['Stage', 'Leads'], by(lp, l => l.status)), table('Enquiries by topic', 'Period.', ['Topic', 'Count'], by(enq.filter(e => inP(e.created)), e => e.type))];
+    }
+    const PER = [[30, '30 days'], [90, '90 days'], [365, '12 months'], [0, 'All time']];
+    const d = A.roleDef() || {};
+    return { locked: false, ok: true, pageTitle, kpis, tables, who: A.current().name + ' · ' + (d.label || ''),
+      out: () => A.logout(),
+      periodLine: st.period ? 'Last ' + PER.find(p => p[0] === st.period)[1] + ' · to ' + new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'All records',
+      periods: PER.map(([v, label]) => ({ label, on: st.period === v, bg: st.period === v ? '#493126' : 'transparent', fg: st.period === v ? '#F8F4ED' : '#493126', go: () => this.setState({ period: v }) })),
+      tabs: areas.map(([k, label]) => ({ label, on: tab === k, fg: tab === k ? '#F8F4ED' : '#B8B2A6', line: tab === k ? '#C6A15B' : 'transparent', go: () => { history.replaceState(null, '', '#' + k); this.setState({ tab: k }); } })),
+      hasSample: sample > 0, sampleNote: 'Includes ' + sample + ' sample records loaded for walkthroughs. Clear sample data in Admin or Institute Admin before reading these figures as real.' };
+  }
+}
+</script>
+</body>
+</html>

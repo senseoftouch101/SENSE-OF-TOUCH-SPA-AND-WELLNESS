@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Launch checklist · Sense of Touch</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#F8F4ED}*{box-sizing:border-box}a{color:#536B4E}a:hover{color:#493126}</style>
+</helmet>
+<main data-screen-label="Launch checklist" style="max-width:1120px;margin:0 auto;padding:clamp(28px,5vw,64px) clamp(16px,4vw,40px) 80px;font-family:Montserrat,sans-serif;color:#24221D;display:flex;flex-direction:column;gap:28px">
+<header style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end;border-bottom:2px solid #493126;padding-bottom:22px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Go-live · senseoftouch.co</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,5vw,60px);line-height:1;color:#493126">Launch checklist</h1>
+<p style="margin:0;font-size:15px;line-height:1.65;max-width:640px;text-wrap:pretty">Everything left between the finished design and a live website. Tick items as they are done — progress is saved on this device. Hand section 1 and the quote checklist to your developer.</p>
+</div>
+<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:56px;line-height:1;color:#493126">{{ pct }}</span>
+<span style="font-size:12px;color:#6B665C">{{ doneLabel }}</span>
+<div style="width:180px;height:6px;background:#E9DDC9"><div style="height:100%;background:#536B4E;width:{{ pct }}"></div></div>
+</div>
+</header>
+
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="4"><button onClick="{{ f.pick }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 16px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid #493126;background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</button></sc-for>
+<button onClick="{{ print }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 16px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-left:auto">Print</button>
+</div>
+
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+<section style="display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px;padding-bottom:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">{{ g.title }}</h2>
+<span style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#536B4E;font-weight:600">{{ g.count }}</span>
+</div>
+<span style="font-size:14px;color:#6B665C;line-height:1.6;padding-bottom:10px">{{ g.note }}</span>
+<sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+<label style="display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:14px;align-items:start;padding:14px 16px;background:#FFFDF9;border:1px solid #E9DDC9;margin-top:-1px;cursor:pointer">
+<input type="checkbox" checked="{{ it.done }}" onChange="{{ it.toggle }}" style="width:22px;height:22px;margin:2px 0 0;accent-color:#536B4E">
+<span style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-size:15px;font-weight:600;color:{{ it.fg }};text-decoration:{{ it.dec }}">{{ it.t }}</span><span style="font-size:13px;line-height:1.55;color:#6B665C">{{ it.d }}</span></span>
+<span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:5px 8px;border:1px solid #C6A15B;color:#493126;white-space:nowrap">{{ it.who }}</span>
+</label>
+</sc-for>
+</section>
+</sc-for>
+
+<section data-screen-label="Developer quote checklist" style="background:#493126;color:#F8F4ED;padding:clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:16px">
+<span style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">For hiring a developer</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(28px,3.5vw,40px)">What to ask for in every quote</h2>
+<p style="margin:0;font-size:14px;line-height:1.7;color:#E9DDC9;max-width:720px">Send them the <b style="color:#F8F4ED">handoff</b> folder (DEPLOYMENT.md, schema.sql, schema-002-platform.sql, ADMIN-HANDBOOK.md). A good quote prices each line separately and names who owns the accounts — it should always be you.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0 32px">
+<sc-for list="{{ quote }}" as="q" hint-placeholder-count="10"><div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:12px 0;border-top:1px solid #6B4F42;font-size:14px;line-height:1.55"><span style="font-family:'Cormorant Garamond',serif;font-size:20px;color:#C6A15B">{{ q.n }}</span><span>{{ q.t }}</span></div></sc-for>
+</div>
+</section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const KEY = 'sot-launch-checklist-v1';
+const G = [
+  { id: 'dev', title: '1 · Make it real', note: 'Blocks launch. Today everything saves in one browser only.', items: [
+    ['Hire a developer', 'Use the quote checklist at the bottom of this page.', 'You'],
+    ['Create the Supabase project', 'Run handoff/schema.sql then schema-002-platform.sql. Owner account holds the login.', 'Developer'],
+    ['Connect the site to the database', 'Swap the browser store (sot-store.js, sot-auth.js, sot-policy.js) for Supabase calls. Same data shapes.', 'Developer'],
+    ['Live sign-in and staff roles', 'Email + password, MFA for staff, admin@ as owner. See DEPLOYMENT.md §1.', 'Developer'],
+    ['Host the site and point senseoftouch.co', 'HTTPS on, homepage served at the root, sitemap.xml and robots.txt at the root.', 'Developer'],
+    ['Create the four inboxes', 'bookings@, info@, customer@, admin@ — forward copies to senseoftouch101@gmail.com.', 'You'],
+    ['Daily job and message outbox', 'Scheduled 06:00 GMT: expire cards, release scheduled gift cards, reminders, birthdays.', 'Developer']] },
+  { id: 'svc', title: '2 · Payments and messages', note: 'Needed to take money and send texts automatically.', items: [
+    ['Open a Paystack business account', 'MoMo + card. Needs business registration and bank details.', 'You'],
+    ['Connect Paystack', 'Deposits, gift cards, shop and Institute fees. Webhook activates gift cards on payment.', 'Developer'],
+    ['Open a Hubtel SMS account', 'Register the sender ID “SenseTouch”.', 'You'],
+    ['Connect Hubtel', 'Sends everything in Admin → Messages automatically.', 'Developer'],
+    ['Save the Google review link', 'Google Business Profile → Ask for reviews → paste in Admin → Reviews.', 'You'],
+    ['Print the review card and gift cards', 'Google Review Card and Gift Card Print pages, after the link and domain are live.', 'You']] },
+  { id: 'content', title: '3 · Content only you can give', note: 'The pages are built; these figures and photos are missing or are my placeholders.', items: [
+    ['Membership fees', 'Essential, Gold and VIP — monthly and annual.', 'You'],
+    ['Institute tuition and registration fees', 'Per course, plus the payment schedule.', 'You'],
+    ['Confirm treatment prices', 'Services and Packages pages, and checkout.', 'You'],
+    ['Confirm rewards figures', 'Reward costs, 5–100 send limit, 20-point birthday bonus, 1 point per GHS 20 retail.', 'You'],
+    ['Real photography', 'Treatment rooms, team, products, slippers. Replace illustrations and placeholders.', 'You'],
+    ['Merchandise specs', 'Check sizes and logo placements before sending the supplier brief.', 'You']] },
+  { id: 'qa', title: '4 · Before launch', note: 'Do these in the week before going live.', items: [
+    ['Legal review of policies', 'Especially refunds, gift cards, membership and the Institute set.', 'Lawyer'],
+    ['Test every flow on a real phone', 'Book, pay deposit, buy and scan a gift card, check out, send points, register for a course.', 'You + developer'],
+    ['Speed check on mobile data', 'Homepage 3D is heavy — aim under 3 seconds on 4G; fall back to the flat logo if needed.', 'Developer'],
+    ['Train reception', 'Admin → Checkout, Gift cards, Messages, Rewards. Use handoff/ADMIN-HANDBOOK.md.', 'You'],
+    ['Back-ups switched on', 'Daily database back-ups, restore tested once.', 'Developer']] },
+  { id: 'after', title: '5 · After launch', note: 'First month.', items: [
+    ['Google Search Console', 'Verify senseoftouch.co and submit sitemap.xml.', 'Developer'],
+    ['Google Business Profile', 'Hours, photos, booking link, Community 25 pin.', 'You'],
+    ['Weekly report check', 'Admin → Reports: takings, gift card balance owed, points.', 'You'],
+    ['Monthly content', 'One Journal post and one Podcast episode a month.', 'You']] }
+];
+const QUOTE = ['Database and sign-in setup from the supplied schema', 'Connecting every page to the database (no browser-only storage left)', 'Paystack: deposits, gift cards, shop, Institute fees, refunds', 'Hubtel SMS + WhatsApp fallback for the outbox', 'Scheduled daily job', 'Hosting, domain, HTTPS, email deliverability (SPF, DKIM, DMARC)', 'Security: staff MFA, role permissions, rate limits on public forms', 'Testing on Android and iPhone, plus a speed report', 'Training session and written hand-over', 'Monthly support price after launch, and confirmation you own all accounts and code'];
+class Component extends DCLogic {
+  state = { done: {}, f: 'All' };
+  componentDidMount() { try { this.setState({ done: JSON.parse(localStorage.getItem(KEY)) || {} }); } catch (e) {} }
+  toggle(id) { const done = { ...this.state.done, [id]: !this.state.done[id] }; this.setState({ done }); try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
+  renderVals() {
+    const { done, f } = this.state;
+    const all = G.flatMap(g => g.items.map((x, i) => g.id + i)), n = all.filter(id => done[id]).length;
+    const who = w => f === 'All' || (f === 'Open' ? true : w.includes(f));
+    return {
+      pct: Math.round(n / all.length * 100) + '%', doneLabel: n + ' of ' + all.length + ' done',
+      filters: ['All', 'Open', 'You', 'Developer'].map(x => ({ label: x, pick: () => this.setState({ f: x }), bg: x === f ? '#493126' : 'transparent', fg: x === f ? '#F8F4ED' : '#493126' })),
+      print: () => window.print(),
+      groups: G.map(g => { const items = g.items.map(([t, d, w], i) => ({ id: g.id + i, t, d, who: w, done: !!done[g.id + i] })).filter(x => who(x.who) && !(f === 'Open' && x.done)); return { title: g.title, note: g.note, count: g.items.filter((x, i) => done[g.id + i]).length + ' / ' + g.items.length, items: items.map(x => ({ ...x, fg: x.done ? '#6B665C' : '#24221D', dec: x.done ? 'line-through' : 'none', toggle: () => this.toggle(x.id) })) }; }).filter(g => g.items.length),
+      quote: QUOTE.map((t, i) => ({ n: String(i + 1).padStart(2, '0'), t }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Access control · Sense of Touch</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F3EEE6;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#536B4E}a:hover{color:#493126}</style>
+<script src="./sot-store.js?v=20261110c"></script>
+</helmet>
+<div style="min-height:100vh">
+<header style="background:#24221D;color:#F8F4ED">
+<div style="max-width:1280px;margin:0 auto;padding:12px clamp(14px,3vw,28px);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+<a href="Admin.dc.html" style="display:flex;flex-direction:column;line-height:1;color:#F8F4ED;text-decoration:none;min-height:44px;justify-content:center"><span style="font-family:'Cormorant Garamond',serif;font-size:22px">Sense of Touch</span><span style="font-size:10px;letter-spacing:0.3em;color:#C6A15B;margin-top:4px">ACCESS CONTROL</span></a>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span style="font-size:12px;color:#E9DDC9">{{ whoLine }}</span><a href="Admin.dc.html" style="min-height:40px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #C6A15B;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;text-decoration:none">← Admin</a></div>
+</div>
+</header>
+
+<sc-if value="{{ notice }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:640px;margin:0 auto;padding:80px 20px;display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:40px;color:#493126">{{ noticeTitle }}</h1>
+<p style="margin:0;font-size:15px;line-height:1.7">{{ noticeText }}</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><a href="Admin.dc.html" style="min-height:48px;padding:0 20px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;text-decoration:none">Sign in on Admin</a><a href="Connect%20Supabase.dc.html" style="min-height:48px;padding:0 20px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;text-decoration:none">Connect Supabase</a></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ true }}">
+<main style="max-width:1280px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(14px,3vw,28px) 80px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#536B4E;font-weight:600">Roles, permissions &amp; hierarchy</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4vw,52px);line-height:1;color:#493126">Access control</h1></div>
+<div style="display:flex;gap:6px;flex-wrap:wrap" role="tablist">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.pick }}" aria-selected="{{ t.on }}" role="tab" style="all:unset;cursor:pointer;min-height:42px;padding:0 16px;display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;background:{{ t.bg }};color:{{ t.fg }};border:1px solid #493126">{{ t.label }}<sc-if value="{{ t.hasCount }}" hint-placeholder-val="{{ false }}"><span style="background:#C6A15B;color:#24221D;padding:2px 7px;font-size:11px">{{ t.count }}</span></sc-if></button></sc-for>
+</div>
+</div>
+<sc-if value="{{ hasMsg }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:{{ msgBg }};border:1px solid {{ msgBorder }};padding:12px 16px;font-size:14px;color:#24221D">{{ msg }}</div></sc-if>
+
+<sc-if value="{{ vOrg }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Organisation" style="display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ levels }}" as="L" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:16px;border-top:1px solid #493126;padding-top:14px">
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#536B4E;font-weight:600">Level {{ L.n }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#493126;line-height:1.1">{{ L.name }}</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:8px">
+<sc-for list="{{ L.roles }}" as="r" hint-placeholder-count="4">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:12px 14px;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><strong style="font-size:14px;color:#493126">{{ r.label }}</strong><span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#6B665C">{{ r.department }}</span></div>
+<span style="font-size:12px;color:#4A453C;line-height:1.5">{{ r.permText }}</span>
+<sc-if value="{{ r.empty }}" hint-placeholder-val="{{ true }}"><span style="font-size:12px;color:#9A6B12">No one assigned</span></sc-if>
+<sc-for list="{{ r.people }}" as="p" hint-placeholder-count="1"><span style="font-size:13px;color:#24221D">{{ p.email }} <span style="color:{{ p.color }};font-size:11px">{{ p.status }}</span></span></sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ vPeople }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="People" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:20px;align-items:start">
+<sc-if value="{{ canAssign }}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{ grant }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Assign a role</span>
+<span style="font-size:13px;line-height:1.6;color:#4A453C">Each person needs their own login first (Authentication → Users → invite). Manager and leadership roles go to the Founder for approval.</span>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Work email<input type="email" required="" value="{{ fEmail }}" onChange="{{ setEmail }}" placeholder="name@senseoftouch.co" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:12px;border:1px solid #E9DDC9;background:#FFFFFF;font-family:Montserrat,sans-serif"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Role<select value="{{ fRole }}" onChange="{{ setRole }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:12px;border:1px solid #E9DDC9;background:#FFFFFF;font-family:Montserrat,sans-serif;min-height:46px"><sc-for list="{{ roleOpts }}" as="o" hint-placeholder-count="8"><option value="{{ o.code }}">{{ o.label }}</option></sc-for></select></label>
+<sc-if value="{{ needDept }}" hint-placeholder-val="{{ false }}"><label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Department<select value="{{ fDept }}" onChange="{{ setDept }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:12px;border:1px solid #E9DDC9;background:#FFFFFF;font-family:Montserrat,sans-serif;min-height:46px"><sc-for list="{{ deptOpts }}" as="d" hint-placeholder-count="6"><option value="{{ d.v }}">{{ d.label }}</option></sc-for></select></label></sc-if>
+<button type="submit" style="all:unset;cursor:pointer;text-align:center;min-height:48px;padding:0 20px;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">{{ grantLabel }}</button>
+</form>
+</sc-if>
+<div style="display:flex;flex-direction:column;gap:8px;grid-column:span 2;min-width:0">
+<span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Staff &amp; accounts <span style="font-size:0.6em;color:#536B4E">{{ peopleCount }}</span></span>
+<sc-for list="{{ people }}" as="p" hint-placeholder-count="5">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:12px 14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+<div style="display:flex;flex-direction:column;gap:4px;min-width:0"><strong style="font-size:14px;overflow-wrap:anywhere">{{ p.email }}</strong>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ p.roles }}" as="r" hint-placeholder-count="1"><span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:4px 8px;background:#F3EEE6;border:1px solid #E9DDC9">{{ r.label }}<span style="color:#6B665C">· {{ r.dept }}</span><sc-if value="{{ r.canRemove }}" hint-placeholder-val="{{ false }}"><button onClick="{{ r.remove }}" aria-label="Remove role" style="all:unset;cursor:pointer;color:#9A3B2A;font-weight:600;padding:0 4px">×</button></sc-if></span></sc-for></div></div>
+<div style="display:flex;gap:6px;align-items:center"><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:{{ p.color }}">{{ p.status }}</span><sc-if value="{{ p.canToggle }}" hint-placeholder-val="{{ false }}"><button onClick="{{ p.toggle }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 12px;display:inline-flex;align-items:center;border:1px solid #493126;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#493126">{{ p.toggleLabel }}</button></sc-if></div>
+</div>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ vAppr }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Approvals" style="display:flex;flex-direction:column;gap:8px">
+<sc-if value="{{ noAppr }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;font-size:14px;color:#6B665C">No requests waiting.</div></sc-if>
+<sc-for list="{{ approvals }}" as="a" hint-placeholder-count="2">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:14px 16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+<div style="display:flex;flex-direction:column;gap:4px"><strong style="font-size:14px;color:#493126">{{ a.title }}</strong><span style="font-size:12px;color:#6B665C">Requested by {{ a.by }} · {{ a.when }} · {{ a.status }}</span></div>
+<sc-if value="{{ a.canDecide }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:6px"><button onClick="{{ a.approve }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 16px;display:inline-flex;align-items:center;background:#536B4E;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Approve</button><button onClick="{{ a.reject }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 16px;display:inline-flex;align-items:center;border:1px solid #9A3B2A;color:#9A3B2A;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Reject</button></div></sc-if>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ vAudit }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Audit log" style="display:flex;flex-direction:column;gap:4px">
+<sc-if value="{{ noAudit }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;font-size:14px;color:#6B665C">{{ auditEmpty }}</div></sc-if>
+<sc-for list="{{ audit }}" as="x" hint-placeholder-count="8">
+<div style="display:grid;grid-template-columns:minmax(0,150px) minmax(0,190px) minmax(0,1fr);gap:10px;padding:10px 12px;background:#FFFDF9;border:1px solid #E9DDC9;font-size:13px"><span style="color:#6B665C">{{ x.when }}</span><strong style="color:#493126;overflow-wrap:anywhere">{{ x.action }}</strong><span style="overflow-wrap:anywhere">{{ x.text }}</span></div>
+</sc-for>
+</section>
+</sc-if>
+</main>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const LEVELS = ['', 'Founder / Owner', 'Executive leadership', 'Department leaders', 'Supervisors & professional staff', 'Frontline staff', 'External & portal users'];
+const DEPTS = [['spa', 'Spa & Wellness'], ['institute', 'Institute'], ['finance', 'Finance'], ['shop', 'E-commerce & inventory'], ['crm', 'Customer experience & CRM'], ['marketing', 'Marketing'], ['partners', 'Partners'], ['admin', 'Administration']];
+const AREA = { spa: 'Spa', consult: 'Consultation notes', crm: 'CRM', giftcards: 'Gift cards', finance: 'Finance', shop: 'Shop', institute: 'Institute', marketing: 'Marketing', partners: 'Partners', admin: 'Admin', DEPT: 'Own department' };
+const fmt = d => { try { return new Date(d).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) { return d; } };
+const permText = ps => ps.includes('*') ? 'Full access to everything' : ps.map(p => { const [a, b] = p.split('.'); if (!b) return { own: 'Own records only' }[a] || a; if (a === 'users') return b === 'manage' ? 'Manage users' : 'Invite users'; if (a === 'audit') return 'Audit log'; if (a === 'reports') return 'Reports'; return (AREA[a] || a) + (b === 'write' ? ' (edit)' : b === 'assigned' ? ' (assigned only)' : ' (view)'); }).join(' · ');
+class Component extends DCLogic {
+  state = { phase: 'loading', tab: 0, me: null, roles: [], ur: [], appr: [], audit: [], auditErr: '', msg: '', ok: true, fEmail: '', fRole: 'RECEPTIONIST', fDept: 'spa' };
+  componentDidMount() { this.boot(0); }
+  sb() { if (this._sb) return this._sb; const C = window.SOTCloud, c = C && C.config && C.config(); if (!c || !c.url || !window.supabase) return null; this._sb = window.supabase.createClient(c.url, c.key, { auth: { persistSession: true, storageKey: 'sot-supabase-auth' } }); return this._sb; }
+  boot(n) { const sb = this.sb(); if (!sb) { if (n < 40) return setTimeout(() => this.boot(n + 1), 150); return this.setState({ phase: 'nocloud' }); } this.load(); }
+  async load() {
+    const sb = this.sb(); const { data: u } = await sb.auth.getUser(); if (!u || !u.user) return this.setState({ phase: 'signedout' });
+    const me = await sb.rpc('sot_me'); if (me.error) return this.setState({ phase: 'nosql', msg: me.error.message });
+    if (me.data.level > 5) return this.setState({ phase: 'denied', me: me.data });
+    const [r, ur, ap, au] = await Promise.all([sb.from('sot_roles').select('*').order('level'), sb.from('sot_user_roles').select('*'), sb.from('sot_approvals').select('*').order('requested_at', { ascending: false }).limit(50), sb.from('sot_audit').select('*').order('at', { ascending: false }).limit(80)]);
+    this.setState({ phase: 'ok', me: me.data, roles: r.data || [], ur: ur.data || [], appr: ap.data || [], audit: au.data || [], auditErr: au.error ? au.error.message : '' });
+  }
+  async call(fn, args) { const { data, error } = await this.sb().rpc(fn, args); this.setState({ msg: error ? error.message : data, ok: !error }); if (!error) this.load(); }
+  renderVals() {
+    const s = this.state, me = s.me || { perms: [], roles: [], level: 99 }, P = me.perms || [], has = p => P.includes('*') || P.includes(p);
+    const mgr = has('users.manage'), inv = has('users.invite');
+    const notice = s.phase !== 'ok' && s.phase !== 'loading';
+    const N = { signedout: ['Please sign in', 'Sign in on the Admin page with your own staff login, then come back here.'], nocloud: ['Supabase is not connected', 'Connect Supabase first; roles are stored and enforced in the database.'], nosql: ['Run the roles update', 'Run handoff/schema-008-rbac.sql in Supabase → SQL Editor, then reload. (' + s.msg + ')'], denied: ['No staff access', 'This account is not assigned a staff role. Ask the Founder or Administration Manager.'] }[s.phase] || ['', ''];
+    const byRole = {}; s.ur.forEach(x => (byRole[x.role] = byRole[x.role] || []).push(x));
+    const stColor = st => st === 'active' ? '#2F4A2B' : '#9A3B2A';
+    const levels = [1, 2, 3, 4, 5, 6].map(n => ({ n, name: LEVELS[n], roles: s.roles.filter(r => r.level === n).map(r => { const pp = byRole[r.code] || []; return { label: r.label, department: r.department, permText: permText(r.perms || []), empty: !pp.length, people: pp.map(p => ({ email: p.email + (p.department ? ' · ' + p.department : ''), status: p.status === 'active' ? '' : p.status, color: stColor(p.status) })) }; }) }));
+    const lvl = c => (s.roles.find(r => r.code === c) || {}).level || 9, label = c => (s.roles.find(r => r.code === c) || {}).label || c;
+    const emails = [...new Set(s.ur.map(x => x.email))].sort((a, b) => Math.min(...s.ur.filter(x => x.email === a).map(x => lvl(x.role))) - Math.min(...s.ur.filter(x => x.email === b).map(x => lvl(x.role))) || a.localeCompare(b));
+    const people = emails.map(e => { const rs = s.ur.filter(x => x.email === e), top = Math.min(...rs.map(x => lvl(x.role))), st = rs.some(x => x.status === 'active') ? 'active' : rs[0].status, self = e === me.email, below = me.founder || top > me.level;
+      return { email: e, status: st, color: stColor(st), canToggle: mgr && !self && below && top > 1, toggleLabel: st === 'active' ? 'Suspend' : 'Reactivate', toggle: () => this.call('sot_set_status', { target: e, new_status: st === 'active' ? 'suspended' : 'active' }),
+        roles: rs.map(x => ({ label: label(x.role), dept: x.department || (s.roles.find(r => r.code === x.role) || {}).department, canRemove: mgr && !self && x.role !== 'FOUNDER_OWNER' && (me.founder || lvl(x.role) > me.level), remove: () => confirm('Remove ' + label(x.role) + ' from ' + e + '?') && this.call('sot_revoke_role', { target: e, role_code: x.role }) })) }; });
+    const roleOpts = s.roles.filter(r => r.code !== 'FOUNDER_OWNER' && (me.founder || (mgr ? r.level > me.level : r.level >= 4))).map(r => ({ code: r.code, label: 'L' + r.level + ' · ' + r.label + (r.privileged && !me.founder ? ' (needs approval)' : '') }));
+    const sel = s.roles.find(r => r.code === s.fRole) || {};
+    const pend = s.appr.filter(a => a.status === 'Pending');
+    const approvals = s.appr.map(a => ({ title: a.kind === 'grant_role' ? 'Give ' + (a.payload.email || '') + ' the role ' + label(a.payload.role) + (a.payload.department ? ' (' + a.payload.department + ')' : '') : a.kind + ': ' + JSON.stringify(a.payload).slice(0, 140), by: a.requested_by, when: fmt(a.requested_at), status: a.status + (a.decided_by ? ' by ' + a.decided_by : ''),
+      canDecide: a.status === 'Pending' && (me.founder || has('approvals.decide')) && a.requested_by !== me.email, approve: () => this.call('sot_decide', { approval_id: a.id, approve: true, why: null }), reject: () => { const w = prompt('Reason (optional)'); if (w !== null) this.call('sot_decide', { approval_id: a.id, approve: false, why: w }); } }));
+    const audit = s.audit.map(x => ({ when: fmt(x.at), action: x.action, text: (x.actor || '') + ' → ' + (x.target || '') + (x.detail ? ' · ' + Object.entries(x.detail).filter(([, v]) => v != null && typeof v !== 'object').map(([k, v]) => k + ': ' + v).join(', ').slice(0, 160) : '') }));
+    const T = [['Organisation', 0], ['People', s.ur.length], ['Approvals', pend.length], ['Audit log', 0]];
+    return {
+      whoLine: me.email ? me.email + ' · ' + (me.roles || []).map(r => r.label).join(', ') : '', notice, noticeTitle: N[0], noticeText: N[1], ready: s.phase === 'ok',
+      tabs: T.map(([l, c], i) => ({ label: l, count: c, hasCount: i === 2 && c > 0, on: String(s.tab === i), bg: s.tab === i ? '#493126' : 'transparent', fg: s.tab === i ? '#F8F4ED' : '#493126', pick: () => this.setState({ tab: i, msg: '' }) })),
+      vOrg: s.tab === 0, vPeople: s.tab === 1, vAppr: s.tab === 2, vAudit: s.tab === 3,
+      hasMsg: !!s.msg && s.phase === 'ok', msg: s.msg, msgBg: s.ok ? '#E8EEE4' : '#F6E7E1', msgBorder: s.ok ? '#536B4E' : '#9A3B2A',
+      levels, people, peopleCount: emails.length, canAssign: mgr || inv, roleOpts,
+      fEmail: s.fEmail, fRole: s.fRole, fDept: s.fDept, needDept: s.fRole === 'DEPARTMENT_MANAGER', deptOpts: DEPTS.map(([v, l]) => ({ v, label: l })),
+      grantLabel: sel.privileged && !me.founder ? 'Request approval' : 'Assign role',
+      setEmail: e => this.setState({ fEmail: e.target.value }), setRole: e => this.setState({ fRole: e.target.value }), setDept: e => this.setState({ fDept: e.target.value }),
+      grant: e => { e.preventDefault(); this.call('sot_grant_role', { target: s.fEmail, role_code: s.fRole, dept: s.fRole === 'DEPARTMENT_MANAGER' ? s.fDept : null }); },
+      approvals, noAppr: !approvals.length, audit, noAudit: !audit.length, auditEmpty: s.auditErr ? 'You do not have access to the audit log.' : 'No activity recorded yet.'
+    };
+  }
+}
+</script>
+</body>
+</html>

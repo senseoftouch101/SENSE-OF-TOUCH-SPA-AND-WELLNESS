@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Ritual · Sense of Touch</title>
+<meta name="description" content="A curated Sense of Touch package: what’s included, how it works and how to book.">
+<meta property="og:title" content="Ritual · Sense of Touch">
+<meta property="og:description" content="A curated Sense of Touch package: what’s included, how it works and how to book.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{overflow-x:hidden}a[href^="https://wa.me"],a[style*="border-bottom"],a[style*="text-transform: uppercase"],button{min-height:44px!important;display:inline-flex;align-items:center}p{max-width:min(100%,72ch)!important}h1,h2,h3,p,span,a{overflow-wrap:break-word}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}img{max-width:100%}@media (max-width:900px){[style*="position: sticky; top: 120px"]{position:static!important}}@media (max-width:720px){[style*="padding: 112px 32px"]{padding:72px 20px!important}[style*="padding: 96px 32px"]{padding:64px 20px!important}[style*="position: sticky; top: 1"]{position:static!important}}
+html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}</style>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="packages" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<nav aria-label="Rituals" style="border-bottom:1px solid #E9DDC9;background:#FFFDF9">
+<div style="max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:24px;overflow-x:auto;scrollbar-width:none;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">
+<a href="Packages.dc.html" style="white-space:nowrap;padding:14px 0;color:#536B4E">← All packages</a>
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="7">
+<a href="{{ t.href }}" aria-current="{{ t.current }}" style="white-space:nowrap;padding:14px 0;color:{{ t.color }};border-bottom:2px solid {{ t.border }}" style-hover="color:#536B4E">{{ t.name }}</a>
+</sc-for>
+</div>
+</nav>
+
+<section data-screen-label="Ritual hero" style="max-width:1280px;margin:0 auto;padding:72px 32px 96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:56px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:22px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Package · {{ r.kicker }}</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(48px,6.4vw,92px);line-height:0.95;color:#493126;text-wrap:balance">{{ r.name }}</h1>
+<span style="font-family:Allura,cursive;font-size:clamp(32px,3.4vw,44px);color:#C6A15B;line-height:1.1">{{ r.tagline }}</span>
+<p style="margin:0;font-size:17px;line-height:1.8;text-wrap:pretty">{{ r.intro }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ r.inc }}" as="i" hint-placeholder-count="3">
+<span style="font-size:12px;letter-spacing:0.08em;padding:8px 12px;border:1px solid #C6A15B;color:#493126">{{ i }}</span>
+</sc-for>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+<a href="{{ r.bookHref }}" style="background:#536B4E;color:#F8F4ED;padding:0 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#493126;color:#F8F4ED">Book this ritual</a>
+<a href="GiftCards.dc.html" style="border:1px solid #493126;color:#493126;padding:0 26px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#493126;color:#F8F4ED">Give as a gift</a>
+</div>
+<span style="font-size:13px;color:#6B665C">Opening rates will be announced soon. Duration is confirmed when you book.</span>
+</div>
+<div style="position:relative;aspect-ratio:4/5;width:100%;max-height:680px;overflow:hidden;background:#E9DDC9">
+<img loading="lazy" src="{{ r.img }}" alt="{{ r.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ r.pos }}">
+<div style="position:absolute;left:0;right:0;bottom:0;padding:22px 24px;background:linear-gradient(180deg,rgba(36,34,29,0) 0%,rgba(36,34,29,0.82) 100%);display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:#F8F4ED">{{ r.kicker }} ritual</span>
+<span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C6A15B;font-weight:600">{{ r.count }}</span>
+</div>
+</div>
+</section>
+
+<section data-screen-label="The journey" style="background:#493126;color:#F8F4ED">
+<div style="max-width:1280px;margin:0 auto;padding:112px 32px;display:flex;flex-wrap:wrap;gap:56px">
+<div style="display:flex;flex-direction:column;gap:18px;align-self:flex-start;position:sticky;top:120px;flex:1 1 300px;min-width:0">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">Your visit</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,4.4vw,58px);line-height:1.02">The ritual, step by step</h2>
+<p style="margin:0;font-size:15px;line-height:1.8;color:#E9DDC9">Every visit begins with a conversation, so your therapist can shape each step around you.</p>
+</div>
+<ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;flex:2 1 520px;min-width:0">
+<sc-for list="{{ r.steps }}" as="s" hint-placeholder-count="4">
+<li style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:20px;padding:28px 0;border-top:1px solid rgba(198,161,91,0.45)">
+<span style="font-family:'Cormorant Garamond',serif;font-size:48px;line-height:0.9;color:#C6A15B">{{ s.n }}</span>
+<span style="display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1">{{ s.t }}</span><span style="font-size:15px;line-height:1.75;color:#E9DDC9;text-wrap:pretty">{{ s.d }}</span></span>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+
+<section data-screen-label="Details" style="max-width:1280px;margin:0 auto;padding:112px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:36px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:600;color:#536B4E">Made for</span>
+<sc-for list="{{ r.forList }}" as="f" hint-placeholder-count="3"><span style="font-size:15px;line-height:1.6;display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid #E9DDC9"><span style="color:#C6A15B">✦</span>{{ f }}</span></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:36px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:600;color:#536B4E">Before you come</span>
+<sc-for list="{{ r.before }}" as="f" hint-placeholder-count="3"><span style="font-size:15px;line-height:1.6;display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid #E9DDC9"><span style="color:#C6A15B">✦</span>{{ f }}</span></sc-for>
+</div>
+<div style="background:#E9DDC9;padding:36px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:600;color:#536B4E">Afterwards</span>
+<sc-for list="{{ r.after }}" as="f" hint-placeholder-count="3"><span style="font-size:15px;line-height:1.6;display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid #C6A15B"><span style="color:#493126">✦</span>{{ f }}</span></sc-for>
+<sc-if value="{{ r.hasMore }}" hint-placeholder-val="{{ false }}"><a href="{{ r.moreHref }}" style="align-self:flex-start;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-bottom:1px solid #493126;margin-top:auto">{{ r.moreLabel }} →</a></sc-if>
+</div>
+</section>
+
+<section data-screen-label="Quote" style="position:relative;isolation:isolate;overflow:hidden;background:#24221D;color:#F8F4ED">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;z-index:-1;pointer-events:none"></div>
+<div style="max-width:960px;margin:0 auto;padding:112px 32px;display:flex;flex-direction:column;gap:20px;align-items:center;text-align:center">
+<span style="font-family:Allura,cursive;font-size:48px;color:#C6A15B;line-height:1">Feel the Touch</span>
+<p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.4vw,42px);line-height:1.3;text-wrap:balance">{{ r.quote }}</p>
+<span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#E9DDC9;font-weight:600">Experience the Transformation</span>
+</div>
+</section>
+
+<section data-screen-label="Other rituals" style="max-width:1280px;margin:0 auto;padding:112px 32px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Keep exploring</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">Other rituals</h2></div>
+<a href="Packages.dc.html" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-bottom:1px solid #493126">All packages →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px">
+<sc-for list="{{ others }}" as="o" hint-placeholder-count="3">
+<a href="{{ o.href }}" data-tilt="1" style="display:flex;flex-direction:column;background:#FFFDF9;border:1px solid #E9DDC9;color:#24221D;transition:border-color .3s" style-hover="border-color:#C6A15B;color:#24221D">
+<div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#E9DDC9"><img src="{{ o.img }}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ o.pos }};transition:transform .9s" style-hover="transform:scale(1.06)"></div>
+<div style="padding:24px;display:flex;flex-direction:column;gap:8px">
+<span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ o.kicker }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.05;color:#493126">{{ o.name }}</span>
+<span style="font-size:14px;line-height:1.6">{{ o.desc }}</span>
+<span style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126;margin-top:6px">Explore →</span>
+</div>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section data-screen-label="Book CTA" style="background:#536B4E;color:#F8F4ED">
+<div style="max-width:1280px;margin:0 auto;padding:80px 32px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:10px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1.05">Ready for {{ r.name }}?</h2><span style="font-size:15px;color:#E9DDC9">Appointments and walk-ins welcome at Community 25, Tema.</span></div>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<a href="{{ r.bookHref }}" style="background:#C6A15B;color:#24221D;padding:0 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#F8F4ED;color:#24221D">Book now</a>
+<a href="{{ r.waHref }}" target="_blank" rel="noopener" style="border:1px solid #F8F4ED;color:#F8F4ED;padding:0 26px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#F8F4ED;color:#493126">Ask on WhatsApp</a>
+</div>
+</div>
+</section>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;ritual&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;reset&quot;,&quot;glow&quot;,&quot;african-pure&quot;,&quot;body-renewal&quot;,&quot;lip-experience&quot;,&quot;total-wellness&quot;,&quot;couples-escape&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const R = [
+  { k: 'reset', kicker: 'Relax', name: 'The Reset', tagline: 'Breathe out. Begin again.', desc: 'Unwind body and mind in a single visit.', img: 'assets/web/body-massage.jpg', pos: '50% 40%', alt: 'Relaxation massage at Sense of Touch',
+    intro: 'A calming massage followed by scalp therapy, for the days when you need to put everything down and simply be looked after.',
+    inc: ['Relaxation massage', 'Scalp therapy'],
+    steps: [['Welcome & consultation', 'Settle in, change into your robe and tell your therapist where you hold tension and how much pressure you like.'], ['Relaxation massage', 'Slow, flowing strokes to ease the shoulders, back and legs.'], ['Scalp therapy', 'An unhurried scalp massage to quiet the mind.'], ['A quiet moment', 'Take your time before you return to the day.']],
+    forList: ['A first visit to Sense of Touch', 'Busy weeks and long days', 'Anyone who carries tension in the neck and shoulders'],
+    quote: 'Some days don’t need fixing. They just need a pause.' },
+  { k: 'glow', kicker: 'Skin', name: 'The Glow', tagline: 'Rested skin, radiant you.', desc: 'For skin that looks rested and radiant.', img: 'assets/web/facial-greenwall.jpg', pos: '50% 35%', alt: 'Facial treatment',
+    intro: 'A facial paired with a hydration treatment, for skin that feels tired, dull or in need of a little care.',
+    inc: ['Facial', 'Hydration treatment'],
+    steps: [['Skin consultation', 'Your therapist looks at your skin and asks about your routine, so the treatment suits you.'], ['Cleanse & facial', 'A thorough cleanse and facial chosen for your skin.'], ['Hydration treatment', 'A hydrating step to leave skin feeling soft and comfortable.'], ['Finishing & advice', 'Simple tips for keeping the results going at home.']],
+    forList: ['Skin that feels dry or tired', 'Before a special occasion', 'Anyone starting a skincare routine'],
+    quote: 'Good skin is a habit, and every habit starts with one visit.' },
+  { k: 'african-pure', kicker: 'Signature', name: 'African Pure Ritual', tagline: 'Our signature AFTERCARE experience.', desc: 'Our full AFTERCARE signature facial experience.', img: 'assets/web/facial-treatment.jpg', pos: '50% 40%', alt: 'AFTERCARE facial ritual',
+    intro: 'The complete AFTERCARE ritual: a consultation, our seven-step signature facial with pure West African ingredients, and a plan to care for your skin afterwards.',
+    inc: ['AFTERCARE consultation', 'Seven-step ritual', 'Aftercare plan'],
+    steps: [['AFTERCARE consultation', 'We talk through your skin, your goals and anything to avoid.'], ['The seven-step ritual', 'Our signature facial, step by step, using pure ingredients inspired by West Africa.'], ['Your aftercare plan', 'Clear guidance on what to use and what to avoid in the days after.'], ['Rest & reflect', 'A calm close to the ritual before you leave.']],
+    forList: ['Anyone wanting our signature experience', 'Skin that needs focused care', 'A treat to mark a milestone'],
+    more: ['Aftercare.dc.html', 'About AFTERCARE'],
+    quote: 'Rooted in pure African ingredients. Made for your skin.' },
+  { k: 'body-renewal', kicker: 'Body', name: 'Body Renewal', tagline: 'Polished, soft, at ease.', desc: 'Smooth, polished skin and melted tension.', img: 'assets/web/robe-black-relax.jpg', pos: '50% 30%', alt: 'Guest relaxing in a Sense of Touch robe',
+    intro: 'A full-body exfoliation followed by massage, leaving skin smooth and the body relaxed.',
+    inc: ['Body exfoliation', 'Massage'],
+    steps: [['Welcome & consultation', 'Tell us about your skin and any areas to focus on or avoid.'], ['Body exfoliation', 'A gentle all-over polish to lift dry, dull skin.'], ['Massage', 'A soothing massage to melt away tension.'], ['A quiet moment', 'Rest before you dress and head home.']],
+    forList: ['Skin that feels dry or rough', 'Before a holiday or event', 'A head-to-toe reset'],
+    quote: 'Softness you can feel, long after you leave.' },
+  { k: 'lip-experience', kicker: 'Lip Bar', name: 'The Lip Experience', tagline: 'Beauty. Care. Confidence.', desc: 'The complete Lip Bar ritual.', img: 'assets/web/lip-closeup.jpg', pos: '50% 50%', alt: 'Lip Bar result', book: 'The Lip Experience',
+    intro: 'The complete Lip Bar ritual: hydration, gentle exfoliation and conditioning, for lips that look and feel cared for.',
+    inc: ['Lip hydration', 'Exfoliation', 'Conditioning'],
+    steps: [['Lip consultation', 'We look at your lips and talk through any dryness or sensitivity.'], ['Hydration', 'A hydrating treatment to soften dry lips.'], ['Exfoliation', 'Gentle exfoliation to smooth flaky texture.'], ['Conditioning', 'A nourishing finish, with tips for daily lip care.']],
+    forList: ['Dry or chapped lips', 'Before photos or an event', 'Anyone new to lip care'],
+    more: ['LipBar.dc.html', 'Visit The Lip Bar'],
+    quote: 'Small ritual. Big confidence.' },
+  { k: 'total-wellness', kicker: 'Complete', name: 'Total Wellness', tagline: 'A half-day of head-to-toe care.', desc: 'A half-day of head-to-toe care.', img: 'assets/web/robe-green-lounge.jpg', pos: '50% 35%', alt: 'Guest in the Sense of Touch lounge',
+    intro: 'Our most complete experience: a facial, a body treatment and relaxation therapy in one unhurried visit.',
+    inc: ['Selected facial', 'Body treatment', 'Relaxation therapy'],
+    steps: [['Welcome & consultation', 'We plan your visit together and choose the facial and body treatment that suit you.'], ['Selected facial', 'A facial chosen for your skin.'], ['Body treatment', 'Care for the body, from exfoliation to massage.'], ['Relaxation therapy', 'A deeply calming close to the day.']],
+    forList: ['A birthday or milestone', 'When you need more than an hour', 'A gift for someone who deserves a full day'],
+    quote: 'Give yourself the whole afternoon. You’re worth it.' },
+  { k: 'couples-escape', kicker: 'For two', name: 'Couples’ Escape', tagline: 'Slow down, together.', desc: 'A shared wellness experience for two.', img: 'assets/web/lounge-group.jpg', pos: '50% 40%', alt: 'Guests relaxing together', book: 'Couples’ Escape',
+    intro: 'Side-by-side treatments for two, for partners, friends, sisters or mother and daughter.',
+    inc: ['Side-by-side treatments', 'Two guests'],
+    steps: [['Welcome together', 'Arrive together and settle into your robes.'], ['Consultation', 'Each guest chooses their treatment with a therapist.'], ['Side-by-side treatments', 'Enjoy your treatments in the same room.'], ['Time together', 'A quiet moment to rest and talk before you leave.']],
+    forList: ['Anniversaries and date days', 'Friends and family celebrating together', 'A shared gift'],
+    more: ['Occasions.dc.html', 'Bridal, couples & birthdays'],
+    quote: 'The best moments are the ones you share.' }
+];
+const BEFORE = ['Book ahead so we can prepare for your visit', 'Complete the consultation form before your appointment', 'Let us know about allergies, pregnancy or skin concerns'];
+const AFTER = ['Drink water and take it easy for the rest of the day', 'Follow any aftercare advice from your therapist', 'Ask us which products suit your routine at home'];
+const slug = () => { try { return new URLSearchParams(location.search).get('r') || ''; } catch (e) { return ''; } };
+class Component extends DCLogic {
+  state = { k: slug() };
+  componentDidMount() { this.onPop = () => this.setState({ k: slug() }); addEventListener('popstate', this.onPop); const r = R.find(x => x.k === this.state.k); if (r) document.title = r.name + ' · Sense of Touch'; }
+  componentWillUnmount() { removeEventListener('popstate', this.onPop); }
+  renderVals() {
+    const r = R.find(x => x.k === (this.props.ritual || this.state.k)) || R[0];
+    const href = x => 'Ritual.dc.html?r=' + x.k;
+    const bookHref = 'Book.dc.html?' + (r.book ? 'service=' + encodeURIComponent(r.book) : 'package=' + encodeURIComponent(r.name));
+    const i = R.indexOf(r), others = [1, 2, 3].map(d => R[(i + d) % R.length]);
+    return {
+      tabs: R.map(x => ({ name: x.name, href: href(x), current: x === r ? 'page' : 'false', color: x === r ? '#493126' : '#6B665C', border: x === r ? '#C6A15B' : 'transparent' })),
+      r: { ...r, count: r.inc.length + ' treatments', bookHref, waHref: 'https://wa.me/233597182026?text=' + encodeURIComponent('Hello Sense of Touch, I’d like to ask about ' + r.name + '.'),
+        steps: r.steps.map(([t, d], j) => ({ n: String(j + 1).padStart(2, '0'), t, d })), before: BEFORE, after: AFTER,
+        hasMore: !!r.more, moreHref: r.more ? r.more[0] : '', moreLabel: r.more ? r.more[1] : '' },
+      others: others.map(o => ({ href: href(o), img: o.img, pos: o.pos, kicker: o.kicker, name: o.name, desc: o.desc }))
+    };
+  }
+}
+</script>
+</body>
+</html>

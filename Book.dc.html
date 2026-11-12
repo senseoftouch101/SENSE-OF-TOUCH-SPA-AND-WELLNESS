@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Book an appointment · Sense of Touch</title>
+<meta name="description" content="Request a spa appointment online in a few steps.">
+<meta property="og:title" content="Book an appointment · Sense of Touch">
+<meta property="og:description" content="Request a spa appointment online in a few steps.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{overflow-x:hidden}a[href^="https://wa.me"],a[href^="tel:"],a[href^="mailto:"],a[href*="instagram"],a[style*="border-bottom"],a[style*="text-transform: uppercase"],button,[type=submit]{min-height:44px!important;display:inline-flex;align-items:center}[style*="font-size: 8px"],[style*="font-size: 9px"],[style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"]{font-size:11px!important}p{max-width:min(100%,72ch)!important}p[style*="text-align: center"]{margin-inline:auto!important}h1,h2,h3,p,span,a{overflow-wrap:break-word}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}@media (pointer:coarse){a[style*="border-bottom"],button{min-height:44px}a[style*="border-bottom"]{display:inline-flex;align-items:center}}img,video,iframe{max-width:100%}@media (max-width:720px){[style*="padding: 112px 32px"]{padding:72px 20px!important}[style*="padding: 96px 32px"]{padding:64px 20px!important}[style*="padding: 80px 32px"]{padding:56px 20px!important}[style*="padding: 72px 32px"]{padding:56px 20px!important}[style*="padding: 96px 56px"]{padding:56px 24px!important}[style*="position: sticky; top: 1"]{position:static!important}[style*="grid-column: span 2"]{grid-column:auto!important}[style*="min-height: 720px"]{min-height:440px!important}[style*="padding: 40px;"]{padding:24px!important}}
+@media (max-width:720px){[data-3d-opt]{display:none!important}}
+html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}input,select,textarea{font-family:Montserrat,sans-serif}</style>
+<script src="./motion.js"></script>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-whatsapp.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<section data-screen-label="Book" style="max-width:1280px;margin:0 auto;padding:80px 32px 112px;display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:22px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Book an appointment</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,5.5vw,72px);line-height:1;color:#493126">Your body deserves this.</h1>
+<div style="display:flex;flex-direction:column;border-top:1px solid #493126">
+<sc-for list="{{ stepList }}" as="s" hint-placeholder-count="4">
+<div style="display:flex;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid #E9DDC9;color:{{ s.color }}">
+<span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;min-width:24px">{{ s.n }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:24px">{{ s.t }}</span>
+<span style="margin-left:auto;font-size:13px">{{ s.mark }}</span>
+</div>
+</sc-for>
+</div>
+<div data-3d="stones" data-3d-opt="1" data-no-reveal="1" style="position:relative;width:100%;height:300px;background:radial-gradient(circle at 50% 55%, #FFFDF9 0%, #F8F4ED 60%);pointer-events:none;cursor:grab;touch-action:pan-y;user-select:none"></div>
+<div style="background:#E9DDC9;padding:24px;display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.6">
+<span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;font-weight:600;color:#493126">Good to know</span>
+<span>A GH₵50 deposit by MTN MoMo to 059 718 2026 confirms your booking. It’s taken off your bill.</span>
+<span>Give 24 hours’ notice to reschedule or cancel. Your deposit moves to one new date, once only.</span>
+<span>Arrive 10 minutes early. After a 20-minute grace period, your appointment may be cancelled.</span>
+<span>Please arrive freshly showered for body treatments.</span>
+<span><a href="Policy%20Centre.dc.html?p=spa" style="color:#493126;font-weight:600;border-bottom:1px solid #493126;text-decoration:none">Read the full spa policies</a></span>
+<span>Walk-ins welcome, subject to availability. Prefer to chat? <a href="https://wa.me/233597182026" target="_blank" rel="noopener" style="color:#493126;font-weight:600;border-bottom:1px solid #493126">WhatsApp +233 59 718 2026</a></span>
+</div>
+</div>
+
+<div style="flex:2 1 520px;min-width:0;background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(24px,4vw,48px);display:flex;flex-direction:column;gap:28px">
+
+<sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:36px;color:#493126">Choose your treatment</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px">
+<sc-for list="{{ serviceCards }}" as="c" hint-placeholder-count="8">
+<button onClick="{{ c.select }}" style="all:unset;cursor:pointer;padding:20px;border:1px solid {{ c.border }};background:{{ c.bg }};display:flex;flex-direction:column;gap:6px">
+<span style="font-size:10px;letter-spacing:0.24em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ c.cat }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126;line-height:1.1">{{ c.name }}</span>
+<span style="font-size:13px;color:#6B665C">{{ c.meta }}</span>
+</button>
+</sc-for>
+</div>
+<sc-if value="{{ canExtra }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #E9DDC9;padding-top:22px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Optional enhancements</span>
+<span style="font-size:13px;line-height:1.55;color:#6B665C">Add any of these to your treatment.</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px">
+<sc-for list="{{ extraList }}" as="x" hint-placeholder-count="3">
+<button onClick="{{ x.toggle }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:56px;padding:14px 16px;border:1px solid {{ x.border }};background:#FFFDF9;display:flex;gap:12px;align-items:center">
+<span style="width:20px;height:20px;flex:none;border:1px solid #536B4E;background:{{ x.bg }};color:#F8F4ED;display:flex;align-items:center;justify-content:center;font-size:13px">{{ x.mark }}</span>
+<span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:500;color:#24221D">{{ x.label }}</span><span style="font-size:12px;color:#6B665C">{{ x.meta }}</span></span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:36px;color:#493126">Therapist, date &amp; time</h2>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Preferred therapist</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ therapistChips }}" as="t" hint-placeholder-count="2">
+<button onClick="{{ t.select }}" style="all:unset;cursor:pointer;padding:12px 18px;font-size:14px;border:1px solid #493126;background:{{ t.bg }};color:{{ t.fg }}">{{ t.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Date</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px">
+<sc-for list="{{ dateChips }}" as="d" hint-placeholder-count="12">
+<button onClick="{{ d.select }}" style="all:unset;cursor:pointer;padding:10px 0;text-align:center;border:1px solid #E9DDC9;background:{{ d.bg }};color:{{ d.fg }};display:flex;flex-direction:column;gap:2px">
+<span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase">{{ d.dow }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:24px;line-height:1">{{ d.day }}</span>
+<span style="font-size:10px">{{ d.mon }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Your preferred time</span>
+<span style="font-size:13px;line-height:1.55;color:#6B665C">{{ timeNote }}</span>
+<sc-for list="{{ timeGroups }}" as="g" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:6px">
+<span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ g.title }}</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:6px">
+<sc-for list="{{ g.chips }}" as="t" hint-placeholder-count="6">
+<button onClick="{{ t.select }}" disabled="{{ t.full }}" aria-label="{{ t.aria }}" style="all:unset;cursor:{{ t.cursor }};padding:10px 0;text-align:center;font-size:13px;border:1px solid #E9DDC9;background:{{ t.bg }};color:{{ t.fg }};display:flex;flex-direction:column;gap:2px;align-items:center;text-decoration:{{ t.strike }}">{{ t.label }}<span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase">{{ t.sub }}</span></button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:36px;color:#493126">Your details</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Full name
+<input autoComplete="name" value="{{ form.name }}" onChange="{{ setName }}" placeholder="Your name" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Phone / WhatsApp
+<input type="tel" inputMode="tel" autoComplete="tel" value="{{ form.phone }}" onChange="{{ setPhone }}" placeholder="024 123 4567" aria-invalid="{{ phoneBad }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Email
+<input type="email" autoComplete="email" value="{{ form.email }}" onChange="{{ setEmail }}" placeholder="you@email.com (optional)" aria-invalid="{{ emailBad }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D">
+</label>
+</div>
+<sc-if value="{{ hasErrors }}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:12px 14px;font-size:14px;line-height:1.5;color:#6B2A1E;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ errors }}" as="e" hint-placeholder-count="1"><span>{{ e }}</span></sc-for>
+</div>
+</sc-if>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Health notes, allergies or preferences
+<textarea value="{{ form.notes }}" onChange="{{ setNotes }}" rows="4" placeholder="Skin sensitivities, pregnancy, injuries, pressure preference…" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D;resize:vertical"></textarea>
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Gift card code (optional)
+<input value="{{ form.gc }}" onChange="{{ setGc }}" placeholder="GC-XXXXXXX" style="font-size:15px;letter-spacing:0.06em;text-transform:uppercase;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D;font-family:inherit">
+<sc-if value="{{ hasGcInfo }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;letter-spacing:0;text-transform:none;font-weight:400;color:#536B4E;line-height:1.5">{{ gcInfo }}</span></sc-if>
+</label>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ consents }}" as="c" hint-placeholder-count="3">
+<button onClick="{{ c.toggle }}" style="all:unset;cursor:pointer;display:flex;gap:14px;align-items:flex-start;font-size:14px;line-height:1.55">
+<span style="width:20px;height:20px;flex:none;border:1px solid #493126;background:{{ c.bg }};color:#F8F4ED;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px">{{ c.mark }}</span>
+<span>{{ c.label }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
+<span style="font-family:Allura,cursive;font-size:56px;color:#536B4E;line-height:1">Thank you, {{ firstName }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126;line-height:1.2">Your request is noted — not yet confirmed.</span>
+<span style="font-size:14px;line-height:1.6">Reference <strong>{{ ref }}</strong>. WhatsApp has opened with your booking — press send, and the team will reply there to confirm your time, the price and the deposit. If it didn’t open, tap below.</span>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#536B4E;color:#F8F4ED;padding:0 24px;min-height:48px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Send on WhatsApp</a>
+<a href="Account.dc.html" style="border:1px solid #493126;color:#493126;padding:0 24px;min-height:48px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">View my bookings</a>
+</div>
+<span style="font-size:12px;line-height:1.5;color:#6B665C">Saved in this browser until online booking is connected.</span>
+</div>
+</sc-if>
+
+<sc-if value="{{ showSummary }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;border-top:1px solid #E9DDC9">
+<sc-for list="{{ summary }}" as="s" hint-placeholder-count="4">
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid #E9DDC9;font-size:14px"><span style="color:#536B4E;font-weight:500">{{ s.k }}</span><span style="text-align:right">{{ s.v }}</span></div>
+</sc-for>
+</div>
+</sc-if>
+
+<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+<sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ back }}" style="all:unset;cursor:pointer;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126;border-bottom:1px solid #493126;padding-bottom:3px">← Back</button>
+</sc-if>
+<span></span>
+<button onClick="{{ next }}" aria-disabled="{{ notOk }}" style="all:unset;cursor:pointer;text-align:center;padding:17px 32px;min-height:48px;box-sizing:border-box;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;background:{{ nextBg }};color:#F8F4ED">{{ nextLabel }}</button>
+</div>
+</div>
+</section>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+// [category, treatment, minutes, price GH₵ (null = quoted), 'from' when the price is a starting price]. Prices from the spa menu (Treatment page).
+const SERVICES = [
+  ['Facial & Skin', 'Essential Facial', 60, 300], ['Facial & Skin', 'Signature Glow Facial', 75, 450], ['Facial & Skin', 'Dermaplaning Facial', 60, 500],
+  ['Facial & Skin', 'Back Facial', 60, 450], ['Facial & Skin', 'Chemical Peel', 45, 600, 'from'],
+  ['Massage', 'Swedish Massage · 60 min', 60, 350], ['Massage', 'Swedish Massage · 90 min', 90, 500],
+  ['Massage', 'Deep Tissue Massage · 60 min', 60, 400], ['Massage', 'Deep Tissue Massage · 90 min', 90, 550],
+  ['Massage', 'Prenatal Massage · 60 min', 60, 400], ['Massage', 'Prenatal Massage · 90 min', 90, 550],
+  ['Massage', 'Foot Therapy · 30 min', 30, 200], ['Massage', 'Foot Therapy · 60 min', 60, 300],
+  ['Wood Therapy', 'Wood Therapy', 90, 500], ['Scalp & Hair', 'Scalp & Hair Wash Therapy + Steam', 60, 300],
+  ['Waxing', 'Brows', 15, 70], ['Waxing', 'Upper Lip', 15, 50], ['Waxing', 'Chin', 15, 70], ['Waxing', 'Underarms', 15, 100],
+  ['Waxing', 'Bikini Line', 30, 150], ['Waxing', 'Brazilian', 45, 250], ['Waxing', 'Half Leg', 30, 200], ['Waxing', 'Full Leg', 45, 300],
+  ['The Lip Bar', 'Lip Hydration Treatment', 30, 300], ['The Lip Bar', 'Lip Plumping · Subtle', 45, 2000], ['The Lip Bar', 'Lip Plumping · Defined', 45, 2800], ['The Lip Bar', 'Lip Plumping · Full', 45, 4800],
+  ['AFTERCARE', 'AFTERCARE signature ritual', 75, null], ['Package', 'A package', null, null], ['Couples', 'Couples’ Escape', null, null]
+];
+const DEPOSIT = 50;
+// Optional enhancements for any treatment: [name, minutes added, price GH₵]
+const EXTRAS = [['Extra 30 minutes', 30, 150], ['Hot Stone Therapy', 0, 100], ['Aromatherapy', 0, 50]];
+// Enhancements are offered with every treatment.
+const fmtMins = mins => mins ? (mins >= 60 ? Math.floor(mins / 60) + ' hr' + (mins % 60 ? ' ' + (mins % 60) + ' min' : '') : mins + ' min') : 'Varies';
+const withExtras = (b, picks) => { if (!b) return b; const on = EXTRAS.filter((x, i) => picks && picks[i]); if (!on.length) return { ...b, extras: [] }; const mins = b.mins ? b.mins + on.reduce((n, x) => n + x[1], 0) : b.mins, add = on.reduce((n, x) => n + x[2], 0), price = b.price == null ? null : b.price + add;
+  return { ...b, extras: on.map(x => x[0]), extrasTotal: add, mins, mm: fmtMins(mins), price, pp: price == null ? b.pp + ' + ' + cedi(add) : (b.from ? 'From ' : '') + cedi(price), bal: price == null ? b.bal : (b.from ? 'From ' : '') + cedi(Math.max(0, price - DEPOSIT)) }; };
+const cedi = n => 'GH₵' + Number(n).toLocaleString('en-GH');
+const svcInfo = i => { if (i === null || i === undefined) return null; const [cat, name, mins, base, from] = SERVICES[i]; let price = base;
+  try { const o = (window.SOT ? window.SOT.list('bo-services') : []).find(x => x.name === name && x.price !== '' && x.price != null); if (o) price = Number(o.price); } catch (e) {}
+  const mm = mins ? (mins >= 60 ? Math.floor(mins / 60) + ' hr' + (mins % 60 ? ' ' + (mins % 60) + ' min' : '') : mins + ' min') : 'Varies';
+  const pp = price == null ? 'Quoted on WhatsApp' : (from ? 'From ' : '') + cedi(price);
+  const bal = price == null ? 'Confirmed on WhatsApp' : (from ? 'From ' : '') + cedi(Math.max(0, price - DEPOSIT));
+  return { cat, name, mins, price, from: !!from, mm, pp, bal }; };
+const CAP = 2; // treatment rooms per slot — adjust when confirmed
+const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// Opening hours by weekday (0 = Sunday): [open, close] in minutes; null = closed. Tue–Sat 9:00–20:00 · Sun 12:00–18:00 · Mon closed.
+const HOURS = { 0: [12 * 60, 18 * 60], 1: null, 2: [9 * 60, 20 * 60], 3: [9 * 60, 20 * 60], 4: [9 * 60, 20 * 60], 5: [9 * 60, 20 * 60], 6: [9 * 60, 20 * 60] };
+const STEP = 30, BUFFER = 15; // slot step and turnover between clients (minutes)
+const THER = ['No preference', 'Woselande'];
+const CONSENTS_OPT = 'Optional: send me offers and seasonal news on WhatsApp. You can withdraw this at any time.';
+const CONSENTS = ['I confirm the health information I provide is accurate.', 'I understand that a consultation and consent form must be completed before treatment.', 'I agree to the deposit and 24-hour cancellation policy.', CONSENTS_OPT];
+const blank = () => ({ extras: [false, false, false], service: null, therapist: 0, date: null, time: null, name: '', phone: '', email: '', notes: '', gc: '', consent: [false, false, false, false] });
+
+class Component extends DCLogic {
+  state = { step: 1, form: blank(), tried: false, ref: '' };
+  componentDidMount() { const pk = new URLSearchParams(location.search).get('package'); if (pk) { const i = SERVICES.findIndex(s => s[1] === 'A package'); if (i >= 0) this.set({ service: i, notes: 'Package: ' + pk }); } const qs = new URLSearchParams(location.search), q = (qs.get('service') || '').toLowerCase(), qc = (qs.get('cat') || '').toLowerCase(); if (q || qc) { let i = SERVICES.findIndex(s => s[1].toLowerCase() === q); if (i < 0 && q) i = SERVICES.findIndex(s => s[1].toLowerCase().startsWith(q)); if (i < 0) i = SERVICES.findIndex(s => s[0].toLowerCase() === (qc || q)); if (i >= 0) this.set({ service: i }); } }
+  set(p) { this.setState(s => ({ form: { ...s.form, ...p } })); }
+  renderVals() {
+    const { step, form } = this.state;
+    const on = a => a ? { bg: '#493126', fg: '#F8F4ED' } : { bg: 'transparent', fg: '#24221D' };
+    const now = new Date();
+    const dates = Array.from({ length: 21 }, (_, i) => { const d = new Date(now); d.setDate(now.getDate() + i + 1); return d; }).filter(d => HOURS[d.getDay()]).slice(0, 12);
+    const SOT = window.SOT || { ghPhone: v => v, email: () => true, wa: t => '#' };
+    const phoneOk = !!SOT.ghPhone(form.phone), emailOk = !form.email.trim() || SOT.email(form.email);
+    const errs = [];
+    if (step === 3 && this.state.tried) { if (!form.name.trim()) errs.push('Please enter your name.'); if (!phoneOk) errs.push('Enter a Ghana phone number, e.g. 024 123 4567 or +233 24 123 4567.'); if (!emailOk) errs.push('That email address doesn’t look right.'); if (!form.consent.every(Boolean)) errs.push('Please tick all three confirmations.'); }
+    const ok = { 1: form.service !== null, 2: form.date !== null && form.time !== null, 3: form.name.trim() && phoneOk && emailOk && form.consent.slice(0, 3).every(Boolean), 4: true }[step];
+    const d = form.date !== null ? dates[form.date] : null;
+    const base = svcInfo(form.service), si = withExtras(base, form.extras), canExtra = !!base;
+    const waText = ref => form.service !== null ? `Hello Sense of Touch, I'd like to book: ${si.name}${si.extras.length ? ' + ' + si.extras.join(', ') : ''} (${si.mm}, ${si.pp}) · ${d ? d.toDateString() : ''} at ${form.time || ''} · Therapist: ${THER[form.therapist]} · Name: ${form.name} · Ref ${ref}` : '';
+    const summaryText = waText(this.state.ref);
+    return {
+      canExtra, extraList: EXTRAS.map(([n, m, p], i) => { const onx = !!(form.extras || [])[i]; return { label: n, meta: '+' + cedi(p) + (m ? ' · +' + m + ' min' : ''), bg: onx ? '#536B4E' : 'transparent', mark: onx ? '✓' : '', border: onx ? '#536B4E' : '#E9DDC9', toggle: () => this.set({ extras: EXTRAS.map((x, j) => j === i ? !onx : !!(form.extras || [])[j]), time: null }) }; }),
+      s1: step === 1, s2: step === 2, s3: step === 3, s4: step === 4,
+      stepList: ['Treatment', 'Date & time', 'Details & consent', 'Confirmation'].map((t, i) => ({ t, n: i + 1, color: i + 1 === step ? '#493126' : i + 1 < step ? '#536B4E' : '#8A857B', mark: i + 1 < step ? '✓' : '' })),
+      serviceCards: SERVICES.map(([cat, name], i) => ({ cat, name, meta: svcInfo(i).mm + ' · ' + svcInfo(i).pp, bg: form.service === i ? '#E9DDC9' : '#FFFDF9', border: form.service === i ? '#493126' : '#E9DDC9', select: () => this.set({ service: i, time: null, extras: [false, false, false] }) })),
+      therapistChips: THER.map((label, i) => ({ label, ...on(form.therapist === i), select: () => this.set({ therapist: i, time: null }) })),
+      dateChips: dates.map((x, i) => ({ dow: DOW[x.getDay()], day: x.getDate(), mon: MON[x.getMonth()], ...on(form.date === i), select: () => this.set({ date: i, time: null }) })),
+      timeGroups: (() => {
+        const day = d && window.SOT ? window.SOT.localDate(d) : null, len = (si && si.mins) || 60;
+        const toM = t => { const [h, m] = String(t || '').split(':').map(Number); return h * 60 + (m || 0); };
+        const toT = m => Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0');
+        const live = day ? window.SOT.list('bookings').filter(b => b.date === day && !['Cancelled', 'Declined', 'No-show'].includes(b.status) && (form.therapist === 0 || b.therapist === THER[form.therapist] || b.therapist === 'No preference')) : [];
+        const blocks = day ? window.SOT.list('schedule-blocks').filter(x => x.date === day && (x.therapist === 'All' || (form.therapist !== 0 && x.therapist === THER[form.therapist]))) : [];
+        const isToday = day && day === (window.SOT && window.SOT.localDate()), nowM = new Date().getHours() * 60 + new Date().getMinutes() + 60;
+        const [OPEN, CLOSE] = (d && HOURS[d.getDay()]) || [9 * 60, 20 * 60]; const slots = []; for (let m = OPEN; m + len <= CLOSE; m += STEP) slots.push(m);
+        const chip = m => { const label = toT(m), end = m + len;
+          const taken = live.filter(b => { const bs = toM(b.time), be = bs + (Number(b.mins) || 60) + BUFFER; return bs < end + BUFFER && m < be; }).length;
+          const blocked = blocks.some(x => toM(x.from) < end && m < toM(x.to)) || (isToday && m < nowM);
+          const full = blocked || (form.therapist === 0 ? taken >= CAP : taken >= 1);
+          return { label, full, sub: full ? 'Full' : 'to ' + toT(end), aria: label + ' to ' + toT(end) + (full ? ', not available' : ''), cursor: full ? 'not-allowed' : 'pointer', strike: full ? 'line-through' : 'none',
+            ...(full ? { bg: '#EFE9DF', fg: '#8A857B' } : on(form.time === label)), select: () => { if (!full) this.set({ time: label }); } }; };
+        return [['Morning', 0, 12 * 60], ['Afternoon', 12 * 60, 17 * 60], ['Evening', 17 * 60, 24 * 60]].map(([title, lo, hi]) => ({ title, chips: slots.filter(m => m >= lo && m < hi).map(chip) })).filter(g => g.chips.length);
+      })(),
+      timeNote: 'Open Tuesday to Saturday 9:00–20:00 and Sunday 12:00–18:00; closed Monday. Pick the start time that suits you. Times shown fit your ' + ((si && si.mm) || '1 hr') + ' treatment.',
+      form,
+      setName: e => this.set({ name: e.target.value }), setPhone: e => this.set({ phone: e.target.value }),
+      setEmail: e => this.set({ email: e.target.value }), setNotes: e => this.set({ notes: e.target.value }),
+      setGc: e => this.set({ gc: e.target.value }),
+      gcInfo: (() => { const c = (form.gc || '').trim(); if (!c || !window.SOT || !window.SOT.gcGet) return ''; const g = window.SOT.gcGet(c); return g ? window.SOT.gcSummary(g) + '. We’ll apply it at reception.' : 'We couldn’t find that code — check it, or the team will confirm on WhatsApp.'; })(),
+      hasGcInfo: !!(form.gc || '').trim(),
+      consents: CONSENTS.map((label, i) => ({ label, bg: form.consent[i] ? '#536B4E' : 'transparent', mark: form.consent[i] ? '✓' : '', toggle: () => this.set({ consent: form.consent.map((c, j) => j === i ? !c : c) }) })),
+      showSummary: step > 1 && form.service !== null,
+      summary: [
+        { k: 'Treatment', v: si ? si.name : '' },
+        { k: 'Type', v: si ? si.cat : '' },
+        ...(si && si.extras.length ? [{ k: 'Enhancements', v: si.extras.join(', ') + ' (+' + cedi(si.extrasTotal) + ')' }] : []),
+        { k: 'Duration', v: si ? si.mm : '' },
+        { k: 'Price', v: si ? si.pp : '' },
+        { k: 'Deposit to confirm', v: cedi(DEPOSIT) + ' (MTN MoMo)' },
+        { k: 'Balance at the spa', v: si ? si.bal : '' },
+        { k: 'Therapist', v: THER[form.therapist] },
+        { k: 'Date', v: d ? d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }) : '—' },
+        { k: 'Time', v: form.time ? form.time + (si && si.mins ? ' – ' + (m => Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0'))(+form.time.split(':')[0] * 60 + +form.time.split(':')[1] + si.mins) : '') : '—' }
+      ],
+      firstName: form.name.trim().split(' ')[0],
+      canBack: step > 1 && step < 4,
+      back: () => this.setState({ step: step - 1 }),
+      nextBg: ok ? '#536B4E' : '#A9A59C',
+      nextLabel: step === 3 ? 'Request appointment' : step === 4 ? 'Book another' : 'Continue',
+      errors: errs, hasErrors: errs.length > 0, phoneBad: this.state.tried && !phoneOk, emailBad: !emailOk, notOk: !ok,
+      ref: this.state.ref, waLink: SOT.wa(summaryText),
+      next: () => {
+        if (step === 4) return this.setState({ step: 1, form: blank(), tried: false, ref: '' });
+        if (!ok) return this.setState({ tried: true });
+        if (step === 3 && window.SOT) {
+          const rec = window.SOT.add('bookings', { service: si.name, category: si.cat, extras: si.extras, extrasTotal: si.extrasTotal || 0, mins: si.mins || null, price: si.price, priceFrom: si.from, deposit: DEPOSIT, therapist: THER[form.therapist], date: window.SOT.localDate(d), time: form.time, name: form.name.trim(), phone: window.SOT.ghPhone(form.phone), email: form.email.trim(), notes: form.notes.trim(), giftCard: (form.gc || '').trim().toUpperCase(), mkt: !!form.consent[3], status: 'Requested' }, 'BK');
+          window.SOT.add('consents', { phone: rec.phone, key: 'wa', channel: 'WhatsApp', granted: true, method: 'Booking form — service messages about this booking', by: 'Client (website)' }, 'CS');
+          window.SOT.add('consents', { phone: rec.phone, key: 'mkt', channel: 'Marketing', granted: !!form.consent[3], method: 'Booking form — optional checkbox', by: 'Client (website)' }, 'CS');
+          try { const X = window.SOTWA, c = X && X.cfg(); if (c && c.mode === 'api' && c.auto.received) X.send('received', rec, 'System (automatic)'); } catch (e) {}
+          try { localStorage.setItem('sot-v1-me', JSON.stringify(rec.phone)); } catch (e) {}
+          try { window.open(SOT.wa(waText(rec.id) + (form.notes.trim() ? ' · Notes: ' + form.notes.trim() : '')), '_blank', 'noopener'); } catch (e) {}
+          return this.setState({ step: 4, ref: rec.id, tried: false });
+        }
+        this.setState({ step: step + 1, tried: false });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

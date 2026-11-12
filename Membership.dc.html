@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Membership · Sense of Touch</title>
+<meta name="description" content="Essential, Gold and VIP memberships with monthly wellness benefits.">
+<meta property="og:title" content="Membership · Sense of Touch">
+<meta property="og:description" content="Essential, Gold and VIP memberships with monthly wellness benefits.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{overflow-x:hidden}a[href^="https://wa.me"],a[href^="tel:"],a[href^="mailto:"],a[href*="instagram"],a[style*="border-bottom"],a[style*="text-transform: uppercase"],button,[type=submit]{min-height:44px!important;display:inline-flex;align-items:center}[style*="font-size: 8px"],[style*="font-size: 9px"],[style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"]{font-size:11px!important}p{max-width:min(100%,72ch)!important}p[style*="text-align: center"]{margin-inline:auto!important}h1,h2,h3,p,span,a{overflow-wrap:break-word}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}@media (pointer:coarse){a[style*="border-bottom"],button{min-height:44px}a[style*="border-bottom"]{display:inline-flex;align-items:center}}img,video,iframe{max-width:100%}@media (max-width:720px){[style*="padding: 112px 32px"]{padding:72px 20px!important}[style*="padding: 96px 32px"]{padding:64px 20px!important}[style*="padding: 80px 32px"]{padding:56px 20px!important}[style*="padding: 72px 32px"]{padding:56px 20px!important}[style*="padding: 96px 56px"]{padding:56px 24px!important}[style*="position: sticky; top: 1"]{position:static!important}[style*="grid-column: span 2"]{grid-column:auto!important}[style*="min-height: 720px"]{min-height:440px!important}[style*="padding: 40px;"]{padding:24px!important}}
+@media (max-width:720px){[data-3d-opt]{display:none!important}}
+html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}input,select,textarea{font-family:Montserrat,sans-serif}input:focus,select:focus,textarea:focus{outline:2px solid #C6A15B;outline-offset:1px}
+@media (max-width:1000px){[data-mem-aside]{position:static!important;gap:16px!important}[data-mem-aside] h1{font-size:40px!important}[data-mem-aside] > div:nth-of-type(1){max-width:320px!important;padding:20px!important}[data-mem-steps],[data-mem-aside] [data-3d]{display:none!important}}</style>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="packages" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<section data-screen-label="Membership sign-up" style="max-width:1280px;margin:0 auto;padding:72px 32px 112px;display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+
+<aside data-no-reveal="1" data-mem-aside="1" style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:24px;position:sticky;top:110px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Membership application</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,64px);line-height:1;color:#493126">Make self-care a ritual</h1>
+<div data-tilt="1" style="width:100%;max-width:420px;background:{{ card.bg }};color:{{ card.fg }};padding:28px;aspect-ratio:1.6/1;display:flex;flex-direction:column;justify-content:space-between;border:1px solid #C6A15B;transition:background .4s ease">
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;font-weight:600"><span>Sense of Touch</span><span style="color:#C6A15B">Member</span></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1">{{ card.name }}</span>
+<span style="font-size:12px;letter-spacing:0.18em;text-transform:uppercase">{{ card.holder }}</span>
+</div>
+</div>
+<div data-3d="gift" data-3d-opt="1" data-no-reveal="1" style="position:relative;width:100%;height:220px;max-width:420px;pointer-events:none;margin:-8px 0;cursor:grab;touch-action:pan-y;user-select:none"></div>
+<div data-mem-steps="1" style="display:flex;flex-direction:column;border-top:1px solid #493126">
+<sc-for list="{{ stepList }}" as="s" hint-placeholder-count="5">
+<div style="display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid #E9DDC9;color:{{ s.color }}">
+<span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;min-width:22px">{{ s.n }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:22px">{{ s.t }}</span>
+<span style="margin-left:auto;font-size:13px">{{ s.mark }}</span>
+</div>
+</sc-for>
+</div>
+</aside>
+
+<div style="flex:2 1 560px;min-width:0;background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(24px,4vw,48px);display:flex;flex-direction:column;gap:28px">
+
+<sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:36px;color:#493126">Choose your membership</h2>
+<span style="font-size:14px;line-height:1.6">Opening rates will be confirmed before your membership begins.</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px">
+<sc-for list="{{ tierCards }}" as="t" hint-placeholder-count="3">
+<button onClick="{{ t.select }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;gap:12px;padding:22px;border:1px solid {{ t.border }};background:{{ t.bg }}">
+<span style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126;line-height:1">{{ t.name }}</span>
+<span style="width:18px;height:18px;border-radius:50%;border:1px solid #493126;background:{{ t.dot }};flex:none"></span>
+</span>
+<span style="font-size:13px;line-height:1.5">{{ t.desc }}</span>
+<span style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #E9DDC9;padding-top:12px">
+<sc-for list="{{ t.perks }}" as="k" hint-placeholder-count="3">
+<span style="font-size:13px;display:flex;gap:10px"><span style="color:#536B4E">✓</span>{{ k }}</span>
+</sc-for>
+</span>
+</button>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Billing</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ billingChips }}" as="b" hint-placeholder-count="2">
+<button onClick="{{ b.select }}" style="all:unset;cursor:pointer;padding:12px 18px;font-size:14px;border:1px solid #493126;background:{{ b.bg }};color:{{ b.fg }}">{{ b.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Who is this for?</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ forChips }}" as="b" hint-placeholder-count="2">
+<button onClick="{{ b.select }}" style="all:unset;cursor:pointer;padding:12px 18px;font-size:14px;border:1px solid #493126;background:{{ b.bg }};color:{{ b.fg }}">{{ b.label }}</button>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{ isGift }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;background:#F8F4ED;padding:20px">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Your name (gift from)
+<input value="{{ f.giftFrom }}" onChange="{{ on.giftFrom }}" placeholder="Your name" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Gift message
+<input value="{{ f.giftMsg }}" onChange="{{ on.giftMsg }}" placeholder="Optional" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;color:#24221D">
+</label>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:36px;color:#493126">{{ detailsTitle }}</h2>
+<span style="font-size:14px;line-height:1.6">Fields marked * are required.</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">First name *
+<input value="{{ f.first }}" onChange="{{ on.first }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid {{ err.first }};background:#F8F4ED;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Last name *
+<input value="{{ f.last }}" onChange="{{ on.last }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid {{ err.last }};background:#F8F4ED;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Phone / WhatsApp *
+<input value="{{ f.phone }}" onChange="{{ on.phone }}" placeholder="+233" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid {{ err.phone }};background:#F8F4ED;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Email *
+<input value="{{ f.email }}" onChange="{{ on.email }}" placeholder="you@email.com" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid {{ err.email }};background:#F8F4ED;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Date of birth *
+<input type="date" value="{{ f.dob }}" onChange="{{ on.dob }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid {{ err.dob }};background:#F8F4ED;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Area / neighbourhood
+<input value="{{ f.area }}" onChange="{{ on.area }}" placeholder="e.g. Community 25" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D">
+</label>
+</div>
+<sc-if value="{{ isMinor }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px;background:#E9DDC9;padding:20px">
+<span style="font-size:13px;line-height:1.6;color:#493126"><strong>Under 18:</strong> a parent or guardian must complete and sign this application.</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Guardian name *
+<input value="{{ f.guardian }}" onChange="{{ on.guardian }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid {{ err.guardian }};background:#FFFDF9;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Guardian phone *
+<input value="{{ f.guardianPhone }}" onChange="{{ on.guardianPhone }}" placeholder="+233" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid {{ err.guardianPhone }};background:#FFFDF9;color:#24221D">
+</label>
+</div>
+</div>
+</sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Emergency contact name
+<input value="{{ f.emName }}" onChange="{{ on.emName }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Emergency contact phone
+<input value="{{ f.emPhone }}" onChange="{{ on.emPhone }}" placeholder="+233" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D">
+</label>
+</div>
+<sc-if value="{{ hasErrors }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:13px;color:#8A2E1E">Please complete the highlighted fields.</span>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:36px;color:#493126">Your wellness profile</h2>
+<span style="font-size:14px;line-height:1.6">Helps your therapist personalise every visit. Kept confidential.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Treatments you’re most interested in</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ interestChips }}" as="c" hint-placeholder-count="7">
+<button onClick="{{ c.toggle }}" style="all:unset;cursor:pointer;padding:11px 16px;font-size:13px;border:1px solid #493126;background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Wellness goals</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ goalChips }}" as="c" hint-placeholder-count="6">
+<button onClick="{{ c.toggle }}" style="all:unset;cursor:pointer;padding:11px 16px;font-size:13px;border:1px solid #536B4E;background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Skin type
+<select value="{{ f.skin }}" onChange="{{ on.skin }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D">
+<sc-for list="{{ skinTypes }}" as="o" hint-placeholder-count="6"><option value="{{ o }}">{{ o }}</option></sc-for>
+</select>
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Massage pressure
+<select value="{{ f.pressure }}" onChange="{{ on.pressure }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D">
+<sc-for list="{{ pressures }}" as="o" hint-placeholder-count="4"><option value="{{ o }}">{{ o }}</option></sc-for>
+</select>
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Preferred visit time
+<select value="{{ f.visitTime }}" onChange="{{ on.visitTime }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D">
+<sc-for list="{{ visitTimes }}" as="o" hint-placeholder-count="4"><option value="{{ o }}">{{ o }}</option></sc-for>
+</select>
+</label>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid #E9DDC9;padding-top:20px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Health screening — tick any that apply</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 20px">
+<sc-for list="{{ healthChecks }}" as="c" hint-placeholder-count="8">
+<button onClick="{{ c.toggle }}" style="all:unset;cursor:pointer;display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.45">
+<span style="width:20px;height:20px;flex:none;border:1px solid #493126;background:{{ c.bg }};color:#F8F4ED;display:flex;align-items:center;justify-content:center;font-size:12px">{{ c.mark }}</span>
+<span>{{ c.label }}</span>
+</button>
+</sc-for>
+</div>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Allergies, medications or anything we should know
+<textarea value="{{ f.healthNotes }}" onChange="{{ on.healthNotes }}" rows="3" placeholder="e.g. nut allergy, recent surgery, sensitive skin" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D;resize:vertical"></textarea>
+</label>
+<span style="font-size:12px;line-height:1.6;color:#493126">Some treatments may be adjusted or need a doctor’s clearance. A full consultation takes place at your first visit.</span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:24px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:36px;color:#493126">Payment &amp; agreement</h2>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Preferred payment method</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px">
+<sc-for list="{{ payChips }}" as="p" hint-placeholder-count="4">
+<button onClick="{{ p.select }}" style="all:unset;cursor:pointer;padding:16px;border:1px solid {{ p.border }};background:{{ p.bg }};display:flex;flex-direction:column;gap:4px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#493126">{{ p.label }}</span>
+<span style="font-size:12px">{{ p.sub }}</span>
+</button>
+</sc-for>
+</div>
+<span style="font-size:12px;line-height:1.6;color:#493126">No payment is taken now. We’ll contact you to confirm your rate and set up payment before your membership starts.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Preferred start</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ startChips }}" as="b" hint-placeholder-count="3">
+<button onClick="{{ b.select }}" style="all:unset;cursor:pointer;padding:12px 18px;font-size:14px;border:1px solid #493126;background:{{ b.bg }};color:{{ b.fg }}">{{ b.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="background:#F8F4ED;padding:22px;display:flex;flex-direction:column;gap:8px;font-size:13px;line-height:1.6">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Membership terms (summary)</span>
+<span>Benefits renew each billing period and don’t roll over unless stated.</span>
+<span>Memberships are personal and non-transferable, except gifted memberships before activation.</span>
+<span>Cancel with 30 days’ notice; annual memberships follow the agreed terms.</span>
+<span>Appointments cancelled with under 24 hours’ notice may count as used.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ consents }}" as="c" hint-placeholder-count="4">
+<button onClick="{{ c.toggle }}" style="all:unset;cursor:pointer;display:flex;gap:14px;align-items:flex-start;font-size:14px;line-height:1.55">
+<span style="width:20px;height:20px;flex:none;border:1px solid {{ c.border }};background:{{ c.bg }};color:#F8F4ED;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px">{{ c.mark }}</span>
+<span>{{ c.label }}</span>
+</button>
+</sc-for>
+</div>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Signature — type your full name *
+<input value="{{ f.signature }}" onChange="{{ on.signature }}" placeholder="{{ sigPlaceholder }}" style="font-family:Allura,cursive;font-size:32px;letter-spacing:0;text-transform:none;font-weight:400;padding:8px 12px;border:none;border-bottom:1px solid {{ err.signature }};background:transparent;color:#493126">
+</label>
+<sc-if value="{{ hasErrors }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:13px;color:#8A2E1E">Please accept the required terms and sign to continue.</span>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+<span style="font-family:Allura,cursive;font-size:60px;color:#536B4E;line-height:1">Welcome, {{ f.first }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126;line-height:1.2">Your {{ card.name }} membership application has been received.</span>
+<span style="font-size:14px;line-height:1.7">Reference <strong>{{ ref }}</strong>. We’ll contact you within two business days to confirm your rate, payment and start date, and to book your first consultation.</span>
+<div style="display:flex;flex-direction:column;width:100%;border-top:1px solid #E9DDC9">
+<sc-for list="{{ summary }}" as="s" hint-placeholder-count="6">
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid #E9DDC9;font-size:14px"><span style="color:#536B4E;font-weight:500">{{ s.k }}</span><span style="text-align:right">{{ s.v }}</span></div>
+</sc-for>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<a href="Book.dc.html" style="background:#493126;color:#F8F4ED;padding:15px 26px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600" style-hover="background:#24221D;color:#F8F4ED">Book first visit</a>
+<button onClick="{{ reset }}" style="all:unset;cursor:pointer;border:1px solid #493126;color:#493126;padding:14px 26px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">New application</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid #E9DDC9;padding-top:24px">
+<sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ back }}" style="all:unset;cursor:pointer;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126;border-bottom:1px solid #493126;padding-bottom:3px">← Back</button>
+</sc-if>
+<span style="font-size:12px;color:#536B4E;margin-left:auto">Step {{ step }} of 4</span>
+<button onClick="{{ next }}" style="all:unset;cursor:pointer;text-align:center;padding:17px 32px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;background:#536B4E;color:#F8F4ED" style-hover="background:#493126">{{ nextLabel }}</button>
+</div>
+</sc-if>
+</div>
+</section>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TIERS = {
+  essential: { name: 'Essential', desc: 'Monthly wellness benefits for regular self-care.', perks: ['Monthly wellness benefits', 'Member-only offers', 'Birthday treat'], bg: '#F8F4ED', fg: '#493126' },
+  gold: { name: 'Gold', desc: 'Priority booking and selected treatment benefits.', perks: ['Everything in Essential', 'Priority booking', 'Selected treatment benefits'], bg: '#536B4E', fg: '#F8F4ED' },
+  vip: { name: 'VIP', desc: 'Personalised wellness and exclusive privileges.', perks: ['Everything in Gold', 'Personalised wellness plan', 'Exclusive events'], bg: '#24221D', fg: '#F8F4ED' }
+};
+const INTERESTS = ['Facials', 'AFTERCARE ritual', 'Massage', 'Wood therapy', 'Scalp & hair', 'Waxing', 'The Lip Bar'];
+const GOALS = ['Relaxation', 'Stress relief', 'Glowing skin', 'Muscle recovery', 'Body confidence', 'Regular self-care'];
+const HEALTH = ['Pregnant or breastfeeding', 'High or low blood pressure', 'Diabetes', 'Skin condition (eczema, acne…)', 'Recent surgery or injury', 'Allergies to oils, nuts or fragrance', 'Taking blood thinners', 'Heart condition'];
+const PAY = [['Mobile Money', 'MTN · Telecel · AirtelTigo'], ['Card', 'Visa · Mastercard'], ['Bank transfer', 'Monthly or annual'], ['Pay in person', 'At reception']];
+const CONSENTS = [['I confirm the information provided is accurate and I’ll update it if my health changes.', true], ['I have read and accept the membership terms.', true], ['I consent to Sense of Touch storing my information securely to manage my membership.', true], ['Send me offers and wellness tips by WhatsApp or email.', false]];
+const blank = (tier) => ({ tier, billing: 'Monthly', forWho: 'Myself', giftFrom: '', giftMsg: '', first: '', last: '', phone: '', email: '', dob: '', area: '', guardian: '', guardianPhone: '', emName: '', emPhone: '', interests: [], goals: [], skin: 'Not sure', pressure: 'Medium', visitTime: 'Flexible', health: [], healthNotes: '', pay: 0, start: 'At opening', consent: [false, false, false, false], signature: '' });
+
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    let tier = 'gold';
+    try { const q = new URLSearchParams(location.search).get('tier'); if (TIERS[q]) tier = q; } catch (e) {}
+    this.state = { step: 1, f: blank(tier), tried: false, ref: '' };
+  }
+  set(p) { this.setState(s => ({ f: { ...s.f, ...p } })); }
+  toggleIn(key, v) { const a = this.state.f[key]; this.set({ [key]: a.includes(v) ? a.filter(x => x !== v) : [...a, v] }); }
+  age() { const d = new Date(this.state.f.dob); if (isNaN(d)) return null; const n = new Date(); let a = n.getFullYear() - d.getFullYear(); if (n < new Date(n.getFullYear(), d.getMonth(), d.getDate())) a--; return a; }
+  errors() {
+    const { f, step } = this.state, e = {};
+    if (step === 2) {
+      ['first', 'last', 'phone', 'dob'].forEach(k => { if (!String(f[k]).trim()) e[k] = 1; });
+      if (!/^\S+@\S+\.\S+$/.test(f.email)) e.email = 1;
+      const a = this.age(); if (a !== null && a < 18) { if (!f.guardian.trim()) e.guardian = 1; if (!f.guardianPhone.trim()) e.guardianPhone = 1; }
+    }
+    if (step === 4) {
+      CONSENTS.forEach(([, req], i) => { if (req && !f.consent[i]) e['c' + i] = 1; });
+      if (f.signature.trim().length < 3) e.signature = 1;
+    }
+    return e;
+  }
+  renderVals() {
+    const { step, f, tried, ref } = this.state;
+    const T = TIERS[f.tier];
+    const E = tried ? this.errors() : {};
+    const bc = k => E[k] ? '#8A2E1E' : '#E9DDC9';
+    const chip = (a, dark = '#493126') => a ? { bg: dark, fg: '#F8F4ED' } : { bg: 'transparent', fg: '#24221D' };
+    const on = {}; Object.keys(blank()).forEach(k => { on[k] = e => this.set({ [k]: e.target.value }); });
+    const a = this.age();
+    return {
+      f, on, step, ref,
+      s1: step === 1, s2: step === 2, s3: step === 3, s4: step === 4, s5: step === 5,
+      card: { name: T.name, bg: T.bg, fg: T.fg, holder: [f.first, f.last].filter(Boolean).join(' ') || 'Your name' },
+      stepList: ['Membership', 'Your details', 'Wellness profile', 'Payment & agreement', 'Confirmation'].map((t, i) => ({ t, n: i + 1, color: i + 1 === step ? '#493126' : i + 1 < step ? '#536B4E' : '#8A857B', mark: i + 1 < step ? '✓' : '' })),
+      tierCards: Object.entries(TIERS).map(([k, t]) => ({ ...t, border: f.tier === k ? '#493126' : '#E9DDC9', bg: f.tier === k ? '#E9DDC9' : '#FFFDF9', dot: f.tier === k ? '#536B4E' : 'transparent', select: () => this.set({ tier: k }) })),
+      billingChips: ['Monthly', 'Annual'].map(l => ({ label: l, ...chip(f.billing === l), select: () => this.set({ billing: l }) })),
+      forChips: ['Myself', 'A gift for someone'].map(l => ({ label: l, ...chip(f.forWho === l), select: () => this.set({ forWho: l }) })),
+      isGift: f.forWho !== 'Myself',
+      detailsTitle: f.forWho === 'Myself' ? 'Your details' : 'Member’s details',
+      err: { first: bc('first'), last: bc('last'), phone: bc('phone'), email: bc('email'), dob: bc('dob'), guardian: bc('guardian'), guardianPhone: bc('guardianPhone'), signature: E.signature ? '#8A2E1E' : '#493126' },
+      hasErrors: Object.keys(E).length > 0,
+      isMinor: a !== null && a < 18,
+      interestChips: INTERESTS.map(l => ({ label: l, ...chip(f.interests.includes(l)), toggle: () => this.toggleIn('interests', l) })),
+      goalChips: GOALS.map(l => ({ label: l, ...chip(f.goals.includes(l), '#536B4E'), toggle: () => this.toggleIn('goals', l) })),
+      skinTypes: ['Not sure', 'Normal', 'Dry', 'Oily', 'Combination', 'Sensitive'],
+      pressures: ['Light', 'Medium', 'Firm', 'Varies'],
+      visitTimes: ['Flexible', 'Weekday mornings', 'Weekday evenings', 'Weekends'],
+      healthChecks: HEALTH.map(l => { const o = f.health.includes(l); return { label: l, bg: o ? '#536B4E' : 'transparent', mark: o ? '✓' : '', toggle: () => this.toggleIn('health', l) }; }),
+      payChips: PAY.map(([label, sub], i) => ({ label, sub, bg: f.pay === i ? '#E9DDC9' : '#FFFDF9', border: f.pay === i ? '#493126' : '#E9DDC9', select: () => this.set({ pay: i }) })),
+      startChips: ['At opening', 'Next month', 'Not sure yet'].map(l => ({ label: l, ...chip(f.start === l), select: () => this.set({ start: l }) })),
+      consents: CONSENTS.map(([label, req], i) => ({ label: label + (req ? ' *' : ''), bg: f.consent[i] ? '#536B4E' : 'transparent', mark: f.consent[i] ? '✓' : '', border: E['c' + i] ? '#8A2E1E' : '#493126', toggle: () => this.set({ consent: f.consent.map((c, j) => j === i ? !c : c) }) })),
+      sigPlaceholder: [f.first, f.last].filter(Boolean).join(' ') || 'Your full name',
+      summary: [
+        { k: 'Membership', v: `${T.name} · ${f.billing}` },
+        { k: 'Member', v: `${f.first} ${f.last}` },
+        { k: 'Contact', v: f.phone },
+        { k: 'Interests', v: f.interests.join(', ') || '—' },
+        { k: 'Payment', v: PAY[f.pay][0] },
+        { k: 'Start', v: f.start }
+      ].concat(f.forWho !== 'Myself' ? [{ k: 'Gift from', v: f.giftFrom || '—' }] : []),
+      showNav: step < 5, canBack: step > 1 && step < 5,
+      nextLabel: step === 4 ? 'Submit application' : 'Continue',
+      back: () => this.setState({ step: step - 1, tried: false }),
+      next: () => {
+        if (Object.keys(this.errors()).length) { this.setState({ tried: true }); return; }
+        const n = step + 1;
+        this.setState({ step: n, tried: false, ref: n === 5 ? 'SOT-' + f.tier.slice(0, 1).toUpperCase() + Math.random().toString(36).slice(2, 7).toUpperCase() : ref });
+        try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+      },
+      reset: () => this.setState({ step: 1, f: blank(f.tier), tried: false, ref: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

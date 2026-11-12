@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Student registration · Sense of Touch Institute</title>
+<meta name="description" content="Apply to the Sense of Touch Institute of Beauty &amp; Wellness in five steps.">
+<meta property="og:title" content="Apply · Sense of Touch Institute">
+<meta property="og:description" content="Apply online for a course at the Sense of Touch Institute of Beauty & Wellness.">
+<meta property="og:image" content="assets/logo.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<style>@keyframes sotFadeUp{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-auth.js"></script>
+<script src="./academy-core.js"></script>
+<script src="./sot-policy.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="academy" hint-size="100%,72px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+<main data-screen-label="Student registration" style="max-width:860px;margin:0 auto;padding:clamp(32px,6vw,64px) clamp(16px,3vw,32px) 96px;display:flex;flex-direction:column;gap:24px">
+<a href="Institute.dc.html#admissions" style="align-self:flex-start;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">← Admissions</a>
+
+<sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFDF9;border:1px solid #536B4E;padding:clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:14px;animation:sotFadeUp .5s ease both">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Application submitted</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.5vw,54px);color:#493126;line-height:1.05">Thank you, {{ doneName }}</h1>
+<span style="font-size:15px">Your application reference</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:44px;letter-spacing:0.08em;color:#493126">{{ doneRef }}</span>
+<p style="margin:0;font-size:15px;line-height:1.7">We’ve sent a confirmation and notified our admissions team. Track your status, read your admission letter and see payment instructions any time with this reference and your email.</p>
+<sc-if value="{{ doneFee }}" hint-placeholder-val="{{ false }}"><div style="background:#F3E3C4;padding:14px 16px;font-size:14px;color:#6B4A12">An application fee of <strong>{{ appFee }}</strong> applies — pay it from the Track page so review can begin.</div></sc-if>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><a href="Institute.dc.html#track" style="min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Track application</a><button onClick="{{ restart }}" style="all:unset;cursor:pointer;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Another application</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:12px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Student registration · Step {{ step }} of 5</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.5vw,54px);color:#493126;line-height:1.05">{{ stepTitle }}</h1>
+<ol aria-label="Registration progress" style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px">
+<sc-for list="{{ bars }}" as="b" hint-placeholder-count="5"><li style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:{{ b.fg }}"><span style="height:4px;background:#E9DDC9;overflow:hidden"><span style="display:block;height:4px;width:{{ b.w }};background:#536B4E;transition:width .6s cubic-bezier(.2,.7,.2,1)"></span></span><span>{{ b.l }}</span></li></sc-for>
+</ol>
+<span style="font-size:12px;color:#6B665C">{{ savedNote }}</span>
+</div>
+
+<sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:16px;animation:sotFadeUp .4s ease both">
+<sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}"><div style="background:#DCE5D6;padding:16px;font-size:14px;color:#2F4A2B;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between"><span>Signed in as <strong>{{ memberName }}</strong> · {{ memberEmail }}</span><button onClick="{{ signOut }}" style="all:unset;cursor:pointer;min-height:40px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#2F4A2B">Not you? Sign out</button></div></sc-if>
+<sc-if value="{{ signedOut }}" hint-placeholder-val="{{ true }}">
+<div role="tablist" style="display:flex;gap:6px"><sc-for list="{{ modes }}" as="m" hint-placeholder-count="2"><button role="tab" aria-selected="{{ m.on }}" onClick="{{ m.go }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:{{ m.bg }};color:{{ m.fg }};border:1px solid #493126">{{ m.l }}</button></sc-for></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+<sc-for list="{{ acctFields }}" as="f" hint-placeholder-count="5"><label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">{{ f.l }}<input type="{{ f.type }}" value="{{ f.v }}" onChange="{{ f.on }}" autoComplete="{{ f.ac }}" placeholder="{{ f.ph }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid {{ f.bd }};background:#FFFDF9;width:100%"><span role="alert" style="font-size:13px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ f.err }}</span></label></sc-for>
+</div>
+<sc-if value="{{ isNew }}" hint-placeholder-val="{{ true }}"><label style="display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.55;min-height:44px"><input type="checkbox" checked="{{ fv.terms }}" onChange="{{ setTerms }}" style="width:20px;height:20px;flex:none;margin-top:2px;accent-color:#536B4E">I accept the <a href="Legal.dc.html" style="color:#536B4E;font-weight:600">terms and privacy policy</a>.</label><span role="alert" style="font-size:13px;font-weight:500;color:#9A3B2A">{{ termsErr }}</span></sc-if>
+<span style="font-size:12px;line-height:1.6;color:#6B665C">One Sense of Touch account for the spa, shop and Institute. We’ll send a 6-digit code to verify your email.</span>
+<span role="alert" style="font-size:14px;font-weight:500;color:#9A3B2A">{{ authErr }}</span>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;animation:sotFadeUp .4s ease both">
+<sc-for list="{{ profFields }}" as="f" hint-placeholder-count="8"><label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126;grid-column:{{ f.span }}">{{ f.l }}
+<sc-if value="{{ f.isInput }}" hint-placeholder-val="{{ true }}"><input type="{{ f.type }}" value="{{ f.v }}" onChange="{{ f.on }}" placeholder="{{ f.ph }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid {{ f.bd }};background:#FFFDF9;width:100%"></sc-if>
+<sc-if value="{{ f.isArea }}" hint-placeholder-val="{{ false }}"><textarea rows="3" value="{{ f.v }}" onChange="{{ f.on }}" placeholder="{{ f.ph }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid {{ f.bd }};background:#FFFDF9;width:100%;resize:vertical;line-height:1.5"></textarea></sc-if>
+<sc-if value="{{ f.isSelect }}" hint-placeholder-val="{{ false }}"><select value="{{ f.v }}" onChange="{{ f.on }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid {{ f.bd }};background:#FFFDF9;width:100%"><sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="3"><option value="{{ o }}">{{ o }}</option></sc-for></select></sc-if>
+<span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:400;color:#6B665C">{{ f.help }}</span><span role="alert" style="font-size:13px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ f.err }}</span></label></sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px;animation:sotFadeUp .4s ease both">
+<sc-for list="{{ progFields }}" as="f" hint-placeholder-count="5"><label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">{{ f.l }}
+<sc-if value="{{ f.isSelect }}" hint-placeholder-val="{{ true }}"><select value="{{ f.v }}" onChange="{{ f.on }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid {{ f.bd }};background:#FFFDF9;width:100%"><sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select></sc-if>
+<sc-if value="{{ f.isInput }}" hint-placeholder-val="{{ false }}"><input type="{{ f.type }}" value="{{ f.v }}" onChange="{{ f.on }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:12px;border:1px solid #E9DDC9;background:#FFFDF9;width:100%"></sc-if>
+<span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:400;color:#6B665C">{{ f.help }}</span><span role="alert" style="font-size:13px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ f.err }}</span></label></sc-for>
+<sc-if value="{{ hasCourse }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:16px;font-size:14px;line-height:1.6"><strong style="color:#493126">{{ pc.title }}</strong> · {{ pc.product }}<br>Entry: {{ pc.entry }}<br><span style="color:#6B665C">{{ pc.note }}</span></div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:18px;animation:sotFadeUp .4s ease both">
+<sc-for list="{{ docFields }}" as="d" hint-placeholder-count="3"><label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">{{ d.l }}<input type="file" multiple="{{ d.multi }}" accept=".pdf,.jpg,.jpeg,.png" onChange="{{ d.on }}" style="font-size:14px;letter-spacing:0;text-transform:none;font-weight:400;padding:12px;border:1px dashed {{ d.bd }};background:#FFFDF9"><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:400;color:#6B665C">{{ d.help }}</span><span style="font-size:13px;letter-spacing:0;text-transform:none;font-weight:400;color:#2F4A2B">{{ d.files }}</span><span role="alert" style="font-size:13px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ d.err }}</span></label></sc-for>
+<span style="font-size:12px;line-height:1.6;color:#6B665C">PDF, JPG or PNG, up to 5 MB each. Files are stored privately and seen only by authorised admissions staff. Prototype: file names are recorded; files are uploaded once secure storage is connected.</span>
+</div>
+</sc-if>
+
+<sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px;animation:sotFadeUp .4s ease both">
+<sc-for list="{{ summary }}" as="g" hint-placeholder-count="4"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:16px 18px;display:flex;flex-direction:column"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:6px"><strong style="font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:#536B4E">{{ g.title }}</strong><button onClick="{{ g.edit }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126">Edit</button></div>
+<sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:12px;padding:6px 0;border-top:1px solid #F3EEE6;font-size:14px;line-height:1.5"><span style="color:#6B665C">{{ r.l }}</span><span>{{ r.v }}</span></div></sc-for></div></sc-for>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Applicant statement *<textarea rows="5" value="{{ fv.statement }}" onChange="{{ setStatement }}" placeholder="Tell us why you want to join this course." style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid {{ stmtBd }};background:#FFFDF9;resize:vertical;line-height:1.5"></textarea><span role="alert" style="font-size:13px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ err.statement }}</span></label>
+<fieldset style="border:1px solid #E9DDC9;padding:14px;margin:0;display:flex;flex-wrap:wrap;gap:4px 20px"><legend style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126;padding:0 6px">Contact me about my application by</legend><sc-for list="{{ consentOpts }}" as="c" hint-placeholder-count="3"><label style="display:flex;gap:10px;align-items:center;font-size:14px;min-height:44px"><input type="checkbox" checked="{{ c.on }}" onChange="{{ c.toggle }}" style="width:20px;height:20px;accent-color:#536B4E">{{ c.l }}</label></sc-for></fieldset>
+<label style="display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.55;min-height:44px"><input type="checkbox" checked="{{ fv.privacy }}" onChange="{{ setPrivacy }}" style="width:20px;height:20px;flex:none;margin-top:2px;accent-color:#536B4E">I agree to my information being processed to assess this application and run my studies, as described in the privacy policy. *</label>
+<span style="font-size:13px;line-height:1.6;color:#4A453C">Submitting also records your acceptance of the current versions of the Institute policies in the <a href="Policy%20Centre.dc.html" target="_blank" rel="noopener">Legal &amp; Policies Centre</a>.</span>
+<label style="display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.55;min-height:44px"><input type="checkbox" checked="{{ fv.declaration }}" onChange="{{ setDeclaration }}" style="width:20px;height:20px;flex:none;margin-top:2px;accent-color:#536B4E">I declare that the information I have given is accurate and complete. *</label>
+<sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:12px 14px;font-size:14px;color:#6B2A1E">{{ errSummary }}</div></sc-if>
+</div>
+</sc-if>
+
+<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;border-top:1px solid #E9DDC9;padding-top:20px">
+<button onClick="{{ back }}" style="all:unset;cursor:pointer;min-height:50px;padding:0 22px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;opacity:{{ backOp }}">Back</button>
+<button onClick="{{ next }}" style="all:unset;cursor:pointer;min-height:50px;padding:0 28px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;opacity:{{ nextOp }}">{{ nextLabel }}</button>
+</div>
+</sc-if>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const DK = 'sot-inst-registration-draft';
+const STEPS = ['Create your account', 'Your profile', 'Choose your programme', 'Supporting documents', 'Review and submit'];
+const BARS = ['Account', 'Profile', 'Programme', 'Documents', 'Review'];
+const BLANK = { name: '', email: '', phone: '', dob: '', gender: 'Prefer not to say', location: '', country: 'Ghana', emergency: '', education: '', experience: '', goals: '', courseId: '', format: '', cohortId: '', level: 'Beginner', startDate: '', statement: '', source: 'Website', consent: { email: 1, wa: 0, sms: 0 }, privacy: false, declaration: false, terms: false };
+const fmt = s => s ? new Date(s + 'T00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+class Component extends DCLogic {
+  state = { step: 1, mode: 'new', f: (() => { try { return { ...BLANK, ...JSON.parse(localStorage.getItem(DK)) }; } catch (e) { return { ...BLANK }; } })(), pw: '', pw2: '', idDoc: null, eduDocs: [], otherDocs: [], err: {}, authErr: '', busy: false, done: null, saved: '', tick: 0 };
+  componentDidMount() {
+    const up = () => this.setState(s => ({ tick: s.tick + 1 })); this.off = window.SOTAuth && window.SOTAuth.on(up); this.off2 = window.SOT && window.SOT.on(up);
+    const [code, coh] = decodeURIComponent(location.hash.replace(/^#/, '')).split('/'); const A = window.ACAD;
+    if (A && code) { const c = A.list('courses').find(x => x.code === code); if (c) this.setF({ courseId: c.id, cohortId: coh || '' }); }
+    const m = window.SOTAuth && window.SOTAuth.current(); if (m && m.role === 'member') { this.setF({ name: this.state.f.name || m.name, email: m.email, phone: this.state.f.phone || m.phone || '' }); if (this.state.step === 1) this.setState({ step: 2 }); }
+  }
+  componentWillUnmount() { this.off && this.off(); this.off2 && this.off2(); }
+  setF(p) { this.setState(s => { const f = { ...s.f, ...p }; try { localStorage.setItem(DK, JSON.stringify(f)); } catch (e) {} const err = { ...s.err }; Object.keys(p).forEach(k => delete err[k]); return { f, err, saved: 'Progress saved ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) }; }); }
+  go(n) { this.setState({ step: n, err: {} }); window.scrollTo(0, 0); }
+  renderVals() {
+    const A = window.ACAD, AU = window.SOTAuth; if (!A) return { isForm: true, s1: true };
+    const st = this.state, f = st.f, err = st.err, step = st.step, mem = AU && AU.current(), member = mem && mem.role === 'member' ? mem : null;
+    const courses = A.list('courses').filter(c => c.status === 'Published'), pc = A.course(f.courseId);
+    const openFor = cid => A.list('cohorts').filter(h => h.courseId === cid && h.status === 'Open' && (!h.closeDate || h.closeDate >= A.today()));
+    const seats = h => h.capacity ? h.capacity - A.list('enrolments').filter(e => e.cohortId === h.id && !['Withdrawn', 'Cancelled'].includes(e.status)).length : null;
+    const inp = (k, l, type, o = {}) => ({ l, type: type || 'text', v: f[k] ?? '', on: e => this.setF({ [k]: e.target.value }), ph: o.ph || '', ac: o.ac || 'off', help: o.help || '', err: err[k] || '', bd: err[k] ? '#9A3B2A' : '#E9DDC9', isInput: !o.area && !o.opts, isArea: !!o.area, isSelect: !!o.opts, opts: o.opts || [], span: o.span || 'auto' });
+    const out = { step, stepTitle: STEPS[step - 1], s1: step === 1, s2: step === 2, s3: step === 3, s4: step === 4, s5: step === 5, isDone: !!st.done, isForm: !st.done, fv: f, err,
+      bars: BARS.map((l, i) => ({ l, w: i + 1 < step ? '100%' : i + 1 === step ? '50%' : '0%', fg: i + 1 <= step ? '#493126' : '#9C9486' })),
+      savedNote: st.saved ? st.saved + ' in this browser — you can close this page and continue later.' : 'Your progress is saved as you go, so you can continue later.',
+      backOp: step === 1 ? 0.35 : 1, back: () => step > 1 && this.go(step - 1), nextOp: st.busy ? 0.5 : 1, nextLabel: step === 1 && !member ? (st.mode === 'new' ? 'Create account & verify' : 'Sign in & continue') : step === 5 ? 'Submit application' : 'Continue',
+      signedIn: !!member, signedOut: !member, memberName: member ? member.name : '', memberEmail: member ? member.email : '', signOut: () => AU.logout(),
+      modes: [['new', 'New applicant'], ['existing', 'I have an account']].map(([k, l]) => ({ l, on: st.mode === k ? 'true' : 'false', bg: st.mode === k ? '#493126' : 'transparent', fg: st.mode === k ? '#F8F4ED' : '#493126', go: () => this.setState({ mode: k, authErr: '', err: {} }) })),
+      isNew: st.mode === 'new', authErr: st.authErr, termsErr: (st.err || {}).terms || '', setTerms: e => this.setF({ terms: e.target.checked }),
+      appFee: A.money(A.settings().appFee) };
+    const pwF = (k, l, ac) => ({ l, type: 'password', v: st[k], on: e => this.setState({ [k]: e.target.value, err: { ...err, [k]: undefined } }), ac, ph: '', err: err[k] || '', bd: err[k] ? '#9A3B2A' : '#E9DDC9' });
+    out.acctFields = st.mode === 'new' ? [inp('name', 'Full name *', 'text', { ac: 'name' }), inp('email', 'Email *', 'email', { ac: 'email' }), inp('phone', 'Phone (Ghana or international) *', 'tel', { ac: 'tel', ph: '024 123 4567 or +44…' }), pwF('pw', 'Password *', 'new-password'), pwF('pw2', 'Confirm password *', 'new-password')] : [inp('email', 'Email', 'email', { ac: 'username' }), pwF('pw', 'Password', 'current-password')];
+    out.profFields = [inp('dob', 'Date of birth', 'date', { help: 'Used only to confirm the minimum age where a course requires it.' }), inp('gender', 'Gender (optional)', '', { opts: ['Prefer not to say', 'Female', 'Male', 'Self-described'] }), inp('location', 'Residential location *', 'text', { ph: 'e.g. Tema Community 25' }), inp('country', 'Country *'), inp('emergency', 'Emergency contact', 'text', { ph: 'Name and phone', help: 'Needed for in-person and hybrid courses.', span: '1/-1' }), inp('education', 'Education background *', '', { area: true, span: '1/-1', ph: 'e.g. WASSCE, diploma, degree' }), inp('experience', 'Relevant experience', '', { area: true, span: '1/-1', ph: 'Beauty, spa, wellness or customer-service experience' }), inp('goals', 'Career objectives *', '', { area: true, span: '1/-1' })];
+    const coh = f.courseId ? openFor(f.courseId) : [];
+    const sel = (k, l, opts, help) => ({ l, v: f[k], on: e => this.setF(k === 'courseId' ? { courseId: e.target.value, cohortId: '', format: '' } : { [k]: e.target.value }), opts, help: help || '', err: err[k] || '', bd: err[k] ? '#9A3B2A' : '#E9DDC9', isSelect: true, isInput: false });
+    out.progFields = [sel('courseId', 'Course *', [{ v: '', l: 'Choose a course…' }, ...courses.map(c => ({ v: c.id, l: c.title + ' — ' + c.product }))]), sel('format', 'Learning method', [{ v: '', l: 'As offered for this course' }, ...(pc ? pc.modes : []).map(m => ({ v: m, l: m }))]),
+      sel('cohortId', 'Preferred intake', [{ v: '', l: 'Next available intake' }, ...coh.map(h => { const s = seats(h); return { v: h.id, l: h.name + ' · starts ' + fmt(h.start) + (s == null ? '' : s > 0 ? ' · ' + s + ' places left' : ' · full (waiting list)') }; })], coh.length ? 'Places left are based on actual class capacity.' : 'No intake is open yet — we’ll offer the next one.'),
+      sel('level', 'Training level', A.LEVELS.map(v => ({ v, l: v }))), { l: 'Preferred start date', type: 'date', v: f.startDate, on: e => this.setF({ startDate: e.target.value }), isInput: true, isSelect: false, help: '', err: '' }];
+    out.hasCourse = !!pc; out.pc = pc ? { title: pc.title, product: pc.product, entry: pc.entry + (pc.requiresId ? ' Identification document required.' : ''), note: (A.PRODUCTS.find(p => p.name === pc.product) || {}).note || '' } : {};
+    const fileSet = (k, multi) => e => { const fs = Array.from(e.target.files || []).map(x => ({ name: x.name, size: x.size })); this.setState({ [k]: multi ? fs : (fs[0] || null), err: { ...err, [k]: undefined } }); };
+    const needId = !!(pc && pc.requiresId);
+    out.docFields = [...(needId ? [{ l: 'Identity document *', multi: false, on: fileSet('idDoc'), help: 'Ghana Card or passport — required for this programme.', files: st.idDoc ? st.idDoc.name : '', err: err.idDoc || '', bd: '#9A3B2A' }] : []), { l: 'Educational documents (optional)', multi: true, on: fileSet('eduDocs', true), help: 'Certificates or transcripts, where relevant.', files: st.eduDocs.map(d => d.name).join(', '), err: err.eduDocs || '', bd: '#C6A15B' }, { l: 'Other programme requirements (optional)', multi: true, on: fileSet('otherDocs', true), help: 'CV, references or professional certificates (for advanced programmes).', files: st.otherDocs.map(d => d.name).join(', '), err: '', bd: '#C6A15B' }];
+    const h = f.cohortId ? A.cohort(f.cohortId) : null;
+    out.summary = [{ title: 'Account', s: 1, rows: [['Name', f.name], ['Email', f.email], ['Phone', f.phone]] }, { title: 'Profile', s: 2, rows: [['Date of birth', f.dob ? fmt(f.dob) : '—'], ['Gender', f.gender], ['Location', f.location + ', ' + f.country], ['Emergency contact', f.emergency || '—'], ['Education', f.education], ['Experience', f.experience || '—'], ['Career goals', f.goals]] }, { title: 'Programme', s: 3, rows: [['Course', pc ? pc.title : '—'], ['Learning method', f.format || 'As offered'], ['Intake', h ? h.name : 'Next available'], ['Level', f.level], ['Preferred start', f.startDate ? fmt(f.startDate) : '—']] }, { title: 'Documents', s: 4, rows: [['Identity document', st.idDoc ? st.idDoc.name : needId ? 'Missing' : 'Not required'], ['Educational', st.eduDocs.map(d => d.name).join(', ') || 'None'], ['Other', st.otherDocs.map(d => d.name).join(', ') || 'None']] }].map(g => ({ title: g.title, edit: () => this.go(g.s), rows: g.rows.map(([l, v]) => ({ l, v: v || '—' })) }));
+    out.setStatement = e => this.setF({ statement: e.target.value }); out.stmtBd = err.statement ? '#9A3B2A' : '#E9DDC9';
+    out.setPrivacy = e => this.setF({ privacy: e.target.checked }); out.setDeclaration = e => this.setF({ declaration: e.target.checked });
+    out.consentOpts = [['email', 'Email'], ['wa', 'WhatsApp'], ['sms', 'SMS']].map(([k, l]) => ({ l, on: !!f.consent[k], toggle: e => this.setF({ consent: { ...f.consent, [k]: e.target.checked ? 1 : 0 } }) }));
+    const errs = Object.values(err).filter(Boolean); out.hasErr = step === 5 && errs.length > 0; out.errSummary = 'Please check: ' + errs.join(' ');
+    out.doneName = st.done ? st.done.name.split(' ')[0] : ''; out.doneRef = st.done ? st.done.id : ''; out.doneFee = !!(A.settings().appFee > 0);
+    out.restart = () => this.setState({ done: null, step: member ? 2 : 1 });
+    const phoneOk = p => !!(window.SOT.ghPhone(p) || /^\+\d{8,15}$/.test(String(p || '').replace(/[\s-]/g, '')));
+    out.next = async () => {
+      if (st.busy) return; const e = {};
+      if (step === 1 && !member) {
+        if (st.mode === 'new') { if (!f.name.trim()) e.name = 'Add your full name.'; if (!window.SOT.email(f.email)) e.email = 'Enter a valid email.'; if (!phoneOk(f.phone)) e.phone = 'Enter a Ghana number or an international number starting with +.'; if (st.pw.length < 8) e.pw = 'At least 8 characters.'; else if (!/[A-Za-z]/.test(st.pw) || !/\d/.test(st.pw)) e.pw = 'Use letters and at least one number.'; if (st.pw2 !== st.pw) e.pw2 = 'Passwords don’t match.'; if (!f.terms) e.terms = 'Please accept the terms.'; }
+        if (Object.keys(e).length) return this.setState({ err: e });
+        this.setState({ busy: true, authErr: '' });
+        const r = st.mode === 'new' ? AU.register({ name: f.name.trim(), email: f.email, phone: window.SOT.ghPhone(f.phone) || f.phone, pass: st.pw }) : AU.login(f.email, st.pw);
+        if (r.error) return this.setState({ busy: false, authErr: r.error });
+        const ses = r.pending ? await r.done : r; this.setState({ busy: false, pw: '', pw2: '' });
+        if (!ses) return this.setState({ authErr: 'Verification was cancelled. Your account is saved — sign in to continue.' });
+        if (ses.role !== 'member') return this.setState({ authErr: 'Please use a personal (not staff) account to apply.' });
+        this.setF({ name: f.name || ses.name, email: ses.email, phone: f.phone || ses.phone || '' }); return this.go(2);
+      }
+      if (step === 2) { if (!f.location.trim()) e.location = 'Required.'; if (!f.country.trim()) e.country = 'Required.'; if (!f.education.trim()) e.education = 'Required.'; if (!f.goals.trim()) e.goals = 'Required.'; if (pc && !/online/i.test((pc.modes || []).join()) && !f.emergency.trim()) e.emergency = 'Required for in-person training.'; }
+      if (step === 3) { if (!f.courseId) e.courseId = 'Choose a course.'; }
+      if (step === 4) { if (needId && !st.idDoc) e.idDoc = 'This programme requires an identity document.'; [st.idDoc, ...st.eduDocs, ...st.otherDocs].filter(Boolean).forEach(d => { if (d.size > 5 * 1024 * 1024) e.eduDocs = d.name + ' is over 5 MB.'; if (!/\.(pdf|jpe?g|png)$/i.test(d.name)) e.eduDocs = d.name + ' must be PDF, JPG or PNG.'; }); if (e.eduDocs && needId && st.idDoc && st.idDoc.size > 5 * 1024 * 1024) e.idDoc = e.eduDocs; }
+      if (Object.keys(e).length) return this.setState({ err: e });
+      if (step < 5) return this.go(step + 1);
+      const res = A.submitApplication({ ...f, docs: [...st.eduDocs, ...st.otherDocs], idDoc: st.idDoc, accountEmail: member ? member.email : f.email, terms: undefined });
+      if (res.errors) { const first = Object.keys(res.errors)[0]; const map = { name: 1, email: 1, phone: 1, location: 2, country: 2, education: 2, goals: 2, emergency: 2, courseId: 3, cohortId: 3, idDoc: 4, docs: 4 }; this.setState({ err: res.errors }); if (map[first]) this.go(map[first]); this.setState({ err: res.errors }); return; }
+      try { window.SOTPolicy && window.SOTPolicy.accept({ userId: f.email, type: 'student', optional: {} }); } catch (x) {}
+      try { localStorage.removeItem(DK); } catch (x) {} this.setState({ done: res.app, f: { ...BLANK, name: f.name, email: f.email, phone: f.phone }, idDoc: null, eduDocs: [], otherDocs: [], err: {}, step: 1 }); window.scrollTo(0, 0);
+    };
+    return out;
+  }
+}
+</script>
+</body>
+</html>

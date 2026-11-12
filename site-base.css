@@ -1,0 +1,11 @@
+html,body{margin:0;overflow-x:hidden;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#493126;text-decoration:none}a:hover{color:#536B4E}
+input,select,textarea,button{font-family:Montserrat,sans-serif}
+input,select,textarea{font-size:16px}
+img,video,iframe{max-width:100%}
+h1,h2,h3,p,span,a{overflow-wrap:break-word}
+p{max-width:min(100%,72ch)}
+:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}
+button,[type=submit]{min-height:44px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

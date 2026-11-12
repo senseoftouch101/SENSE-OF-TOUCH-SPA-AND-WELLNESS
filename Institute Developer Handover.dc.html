@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Institute · Developer handover</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<style>code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:#F3EEE6;padding:1px 4px}</style>
+</helmet>
+<article style="max-width:1040px;margin:0 auto;padding:clamp(32px,6vw,72px) clamp(16px,4vw,40px) 96px;display:flex;flex-direction:column;gap:40px;font-size:14.5px;line-height:1.7;color:#24221D">
+<header style="display:flex;flex-direction:column;gap:12px;border-bottom:1px solid #493126;padding-bottom:24px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Sense of Touch Institute of Beauty &amp; Wellness</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,60px);line-height:1.02;color:#493126">Developer handover</h1>
+<p style="margin:0">How to turn the working prototype into the production platform. All business rules already live in <code>academy-core.js</code> — port them to server functions; keep the pages as the UI reference.</p>
+</header>
+
+<section style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">1 · File map</h2>
+<div style="display:flex;flex-direction:column">
+<div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px;padding:8px 0;border-top:1px solid #E9DDC9"><code>Institute.dc.html</code><span>Public site: home (3D intro + hero), about, courses, course detail, methods + 3D lab, workshops, tour, events, admissions, calendar, instructors, news, track (letter, schedule, payment), verify, contact.</span></div>
+<div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px;padding:8px 0;border-top:1px solid #E9DDC9"><code>Institute Registration.dc.html</code><span>5-step application; account via <code>sot-auth.js</code> (register/login with one-time code).</span></div>
+<div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px;padding:8px 0;border-top:1px solid #E9DDC9"><code>Institute Portal.dc.html</code><span>Student LMS, schedule, results, payments, documents, support · instructor registers, grading, Q&amp;A, practical evaluations, quiz/assignment builders.</span></div>
+<div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px;padding:8px 0;border-top:1px solid #E9DDC9"><code>Institute Alumni.dc.html</code><span>Alumni boards, directory (opt-in), graduation history, feedback → stories.</span></div>
+<div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px;padding:8px 0;border-top:1px solid #E9DDC9"><code>Institute Admin.dc.html</code><span>Role-scoped admin: overview + charts, admissions, students, courses, cohorts, assessments, certificates, finance, events, content, comms, support, reports, settings, audit.</span></div>
+<div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px;padding:8px 0;border-top:1px solid #E9DDC9"><code>academy-core.js</code><span>Data model, workflows, eligibility, permissions, metrics, sample data. Storage keys <code>sot-v1-acad-*</code>.</span></div>
+<div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px;padding:8px 0;border-top:1px solid #E9DDC9"><code>institute3d.js</code> · <code>splash3d.js</code> · <code>motion.js</code><span>Three.js scenes (hero, face, back, wood) with WebGL/reduced-motion fallbacks; logo intro; scroll/tilt motion.</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">2 · Tables (Supabase / Postgres)</h2>
+<p style="margin:0">Each prototype key maps to a table. Use <code>uuid</code> primary keys plus the human-readable references shown (unique). Every table: <code>created_at</code>, <code>updated_at</code>, <code>created_by</code>.</p>
+<div style="display:flex;flex-direction:column;font-size:13.5px">
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>profiles</code><span>auth.users 1:1 · name, phone, role[] · links to existing CRM client by phone (no duplicate people)</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>students</code><span>profile_id, student_ref (STU-…, unique), location, emergency, consent jsonb, alumni jsonb</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>instructors</code><span>profile_id, title, bio, photo, verified_qualifications jsonb, active</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>courses · modules · lessons · quiz_questions · practical_items</code><span>course: code unique, product, level, modes[], requirements jsonb, requires_id, status · ordered children with <code>position</code></span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>cohorts · sessions · bookings</code><span>fees, deposit, instalments, capacity, access_from/to · session kind, private meeting_ref, recording jsonb · practical bookings</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>enquiries · applications · documents</code><span>application ref (APP-…), status, status_history, consent, account link · documents in private storage bucket with row per file</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>enrolments · lesson_progress · submissions</code><span>unique (student, cohort) · progress per lesson · quiz attempts, assignments, demo videos with grades</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>attendance · practical_evaluations</code><span>unique (session, student) with corrections[] · date, criteria, rating, outcome Pass/Resit/Pending, supervised, signed_off_by (append-only)</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>completions · certificates</code><span>requirement snapshot · public cert ref unique, status Valid/Revoked, history[]</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>payments · refunds</code><span>provider_ref unique, kind, amount (GHS, numeric), status, webhook_payload, verified_at</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>events · event_registrations · articles · stories</code><span>CMS content; stories require consent = true to publish (check constraint)</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>messages · notifications · support · questions · audit_log · settings</code><span>queued outbound messages with channel + status; audit is insert-only</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">3 · Row-level security</h2>
+<div style="display:flex;flex-direction:column;font-size:13.5px">
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><strong>Student</strong><span>select own rows where <code>student.profile_id = auth.uid()</code>; insert own submissions, questions, support, bookings; never update grades, attendance or payments.</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><strong>Instructor</strong><span>rows whose cohort.instructor_id = own instructor id; write attendance, grades, evaluations, lessons for those courses only.</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><strong>Staff roles</strong><span>permission table mirrors <code>ROLES</code> in academy-core.js (16 permissions). Check <code>has_perm(auth.uid(), 'finance.verify')</code> in policies and functions.</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><strong>Public</strong><span>published courses, cohorts (no private fields), events, articles, consented stories; certificate verification through a function returning only public fields.</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">4 · Server functions</h2>
+<div style="display:flex;flex-direction:column;font-size:13.5px">
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>submit_application</code><span>validation + duplicate check + CRM link + notifications (from <code>submitApplication</code>)</span></div>
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>payment_webhook</code><span>verify provider signature → mark Verified → <code>try_enrol</code>. Never trust the browser’s success page.</span></div>
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>try_enrol</code><span>offer accepted + verified ≥ deposit → create/link student, enrolment, welcome message</span></div>
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>eligibility · confirm_completion · issue_certificate</code><span>port <code>eligibility()</code> exactly; issue only from a completion record; render PDF server-side with QR to the verify URL</span></div>
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>send_messages</code><span>cron: dispatch queued messages by consented channel; store provider id and delivery status</span></div>
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><code>signed_media_url</code><span>short-lived URLs for lesson video/PDF to enrolled students within access dates</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">5 · Provider setup</h2>
+<div style="display:flex;flex-direction:column;font-size:13.5px">
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><strong>Paystack / Hubtel</strong><span>business account in Sense of Touch’s name · enable MoMo (MTN, Telecel, AirtelTigo) and cards · set webhook URL · secrets in server env only</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><strong>Zoom or Google Meet</strong><span>licensed host account · create meetings per session via API · import attendance reports</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><strong>Messaging</strong><span>email (verified sending domain) · WhatsApp Business API with approved templates (names match <code>TPL</code>) · Hubtel SMS sender ID</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><strong>Storage &amp; video</strong><span>private buckets (documents, submissions) with virus scan · video host with signed playback and low-bitrate renditions</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:7px 0;border-top:1px solid #E9DDC9"><strong>Environment</strong><span><code>SUPABASE_URL</code> · <code>SUPABASE_SERVICE_KEY</code> · <code>PAYSTACK_SECRET</code> / <code>HUBTEL_CLIENT_ID</code>, <code>HUBTEL_SECRET</code> · <code>ZOOM_ACCOUNT_ID</code>, <code>ZOOM_CLIENT_SECRET</code> · <code>WHATSAPP_TOKEN</code> · <code>EMAIL_API_KEY</code> · <code>VIDEO_SIGNING_KEY</code></span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">6 · Before go-live</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:0 28px;font-size:13.5px">
+<span style="padding:7px 0;border-top:1px solid #E9DDC9">Remove sample data (Admin → Settings)</span>
+<span style="padding:7px 0;border-top:1px solid #E9DDC9">Replace prototype sign-in with Supabase Auth + MFA for staff</span>
+<span style="padding:7px 0;border-top:1px solid #E9DDC9">Data-protection review (Ghana Data Protection Act, 2012) and retention schedule</span>
+<span style="padding:7px 0;border-top:1px solid #E9DDC9">Run the acceptance tests in the Implementation Plan end to end</span>
+<span style="padding:7px 0;border-top:1px solid #E9DDC9">Accessibility pass: keyboard, screen reader, contrast, reduced motion</span>
+<span style="padding:7px 0;border-top:1px solid #E9DDC9">Mobile performance on 3G-class networks; 3D only on capable devices</span>
+<span style="padding:7px 0;border-top:1px solid #E9DDC9">Penetration test of uploads, webhooks and role policies</span>
+<span style="padding:7px 0;border-top:1px solid #E9DDC9">Confirm fees, instructors, handbook and certificate wording with the founder</span>
+</div>
+</section>
+</article>
+</x-dc>
+</body>
+</html>

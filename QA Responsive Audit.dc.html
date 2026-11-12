@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0;font-family:Montserrat,sans-serif;background:#F8F4ED;color:#24221D}a{color:#536B4E}a:hover{color:#493126}</style></helmet>
+<div style="padding:16px;display:flex;flex-direction:column;gap:8px">
+<div style="font-size:14px;font-weight:600">{{ status }}</div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="0">
+<div style="font-size:11px;line-height:1.35;border-bottom:1px solid #E9DDC9;padding:3px 0;display:grid;grid-template-columns:200px 50px 1fr;gap:8px"><span>{{ r.p }}</span><span style="font-weight:600;color:{{ r.c }}">{{ r.w }}</span><span>{{ r.msg }}</span></div>
+</sc-for>
+<div ref="{{ host }}" style="position:fixed;left:-30000px;top:0"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PAGES = ['Sense of Touch Homepage','About','Services','AFTERCARE','LipBar','Founder','Gallery','Packages','Membership','Shop','Book','Contact','Account','GiftCards','Rewards','Consultation','Occasions','Corporate','Journal','Admin'];
+const WIDTHS = [320, 360, 414, 600, 768, 900, 1024, 1180, 1280, 1440, 1920, 2560];
+class Component extends DCLogic {
+  state = { rows: [], status: 'Running…' };
+  host = React.createRef();
+  componentDidMount() { this.run(); }
+  test(p, w) {
+    return new Promise(res => {
+      const f = document.createElement('iframe');
+      f.style.cssText = `width:${w}px;height:800px;border:0`;
+      f.src = encodeURI(p + '.dc.html') + '?qa=1';
+      const done = () => {
+        let msg = [], bad = false;
+        try {
+          const d = f.contentDocument, W = d.documentElement.clientWidth;
+          const sw = d.documentElement.scrollWidth;
+          const over = [...d.querySelectorAll('body *')].filter(el => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && r.right > W + 2 && cs.position !== 'fixed' && !el.closest('[style*="overflow:hidden"],[style*="overflow: hidden"],[style*="overflow-x:auto"],[style*="overflow-x: auto"]'); });
+          const top = over.filter(el => !over.includes(el.parentElement)).slice(0, 3).map(el => `${el.tagName.toLowerCase()}[${Math.round(el.getBoundingClientRect().right)}] "${(el.innerText || el.getAttribute('src') || '').trim().slice(0, 30)}"`);
+          if (sw > W + 1 || top.length) { bad = true; msg.push(`OVERFLOW sw=${sw}: ${top.join(' | ')}`); }
+          const small = [...d.querySelectorAll('a,button,input,select,textarea')].filter(el => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && (r.height < 40) && !el.closest('nav,footer,p,li') && (el.innerText||'').trim().length < 40; });
+          if (small.length) msg.push(`small taps ${small.length}: ` + small.slice(0, 3).map(el => `"${(el.innerText || el.name || el.type || '').trim().slice(0, 18)}" ${Math.round(el.getBoundingClientRect().height)}px`).join(', '));
+          const hd = d.querySelector('header'); if (hd) { const nv = hd.querySelector(':scope > nav'); const hh = hd.getBoundingClientRect().height - (nv ? nv.getBoundingClientRect().height : 0); if (hh > 96) msg.push(`header ${Math.round(hh)}px tall`); }
+          const h1 = d.querySelector('h1'); if (h1) { const fs = parseFloat(getComputedStyle(h1).fontSize); if (fs > W * 0.16) msg.push(`h1 ${fs}px too big`); }
+          const lines = [...d.querySelectorAll('p')].filter(el => { const r = el.getBoundingClientRect(); return r.width > 0 && r.width / parseFloat(getComputedStyle(el).fontSize) > 48; }).length;
+          if (lines) msg.push(`long lines: ${lines}`);
+          const noalt = [...d.images].filter(i => !i.hasAttribute('alt')).length;
+          if (noalt) msg.push(`img no alt: ${noalt}`);
+          const unlab = [...d.querySelectorAll('input:not([type=hidden]),select,textarea')].filter(el => !el.labels?.length && !el.getAttribute('aria-label') && !el.closest('label')).length;
+          if (unlab) msg.push(`unlabelled fields: ${unlab}`);
+          const tiny = [...d.querySelectorAll('p,span,a,li,label,button')].filter(el => el.childElementCount === 0 && (el.innerText||'').trim() && parseFloat(getComputedStyle(el).fontSize) < 11).length;
+          if (tiny) msg.push(`text <11px: ${tiny}`);
+        } catch (e) { bad = true; msg.push('ERR ' + e.message); }
+        f.remove();
+        res({ p, w, msg: msg.join(' ; ') || 'pass', c: bad ? '#A33' : msg.length ? '#A70' : '#536B4E' });
+      };
+      let fired = false; const go = () => { if (!fired) { fired = true; setTimeout(done, 2500); } };
+      f.onload = go; setTimeout(go, 8000);
+      this.host.current.appendChild(f);
+    });
+  }
+  async run() {
+    const jobs = [];
+    for (const p of PAGES) for (const w of WIDTHS) jobs.push([p, w]);
+    const rows = [];
+    for (let i = 0; i < jobs.length; i += 9) {
+      const r = await Promise.all(jobs.slice(i, i + 9).map(([p, w]) => this.test(p, w)));
+      rows.push(...r); window.__qa = rows; this.setState({ rows: [...rows], status: `Running ${rows.length}/${jobs.length}` });
+    }
+    window.__qa = rows;
+    this.setState({ status: 'Done ' + rows.length });
+  }
+  renderVals() { return { rows: this.state.rows, status: this.state.status, host: this.host }; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Sign in · Sense of Touch Institute of Beauty &amp; Wellness</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F3EEE6;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-auth.js"></script>
+</helmet>
+<main data-screen-label="Sign in" style="min-height:100vh;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))">
+<div style="background:#493126;color:#F8F4ED;padding:clamp(40px,7vw,96px) clamp(24px,6vw,80px);display:flex;flex-direction:column;justify-content:space-between;gap:40px">
+<a href="Sense%20of%20Touch%20Homepage.dc.html" style="display:flex;align-items:center;gap:14px;color:#F8F4ED;text-decoration:none"><img src="assets/logo-transparent.png" alt="" style="width:48px;height:48px;object-fit:contain;filter:brightness(0) invert(1)"><span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#C6A15B">Back to the website</span></a>
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5vw,72px);line-height:0.95;letter-spacing:0.04em">SENSE OF TOUCH</span><span style="font-size:13px;letter-spacing:0.32em;text-transform:uppercase;color:#C6A15B;font-weight:600">Institute of Beauty &amp; Wellness</span></div>
+<span style="font-size:14px;line-height:1.7;color:#E9DDC9;max-width:40ch">Secure access for students, customers and authorised administrators.</span>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;padding:clamp(32px,6vw,80px) 20px">
+<div style="width:min(100%,420px);display:flex;flex-direction:column;gap:22px">
+
+<sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-direction:column;gap:14px"><span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Signed in</span><span style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#493126">Hello, {{ who }}</span><span style="font-size:14px;color:#4A453C">{{ whoEmail }} · {{ roleLabel }}</span>
+<a href="{{ dest }}" style="min-height:50px;display:flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;text-decoration:none;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600">{{ destLabel }}</a>
+<button onClick="{{ out }}" style="all:unset;cursor:pointer;text-align:center;min-height:44px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#9A3B2A">Sign out</button></div>
+<div data-screen-label="Signed-in devices" style="display:flex;flex-direction:column;gap:4px;border:1px solid #E9DDC9;padding:18px 20px;background:#FFFDF9">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Signed-in devices</span>
+<sc-for list="{{ devices }}" as="d" hint-placeholder-count="1"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px"><span style="display:flex;flex-direction:column"><strong style="color:#24221D;font-weight:600">{{ d.name }}</strong><span style="color:#6B665C">{{ d.when }}</span></span><sc-if value="{{ d.isCur }}" hint-placeholder-val="{{ true }}"><span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#536B4E">This device</span></sc-if><sc-if value="{{ d.notCur }}" hint-placeholder-val="{{ false }}"><button onClick="{{ d.revoke }}" style="all:unset;cursor:pointer;min-height:44px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#9A3B2A">Sign out</button></sc-if></div></sc-for>
+<sc-if value="{{ hasOthers }}" hint-placeholder-val="{{ false }}"><button onClick="{{ revokeOthers }}" style="all:unset;cursor:pointer;min-height:44px;font-size:12px;color:#493126;text-decoration:underline">Sign out of all other devices</button></sc-if>
+<span style="font-size:12px;color:#6B665C">Staff sessions end after 30 minutes without activity. Customer sessions end after 30 days.</span>
+</div>
+</sc-if>
+
+<sc-if value="{{ showLogin }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:6px"><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:44px;line-height:1;color:#493126">Welcome back</h1><span style="font-size:15px;color:#4A453C">Sign in to your account</span></div>
+<sc-if value="{{ hasExpired }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#F3E3C4;border-left:3px solid #C6A15B;padding:12px 14px;font-size:14px;line-height:1.55;color:#6B4A12">{{ expired }}</div></sc-if>
+<form onSubmit="{{ submit }}" noValidate="{{ true }}" style="display:flex;flex-direction:column;gap:16px">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Email address<input type="email" autoComplete="username" value="{{ em }}" onChange="{{ setEm }}" style="padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Password<span style="display:flex;border:1px solid #E9DDC9;background:#FFFDF9"><input type="{{ pwType }}" autoComplete="current-password" value="{{ pw }}" onChange="{{ setPw }}" style="flex:1;min-width:0;padding:14px 12px;border:0;background:transparent;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"><button type="button" onClick="{{ togglePw }}" aria-label="{{ pwAria }}" style="all:unset;cursor:pointer;padding:0 14px;font-size:11px;letter-spacing:0.12em;font-weight:600;color:#536B4E">{{ pwBtn }}</button></span></label>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><label style="display:flex;gap:10px;align-items:center;min-height:44px;font-size:14px"><input type="checkbox" checked="{{ remember }}" onChange="{{ setRemember }}" style="width:20px;height:20px;accent-color:#536B4E">Remember me</label><button type="button" onClick="{{ goForgot }}" style="all:unset;cursor:pointer;min-height:44px;font-size:14px;color:#493126;text-decoration:underline">Forgot password?</button></div>
+<sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:12px 14px;font-size:14px;line-height:1.55;color:#6B2A1E">{{ err }}</div></sc-if>
+<button type="submit" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:54px;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600" style-hover="background:#536B4E">Sign in</button>
+</form>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.6;color:#4A453C;border-top:1px solid #E9DDC9;padding-top:18px">
+<span>New customer? <a href="Account.dc.html">Create an account</a></span>
+<span>Institute student? <a href="Institute%20Portal.dc.html">Student portal sign-in</a></span>
+<span>Approved investor? <a href="Investor%20Room.dc.html">Investor room</a></span>
+</div>
+</sc-if>
+
+<sc-if value="{{ showForgot }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:6px"><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:40px;line-height:1;color:#493126">Reset your password</h1><span style="font-size:14px;line-height:1.6;color:#4A453C">{{ fpLead }}</span></div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Email address<input type="email" autoComplete="username" value="{{ em }}" onChange="{{ setEm }}" style="padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"></label>
+<sc-if value="{{ fpSent }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ hasDemo }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;background:#F3E3C4;color:#6B4A12;padding:10px 12px">Prototype: no email service is connected, so your code is <strong>{{ demoCode }}</strong>.</span></sc-if>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">6-digit code<input inputMode="numeric" autoComplete="one-time-code" value="{{ code }}" onChange="{{ setCode }}" style="padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:18px;letter-spacing:0.3em;font-family:inherit"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">New password<input type="password" autoComplete="new-password" value="{{ np }}" onChange="{{ setNp }}" style="padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:16px;font-family:inherit"></label>
+</sc-if>
+<sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:12px 14px;font-size:14px;line-height:1.55;color:#6B2A1E">{{ err }}</div></sc-if>
+<sc-if value="{{ hasOk }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#EEF2EC;border-left:3px solid #536B4E;padding:12px 14px;font-size:14px;color:#2F4A2B">{{ ok }}</div></sc-if>
+<button onClick="{{ fpGo }}" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:52px;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600">{{ fpBtn }}</button>
+<button onClick="{{ goLogin }}" style="all:unset;cursor:pointer;text-align:center;min-height:44px;font-size:13px;color:#493126;text-decoration:underline">Back to sign in</button>
+</sc-if>
+
+<span style="font-size:12px;line-height:1.6;color:#6B665C">Every sign-in is confirmed with a one-time code sent to your email address.</span>
+</div>
+</div>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { view: 'login', em: '', pw: '', show: false, remember: true, err: '', ok: '', code: '', np: '', fpSent: false, demo: null, tick: 0 };
+  componentDidMount() { this.iv = setInterval(() => { if (window.SOTAuth) { clearInterval(this.iv); this.off = window.SOTAuth.on(() => this.setState(s => ({ tick: s.tick + 1 }))); this.forceUpdate(); } }, 80); }
+  componentWillUnmount() { clearInterval(this.iv); this.off && this.off(); }
+  go() { const A = window.SOTAuth, d = A && A.destination(); if (d) location.href = d; }
+  renderVals() {
+    const A = window.SOTAuth, st = this.state, ses = A ? A.current() : null;
+    const dest = A && ses ? A.destination() : '';
+    if (A && st.expired == null) { const r = A.expiredReason(); setTimeout(() => this.setState({ expired: r || '' }), 0); }
+    const devs = A && ses ? A.sessions() : [];
+    return {
+      signedIn: !!ses && st.view === 'login', showLogin: !ses && st.view === 'login', showForgot: st.view === 'forgot',
+      who: ses ? ses.name.split(' ')[0] : '', whoEmail: ses ? ses.email : '', dest: dest || '#', destLabel: A && ses ? 'Open ' + A.destinationLabel() : 'Continue', roleLabel: A && ses ? (A.roleDef() || {}).label || '' : '',
+      hasExpired: !!st.expired && !ses, expired: st.expired || '',
+      devices: devs.map(d => ({ name: d.device || 'This browser', when: 'Signed in ' + new Date(d.at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }), tag: d.current ? 'This device' : 'Sign out', isCur: d.current, notCur: !d.current, revoke: () => A.revoke(d.sid) })),
+      hasOthers: devs.some(d => !d.current), revokeOthers: () => A.revokeOthers(),
+      out: () => { A.logout(); this.setState({ pw: '' }); },
+      em: st.em, pw: st.pw, setEm: e => this.setState({ em: e.target.value, err: '' }), setPw: e => this.setState({ pw: e.target.value, err: '' }),
+      pwType: st.show ? 'text' : 'password', pwBtn: st.show ? 'HIDE' : 'SHOW', pwAria: st.show ? 'Hide password' : 'Show password', togglePw: () => this.setState({ show: !st.show }),
+      remember: st.remember, setRemember: e => this.setState({ remember: e.target.checked }),
+      hasErr: !!st.err, err: st.err, hasOk: !!st.ok, ok: st.ok,
+      submit: e => { e.preventDefault(); if (!A) return; const em = st.em.trim().toLowerCase();
+        if (em === 'admin@senseoftouch.co.senseoftouch.co') return this.setState({ err: 'That address repeats the domain. Did you mean admin@senseoftouch.co?' });
+        const r = A.login(em, st.pw, st.remember); if (r.error) return this.setState({ err: r.error });
+        if (r.pending) r.done.then(s => { if (s) this.go(); }); },
+      goForgot: () => this.setState({ view: 'forgot', err: '', ok: '', fpSent: false, code: '', np: '', demo: null }), goLogin: () => this.setState({ view: 'login', err: '', ok: '' }),
+      fpLead: st.fpSent ? 'Enter the code we sent and choose a new password.' : 'We’ll send a 6-digit code to your email address.',
+      fpSent: st.fpSent, hasDemo: !!st.demo, demoCode: st.demo || '', code: st.code, np: st.np, setCode: e => this.setState({ code: e.target.value.replace(/\D/g, '').slice(0, 6), err: '' }), setNp: e => this.setState({ np: e.target.value, err: '' }),
+      fpBtn: st.fpSent ? 'Set new password' : 'Send code',
+      fpGo: () => { if (!A) return;
+        if (!st.fpSent) { const r = A.resetRequest(st.em); if (r.error) return this.setState({ err: r.error }); return this.setState({ fpSent: true, demo: r.demoCode, err: '', ok: 'If an account exists for ' + r.sentTo + ', a code is on its way.' }); }
+        Promise.resolve(A.resetConfirm(st.em, st.code, st.np)).then(r => { if (r.error) return this.setState({ err: r.error, ok: '' }); this.setState({ view: 'login', pw: '', ok: 'Password updated. Sign in with your new password.', err: '', fpSent: false }); }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

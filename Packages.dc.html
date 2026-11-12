@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Packages &amp; memberships · Sense of Touch</title>
+<meta name="description" content="Curated spa rituals and memberships for returning guests.">
+<meta property="og:title" content="Packages &amp; memberships · Sense of Touch">
+<meta property="og:description" content="Curated spa rituals and memberships for returning guests.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{overflow-x:hidden}a[href^="https://wa.me"],a[href^="tel:"],a[href^="mailto:"],a[href*="instagram"],a[style*="border-bottom"],a[style*="text-transform: uppercase"],button,[type=submit]{min-height:44px!important;display:inline-flex;align-items:center}[style*="font-size: 8px"],[style*="font-size: 9px"],[style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"]{font-size:11px!important}p{max-width:min(100%,72ch)!important}p[style*="text-align: center"]{margin-inline:auto!important}h1,h2,h3,p,span,a{overflow-wrap:break-word}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}@media (pointer:coarse){a[style*="border-bottom"],button{min-height:44px}a[style*="border-bottom"]{display:inline-flex;align-items:center}}img,video,iframe{max-width:100%}@media (max-width:720px){[style*="padding: 112px 32px"]{padding:72px 20px!important}[style*="padding: 96px 32px"]{padding:64px 20px!important}[style*="padding: 80px 32px"]{padding:56px 20px!important}[style*="padding: 72px 32px"]{padding:56px 20px!important}[style*="padding: 96px 56px"]{padding:56px 24px!important}[style*="position: sticky; top: 1"]{position:static!important}[style*="grid-column: span 2"]{grid-column:auto!important}[style*="min-height: 720px"]{min-height:440px!important}[style*="padding: 40px;"]{padding:24px!important}}
+@media (max-width:720px){[data-3d-opt]{display:none!important}}
+html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}</style>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="packages" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<section data-screen-label="Packages hero" style="max-width:1280px;margin:0 auto;padding:72px 32px 56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:24px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Packages &amp; memberships</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(48px,6.5vw,88px);line-height:1;color:#493126;max-width:900px">Curated rituals, made for returning</h1>
+<p style="margin:0;font-size:17px;line-height:1.75;max-width:620px;text-wrap:pretty">Combine treatments into one unhurried experience, or make self-care a habit with a membership. Opening rates will be announced soon.</p>
+</div>
+<div data-3d="gift" data-3d-opt="1" data-no-reveal="1" style="position:relative;width:100%;height:420px;max-width:480px;justify-self:center;cursor:grab;touch-action:pan-y;user-select:none"></div>
+</section>
+
+<section data-screen-label="Packages" style="max-width:1280px;margin:0 auto;padding:0 32px 112px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px">
+<sc-for list="{{ packages }}" as="p" hint-placeholder-count="7">
+<div data-tilt="1" style="background:{{ p.bg }};color:{{ p.fg }};padding:36px;display:flex;flex-direction:column;gap:16px;border-bottom:2px solid #C6A15B">
+<span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:600;color:{{ p.kc }}">{{ p.kicker }}</span>
+<a href="{{ p.href }}" style="font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1.05;color:{{ p.fg }}">{{ p.name }}</a>
+<span style="font-size:14px;line-height:1.65">{{ p.desc }}</span>
+<div style="display:flex;flex-direction:column;border-top:1px solid #C6A15B;margin-top:auto">
+<sc-for list="{{ p.inc }}" as="i" hint-placeholder-count="2">
+<span style="padding:11px 0;border-bottom:1px solid rgba(198,161,91,0.4);font-size:13px">{{ i }}</span>
+</sc-for>
+</div>
+<div style="display:flex;gap:20px;flex-wrap:wrap"><a href="{{ p.href }}" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:{{ p.fg }};border-bottom:1px solid #C6A15B">Explore the ritual</a><a href="{{ p.book }}" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:{{ p.fg }}">Reserve →</a></div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section data-screen-label="Memberships" style="background:#E9DDC9">
+<div style="max-width:1280px;margin:0 auto;padding:112px 32px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Memberships</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126">Make self-care a ritual</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px">
+<sc-for list="{{ memberships }}" as="m" hint-placeholder-count="3">
+<div data-tilt="1" style="display:flex;flex-direction:column;background:#F8F4ED">
+<div style="background:{{ m.bg }};color:{{ m.fg }};padding:32px;aspect-ratio:1.6/1;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;font-weight:600"><span>Sense of Touch</span><span style="color:#C6A15B">Member</span></div>
+<span style="font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1">{{ m.name }}</span>
+</div>
+<div style="padding:28px 32px;display:flex;flex-direction:column">
+<sc-for list="{{ m.perks }}" as="k" hint-placeholder-count="3">
+<span style="padding:12px 0;border-bottom:1px solid #E9DDC9;font-size:14px;display:flex;gap:12px"><span style="color:#536B4E">✓</span>{{ k }}</span>
+</sc-for>
+<a href="{{ m.href }}" style="margin-top:20px;align-self:flex-start;background:#493126;color:#F8F4ED;padding:14px 24px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600" style-hover="background:#24221D;color:#F8F4ED">Join {{ m.name }}</a>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Gift vouchers" style="max-width:1280px;margin:0 auto;padding:112px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:64px;align-items:center">
+<div data-3d="voucher" data-no-reveal="1" style="position:relative;aspect-ratio:3/2;width:100%;background:radial-gradient(circle at 50% 45%, #FFFDF9 0%, #E9DDC9 75%);cursor:grab;touch-action:pan-y;user-select:none">
+<span style="position:absolute;z-index:1;bottom:16px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#493126;pointer-events:none">Drag to turn over</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Gift vouchers</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">Give the gift of touch</h2>
+<p style="margin:0;font-size:15px;line-height:1.75;text-wrap:pretty">For birthdays, thank-yous and anyone who deserves to slow down. Choose a treatment, a package or a value.</p>
+<a href="Contact.dc.html" style="align-self:flex-start;background:#493126;color:#F8F4ED;padding:15px 28px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600" style-hover="background:#24221D;color:#F8F4ED">Request a voucher</a>
+</div>
+</section>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const P = [
+      ['Relax', 'The Reset', 'Unwind body and mind in a single visit.', ['Relaxation massage', 'Scalp therapy']],
+      ['Skin', 'The Glow', 'For skin that looks rested and radiant.', ['Facial', 'Hydration treatment']],
+      ['Signature', 'African Pure Ritual', 'Our full AFTERCARE signature facial experience.', ['AFTERCARE consultation', 'Seven-step ritual', 'Aftercare plan']],
+      ['Body', 'Body Renewal', 'Smooth, polished skin and melted tension.', ['Body exfoliation', 'Massage']],
+      ['Lip Bar', 'The Lip Experience', 'The complete Lip Bar ritual.', ['Lip hydration', 'Exfoliation', 'Conditioning']],
+      ['Complete', 'Total Wellness', 'A half-day of head-to-toe care.', ['Selected facial', 'Body treatment', 'Relaxation therapy']],
+      ['For two', 'Couples’ Escape', 'A shared wellness experience for two.', ['Side-by-side treatments', 'Two guests']]
+    ];
+    return {
+      packages: P.map(([kicker, name, desc, inc], i) => {
+        const dark = i === 2;
+        const slug = ['reset', 'glow', 'african-pure', 'body-renewal', 'lip-experience', 'total-wellness', 'couples-escape'][i]; const svc = { 'lip-experience': 'The Lip Experience', 'couples-escape': 'Couples’ Escape' }[slug];
+        return { href: 'Ritual.dc.html?r=' + slug, book: 'Book.dc.html?' + (svc ? 'service=' + encodeURIComponent(svc) : 'package=' + encodeURIComponent(name)), kicker, name, desc, inc, bg: dark ? '#536B4E' : '#FFFDF9', fg: dark ? '#F8F4ED' : '#493126', kc: dark ? '#C6A15B' : '#536B4E' };
+      }),
+      memberships: [
+        { name: 'Essential', href: 'Membership.dc.html?tier=essential', bg: '#F8F4ED', fg: '#493126', perks: ['Monthly wellness benefits', 'Member-only offers', 'Birthday treat'] },
+        { name: 'Gold', href: 'Membership.dc.html?tier=gold', bg: '#536B4E', fg: '#F8F4ED', perks: ['Everything in Essential', 'Priority booking', 'Selected treatment benefits'] },
+        { name: 'VIP', href: 'Membership.dc.html?tier=vip', bg: '#24221D', fg: '#F8F4ED', perks: ['Everything in Gold', 'Personalised wellness plan', 'Exclusive privileges and events'] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

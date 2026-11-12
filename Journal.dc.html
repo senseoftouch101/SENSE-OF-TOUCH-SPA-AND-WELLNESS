@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Wellness journal · Sense of Touch</title>
+<meta name="description" content="Rituals, skincare tips and wellness notes from the Sense of Touch team.">
+<meta property="og:title" content="Wellness journal · Sense of Touch">
+<meta property="og:description" content="Rituals, skincare tips and wellness notes from the Sense of Touch team.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Journal" style="position:relative;isolation:isolate;overflow:hidden;max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,32px) clamp(64px,8vw,112px);display:flex;flex-direction:column;gap:40px">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;pointer-events:none;z-index:-1"></div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">The wellness journal</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw + 12px,76px);line-height:1;color:#493126">Notes on care, calm &amp; skin</h1>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px 24px">
+<sc-for list="{{ posts }}" as="p" hint-placeholder-count="4">
+<a href="{{ p.href }}" style="display:flex;flex-direction:column;gap:14px;color:#24221D;min-width:0" style-hover="color:#493126">
+<div style="aspect-ratio:4/3;overflow:hidden;background:#E9DDC9"><img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ p.cat }} · {{ p.mins }} min read</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,1.6vw + 16px,32px);line-height:1.1;color:#493126">{{ p.title }}</span>
+<span style="font-size:15px;line-height:1.6">{{ p.dek }}</span>
+</a>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isPost }}" hint-placeholder-val="{{ false }}">
+<article data-screen-label="Journal article" style="max-width:760px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(20px,4vw,32px) clamp(64px,8vw,112px);display:flex;flex-direction:column;gap:22px">
+<a href="Journal.dc.html" style="align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">← All articles</a>
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ post.cat }} · {{ post.mins }} min read</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4vw + 14px,60px);line-height:1.04;color:#493126">{{ post.title }}</h1>
+<p style="margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,1.2vw + 14px,24px);line-height:1.45;color:#493126">{{ post.dek }}</p>
+<div style="aspect-ratio:16/10;overflow:hidden;background:#E9DDC9"><sc-if value="{{ hasPostImg }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ post.img }}" alt="{{ post.alt }}" style="width:100%;height:100%;object-fit:cover;display:block"></sc-if></div>
+<sc-for list="{{ post.body }}" as="b" hint-placeholder-count="4"><p style="margin:0;font-size:17px;line-height:1.8">{{ b }}</p></sc-for>
+<span style="font-size:13px;line-height:1.6;color:#6B665C;border-top:1px solid #E9DDC9;padding-top:16px">General well-being information only — not medical advice. If you have a health condition, speak with your doctor before treatment.</span>
+<a href="Book.dc.html" style="align-self:flex-start;background:#493126;color:#F8F4ED;padding:0 26px;min-height:50px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Book a treatment</a>
+</article>
+</sc-if>
+<dc-import name="SocialFeed" placement="journal" heading="Follow along" hint-size="100%,640px"></dc-import>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const POSTS = [
+  { id: 'make-time', cat: 'Self-care', mins: 3, img: 'assets/web/robe-white-sofa.jpg', alt: 'A guest resting in a white robe', title: 'Making time for yourself is not a luxury', dek: 'Small, regular pauses do more for you than the occasional grand escape.', body: ['Most of us wait until we are exhausted before we rest. A better rhythm is a regular, modest pause — an hour every few weeks that belongs only to you.', 'Put it in your calendar the way you would a meeting. Choose a time when you won’t rush in or rush out, and leave your phone in your bag.', 'The benefit is less about any single treatment and more about the habit: giving your body and mind a predictable moment to slow down.'] },
+  { id: 'first-massage', cat: 'Massage', mins: 4, img: 'assets/web/body-massage.jpg', alt: 'A therapist giving a back massage', title: 'Your first massage: what to expect', dek: 'From arriving to aftercare — a calm, simple guide.', body: ['Arrive ten minutes early. You’ll be asked about your health, any areas to avoid and the pressure you prefer. Be honest — your therapist adjusts everything to you.', 'You’ll be professionally draped throughout, and only the area being worked on is uncovered. You can ask for lighter or firmer pressure at any time, or for the session to stop.', 'Afterwards, drink water, move gently and avoid strenuous exercise for the rest of the day. Feeling a little tender the next day can happen after deeper work.'] },
+  { id: 'lip-care', cat: 'The Lip Bar', mins: 3, img: 'assets/web/lip-closeup.jpg', alt: 'Close-up of soft, cared-for lips', title: 'Everyday lip care, simplified', dek: 'Three habits for softer, more comfortable lips.', body: ['Lips have very thin skin and no oil glands of their own, so they dry out quickly — especially with heat, wind and air-conditioning.', 'Keep a balm with you and reapply through the day. Exfoliate gently once or twice a week rather than picking at dry skin.', 'Drink water regularly, and use a balm with sun protection when you’re outdoors for long periods.'] },
+  { id: 'after-facial', cat: 'Skin', mins: 3, img: 'assets/web/facial-treatment.jpg', alt: 'A facial treatment in progress', title: 'Looking after your skin after a facial', dek: 'Give your skin a quiet day to enjoy the results.', body: ['For the rest of the day, keep your routine simple: a gentle cleanser, a moisturiser and sunscreen.', 'Avoid heavy make-up, strong exfoliants and retinoids for a day or two, and skip saunas or intense workouts the same day.', 'If anything feels uncomfortable or unusual, let us know — we’re always happy to advise.'] }
+];
+class Component extends DCLogic {
+  state = { id: '' };
+  onHash = () => { this.setState({ id: location.hash.replace('#', '') }); window.scrollTo({ top: 0 }); };
+  componentDidMount() { this.onHash(); window.addEventListener('hashchange', this.onHash); this.off = window.SOT && window.SOT.on(() => this.forceUpdate()); }
+  componentWillUnmount() { window.removeEventListener('hashchange', this.onHash); this.off && this.off(); }
+  renderVals() {
+    const cms = window.SOT ? window.SOT.list('cms-posts').filter(p => p.status === 'Published').map(p => ({ id: p.slug, cat: p.cat, mins: p.mins, img: p.img, alt: p.alt || p.title, title: p.title, dek: p.dek, body: String(p.body || '').split(/\n\s*\n/).filter(Boolean) })) : [];
+    const ALL = [...cms, ...POSTS.filter(p => !cms.some(c => c.id === p.id))];
+    const post = ALL.find(p => p.id === this.state.id);
+    return { hasPostImg: !!(post && post.img), isList: !post, isPost: !!post, post: post || ALL[0], posts: ALL.map(p => ({ ...p, href: '#' + p.id })) };
+  }
+}
+</script>
+</body>
+</html>

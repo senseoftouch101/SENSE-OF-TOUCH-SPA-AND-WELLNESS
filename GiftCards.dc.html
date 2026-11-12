@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Gift cards · Sense of Touch</title>
+<meta name="description" content="Send a Sense of Touch gift card for treatments or the shop.">
+<meta property="og:title" content="Gift cards · Sense of Touch">
+<meta property="og:description" content="Send a Sense of Touch gift card for treatments or the shop.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script src="./sot-scan.js"></script>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+<section data-screen-label="Gift cards" style="position:relative;isolation:isolate;overflow:hidden;max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,5vw,64px);align-items:start">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;pointer-events:none;z-index:-1"></div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Digital gift cards</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw + 12px,76px);line-height:1;color:#493126">Give the gift of touch</h1>
+<p style="margin:0;font-size:16px;line-height:1.7">For birthdays, anniversaries, weddings or simply to say thank you. Choose a value or an experience, add a message, and we’ll send a digital card on the day you choose.</p>
+<div style="aspect-ratio:1.6/1;width:100%;max-width:520px;background:#493126;color:#F8F4ED;padding:clamp(20px,4vw,36px);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(36,34,29,0.6)">
+<div style="position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(198,161,91,0.45)"></div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:relative">
+<span style="width:44px;height:52px;overflow:hidden;display:block;position:relative"><img src="assets/logo-transparent.png" alt="Sense of Touch" style="position:absolute;width:144px;height:144px;max-width:none;left:-50px;top:-27px;filter:brightness(0) invert(0.85) sepia(0.5)"></span>
+<span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C6A15B;font-weight:600">Gift card</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;position:relative">
+<span style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,44px);line-height:1">{{ previewValue }}</span>
+<span style="font-size:13px;color:#E9DDC9">For {{ previewTo }} · from {{ previewFrom }}</span>
+<span style="font-family:Allura,cursive;font-size:clamp(22px,3vw,30px);color:#C6A15B;line-height:1.1">{{ previewMsg }}</span>
+</div>
+</div>
+</div>
+
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(22px,4vw,40px);display:flex;flex-direction:column;gap:22px">
+<sc-if value="{{ notDone }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Choose a gift</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:8px">
+<sc-for list="{{ options }}" as="o" hint-placeholder-count="6">
+<button onClick="{{ o.select }}" aria-pressed="{{ o.on }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:56px;padding:12px;text-align:center;border:1px solid {{ o.border }};background:{{ o.bg }};color:{{ o.fg }};font-family:'Cormorant Garamond',serif;font-size:20px;line-height:1.1;display:flex;align-items:center;justify-content:center">{{ o.label }}</button>
+</sc-for>
+</div>
+<sc-if value="{{ isCustom }}" hint-placeholder-val="{{ false }}">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Amount (GHS)
+<input type="number" inputMode="numeric" min="50" step="10" value="{{ f.custom }}" onChange="{{ setCustom }}" placeholder="e.g. 400" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D;width:100%">
+</label>
+</sc-if>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px">
+<sc-for list="{{ fields }}" as="x" hint-placeholder-count="6">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">{{ x.label }}
+<input type="{{ x.type }}" inputMode="{{ x.mode }}" value="{{ x.value }}" onChange="{{ x.set }}" placeholder="{{ x.ph }}" aria-invalid="{{ x.bad }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid {{ x.border }};background:#F8F4ED;color:#24221D;width:100%">
+</label>
+</sc-for>
+</div>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">Personal message
+<textarea rows="3" maxLength="160" value="{{ f.msg }}" onChange="{{ setMsg }}" placeholder="Happy birthday — enjoy every minute." style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D;resize:vertical;width:100%"></textarea>
+</label>
+<sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:12px 14px;font-size:14px;color:#6B2A1E;display:flex;flex-direction:column;gap:4px"><sc-for list="{{ errs }}" as="e" hint-placeholder-count="1"><span>{{ e }}</span></sc-for></div></sc-if>
+<button onClick="{{ submit }}" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:52px;padding:16px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;background:#536B4E;color:#F8F4ED">Request gift card</button>
+<span style="font-size:12px;line-height:1.55;color:#6B665C">Payment (Mobile Money or card) is arranged with you on WhatsApp before the card is issued. Cards are valid for 6 months from payment; value cards can be spent over several visits; not exchangeable for cash.</span>
+</div>
+</sc-if>
+<sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+<span style="font-family:Allura,cursive;font-size:52px;color:#536B4E;line-height:1">Thank you</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126;line-height:1.2">Gift card {{ code }} is reserved — awaiting payment.</span>
+<div data-screen-label="Your gift card code" style="width:100%;max-width:420px;background:#F8F4ED;border:1px solid #E9DDC9;padding:18px;display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:14px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+<span style="font-size:10px;letter-spacing:0.24em;color:#536B4E;font-weight:600">YOUR GIFT CARD BARCODE</span>
+<div data-no-full="1" role="img" aria-label="Barcode for {{ code }}" style="height:64px;width:100%;background-color:#FFFFFF;background-image:{{ barBg }};background-size:100% 100%;background-repeat:no-repeat"></div>
+<span style="font-family:'Courier New',monospace;font-size:16px;letter-spacing:0.14em;color:#493126;text-align:center">{{ code }}</span>
+</div>
+<div data-no-full="1" role="img" aria-label="QR code for {{ code }}" style="width:96px;height:96px;background-color:#FFFFFF;background-image:{{ qrBg }};background-size:100% 100%"></div>
+</div>
+<span style="font-size:13px;line-height:1.6;color:#6B665C">Screenshot this or print the card. The barcode and QR code start working once payment is confirmed.</span>
+<a href="{{ printHref }}" target="_blank" rel="noopener" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #536B4E">Print or save the card</a>
+<span style="font-size:14px;line-height:1.6">Send the request on WhatsApp and we’ll share payment details. The card is issued once payment is confirmed.</span>
+<a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#536B4E;color:#F8F4ED;padding:0 24px;min-height:48px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Send on WhatsApp</a>
+<button onClick="{{ reset }}" style="all:unset;cursor:pointer;min-height:44px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126;border-bottom:1px solid #493126">Send another</button>
+</div>
+</sc-if>
+</div>
+</section>
+
+<section data-screen-label="Check a gift card" style="background:#E9DDC9">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,72px) clamp(20px,4vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px 48px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:10px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,44px);color:#493126">Received a gift card?</h2><span style="font-size:15px;line-height:1.6">Scan the QR code on your card with your phone camera, or type the code to see the balance and expiry date. Value cards can be used over several visits.</span></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<input aria-label="Gift card code" value="{{ check }}" onChange="{{ setCheck }}" placeholder="GC-XXXXXXX" style="flex:1 1 200px;min-width:0;font-size:16px;padding:14px 12px;border:1px solid #493126;background:#F8F4ED;color:#24221D;text-transform:uppercase">
+<button onClick="{{ doCheck }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Check</button>
+<button onClick="{{ scan }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:50px;padding:0 20px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border:1px solid #493126;color:#493126">Scan card</button>
+</div>
+<sc-if value="{{ hasResult }}" hint-placeholder-val="{{ false }}"><span role="status" style="font-size:15px;line-height:1.6">{{ result }}</span></sc-if>
+</div>
+</div>
+</section>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const OPTS = [['GHS 200', 200], ['GHS 300', 300], ['GHS 500', 500], ['GHS 1,000', 1000], ['Custom amount', 'custom'], ['A spa experience', 'exp']];
+const blank = () => ({ opt: 1, custom: '', to: '', toPhone: '', from: '', fromPhone: '', date: '', msg: '' });
+class Component extends DCLogic {
+  state = { f: blank(), tried: false, code: '', check: '', result: '' };
+  set(p) { this.setState(s => ({ f: { ...s.f, ...p } })); }
+  componentDidMount() { const c = new URLSearchParams(location.search).get('code'); if (!c) return; const go = () => { if (!window.SOT || !window.SOT.gcGet) return setTimeout(go, 100); this.checkCode(c); setTimeout(() => { const el = document.querySelector('[data-screen-label="Check a gift card"]'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); }, 200); }; go(); }
+  checkCode(raw) { const c = (window.SOTScan ? window.SOTScan.codeFrom(raw) : String(raw || '').trim().toUpperCase()); const g = window.SOT && window.SOT.gcGet(c); this.setState({ check: c, result: !c ? 'Enter the code printed on your card.' : g ? window.SOT.gcSummary(g) + '.' : 'We couldn’t find that code in this browser. Message us on WhatsApp and we’ll check it for you.' }); }
+  renderVals() {
+    const S = window.SOT || { ghPhone: v => v, wa: () => '#' }, { f, tried } = this.state;
+    const [optLabel, optVal] = OPTS[f.opt];
+    const amt = optVal === 'custom' ? Number(f.custom) : optVal;
+    const label = optVal === 'exp' ? 'A spa experience' : amt ? 'GHS ' + Number(amt).toLocaleString('en-GH') : 'GHS —';
+    const fromOk = !!S.ghPhone(f.fromPhone), toOk = !f.toPhone.trim() || !!S.ghPhone(f.toPhone);
+    const errs = [];
+    if (tried) {
+      if (optVal === 'custom' && !(amt >= 50)) errs.push('Enter an amount of at least GHS 50.');
+      if (!f.to.trim()) errs.push('Who is the gift for?');
+      if (!f.from.trim()) errs.push('Add your name.');
+      if (!fromOk) errs.push('Enter your Ghana phone number so we can arrange payment.');
+      if (!toOk) errs.push('Check the recipient’s phone number.');
+    }
+    const ok = (optVal !== 'custom' || amt >= 50) && f.to.trim() && f.from.trim() && fromOk && toOk;
+    const today = window.SOT ? window.SOT.localDate() : '';
+    const fld = (label, k, ph, type = 'text', mode = 'text', bad = false) => ({ label, value: f[k], ph, type, mode, bad, border: bad ? '#9A3B2A' : '#E9DDC9', set: e => this.set({ [k]: e.target.value }) });
+    const res = this.state.result;
+    return {
+      f, notDone: !this.state.code, done: !!this.state.code, code: this.state.code,
+      ...(() => { const Q = window.SOTScan, c = this.state.code; const bar = c && Q ? Q.barcodeSvg(c, 60) : '', qr = c && Q && window.qrcode ? Q.qrSvg(Q.checkUrl(c), 200) : ''; return { barBg: bar ? 'url("' + bar + '")' : 'none', qrBg: qr ? 'url("' + qr + '")' : 'none', printHref: 'Gift Card Print.dc.html?code=' + c }; })(),
+      options: OPTS.map(([l], i) => ({ label: l, on: f.opt === i, bg: f.opt === i ? '#493126' : '#FFFDF9', fg: f.opt === i ? '#F8F4ED' : '#493126', border: f.opt === i ? '#493126' : '#E9DDC9', select: () => this.set({ opt: i }) })),
+      isCustom: optVal === 'custom', setCustom: e => this.set({ custom: e.target.value }), setMsg: e => this.set({ msg: e.target.value }),
+      fields: [fld('Recipient name', 'to', 'Their name', 'text', 'text', tried && !f.to.trim()), fld('Recipient phone (optional)', 'toPhone', '024 123 4567', 'tel', 'tel', tried && !toOk), fld('Your name', 'from', 'Your name', 'text', 'text', tried && !f.from.trim()), fld('Your phone', 'fromPhone', '024 123 4567', 'tel', 'tel', tried && !fromOk), { ...fld('Deliver on', 'date', '', 'date', 'none'), ph: today }],
+      errs, hasErr: errs.length > 0,
+      previewValue: label, previewTo: f.to || 'someone special', previewFrom: f.from || 'you', previewMsg: f.msg || 'Feel the Touch.',
+      waLink: S.wa(`Hello Sense of Touch, I'd like to pay for gift card ${this.state.code}: ${label} for ${f.to}, from ${f.from}${f.date ? ', deliver on ' + f.date : ''}.`),
+      submit: () => {
+        if (!ok) return this.setState({ tried: true });
+        if (this._busy || this.state.code) return; this._busy = true; setTimeout(() => { this._busy = false; }, 4000);
+        const rec = window.SOT.add('giftcards', { label, amount: optVal === 'exp' ? null : amt, recipient: f.to.trim(), recipientPhone: S.ghPhone(f.toPhone) || '', from: f.from.trim(), buyerPhone: S.ghPhone(f.fromPhone), deliver: f.date, message: f.msg.trim(), status: 'Awaiting payment' }, 'GC');
+        this.setState({ code: rec.id, tried: false });
+      },
+      reset: () => this.setState({ f: blank(), code: '', tried: false }),
+      check: this.state.check, setCheck: e => this.setState({ check: e.target.value, result: '' }),
+      scan: () => window.SOTScan && window.SOTScan.open(c => this.checkCode(c)),
+      doCheck: () => this.checkCode(this.state.check),
+      hasResult: !!res, result: res
+    };
+  }
+}
+</script>
+</body>
+</html>

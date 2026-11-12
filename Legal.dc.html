@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Policies · Sense of Touch</title>
+<meta name="description" content="Privacy, terms, cancellations, refunds and cookies.">
+<meta property="og:title" content="Policies · Sense of Touch">
+<meta property="og:description" content="Privacy, terms, cancellations, refunds and cookies.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}*{box-sizing:border-box}a{color:#493126;text-decoration:underline;text-underline-offset:3px}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}@media print{[data-screen-only]{display:none!important}}</style>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<div data-screen-only="1"><dc-import name="SiteHeader" active="" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import></div>
+
+<section data-screen-label="Legal hero" style="background:#E9DDC9">
+<div style="max-width:1100px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,3vw,32px) 40px;display:flex;flex-direction:column;gap:18px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Policies</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,6vw,80px);line-height:0.98;color:#493126">{{ title }}</h1>
+<p style="margin:0;font-size:16px;line-height:1.75;max-width:680px;text-wrap:pretty">{{ lead }}</p>
+<span style="font-size:13px;color:#4A453C">Last updated {{ updated }}</span>
+<nav data-screen-only="1" aria-label="Policies" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+<a href="{{ t.href }}" aria-current="{{ t.current }}" style="text-decoration:none;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #493126;background:{{ t.bg }};color:{{ t.fg }}">{{ t.label }}</a>
+</sc-for>
+</nav>
+</div>
+</section>
+
+<div data-screen-only="1" style="max-width:1100px;margin:0 auto;padding:20px clamp(20px,3vw,32px) 0">
+<div style="background:#FFFDF9;border:1px dashed #C6A15B;padding:14px 16px;font-size:13px;line-height:1.6">Draft for review. Have these policies checked by a Ghanaian lawyer before launch. Text highlighted in gold needs a decision from Sense of Touch.</div>
+</div>
+
+<main style="max-width:1100px;margin:0 auto;padding:40px clamp(20px,3vw,32px) 96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:48px;align-items:start">
+<aside data-screen-only="1" style="display:flex;flex-direction:column;gap:4px;position:sticky;top:100px;max-width:280px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-bottom:6px">On this page</span>
+<sc-for list="{{ sections }}" as="s" hint-placeholder-count="6"><a href="{{ s.anchor }}" style="text-decoration:none;font-size:14px;padding:6px 0;color:#493126">{{ s.h }}</a></sc-for>
+</aside>
+<article style="display:flex;flex-direction:column;gap:36px;grid-column:span 2;min-width:0">
+<sc-for list="{{ sections }}" as="s" hint-placeholder-count="6">
+<section id="{{ s.id }}" style="display:flex;flex-direction:column;gap:12px;scroll-margin-top:100px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(26px,2.6vw,34px);color:#493126;line-height:1.1">{{ s.num }}. {{ s.h }}</h2>
+<sc-for list="{{ s.blocks }}" as="b" hint-placeholder-count="2">
+<sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.8;text-wrap:pretty">{{ b.text }}</p></sc-if>
+<sc-if value="{{ b.isTodo }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:15px;line-height:1.8;background:#F3E6C8;border-left:3px solid #C6A15B;padding:8px 12px">{{ b.text }}</p></sc-if>
+<sc-if value="{{ b.isList }}" hint-placeholder-val="{{ false }}"><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.7"><sc-for list="{{ b.items }}" as="i" hint-placeholder-count="3"><li>{{ i }}</li></sc-for></ul></sc-if>
+</sc-for>
+</section>
+</sc-for>
+<div style="border-top:1px solid #493126;padding-top:20px;display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.7">
+<strong style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:#493126">Contact us</strong>
+<span>Sense of Touch Spa &amp; Wellness, Community 25 Estate Junction, Tema, Greater Accra, Ghana</span>
+<span><a href="http://senseoftouch.co" target="_blank" rel="noopener">senseoftouch.co</a> · <a href="mailto:info@senseoftouch.co">info@senseoftouch.co</a> · <a href="tel:+233597182026">+233 59 718 2026</a> · <a href="https://wa.me/233597182026" target="_blank" rel="noopener">WhatsApp</a></span>
+</div>
+</article>
+</main>
+<div data-screen-only="1"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;privacy&quot;,&quot;terms&quot;,&quot;refunds&quot;,&quot;cookies&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const T = s => '[To confirm] ' + s;
+const P = {
+  privacy: { label: 'Privacy policy', title: 'Privacy policy', lead: 'How Sense of Touch Spa & Wellness collects, uses and protects your personal information, in line with Ghana’s Data Protection Act, 2012 (Act 843).', s: [
+    ['Who we are', ['Sense of Touch Spa & Wellness (“we”, “us”) is a spa and wellness business at Community 25 Estate Junction, Tema, Greater Accra, Ghana. We are the data controller for the information described here.', 'Our registration with the Data Protection Commission of Ghana is in progress. We will publish our registration number here once it is issued.']],
+    ['Information we collect', [['Contact details: your name, phone number, email address and delivery address.', 'Booking details: the treatments you book, dates, times, therapist preference and notes you give us.', 'Health and consultation information: allergies, skin concerns, pregnancy, medications and other details you share on the consultation form. This is sensitive information and we treat it with extra care.', 'Shop orders: products, amounts, delivery details and payment status. Card and mobile money details are handled by our payment provider; we do not see or store your full card number or PIN.', 'Account details: your login email and a protected (hashed) version of your password.', 'Messages you send us by WhatsApp, phone, email or our website.']]],
+    ['How we use it', [['To confirm, manage and remind you about bookings.', 'To carry out treatments safely, including checking whether a treatment is suitable for you.', 'To process, deliver and support shop orders.', 'To run SOT Rewards, gift cards and memberships.', 'To send marketing messages, only if you have opted in. You can opt out at any time.', 'To meet our legal, tax and accounting obligations.']]],
+    ['Health information', ['We collect health information only to keep you safe during treatment. It is seen only by the therapist treating you and authorised managers, and is never used for marketing. You give consent when you complete the consultation form, and you can ask us to review or update it at any time.']],
+    ['Who we share it with', [['Payment providers (such as Paystack or Hubtel) to take payments.', 'Delivery partners, who receive only what they need to deliver your order.', 'Messaging and email services we use to send confirmations.', 'Website and database hosting providers who store data for us under contract.', 'Authorities, where the law requires it.'], 'We do not sell your personal information.']],
+    ['How long we keep it', ['Booking and consultation records: 6 years after your last visit.', 'Order and payment records: 6 years, as required for tax purposes.', 'Marketing preferences: until you opt out.']],
+    ['Your rights', ['Under Act 843 you can ask to see the information we hold about you, ask us to correct or delete it, withdraw consent for marketing, and object to how we use it. Contact us using the details below and we will respond within a reasonable time. You can also complain to the Data Protection Commission of Ghana.']],
+    ['Security', ['We limit access to your information to staff who need it, use secure, password-protected systems, and ask our service providers to protect it too. No system is completely secure, so please keep your account password private.']],
+    ['Changes', ['We may update this policy. The date at the top shows the latest version.']]
+  ] },
+  terms: { label: 'Terms of use', title: 'Terms & conditions', lead: 'The terms that apply when you use our website, book a treatment or buy from the Sense of Touch shop.', s: [
+    ['About these terms', ['By using this website, booking a treatment or placing an order, you agree to these terms. If you do not agree, please do not use the website.']],
+    ['Bookings', [['Bookings made online are requests until we confirm them by WhatsApp, SMS or email.', 'Every treatment begins with a consultation. We may adjust or decline a treatment if it is not suitable for you.', 'Please give accurate health information. Not doing so may put you at risk.', 'Durations and prices are confirmed at booking.'], 'See our cancellation policy for deposits, rescheduling and late arrivals.']],
+    ['Treatments and results', ['Our treatments are cosmetic and wellness treatments. They are not medical treatments, and results vary from person to person. If you have a medical condition, please speak to your doctor first.']],
+    ['Shop orders', [['Prices are in Ghana cedis (GHS) and include any applicable taxes unless stated.', 'An order is confirmed only once our payment provider has verified your payment.', 'We may cancel an order and refund you if a product is out of stock or a price was shown in error.', 'Delivery fees are shown at checkout. Delivery times are estimates.']]],
+    ['Gift cards and vouchers', ['Each gift card shows, or comes with, its expiry date. See our Gift Card Terms & Conditions.', 'Gift cards cannot be exchanged for cash.', 'Keep your gift card code private; we cannot replace a code someone else has used.']],
+    ['Memberships and rewards', ['Membership benefits and SOT Rewards rules are explained on their pages and may change with notice. Points have no cash value.']],
+    ['Accounts', ['You are responsible for keeping your login details safe. Tell us straight away if you think someone else has used your account.']],
+    ['Website content', ['Text, photos, logos and designs on this website belong to Sense of Touch Spa & Wellness and may not be copied without permission.']],
+    ['Liability', ['We take care to provide safe, professional services. Nothing in these terms limits liability that cannot be limited under Ghanaian law.']],
+    ['Governing law', ['These terms are governed by the laws of the Republic of Ghana.']]
+  ] },
+  refunds: { label: 'Cancellations & refunds', title: 'Cancellations & refunds', lead: 'Our policy for rescheduling appointments, deposits, and returning shop products.', s: [
+    ['Appointment deposits', [['Every appointment needs a GH₵50 non-refundable deposit, paid by MTN Mobile Money to 059 718 2026. Your appointment is confirmed only once we receive it.', 'The deposit is taken off your final bill. It is not an extra charge.', 'The full spa rules are in our Spa Policies & Booking Requirements.']]],
+    ['Cancelling or rescheduling', [['Give at least 24 hours’ notice and your deposit can be moved to one future appointment, once only.', 'If you cancel with less than 24 hours’ notice, miss your appointment or reschedule a second time, the deposit is forfeited.', 'If we need to cancel, we will offer a new time or a full refund of your deposit.']]],
+    ['Late arrivals', ['There is a 20-minute grace period. After that, your appointment may be cancelled and the deposit forfeited, unless the schedule allows us to see you and you pay in full in advance.']],
+    ['Shop returns', ['Unopened, sealed, unused products can be returned at our discretion within seven calendar days of delivery.', 'For hygiene reasons, opened skincare, lip care, body care and cosmetic products cannot be returned unless they are faulty, unsafe or not as described.', 'If a product arrives damaged, faulty or incorrect, contact us within seven days with your order number and a photo. We will replace, exchange or refund it, and cover return delivery.', 'Approved refunds are started within 7–14 business days. Full details are in our E-commerce Returns & Refunds Policy in the Policy Centre.']],
+    ['How refunds are paid', ['Refunds go back to the original payment method (mobile money or card) through our payment provider. Processing times depend on your provider.']],
+    ['Gift cards', ['Gift cards are non-refundable but can be transferred to someone else. Contact us to update the recipient.']]
+  ] },
+  donations: { label: 'Donations', title: 'Foundation donation terms', lead: 'How gifts to the Sense of Touch Foundation are received, used, receipted and refunded.', s: [
+    ['Who receives your gift', ['The Sense of Touch Foundation. Its registration is in progress; its registration details will be published here, and gifts are accepted only once registration is complete.']],
+    ['How gifts are used', [['Gifts marked for a programme are used for that programme. Gifts for “where it’s needed most” fund any Foundation programme.', 'If a programme is fully funded or cannot go ahead, we will use the gift for the closest similar programme and tell you.', 'Up to 10% of gifts may cover programme administration.']]],
+    ['Receipts', ['We email a receipt once your gift is confirmed. Keep it for your records. Tax relief on gifts depends on Ghanaian law and the Foundation’s status — we do not promise any tax benefit.']],
+    ['Monthly gifts', ['Monthly gifts are pledges. You can change or stop them at any time by contacting us.']],
+    ['Refunds', [['If you give by mistake or the amount is wrong, contact us within 14 days and we will refund it.', 'Gifts already spent on a programme cannot normally be refunded.']]],
+    ['Anonymity and privacy', ['You can ask for your gift to be anonymous in reports. We never sell or share donor details. See the privacy policy for how we store your information.']],
+    ['Annual report', ['Each year we publish how much was received, how it was spent and what it achieved.']]
+  ] },
+  students: { label: 'Student terms', title: 'Institute student terms', lead: 'The terms that apply when you apply to, enrol at or study with the Sense of Touch Institute of Beauty & Wellness.', s: [
+    ['Applications and offers', [['An application is not a place. A place is confirmed only when you accept an offer and pay the required deposit.', 'We may decline an application, or offer a different intake or course.']]],
+    ['Fees and instalments', [['Fees, deposits and instalment dates are shown in your offer and student portal.', 'Late instalments may pause access to online materials until they are paid, after a 7-day grace period.']]],
+    ['Withdrawals and refunds', ['Refunds for withdrawals are set out in the Institute Refund Policy, which is being finalised and will be published before enrolment payments are accepted.', 'Refund requests are made in the student portal, and you can follow each step there.']],
+    ['Attendance and assessment', [['Practical sessions require the minimum attendance set for each course. Missed sessions can be made up where a make-up session is offered.', 'Watching videos or completing online theory does not certify practical competency. Practical skills are assessed in person by an instructor.']]],
+    ['Certificates', [['A certificate is issued only when every requirement for the course is met, including payment of all fees.', 'Certificates show what was completed: theory, practical competency or both. They do not represent a regulated qualification unless stated.', 'Certificates can be verified online using the certificate ID and may be revoked if issued in error or obtained dishonestly.']]],
+    ['Conduct and safety', ['Students must follow the hygiene, safety and client-care rules in the student handbook. Practical work on clients is always supervised.']],
+    ['Your data', ['We keep academic, attendance and certificate records for as long as the law requires so certificates can be verified. You can request a copy, a correction or deletion of other personal data in the student portal.']]
+  ] },
+  partners: { label: 'Investor & partner privacy', title: 'Investor & partner privacy notice', lead: 'How we handle information shared by investors, lenders, sponsors and partner organisations.', s: [
+    ['What we collect', [['Your name, organisation, role, contact details and the details of your enquiry.', 'For investors: the documents you were given access to and when you opened them, and whether you accepted the confidentiality agreement.']]],
+    ['Why we use it', ['To assess and respond to your enquiry, manage access to confidential materials, and keep a record of our discussions.']],
+    ['Who sees it', ['Only the founder’s office and staff directly involved in your partnership or investment discussion. We do not sell or share your details.']],
+    ['How long we keep it', ['Enquiries that do not proceed are deleted after 12 months. Records of agreed partnerships are kept as long as the law requires.']],
+    ['Your rights', ['You can ask for a copy of your information, a correction or deletion at any time by contacting us.']]
+  ] },
+  accessibility: { label: 'Accessibility', title: 'Accessibility statement', lead: 'Our commitment to making Sense of Touch welcoming and usable for everyone, online and in the spa.', s: [
+    ['Our website', [['Pages work on phones, tablets and computers, and on slower connections.', 'Text has strong contrast, buttons are large enough to tap, and every form field has a label.', 'Animations are switched off if you turn on reduced motion on your device.', 'Images have text descriptions for screen readers.']]],
+    ['Known limits', ['Some embedded videos and social posts come from other platforms and may not fully meet accessibility standards. We are working on captions for our own videos.']],
+    ['In the spa', ['Our premises are at Community 25 Estate Junction, Tema. Tell us about any access needs before your visit and we will confirm the entrance, washroom and parking arrangements for you.', 'Tell us about any access needs when you book and we will do our best to help, including longer appointment times.']],
+    ['Feedback', ['If something on this website or in the spa is hard to use, please tell us on WhatsApp or by email. We aim to reply within three working days.']]
+  ] },
+  cookies: { label: 'Cookies', title: 'Cookies & local storage', lead: 'How this website stores small pieces of information on your device.', s: [
+    ['What we store', [['Essential: your cart, sign-in session, booking progress and saved preferences. The website does not work properly without these.', 'Preferences: your wishlist, recently viewed products and whether you have dismissed our cookie notice.', 'Analytics (only if you accept): anonymous statistics about which pages are visited, to help us improve the website.']]],
+    ['Your choices', ['When you first visit, you can accept or decline analytics. Essential storage is always on. You can clear stored data at any time in your browser settings, which will empty your cart and sign you out.']],
+    ['Third parties', ['Payment pages, maps, fonts and social media links may set their own cookies. Their own privacy policies apply.']]
+  ] }
+};
+const KEYS = ['privacy', 'terms', 'refunds', 'cookies', 'students', 'donations', 'partners', 'accessibility'];
+const key = () => { try { const k = new URLSearchParams(location.search).get('p'); return KEYS.includes(k) ? k : 'privacy'; } catch (e) { return 'privacy'; } };
+class Component extends DCLogic {
+  componentDidMount() { document.title = P[this.k()].title + ' · Sense of Touch'; }
+  k() { return KEYS.includes(this.props.page) ? this.props.page : key(); }
+  renderVals() {
+    const k = this.k(), d = P[k];
+    return {
+      title: d.title, lead: d.lead, updated: '3 November 2026',
+      tabs: KEYS.map(x => ({ label: P[x].label, href: 'Legal.dc.html?p=' + x, current: x === k ? 'page' : 'false', bg: x === k ? '#493126' : 'transparent', fg: x === k ? '#F8F4ED' : '#493126' })),
+      sections: d.s.map(([h, blocks], i) => ({ h, num: i + 1, id: 's' + (i + 1), anchor: '#s' + (i + 1),
+        blocks: blocks.map(b => Array.isArray(b) ? { isList: true, items: b } : b.startsWith('[To confirm]') ? { isTodo: true, text: b } : { isP: true, text: b }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

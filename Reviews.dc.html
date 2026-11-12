@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./sot-store.js?v=20261110b"></script>
+</helmet>
+<section data-screen-label="Client reviews" style="background:{{ bg }};font-family:Montserrat,sans-serif;color:#24221D">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Client reviews</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3.4vw + 14px,52px);line-height:1.05;color:#493126">In their words</h2>
+<sc-if value="{{ hasAvg }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#4A453C"><span style="color:#C6A15B;letter-spacing:2px">{{ avgStars }}</span> {{ avgTxt }}</span></sc-if></div>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><sc-if value="{{ hasGoogle }}" hint-placeholder-val="{{ false }}"><a href="{{ googleUrl }}" target="_blank" rel="noopener" style="min-height:46px;padding:0 18px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;white-space:nowrap" style-hover="background:#493126;color:#F8F4ED">Google reviews</a></sc-if><button onClick="{{ toggleForm }}" aria-expanded="{{ formOpen }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 18px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;white-space:nowrap">Leave a review</button></div>
+</div>
+<sc-if value="{{ noReviews }}" hint-placeholder-val="{{ true }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;font-size:15px;line-height:1.7;color:#4A453C">Reviews from our clients will appear here. Been to see us? We’d love to hear how it went.</div></sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px">
+<sc-for list="{{ reviews }}" as="r" hint-placeholder-count="0">
+<figure style="margin:0;background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:12px">
+<span aria-label="{{ r.aria }}" style="color:#C6A15B;letter-spacing:3px;font-size:16px">{{ r.stars }}</span>
+<blockquote style="margin:0;font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.35;color:#493126">“{{ r.text }}”</blockquote>
+<figcaption style="font-size:13px;color:#6B665C">{{ r.who }}</figcaption>
+<sc-if value="{{ r.hasResp }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.6;padding:8px 12px;background:#F3EEE6;border-left:2px solid #C6A15B"><strong>Sense of Touch:</strong> {{ r.resp }}</span></sc-if>
+</figure>
+</sc-for>
+</div>
+<sc-if value="{{ formOpen }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#FFFDF9;border:1px solid #536B4E;padding:24px;font-size:15px;line-height:1.7">Thank you — your review has been received. We check every review before it appears here.</div></sc-if>
+<sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{ send }}" noValidate="{{ true }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(20px,4vw,28px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px">
+<fieldset style="border:0;margin:0;padding:0;grid-column:1/-1;display:flex;flex-direction:column;gap:6px"><legend style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126;padding:0 0 6px">Your rating</legend><div style="display:flex;gap:4px"><sc-for list="{{ starBtns }}" as="s" hint-placeholder-count="5"><button type="button" onClick="{{ s.go }}" aria-label="{{ s.aria }}" aria-pressed="{{ s.on }}" style="all:unset;cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:28px;color:{{ s.c }}">★</button></sc-for></div><span style="font-size:12px;font-weight:500;color:#9A3B2A">{{ errRating }}</span></fieldset>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">First name<input autoComplete="given-name" value="{{ f.name }}" onChange="{{ setName }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ errName }}</span></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Treatment (optional)<input value="{{ f.service }}" onChange="{{ setService }}" placeholder="e.g. Signature facial" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Phone used to book<input type="tel" autoComplete="tel" value="{{ f.phone }}" onChange="{{ setPhone }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:500;color:{{ phoneC }}">{{ phoneNote }}</span></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126;grid-column:1/-1">Your review<textarea rows="3" value="{{ f.text }}" onChange="{{ setText }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit;resize:vertical;line-height:1.6"></textarea><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ errText }}</span></label>
+<label style="display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.6;color:#4A453C;grid-column:1/-1"><input type="checkbox" checked="{{ f.consent }}" onChange="{{ setConsent }}" style="width:20px;height:20px;accent-color:#536B4E;flex:none;margin-top:1px"><span>I agree that Sense of Touch may publish my review with my first name. My phone number is never shown.</span></label>
+<span style="font-size:12px;font-weight:500;color:#9A3B2A;grid-column:1/-1">{{ errConsent }}</span>
+<button type="submit" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:50px;padding:0 24px;justify-self:start;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600">Submit review</button>
+</form>
+</sc-if>
+</sc-if>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:640},&quot;limit&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:6,&quot;min&quot;:3,&quot;max&quot;:12,&quot;tsType&quot;:&quot;number&quot;},&quot;background&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#F8F4ED&quot;,&quot;options&quot;:[&quot;#F8F4ED&quot;,&quot;#F3EEE6&quot;,&quot;#FFFDF9&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { open: false, f: { rating: 0, name: '', service: '', phone: '', text: '', consent: false }, err: {}, sent: false, tick: 0 };
+  componentDidMount() { this.off = window.SOT && window.SOT.on(() => this.setState(s => ({ tick: s.tick + 1 }))); }
+  componentWillUnmount() { this.off && this.off(); }
+  renderVals() {
+    const S = window.SOT, st = this.state, f = st.f, e = st.err, max = this.props.limit ?? 6;
+    const bg = this.props.background || '#F8F4ED';
+    if (!S) return { bg, reviews: [], noReviews: true, starBtns: [] };
+    const cfg = (S.list('review-settings')[0]) || {}, clients = S.list('clients');
+    const nm = (phone, fallback) => { const c = clients.find(x => x.phone === phone); const n = (c && c.name) || fallback || 'Client'; const p = n.trim().split(/\s+/); return p[0] + (p[1] ? ' ' + p[1][0] + '.' : ''); };
+    const crm = S.list('feedback').filter(x => x.publish && x.mod === 'Approved' && !x.demo).map(x => ({ rating: x.rating, text: x.text, who: nm(x.phone), svc: x.ref && x.ref !== 'General' ? x.ref : '', resp: x.response || '', at: x.created }));
+    const web = S.list('reviews').filter(x => x.status === 'Approved').map(x => ({ rating: x.rating, text: x.text, who: nm(x.phone, x.name), svc: x.service, resp: x.response || '', at: x.created, verified: x.verified }));
+    const all = [...crm, ...web].sort((a, b) => String(b.at).localeCompare(String(a.at)));
+    const avg = all.length ? all.reduce((a, r) => a + r.rating, 0) / all.length : 0;
+    const set = p => this.setState({ f: { ...f, ...p }, err: {} });
+    const ph = S.ghPhone(f.phone), isClient = ph && (clients.some(c => c.phone === ph) || S.list('bookings').some(b => S.ghPhone(b.phone) === ph));
+    return { bg,
+      reviews: all.slice(0, max).map(r => ({ stars: '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating), aria: r.rating + ' out of 5 stars', text: r.text, who: r.who + (r.svc ? ' · ' + r.svc : '') + (r.verified ? ' · Verified client' : ''), hasResp: !!r.resp, resp: r.resp })),
+      noReviews: !all.length, hasAvg: all.length >= 3, avgStars: '★'.repeat(Math.round(avg)), avgTxt: avg.toFixed(1) + ' from ' + all.length + ' reviews',
+      hasGoogle: !!cfg.google, googleUrl: cfg.google || '#',
+      formOpen: st.open, toggleForm: () => this.setState({ open: !st.open }),
+      sent: st.sent, notSent: !st.sent, f,
+      starBtns: [1, 2, 3, 4, 5].map(n => ({ aria: n + ' star' + (n > 1 ? 's' : ''), on: f.rating === n ? 'true' : 'false', c: n <= f.rating ? '#C6A15B' : '#E9DDC9', go: () => set({ rating: n }) })),
+      setName: ev => set({ name: ev.target.value }), setService: ev => set({ service: ev.target.value }), setPhone: ev => set({ phone: ev.target.value }), setText: ev => set({ text: ev.target.value }), setConsent: ev => set({ consent: ev.target.checked }),
+      phoneNote: !f.phone ? 'Helps us confirm you’re a client. Never published.' : isClient ? 'Found your booking — thank you.' : ph ? 'We’ll check this against our bookings.' : 'Enter a Ghana number.', phoneC: f.phone && !ph ? '#9A3B2A' : '#6B665C',
+      errRating: e.rating || '', errName: e.name || '', errText: e.text || '', errConsent: e.consent || '',
+      send: ev => { ev.preventDefault(); const x = {};
+        if (!f.rating) x.rating = 'Choose a rating.'; if (f.name.trim().length < 2) x.name = 'Enter your first name.'; if (f.text.trim().length < 10) x.text = 'Write a few words about your visit.'; if (!f.consent) x.consent = 'Please agree so we can publish your review.';
+        if (Object.keys(x).length) return this.setState({ err: x });
+        S.add('reviews', { rating: f.rating, name: f.name.trim(), service: f.service.trim(), phone: ph || '', text: f.text.trim().slice(0, 600), verified: !!isClient, status: 'Pending' }, 'RV');
+        this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

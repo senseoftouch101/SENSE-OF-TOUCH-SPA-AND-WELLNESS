@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Institute · Implementation plan</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<style>code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:#F3EEE6;padding:1px 4px}</style>
+</helmet>
+<article style="max-width:960px;margin:0 auto;padding:clamp(32px,6vw,72px) clamp(16px,4vw,40px) 96px;display:flex;flex-direction:column;gap:40px;font-size:15px;line-height:1.7;color:#24221D">
+<header style="display:flex;flex-direction:column;gap:14px;border-bottom:1px solid #493126;padding-bottom:28px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Sense of Touch · Institute</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,62px);line-height:1.02;color:#493126">Implementation plan</h1>
+<p style="margin:0">How the Institute plugs into the existing Sense of Touch platform — architecture, data, workflows, permissions, phases and acceptance tests. The working prototype lives in <a href="Institute.dc.html" style="color:#536B4E;font-weight:600">Institute</a> (public), <a href="Institute%20Portal.dc.html" style="color:#536B4E;font-weight:600">Institute Portal</a> (students and instructors) and <a href="Institute%20Admin.dc.html" style="color:#536B4E;font-weight:600">Institute Admin</a> (staff), all sharing <code>academy-core.js</code>.</p>
+</header>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">0 · Before launch: three decisions</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1px;background:#E9DDC9;border:1px solid #E9DDC9">
+<div style="background:#FFFDF9;padding:20px;display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">1. Fees, durations and first intakes</strong><span style="font-size:14px">Every course currently shows “To be confirmed”. Set tuition, registration fee, deposit, installment policy and dates per cohort.</span></div>
+<div style="background:#FFFDF9;padding:20px;display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">2. Instructors and safety requirements</strong><span style="font-size:14px">Appoint instructors beyond the founder, record their verified qualifications, and confirm the supervised-practice and hygiene rules per course.</span></div>
+<div style="background:#FFFDF9;padding:20px;display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">3. Certificate wording and accreditation</strong><span style="font-size:14px">Certificates are internal certificates of completion. Only add an accreditation statement once documentary confirmation is on file.</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">1 · Audit of the existing platform</h2>
+<div style="display:flex;flex-direction:column">
+<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong>Website</strong><span>Design-component pages with a shared header and footer. Institute added as a nav item and its own sub-navigation.</span></div>
+<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong>Data</strong><span><code>sot-store.js</code> keeps records in browser storage (prototype). Institute records use the same store under <code>acad-*</code> keys so the move to a real database is one migration.</span></div>
+<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong>Authentication</strong><span><code>sot-auth.js</code>: members, admin and staff accounts with one-time codes. Institute staff roles are assigned in Admin → Staff; the Institute Admin reads the same session.</span></div>
+<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong>CRM</strong><span><code>crm-core.js</code> merges clients by Ghana phone number. Institute enquiries and applications update an existing lead (matched by phone or email) instead of creating a duplicate.</span></div>
+<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong>Payments</strong><span>No live provider yet. Shop and gift cards rely on staff verification — the Institute follows the same rule: access is granted only after verification.</span></div>
+<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong>Communications</strong><span>WhatsApp links only. Institute messages are logged and queued with the channel chosen from each person’s consent, ready for a provider.</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">2 · Architecture</h2>
+<p style="margin:0">One platform, one database, one sign-in. The Institute is a module, not a separate app.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px;font-size:14px">
+<div style="border:1px solid #493126;padding:14px"><strong style="color:#493126">Public site</strong><br>Catalogue, course pages, calendar, admissions, apply, track, verify, contact</div>
+<div style="border:1px solid #493126;padding:14px"><strong style="color:#493126">Portal</strong><br>Student LMS, schedule, results, payments, support · Instructor registers, grading, practicals</div>
+<div style="border:1px solid #493126;padding:14px"><strong style="color:#493126">Admin Console</strong><br>Institute Management module with role-scoped sections</div>
+<div style="border:1px solid #536B4E;background:#DCE5D6;padding:14px"><strong style="color:#2F4A2B">Shared services</strong><br>Supabase Postgres + Auth + Storage, row-level security, payment webhooks, message queue, PDF</div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">3 · Database schema</h2>
+<div style="display:flex;flex-direction:column;font-size:13.5px">
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>departments</code><span>id, name, areas</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>courses</code><span>id, code (unique), title, dept_id, summary, objectives[], entry, duration, modes[], location, fee, reg_fee, class_size, instructor_id, status (Draft/Published/Archived), theory_first, requirements (lessons, quiz_pass, assignment, attendance_pct, practical, balance), cert_kind, open/close dates</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>modules · lessons</code><span>course → modules (order) → lessons (type: text/video/pdf/quiz/practical, body, media_ref, order); quiz questions in <code>quiz_questions</code></span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>practical_items</code><span>course_id, label, requires_supervision</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>cohorts · sessions</code><span>cohort: course_id, name, dates, venue, mode, capacity, instructor_id, fee/reg_fee/deposit, status · session: cohort_id, date, start, end, kind, title, venue, private meeting_ref</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>enquiries · applications</code><span>person fields, course/cohort, statement, documents (storage refs), consent, source, status, status_history[], crm_lead_id</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>students · enrolments</code><span>student: auth_user_id, crm_client_id, contact, consent · enrolment: student_id, course_id, cohort_id, application_id, status (Active/Completed/Withdrawn/Cancelled), last_lesson_id, access dates</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>lesson_progress</code><span>student_id, lesson_id, completed_at — online completion only</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>submissions</code><span>quiz attempts, assignments, demonstration videos: score, feedback, graded_by, attempt</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>attendance</code><span>session_id, student_id, status (Present/Absent/Late/Excused/Not recorded), reason, recorded_by, corrections[]</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>practical_results</code><span>student_id, item_id, result, supervised, assessor_id — practical competency only</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>completions · certificates</code><span>completion: enrolment_id, confirmed_by, requirement snapshot · certificate: public id, name, course, kind, completed, signatory, accreditation_text, status (Valid/Revoked), history[]</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>payments</code><span>application_id / student_id, course, cohort, kind, amount, method, provider_ref (unique), status, verified_by, webhook_payload</span></div>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><code>announcements · messages · support · reports · audit_log</code><span>communications history, support tickets and data-correction requests, instructor reports, every sensitive action</span></div>
+</div>
+<p style="margin:0;font-size:14px">Attendance, online completion, knowledge assessment, practical competency, overall completion and certificate issuance are separate tables by design.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">4 · Key workflows</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px;font-size:14px">
+<div style="display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">Admissions</strong><span>Apply (validated, duplicate-checked) → reference issued, CRM lead updated, admissions notified → review → accept / waitlist / decline → applicant accepts offer on the Track page → payment instructions.</span></div>
+<div style="display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">Payment → enrolment</strong><span>Payer submits transaction ID → <em>Pending verification</em> → provider webhook (or finance, until connected) verifies → once the required deposit is verified, the student record is created or linked and the enrolment activates. A front-end success screen never grants access.</span></div>
+<div style="display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">Onboarding</strong><span>Enrolment issues the student ID and links the shared Sense of Touch account → welcome message → first portal sign-in shows the handbook and policies to acknowledge (recorded) → timetable → lessons unlock within the cohort’s access dates.</span></div>
+<div style="display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">Course products</strong><span>Each course has a type: short introductory, professional certificate programme (subject to recognition), advanced specialist workshop, online self-paced, corporate training, train-the-trainer (subject to qualifications and approval). Revenue is reported per type.</span></div>
+<div style="display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">Hybrid learning</strong><span>Online theory lessons → knowledge checks (pass mark, limited attempts) → practical eligibility → supervised sessions with registers → practical competency recorded by an instructor → completion confirmed → certificate.</span></div>
+<div style="display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">Certificates</strong><span>Eligibility is computed from the course’s configured requirements. Completion is confirmed by an authorised role; issuance creates a public ID, QR code and verification record. Revocations and corrections are logged and reflected on the verification page immediately.</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">5 · Integrations to evaluate</h2>
+<div style="display:flex;flex-direction:column;font-size:14px">
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><strong>Payments</strong><span>Paystack (cards, MTN/Telecel/AirtelTigo MoMo) or Hubtel — choose on fees, settlement time and webhook reliability. Verify on the server only.</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><strong>Live classroom</strong><span>Google Meet (if on Workspace) or Zoom. Links generated per session and shown only to enrolled students.</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><strong>Video</strong><span>Access-controlled hosting with signed, expiring URLs and low-bitrate renditions for mobile data; audio + transcript fallback.</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><strong>Messaging</strong><span>Email provider; WhatsApp Business API with approved templates; SMS via Hubtel. Respect per-person consent.</span></div>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;padding:8px 0;border-top:1px solid #E9DDC9"><strong>Storage &amp; PDF</strong><span>Private buckets for applicant documents (virus-scanned, type and size limited); server-rendered certificate PDFs.</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">6 · Phases</h2>
+<div style="display:flex;flex-direction:column;font-size:14px">
+<div style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong style="color:#536B4E">Phase 1</strong><span>Confirm the three decisions. Publish course pages, calendar and enquiry/interest capture into the CRM.</span></div>
+<div style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong style="color:#536B4E">Phase 2</strong><span>Move data to Supabase with row-level security; applications, admissions, track-and-accept, staff roles, audit log.</span></div>
+<div style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong style="color:#536B4E">Phase 3</strong><span>Payment provider + webhooks, automatic enrolment, receipts, balances, refunds, reconciliation.</span></div>
+<div style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong style="color:#536B4E">Phase 4</strong><span>Student portal and LMS with video hosting, live classroom, instructor registers, grading and practical records.</span></div>
+<div style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:10px 0;border-top:1px solid #E9DDC9"><strong style="color:#536B4E">Phase 5</strong><span>Certificates (PDF + QR + verification), messaging automations, reports; optional alumni module after the first cohort graduates.</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">7 · Acceptance tests</h2>
+<p style="margin:0;font-size:14px">End to end: visitor → course → application → review → admission → payment → enrolment → student sign-in → learning → attendance → assessment → completion → certificate → verification. Load sample data in Institute Admin → Settings to walk it in the prototype.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:0 28px;font-size:14px">
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Missing required fields block submission per step</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Same email + course while active → duplicate rejected with existing reference</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Reused transaction ID rejected; “Not found” payment leaves enrolment inactive</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Partial payment below the deposit doesn’t enrol</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Withdrawn applicant / student loses active status; balances recalculate</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Cancelled cohort notifies and cancels its enrolments</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Students see only their own records; instructors only their cohorts</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Supervised practical items can’t be marked competent unsupervised</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Opening a course or watching videos never completes it</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Certificate refused until every configured requirement passes</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Revoked certificate shows “not valid” on verification</span>
+<span style="padding:8px 0;border-top:1px solid #E9DDC9">Uploads limited to PDF/JPG/PNG under 5 MB; mobile layouts at 360px</span>
+</div>
+</section>
+</article>
+</x-dc>
+</body>
+</html>

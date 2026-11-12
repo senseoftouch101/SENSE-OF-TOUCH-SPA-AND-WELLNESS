@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Treatment · Sense of Touch</title>
+<meta name="description" content="Treatment details, what to expect and how to book at Sense of Touch Spa &amp; Wellness, Tema.">
+<meta property="og:title" content="Treatment · Sense of Touch">
+<meta property="og:description" content="Treatment details, what to expect and how to book at Sense of Touch Spa &amp; Wellness, Tema.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}img{max-width:100%}@media (max-width:900px){[style*="position: sticky; top: 120px"]{position:static!important}}</style>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="services" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<nav aria-label="Breadcrumb" style="max-width:1280px;margin:0 auto;padding:20px clamp(20px,3vw,32px) 0;display:flex;gap:10px;flex-wrap:wrap;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">
+<a href="Services.dc.html">Services</a><span aria-hidden="true">/</span><a href="{{ t.deptHref }}">{{ t.dept }}</a><span aria-hidden="true">/</span><span style="color:#536B4E">{{ t.name }}</span>
+</nav>
+
+<section data-screen-label="Treatment hero" style="max-width:1280px;margin:0 auto;padding:40px clamp(20px,3vw,32px) 96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:56px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:22px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">{{ t.num }} · {{ t.dept }}</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(46px,6vw,86px);line-height:0.96;color:#493126;text-wrap:balance">{{ t.name }}</h1>
+<span style="font-family:Allura,cursive;font-size:clamp(30px,3.2vw,42px);color:#C6A15B;line-height:1.1">{{ t.short }}</span>
+<p style="margin:0;font-size:17px;line-height:1.8;text-wrap:pretty">{{ t.intro }}</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<a href="{{ t.bookHref }}" style="min-height:48px;display:inline-flex;align-items:center;background:#536B4E;color:#F8F4ED;padding:0 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#493126;color:#F8F4ED">Book this treatment</a>
+<a href="{{ t.waHref }}" target="_blank" rel="noopener" style="min-height:48px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;padding:0 26px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#493126;color:#F8F4ED">Ask a question</a>
+</div>
+<span style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">{{ t.price }}</span><span style="font-size:13px;color:#4A453C">{{ t.priceNote }}</span></span>
+</div>
+<div style="position:relative;aspect-ratio:4/5;width:100%;max-height:660px;overflow:hidden;background:#E9DDC9">
+<sc-if value="{{ t.imgCover }}" hint-placeholder-val="{{ true }}"><img loading="lazy" src="{{ t.img }}" alt="{{ t.dept }} at Sense of Touch" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%"></sc-if>
+<sc-if value="{{ t.imgContain }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ t.img }}" alt="{{ t.dept }} at Sense of Touch" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#24221D;"></sc-if>
+<sc-if value="{{ t.noImg }}" hint-placeholder-val="{{ false }}"><image-slot id="{{ t.slot }}" shape="rect" placeholder="{{ t.ph }}" style="position:absolute;inset:0"></image-slot></sc-if>
+</div>
+</section>
+
+<section data-screen-label="How it works" style="background:#493126;color:#F8F4ED">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,3vw,32px);display:flex;flex-wrap:wrap;gap:56px">
+<div style="display:flex;flex-direction:column;gap:18px;align-self:flex-start;position:sticky;top:120px;flex:1 1 300px;min-width:0">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">Your appointment</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,4.4vw,58px);line-height:1.02">How it works</h2>
+<p style="margin:0;font-size:15px;line-height:1.8;color:#E9DDC9">Every treatment begins with a conversation, so we can shape it around you.</p>
+</div>
+<ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;flex:2 1 520px;min-width:0">
+<sc-for list="{{ t.steps }}" as="s" hint-placeholder-count="4">
+<li style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding:26px 0;border-top:1px solid rgba(198,161,91,0.45)">
+<span style="font-family:'Cormorant Garamond',serif;font-size:44px;line-height:0.9;color:#C6A15B">{{ s.n }}</span>
+<span style="display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.1">{{ s.t }}</span><span style="font-size:15px;line-height:1.75;color:#E9DDC9;text-wrap:pretty">{{ s.d }}</span></span>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+
+<section data-screen-label="Good to know" style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:32px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:600;color:#536B4E">Good for</span>
+<sc-for list="{{ t.good }}" as="f" hint-placeholder-count="3"><span style="font-size:15px;line-height:1.6;display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid #E9DDC9"><span style="color:#C6A15B">✦</span>{{ f }}</span></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:32px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:600;color:#536B4E">Before you come</span>
+<sc-for list="{{ t.before }}" as="f" hint-placeholder-count="3"><span style="font-size:15px;line-height:1.6;display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid #E9DDC9"><span style="color:#C6A15B">✦</span>{{ f }}</span></sc-for>
+</div>
+<div style="background:#E9DDC9;padding:32px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:600;color:#536B4E">Afterwards</span>
+<sc-for list="{{ t.after }}" as="f" hint-placeholder-count="3"><span style="font-size:15px;line-height:1.6;display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid #C6A15B"><span style="color:#493126">✦</span>{{ f }}</span></sc-for>
+</div>
+<sc-if value="{{ t.hasNote }}" hint-placeholder-val="{{ false }}"><p style="margin:0;grid-column:1/-1;font-size:13px;line-height:1.65;background:#FFFDF9;border:1px dashed #C6A15B;padding:14px 16px">{{ t.note }}</p></sc-if>
+</section>
+
+<section data-screen-label="Related" style="background:#E9DDC9">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,52px);color:#493126;line-height:1.05">More in {{ t.dept }}</h2>
+<a href="{{ t.deptHref }}" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-bottom:1px solid #493126;min-height:44px;display:inline-flex;align-items:center">Full {{ t.dept }} menu →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px">
+<sc-for list="{{ related }}" as="o" hint-placeholder-count="4">
+<a href="{{ o.href }}" style="background:#F8F4ED;border:1px solid #C6A15B;padding:20px;display:flex;flex-direction:column;gap:6px;min-height:110px;transition:transform .25s" style-hover="transform:translateY(-3px)">
+<span style="display:flex;justify-content:space-between;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;line-height:1.1;color:#493126">{{ o.name }}</span><span style="color:#C6A15B">→</span></span>
+<span style="font-size:13px;line-height:1.5;color:#4A453C">{{ o.short }}</span>
+</a>
+</sc-for>
+</div>
+<a href="Packages.dc.html" style="align-self:flex-start;font-size:13px;color:#493126;border-bottom:1px solid #493126">Or combine treatments in one of our packages →</a>
+</div>
+</section>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;treatment&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const D = {
+  facial: { dept: 'Facial & Skin Therapy', book: 'Facial & Skin', img: 'assets/web/facial-treatment.jpg', intro: 'shaped by a consultation with our aesthetician, using products chosen for your skin.',
+    steps: [['Skin consultation', 'We look at your skin and talk about your routine, concerns and anything to avoid.'], ['Cleanse & prepare', 'A gentle cleanse so your skin is ready for treatment.'], ['Your treatment', 'The treatment itself, adjusted to how your skin responds.'], ['Finish & advice', 'A soothing finish and simple tips for home care.']],
+    good: ['Skin that feels dull, dry or congested', 'A regular skincare routine', 'Before a special occasion'],
+    before: ['Arrive with a clean face if you can', 'Tell us about allergies, medications or recent treatments', 'Avoid strong exfoliants for a couple of days before'],
+    after: ['Wear sunscreen and avoid harsh sun', 'Skip heavy make-up for the rest of the day', 'Follow the routine your therapist suggests'] },
+  body: { dept: 'Body Therapy & Massage', book: 'Massage', img: 'assets/web/body-therapy-session.jpeg', intro: 'delivered by a qualified massage therapist, with pressure adjusted to suit you.',
+    steps: [['Consultation', 'Tell us where you hold tension, how much pressure you like and any health concerns.'], ['Settle in', 'Change into a robe and relax on a fresh, warm treatment bed.'], ['Your treatment', 'Your therapist works at your pace, checking in on pressure and comfort.'], ['Rest', 'Take a quiet moment before you get up.']],
+    good: ['Tension in the back, neck and shoulders', 'Stress and long working weeks', 'A regular self-care habit'],
+    before: ['Avoid a heavy meal just before', 'Let us know about injuries, pregnancy or medical conditions', 'Arrive a little early to settle in'],
+    after: ['Drink water', 'Take it easy for the rest of the day', 'Tell us how you felt so we can adjust next time'] },
+  wood: { dept: 'Wood Therapy', book: 'Wood Therapy', img: 'assets/web/wood-therapy-session.jpeg', intro: 'using shaped wooden tools in a traditional massage technique.',
+    steps: [['Consultation', 'We talk through your goals and check the treatment suits you.'], ['Preparation', 'The area is prepared with oil so the tools glide comfortably.'], ['Wood therapy', 'Shaped wooden tools are used with rhythmic massage movements.'], ['Finish', 'A calming finish and aftercare advice.']],
+    good: ['A firmer, invigorating massage', 'Relaxing tight areas', 'Anyone curious about traditional techniques'],
+    before: ['Let us know about circulation problems, pregnancy or recent surgery', 'Avoid a heavy meal just before', 'Wear or bring comfortable clothes'],
+    after: ['Drink water', 'Avoid intense exercise for the rest of the day', 'Some tenderness can be normal; tell us if it lasts'],
+    note: 'Wood therapy is a massage and relaxation treatment. Results vary; it is not a weight-loss or medical procedure.' },
+  scalp: { dept: 'Scalp & Hair Therapy', book: 'Scalp & Hair', img: 'assets/web/scalp-steam-hair-loc.jpg', ph: 'Scalp treatment photo', intro: 'calming, cleansing and nourishing care for the scalp and hair.',
+    steps: [['Consultation', 'We ask about your hair type, scalp and any sensitivities.'], ['Cleanse', 'A gentle cleanse to refresh the scalp.'], ['Your treatment', 'Massage and nourishing care, chosen for your hair.'], ['Finish', 'Styling tips and advice for home care.']],
+    good: ['A dry or tight-feeling scalp', 'Relaxation and stress relief', 'Hair that needs extra moisture'],
+    before: ['Tell us about scalp conditions, allergies or recent chemical treatments', 'Let us know if you wear braids or extensions', 'Arrive with hair loose if you can'],
+    after: ['Avoid harsh products for a day or two', 'Follow the home-care tips we give you', 'Book regular sessions for best results'] },
+  waxing: { dept: 'Waxing & Personal Grooming', book: 'Waxing', img: 'assets/web/waxing-before-after.jpg', ph: 'Waxing suite photo', intro: 'precise and hygienic, in a private and respectful setting.',
+    steps: [['Consultation', 'We check your skin and ask about sensitivities and medications.'], ['Prepare', 'The skin is cleansed and prepared.'], ['Waxing', 'Quick, careful waxing using fresh, single-use applicators.'], ['Soothe', 'A soothing finish and aftercare advice.']],
+    good: ['Smooth skin for longer than shaving', 'Before holidays and events', 'Regular grooming'],
+    before: ['Let hair grow to about 0.5 cm', 'Avoid exfoliating or tanning for 24 hours before', 'Tell us about retinoids, acne medication or sensitive skin'],
+    after: ['Avoid heat, sun and tight clothing for 24 hours', 'Exfoliate gently after a few days', 'Moisturise daily'],
+    note: 'Intimate-area waxing is performed only by trained staff following strict hygiene protocols.' },
+  lips: { dept: 'The Lip Bar', book: 'The Lip Bar', img: 'assets/web/lips/lip-mapping.jpg', intro: 'hydration, care and beauty for your lips, in our dedicated Lip Bar.',
+    steps: [['Lip consultation', 'We look at your lips and ask about dryness or sensitivity.'], ['Prepare', 'Lips are cleansed and prepared.'], ['Your treatment', 'The treatment itself, gentle and comfortable.'], ['Finish', 'A nourishing finish and lip-care tips.']],
+    good: ['Dry or chapped lips', 'Before photos or an event', 'A regular lip-care habit'],
+    before: ['Tell us about cold sores or allergies', 'Arrive without lipstick if you can', 'Let us know about recent lip treatments'],
+    after: ['Keep lips moisturised', 'Avoid very hot food and drinks for a few hours', 'Use lip balm with SPF outdoors'],
+    note: 'All Lip Bar treatments, including lip plumping, are non-invasive and use no needles.' }
+};
+const S = [
+  ['facial', [['Essential Facial', 'Cleanse, exfoliate, mask and moisturise', 'GH₵300'], ['Signature Glow Facial', 'Our tailored house facial', 'GH₵450'], ['Dermaplaning Facial', 'Gentle blade exfoliation', 'GH₵500'], ['Back Facial', 'Deep cleansing care for the back', 'GH₵450'], ['Chemical Peel', 'Chosen after skin assessment', 'From GH₵600']]],
+  ['body', [['Swedish Massage', '60 min GH₵350 · 90 min', 'GH₵500'], ['Deep Tissue Massage', '60 min GH₵400 · 90 min', 'GH₵550'], ['Prenatal Massage', '60 min GH₵400 · 90 min', 'GH₵550'], ['Foot Therapy', '30 min GH₵200 · 60 min', 'GH₵300']]],
+  ['wood', [['Wood Therapy', '90 minutes', 'GH₵500']]],
+  ['scalp', [['Scalp & Hair Wash Therapy + Steam', 'Cleanse, massage and steam', 'GH₵300']]],
+  ['waxing', [['Brows', 'Shaped and defined', 'GH₵70'], ['Upper Lip', 'Quick and clean', 'GH₵50'], ['Chin', 'Quick and clean', 'GH₵70'], ['Underarms', 'Smooth for longer', 'GH₵100'], ['Bikini Line', 'Discreet and hygienic', 'GH₵150'], ['Brazilian', 'Discreet and hygienic', 'GH₵250'], ['Half Leg', 'Lower legs', 'GH₵200'], ['Full Leg', 'Ankle to thigh', 'GH₵300']]],
+  ['lips', [['Lip Plumping · Subtle', 'Soft, natural-looking fullness · 45 min incl. consultation', 'GH₵2,000'], ['Lip Plumping · Defined', 'Fuller, more defined lips · 45 min incl. consultation', 'GH₵2,800'], ['Lip Plumping · Full', 'Our most pronounced plumping · 45 min incl. consultation', 'GH₵4,800'], ['Lip Hydration Treatment', 'Moisture-focused care', 'GH₵300'], ['Lip Aftercare Kit', 'Take-home care', 'GH₵150'], ['Wosè Lip Gloss', 'Our signature gloss', 'GH₵120']]]
+];
+const BOOKABLE = ['Signature facial', 'Hydration facial', 'Relaxation massage', 'Deep tissue massage', 'Hot stone massage', 'Wood therapy massage'];
+const slugify = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const ALL = []; S.forEach(([d, items], di) => items.forEach(([name, short, price]) => ALL.push({ d, di, name, short, price, k: slugify(name) })));
+const cur = () => { try { return new URLSearchParams(location.search).get('t') || ''; } catch (e) { return ''; } };
+class Component extends DCLogic {
+  componentDidMount() { const x = this.item(); document.title = x.name + ' · Sense of Touch'; }
+  item() { const k = this.props.treatment || cur(); return ALL.find(x => x.k === k) || ALL[0]; }
+  renderVals() {
+    const x = this.item(), d = D[x.d];
+    const book = x.name;
+    return {
+      t: { name: x.name, short: x.short, price: x.d === 'body' ? x.short.replace(' · ', ' · ') + ' ' + x.price : x.price, priceNote: x.d === 'body' ? 'Add hot stone +GH₵100 or aromatherapy +GH₵50' : 'Confirmed at your consultation', dept: d.dept, deptHref: 'Services.dc.html#' + x.d, num: String(x.di + 1).padStart(2, '0'),
+        intro: x.d === 'body' || x.d === 'wood' ? x.name + ', ' + d.intro : x.name + ': ' + x.short.charAt(0).toLowerCase() + x.short.slice(1) + ', ' + d.intro,
+        hasImg: !!d.img, imgCover: !!d.img && !/(scalp-steam|waxing-before)/.test(d.img), imgContain: !!d.img && /(scalp-steam|waxing-before)/.test(d.img), noImg: !d.img, img: d.img || '', slot: 'svc-' + x.d, ph: d.ph || '',
+        steps: d.steps.map(([t, dd], i) => ({ n: String(i + 1).padStart(2, '0'), t, d: dd })), good: d.good, before: d.before, after: d.after, hasNote: !!d.note, note: d.note || '',
+        bookHref: 'Book.dc.html?service=' + encodeURIComponent(book) + '&cat=' + encodeURIComponent(d.book), waHref: 'https://wa.me/233597182026?text=' + encodeURIComponent('Hello Sense of Touch, I have a question about ' + x.name + '.') },
+      related: ALL.filter(o => o.d === x.d && o !== x).map(o => ({ href: 'Treatment.dc.html?t=' + o.k, name: o.name, short: o.short }))
+    };
+  }
+}
+</script>
+</body>
+</html>

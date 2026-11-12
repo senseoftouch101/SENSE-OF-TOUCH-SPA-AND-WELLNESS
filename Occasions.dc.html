@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Bridal, couples &amp; birthdays · Sense of Touch</title>
+<meta name="description" content="Spa experiences for weddings, couples and celebrations.">
+<meta property="og:title" content="Bridal, couples &amp; birthdays · Sense of Touch">
+<meta property="og:description" content="Spa experiences for weddings, couples and celebrations.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="packages" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+<section data-screen-label="Occasions" style="position:relative;isolation:isolate;overflow:hidden;max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,32px) 32px;display:flex;flex-direction:column;gap:16px">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;pointer-events:none;z-index:-1"></div>
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Occasions</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw + 12px,76px);line-height:1;color:#493126">Moments worth celebrating</h1>
+<p style="margin:0;font-size:16px;line-height:1.7">Private spa experiences for brides and their circle, couples, and birthdays — each planned with you around the treatments you love.</p>
+</section>
+<section data-screen-label="Occasion types" style="max-width:1280px;margin:0 auto;padding:24px clamp(20px,4vw,32px) clamp(56px,7vw,88px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px">
+<sc-for list="{{ occasions }}" as="o" hint-placeholder-count="3">
+<article id="{{ o.id }}" style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column;min-width:0">
+<div style="aspect-ratio:4/3;overflow:hidden;background:#E9DDC9"><img src="{{ o.img }}" alt="{{ o.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:{{ o.pos }};display:block"></div>
+<div style="padding:clamp(20px,3vw,30px);display:flex;flex-direction:column;gap:14px;flex:1">
+<span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ o.kicker }}</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,2.4vw + 14px,40px);line-height:1.05;color:#493126">{{ o.title }}</h2>
+<p style="margin:0;font-size:15px;line-height:1.65">{{ o.body }}</p>
+<div style="display:flex;flex-direction:column;border-top:1px solid #E9DDC9">
+<sc-for list="{{ o.items }}" as="i" hint-placeholder-count="4"><span style="font-size:14px;padding:10px 0;border-bottom:1px solid #E9DDC9;display:flex;gap:10px"><span style="color:#C6A15B" aria-hidden="true">—</span>{{ i }}</span></sc-for>
+</div>
+<div style="margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding-top:8px">
+<span style="font-size:13px;color:#6B665C">Price on request</span>
+<button onClick="{{ o.pick }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:46px;padding:0 20px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Plan this</button>
+</div>
+</div>
+</article>
+</sc-for>
+</section>
+
+<section id="plan" data-screen-label="Plan your occasion" style="background:#E9DDC9">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,88px) clamp(20px,4vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:32px 64px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:12px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3vw + 14px,52px);color:#493126;line-height:1.05">Plan your occasion</h2><p style="margin:0;font-size:15px;line-height:1.7">Tell us the date and your group, and we’ll come back with options and a quote.</p></div>
+<div style="background:#FFFDF9;padding:clamp(22px,4vw,36px);display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div role="radiogroup" aria-label="Occasion" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ types }}" as="t" hint-placeholder-count="4">
+<button role="radio" aria-checked="{{ t.on }}" onClick="{{ t.select }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:13px;border:1px solid #493126;background:{{ t.bg }};color:{{ t.fg }}">{{ t.label }}</button>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+<sc-for list="{{ fields }}" as="x" hint-placeholder-count="4">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">{{ x.label }}
+<input type="{{ x.type }}" inputMode="{{ x.mode }}" value="{{ x.value }}" onChange="{{ x.set }}" placeholder="{{ x.ph }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D;width:100%">
+</label>
+</sc-for>
+</div>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126">What would you love?
+<textarea rows="3" value="{{ notes }}" onChange="{{ setNotes }}" placeholder="Treatments, timing, anything special…" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#F8F4ED;color:#24221D;resize:vertical;width:100%"></textarea>
+</label>
+<sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:12px 14px;font-size:14px;color:#6B2A1E">{{ err }}</div></sc-if>
+<button onClick="{{ send }}" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:52px;padding:16px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;background:#536B4E;color:#F8F4ED">Send enquiry</button>
+</div>
+</sc-if>
+<sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Thank you — your enquiry is noted.</span>
+<span style="font-size:14px;line-height:1.6">Send it on WhatsApp for the quickest reply.</span>
+<a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#536B4E;color:#F8F4ED;padding:0 24px;min-height:48px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Send on WhatsApp</a>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+<dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const OCC = [
+  { id: 'bridal', kicker: 'For the bride & her circle', title: 'Bridal', img: 'assets/web/lounge-group.jpg', pos: 'center 60%', alt: 'Guests relaxing together in robes in the spa lounge', body: 'Calm before the big day — a private session for the bride, bridesmaids and family.', items: ['Pre-wedding facial and lip care', 'Relaxing massage for the bride', 'Group treatments for the bridal party', 'Private lounge time'] },
+  { id: 'couples', kicker: 'For two', title: 'Couples', img: 'assets/web/robe-white-sofa.jpg', pos: 'center 35%', alt: 'A guest resting in a white robe', body: 'Share an unhurried experience side by side — for anniversaries, honeymoons or just because.', items: ['Side-by-side massage', 'Choice of add-on treatments', 'Quiet time together after', 'Gift card option'] },
+  { id: 'birthday', kicker: 'For your day', title: 'Birthday', img: 'assets/web/robe-red-portrait.jpg', pos: 'center 25%', alt: 'A smiling guest in a red robe', body: 'Celebrate yourself, or treat friends to an afternoon of care together.', items: ['Birthday guest’s signature treatment', 'Group treatments for friends', 'Lip Bar touch-up', 'Celebration in the lounge'] }
+];
+const TYPES = ['Bridal', 'Couples', 'Birthday', 'Other'];
+class Component extends DCLogic {
+  state = { type: 0, date: '', guests: '', name: '', phone: '', notes: '', err: '', sent: false };
+  componentDidMount() { const h = location.hash.replace('#', ''); const i = OCC.findIndex(o => o.id === h); if (i >= 0) this.setState({ type: i }); }
+  renderVals() {
+    const s = this.state, S = window.SOT || { ghPhone: v => v, wa: () => '#' };
+    const go = i => { this.setState({ type: i }); const el = document.getElementById('plan'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); };
+    const f = (label, k, ph, type = 'text', mode = 'text') => ({ label, value: s[k], ph, type, mode, set: e => this.setState({ [k]: e.target.value, err: '' }) });
+    return {
+      occasions: OCC.map((o, i) => ({ ...o, pick: () => go(i) })),
+      types: TYPES.map((label, i) => ({ label, on: s.type === i, bg: s.type === i ? '#493126' : 'transparent', fg: s.type === i ? '#F8F4ED' : '#493126', select: () => this.setState({ type: i }) })),
+      fields: [f('Preferred date', 'date', '', 'date', 'none'), f('Number of guests', 'guests', 'e.g. 6', 'number', 'numeric'), f('Your name', 'name', 'Your name'), f('Phone', 'phone', '024 123 4567', 'tel', 'tel')],
+      notes: s.notes, setNotes: e => this.setState({ notes: e.target.value }),
+      err: s.err, hasErr: !!s.err, sent: s.sent, notSent: !s.sent,
+      waLink: S.wa(`Hello Sense of Touch, I'd like to plan a ${TYPES[s.type]} experience${s.date ? ' on ' + s.date : ''} for ${s.guests || '?'} guests. ${s.notes} — ${s.name}`),
+      send: () => {
+        if (!s.name.trim()) return this.setState({ err: 'Please add your name.' });
+        if (!S.ghPhone(s.phone)) return this.setState({ err: 'Enter a Ghana phone number, e.g. 024 123 4567.' });
+        if (window.SOT) window.SOT.add('enquiries', { type: TYPES[s.type] + ' occasion', name: s.name.trim(), reach: S.ghPhone(s.phone), date: s.date, guests: s.guests, message: s.notes.trim(), status: 'New' }, 'EN');
+        { const t = 'Hello Sense of Touch, I\'d like to plan a ' + TYPES[s.type] + ' occasion' + (s.date ? ' on ' + s.date : '') + ' for ' + s.guests + ' guests · Name: ' + s.name.trim() + (s.notes.trim() ? ' · ' + s.notes.trim() : ''); try { window.open(window.SOT ? window.SOT.wa(t) : 'https://wa.me/233597182026?text=' + encodeURIComponent(t), '_blank', 'noopener'); } catch (e) {} }
+        this.setState({ sent: true });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

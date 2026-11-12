@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Spa Operations System · Claude Code master prompt</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#F3EEE6;color:#24221D;font-family:Montserrat,sans-serif}a{color:#536B4E}a:hover{color:#493126}</style>
+</helmet>
+<div style="min-height:100vh">
+<header style="background:#24221D;color:#F8F4ED;position:sticky;top:0;z-index:5"><div style="max-width:980px;margin:0 auto;padding:10px clamp(16px,4vw,32px);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><a href="Admin.dc.html" style="display:flex;align-items:center;gap:10px;color:#F8F4ED;text-decoration:none;min-height:44px"><span style="font-family:'Cormorant Garamond',serif;font-size:22px">Sense of Touch</span><span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C6A15B;font-weight:600">Build brief</span></a><button onClick="{{ copy }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 18px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;background:#C6A15B;color:#24221D">{{ copyLabel }}</button></div></header>
+<main style="max-width:980px;margin:0 auto;padding:clamp(32px,6vw,64px) clamp(16px,4vw,32px) 96px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;font-weight:600;color:#536B4E">Claude Code · implementation master prompt</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,6vw,64px);line-height:1.02;color:#493126">Complete Spa Operations &amp; Management System</h1><p style="margin:0;font-size:16px;line-height:1.7;max-width:720px;text-wrap:pretty">Paste everything below the line into Claude Code at the root of the production repository. The working prototype is the Front desk tab in Admin; this brief turns it into a real, multi-user system on Supabase.</p></div>
+<div style="height:1px;background:#C6A15B"></div>
+
+<article data-prompt="1" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(20px,4vw,44px);display:flex;flex-direction:column;gap:22px;font-size:15px;line-height:1.7">
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">0. Role and goal</h2>
+<p style="margin:0">You are the lead engineer for SENSE OF TOUCH SPA &amp; WELLNESS (Tema, Community 25, Ghana). Build the Spa Operations System: one connected workflow from enquiry to next appointment, covering booking, reception, therapist scheduling, consultation and treatment records, payments and cash-up, retail (THE LIP BAR, AFTERCARE), aftercare and follow-up, CRM, audit and founder reporting. It must share one client database with the spa, store and Sense of Touch Institute. Never create a second customer table.</p>
+<p style="margin:0">Work in phases. At the end of each phase: run the tests, list what changed, list open questions, stop for review. Do not invent prices, policies or medical claims. Leave a clearly marked TODO for the founder instead.</p></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">1. Existing context to read first</h2>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li><b>Admin.dc.html → Front desk tab</b> and <b>sot-frontdesk.js</b>: the reference behaviour for every workflow below. Match its states, copy and rules.</li>
+<li><b>sot-store.js</b>: bookings, sales/checkout, gift cards, SOT Rewards, notifications, daily job. <b>sot-auth.js</b>: role list (RD) and Admin tab permissions. <b>sot-supabase.js</b> and Connect Supabase: current cloud wiring.</li>
+<li>Consultation.dc.html (intake), CRM.dc.html, Operations.dc.html (therapist schedule, suppliers, invoices), Executive Dashboard.dc.html, Shop.dc.html (product catalogue).</li>
+<li>Brand: Cormorant Garamond + Montserrat; ink #24221D, brown #493126, gold #C6A15B, sage #536B4E, cream #F8F4ED / #F3EEE6, line #E9DDC9, error #9A3B2A. Square corners, 1px lines, uppercase micro-labels. Keep the existing visual language.</li>
+</ul></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">2. Stack and conventions</h2>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li>Supabase: Postgres, Auth, Row Level Security on every table, Edge Functions (Deno) for payments, messaging and scheduled jobs, Storage for consent PDFs.</li>
+<li>Frontend: keep the current page set and design. Replace localStorage reads and writes with a typed data layer (one module per domain) that calls Supabase. Keep an offline queue for reception so a dropped connection never loses a check-in or payment.</li>
+<li>Currency GHS stored as integer pesewas. Timezone Africa/Accra (GMT, no DST). Phones normalised to E.164 +233.</li>
+<li>Every write goes through an RPC or Edge Function that also writes audit_log. No direct table writes from the browser for money, treatment records or permissions.</li>
+</ul></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">3. Roles and permissions</h2>
+<p style="margin:0">Roles are those in sot-auth.js plus <b>therapist</b>. Enforce in RLS, not just the UI.</p>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li><b>Receptionist</b>: calendar, bookings, walk-ins, waitlist, check-in, consent tick, deposits, checkout, cash-up for own shift, feedback logging. Cannot read treatment notes. Cannot refund above a limit set by the manager.</li>
+<li><b>Therapist</b>: own schedule, own clients' intake and treatment records (read/write for own visits, read for prior visits of the same client), stage changes to In treatment and Ready to pay. No payments.</li>
+<li><b>Department/Spa manager</b>: everything above, all treatment records, refunds, day close approval, staff schedules, audit view.</li>
+<li><b>Director/Founder, General admin, Super admin</b>: all, plus reporting, integrations and settings. <b>Finance</b>: payments, cash-ups, reports; no treatment notes. <b>Auditor</b>: read-only reports and audit log; no notes.</li>
+<li>Treatment notes visibility: <b>therapist + manager only</b>. They never appear in marketing exports, CRM segments or the customer portal.</li>
+</ul></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">4. Database schema</h2>
+<p style="margin:0">Create migrations for these tables (uuid ids, created_at, updated_at, created_by on all):</p>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li><b>clients</b>: phone (unique), name, email, birthday_mmdd, marketing_consent, source, notes_public. Shared with store and Institute.</li>
+<li><b>services</b>: name, category (Massage, Wood Therapy, Facial &amp; Skin, AFTERCARE, The Lip Bar), duration_min, buffer_min, price_pesewas (nullable until confirmed), deposit_rule, rebook_days, aftercare_template_id, active.</li>
+<li><b>therapists</b> (staff_id, services[]), <b>rooms</b> (name, kind, services[]), <b>staff_shifts</b> (staff_id, date, start, end, type: shift/leave/blocked).</li>
+<li><b>appointments</b>: client_id, service_id, therapist_id, room_id, starts_at, ends_at, status (requested, confirmed, cancelled, no_show, completed), stage (booked, arrived, consultation, in_treatment, ready_to_pay, completed), source (web, front_desk, walk_in, whatsapp), deposit_pesewas, deposit_outcome, cancel_reason, late_cancel, consent_confirmed_at, arrived_at, started_at, finished_at, aftercare_sent_at. Exclusion constraints so a therapist or room can never be double-booked (tstzrange + btree_gist).</li>
+<li><b>waitlist</b>: client_id, service_id, date, window, therapist_pref, status (waiting, slot_opened, booked, removed), offered_appointment_id.</li>
+<li><b>intake_forms</b>: client_id, answers jsonb, contraindications[], signed_at, signature_path, version. <b>consents</b>: appointment_id, form_version, confirmed_by.</li>
+<li><b>treatment_records</b> (private schema, separate RLS): appointment_id, client_id, therapist_id, areas, products_used, technique, observations, reactions, advice, concerns[], edited_history jsonb.</li>
+<li><b>payments</b>: appointment_id/sale_id, kind (deposit, sale, refund), method (momo, card, cash, gift_card), amount_pesewas, provider_ref, status, received_by. <b>sales</b> + <b>sale_items</b> (service or retail, product_id, qty, price). <b>cash_ups</b>: date, shift, expected jsonb, counted jsonb, variance, note, closed_by, approved_by.</li>
+<li><b>products</b>, <b>stock_movements</b> (sale, return, restock, adjustment, batch, expiry). Retail sold at checkout decrements stock.</li>
+<li><b>notifications</b>: client_id, channel, template, body, deliver_on, status (queued, due, sent, failed), provider_ref, related_id.</li>
+<li><b>feedback</b>: client_id, appointment_id, kind (review, complaint, suggestion), rating, comment, status (logged, needs_recovery, resolved), recovery_action, resolved_by.</li>
+<li><b>audit_log</b>: actor_id, actor_role, action, entity, entity_id, before jsonb, after jsonb, ip, at. Append-only (no update/delete grants).</li>
+<li><b>integration_checks</b>: name, ok, detail, checked_at. <b>backups</b>: taken_at, location, restore_tested_at.</li>
+</ul></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">5. Workflows (match the prototype)</h2>
+<ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">
+<li><b>Live calendar</b>: day view by therapist or by room, 30-minute grid 09:00–19:00, now-line, colour by stage, dashed outline for unconfirmed web requests. Tap an empty slot to prefill a booking. Week view and drag-to-reschedule come later.</li>
+<li><b>Booking</b>: clash check on therapist and room, respecting shifts, leave and service buffers. Confirm by WhatsApp.</li>
+<li><b>Walk-in</b>: pick a service and get the first free therapist and room from now. Create the appointment already at the Arrived stage.</li>
+<li><b>Waitlist</b>: when a booking is cancelled or marked no-show, flag the first person waiting that day. Booking them from the waitlist sends an offer message.</li>
+<li><b>Deposits</b>: record MoMo, card or cash with a reference. Over 24h before the start a cancellation means "refund due". Inside 24h, or a no-show, the deposit is kept. Refunds are logged as negative payments. Policy values live in settings (TODO: founder to confirm).</li>
+<li><b>Check-in → consultation</b>: show the intake status. Treatment cannot start until consent is confirmed. Prompt for an intake form if none is on file or it is older than 12 months.</li>
+<li><b>Treatment record</b>: therapist writes areas, products, technique, observations, reactions, advice and client concerns. Every edit is versioned.</li>
+<li><b>Ready to pay → checkout</b>: suggest products from the concerns (Product Routine Builder, approved product info only, show "not a diagnosis"). Hand the service and chosen retail to the existing checkout, which already settles deposit, gift card, reward code and the rest. Completing the sale completes the appointment and awards points.</li>
+<li><b>Aftercare</b>: one tap queues three messages: aftercare text today, a 1–5 feedback request in 2 days, and a rebook nudge at the service's rebook_days.</li>
+<li><b>Cash-up</b>: expected per method from sales, deposits and refunds; staff enter counted amounts. Any variance needs a note. Manager approval locks the day.</li>
+<li><b>Feedback centre</b>: ratings of 3 or below and all complaints open a service-recovery task, closed with the action taken.</li>
+</ol></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">6. Client-facing differentiators</h2>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li><b>Digital Spa Passport</b> (staff): visits, client-since date, points, active gift cards, next visit, service mix, no-shows, intake status, and treatment records for permitted roles only.</li>
+<li><b>My Wellness Journey</b> (customer portal, Account page): own visit history, approved aftercare per visit, products bought, rebook button. Never shows therapist notes.</li>
+<li><b>Product Routine Builder</b>: concern → approved products for THE LIP BAR and AFTERCARE. Rules live in a table the founder edits. No medical claims.</li>
+<li><b>Customer Feedback Centre</b>: as above, plus the WhatsApp 1–5 reply flowing in automatically.</li>
+<li><b>Integration status monitor</b>: database, WhatsApp, Paystack (MoMo and card), Google review link, daily automations, backups. Each shows working / check / not set, from scheduled checks.</li>
+</ul></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">7. Integrations</h2>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li><b>Paystack</b> for MTN MoMo, Telecel Cash, AT Money and cards: Edge Function to initialise, webhook to confirm (verify signature, idempotent on reference). A payment counts only after the webhook.</li>
+<li><b>WhatsApp Business Cloud API</b>: approved templates for confirmation, reminder (24h), reschedule, waitlist offer, aftercare, feedback and rebook. Inbound replies go to the Admin WhatsApp inbox. Fall back to SMS when delivery fails.</li>
+<li><b>Email</b> (Resend or similar) for receipts and staff alerts. <b>Google</b> review link after checkout, never tied to rewards.</li>
+<li>Scheduled Edge Function at 06:00 GMT replacing SOT.runDaily: release queued messages, expire gift cards, birthday points, 24h reminders, integration checks, nightly backup.</li>
+</ul></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">8. Security, privacy, audit, backup</h2>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li>Ghana Data Protection Act 2012 (Act 843): consent for marketing kept separate from treatment consent. Clients can request export and deletion; treatment records are kept for the retention period set by the founder (TODO).</li>
+<li>Treatment records and intake answers in a private schema with column-level grants. Access to them is itself logged.</li>
+<li>Audit log is append-only and covers bookings, moves, cancellations, deposits, refunds, stage changes, record edits, price changes, permission changes, day close and exports.</li>
+<li>Staff sessions: idle timeout, per-device revoke, 2FA for managers and above.</li>
+<li>Backups: Supabase PITR plus a nightly encrypted export to a separate bucket. Do a monthly restore drill into staging and record it in backups.restore_tested_at.</li>
+</ul></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">9. Founder reporting</h2>
+<p style="margin:0">Feed Executive Dashboard from views: revenue by day, week and month split by service and retail; deposits held; refunds; cash-up variances; bookings new vs returning; no-show and late-cancel rates; therapist and room utilisation; average wait from arrival to start; retail attach rate per visit; routine-builder conversion; feedback average and open recoveries; Lip Bar and AFTERCARE stock and margin.</p></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">10. Build phases</h2>
+<ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li>Schema, RLS, roles, audit trigger, seed services, rooms and therapists. Tests for every policy.</li>
+<li>Calendar, booking, walk-in, waitlist, reschedule, cancel and no-show, with clash constraints.</li>
+<li>Intake, consent, treatment records, Spa Passport.</li>
+<li>Deposits, checkout wiring, Paystack, refunds, cash-up with approval.</li>
+<li>Retail and stock decrement, Routine Builder.</li>
+<li>Notifications, WhatsApp, aftercare sequence, feedback centre, My Wellness Journey.</li>
+<li>Integration monitor, backups and restore drill, reporting views.</li>
+<li>Hardening, load test, launch checklist.</li>
+</ol></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">11. Tests (realistic scenarios, must pass)</h2>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li>Two receptionists book the same therapist at 10:30 at the same moment: exactly one succeeds.</li>
+<li>Walk-in at 16:45 for a 90-minute service with close at 19:00: offered 17:00 or later, never past close.</li>
+<li>Cancel 30h ahead with a GHS 100 MoMo deposit → refund due → refunded → cash-up expected drops by 100.</li>
+<li>Cancel 3h ahead → deposit kept; waitlisted client for that day flagged and offered.</li>
+<li>Therapist cannot start treatment without consent; receptionist cannot read treatment notes through the UI, the API or an export.</li>
+<li>Checkout with deposit + partial gift card + reward code + MoMo for the rest; Paystack webhook replayed twice → one payment.</li>
+<li>Retail sale decrements stock and awards retail points; return reverses both.</li>
+<li>Aftercare queues 3 messages with correct dates; a failed WhatsApp send retries, then falls back to SMS.</li>
+<li>Rating 2 opens a recovery task; resolving it records who and what.</li>
+<li>Cash-up with a GHS 20 variance cannot close without a note; after approval the day is locked.</li>
+<li>Every action above appears in audit_log with actor and before/after.</li>
+<li>Restore last night's backup into staging; record counts match.</li>
+</ul></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">12. Deployment</h2>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li>Environments: local (supabase start), staging, production; migrations via CI only. Secrets in Supabase and host env, never in the client.</li>
+<li>Paystack and WhatsApp in test mode on staging; go-live checklist flips them after a full scripted rehearsal with real staff.</li>
+<li>Monitoring: Edge Function errors, webhook failures and queued messages older than 24h raise an alert to the manager.</li>
+<li>Deliver a short staff guide per role (receptionist, therapist, manager) with screenshots.</li>
+</ul></section>
+
+<section style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;color:#493126">13. Founder decisions needed (leave as TODO)</h2>
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+<li>Confirmed service prices and durations; deposit amount per service; late-cancel window and refund rules.</li>
+<li>Room list and which services each room supports; therapist rosters.</li>
+<li>Approved aftercare wording and routine-builder rules; treatment record retention period.</li>
+<li>Refund limit for receptionists; who approves day close.</li>
+</ul></section>
+</article>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { copied: false };
+  renderVals() {
+    return {
+      copyLabel: this.state.copied ? 'Copied ✓' : 'Copy full prompt',
+      copy: () => { const el = document.querySelector('[data-prompt]'); if (!el) return; navigator.clipboard.writeText(el.innerText).then(() => { this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 2000); }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

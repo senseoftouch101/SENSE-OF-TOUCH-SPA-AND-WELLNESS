@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Alumni · Sense of Touch Institute</title>
+<meta name="description" content="The Sense of Touch Institute of Beauty &amp; Wellness alumni community.">
+<meta property="og:title" content="Alumni · Sense of Touch Institute">
+<meta property="og:description" content="Graduates, certificate verification and continuing education.">
+<meta property="og:image" content="assets/logo.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<script src="./motion.js"></script>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-auth.js"></script>
+<script src="./academy-core.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="academy" hint-size="100%,72px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<section data-screen-label="Alumni hero" style="position:relative;isolation:isolate;overflow:hidden;background:#493126;color:#F8F4ED">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;pointer-events:none;z-index:-1"></div>
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:18px;max-width:1280px">
+<a href="Institute.dc.html" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#C6A15B">← The Institute</a>
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">Alumni</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,6vw,80px);line-height:1;max-width:900px;text-wrap:balance">Once trained here, always part of the house</h1>
+<p style="margin:0;font-size:16px;line-height:1.75;color:#E9DDC9;max-width:640px">Graduates of the Sense of Touch Institute of Beauty &amp; Wellness keep their certificate records, hear about advanced workshops first, and stay connected with each other.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><a href="#signin" style="white-space:nowrap;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#C6A15B;color:#24221D;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Alumni sign-in</a><a href="Institute.dc.html#verify" style="white-space:nowrap;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;border:1px solid #C6A15B;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Verify a certificate</a></div>
+</div>
+</section>
+
+<main style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:56px">
+
+<section data-screen-label="Alumni announcements and opportunities" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px;align-items:start">
+<sc-for list="{{ boards }}" as="b" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:12px;letter-spacing:0.26em;text-transform:uppercase;color:#536B4E;font-weight:600">{{ b.title }}</span>
+<sc-if value="{{ b.empty }}" hint-placeholder-val="{{ true }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;font-size:14px;line-height:1.6;color:#6B665C">{{ b.emptyText }}</div></sc-if>
+<sc-for list="{{ b.items }}" as="i" hint-placeholder-count="1"><details data-tilt="1" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:16px 18px"><summary style="cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#6B665C">{{ i.date }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126;line-height:1.15">{{ i.title }}</span><span style="font-size:14px;line-height:1.6">{{ i.summary }}</span></summary><p style="margin:10px 0 0;font-size:14px;line-height:1.7;white-space:pre-line">{{ i.body }}</p></details></sc-for>
+</div>
+</sc-for>
+</section>
+
+<section data-screen-label="Continuing education" style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-end"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,50px);color:#493126;line-height:1.05">Continuing education</h2><a href="Institute.dc.html#workshops" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #536B4E">All workshops →</a></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:16px"><sc-for list="{{ nextCourses }}" as="c" hint-placeholder-count="3"><a data-tilt="1" href="{{ c.href }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:6px;color:#24221D"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ c.product }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126;line-height:1.1">{{ c.title }}</span><span style="font-size:12px;color:#6B665C">{{ c.level }}</span></a></sc-for></div>
+</section>
+
+<section data-screen-label="Alumni directory" style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,50px);color:#493126;line-height:1.05">Alumni directory</h2>
+<span style="font-size:14px;color:#6B665C">Only graduates who have chosen to be listed appear here.</span>
+<sc-if value="{{ noDirectory }}" hint-placeholder-val="{{ true }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;font-size:14px;color:#6B665C">No graduates have opted in yet.</div></sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px"><sc-for list="{{ directory }}" as="d" hint-placeholder-count="0"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><strong style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:#493126">{{ d.name }}</strong><span style="font-size:13px">{{ d.headline }}</span><span style="font-size:12px;color:#6B665C">{{ d.meta }}</span></div></sc-for></div>
+</section>
+
+<section id="signin" data-screen-label="Alumni area" style="background:#FFFDF9;border:1px solid #C6A15B;padding:clamp(20px,4vw,36px);display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{ out }}" hint-placeholder-val="{{ true }}">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3.5vw,44px);color:#493126">Alumni sign-in</h2>
+<span style="font-size:14px;line-height:1.6">Use the email and student ID from your enrolment. Your portal sign-in also works here.</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;align-items:end">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Email<input type="email" value="{{ em }}" onChange="{{ setEm }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid #E9DDC9;background:#F8F4ED"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Student ID<input value="{{ code }}" onChange="{{ setCode }}" style="font-size:16px;letter-spacing:0.1em;text-transform:uppercase;font-weight:400;padding:13px 12px;border:1px solid #E9DDC9;background:#F8F4ED"></label>
+<button onClick="{{ login }}" style="all:unset;cursor:pointer;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Sign in</button>
+</div>
+<span role="alert" style="font-size:14px;color:#9A3B2A">{{ loginErr }}</span>
+</sc-if>
+<sc-if value="{{ notGrad }}" hint-placeholder-val="{{ false }}"><div style="font-size:15px;line-height:1.6">You’re signed in as {{ who }}. The alumni area opens once you complete a course. <a href="Institute%20Portal.dc.html" style="color:#536B4E;font-weight:600">Go to your student portal →</a></div></sc-if>
+<sc-if value="{{ isGrad }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:baseline"><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3.5vw,44px);color:#493126">Welcome back, {{ first }}</h2><button onClick="{{ logout }}" style="all:unset;cursor:pointer;min-height:40px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#6B665C">Sign out</button></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;align-items:start">
+<div style="display:flex;flex-direction:column"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-bottom:6px">Graduation history</span>
+<sc-for list="{{ grads }}" as="g" hint-placeholder-count="1"><div style="display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:14px"><strong>{{ g.course }}</strong><span style="color:#6B665C">Completed {{ g.date }}</span><a href="{{ g.verify }}" style="font-size:12px;color:#536B4E;font-weight:600">{{ g.cert }}</a></div></sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">My alumni profile</span>
+<input aria-label="Headline" value="{{ pf.headline }}" onChange="{{ setPf.headline }}" placeholder="e.g. Massage therapist · own studio" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px">
+<input aria-label="City" value="{{ pf.city }}" onChange="{{ setPf.city }}" placeholder="Town or city" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px">
+<label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;min-height:44px"><input type="checkbox" checked="{{ pf.optIn }}" onChange="{{ setOptIn }}" style="width:20px;height:20px;flex:none;margin-top:2px;accent-color:#536B4E">List me in the alumni directory (name, headline, city and course only). You can withdraw at any time.</label>
+<button onClick="{{ saveProfile }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:46px;padding:0 18px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Save profile</button>
+<span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-top:10px">Graduate feedback</span>
+<textarea aria-label="Feedback" rows="3" value="{{ fb }}" onChange="{{ setFb }}" placeholder="How has the course helped you since graduating?" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea>
+<label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;min-height:44px"><input type="checkbox" checked="{{ fbConsent }}" onChange="{{ setFbConsent }}" style="width:18px;height:18px;flex:none;margin-top:2px;accent-color:#536B4E">The Institute may publish my words as a student story (with my name and course).</label>
+<button onClick="{{ sendFb }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:46px;padding:0 18px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Send feedback</button>
+<span role="status" style="font-size:13px;color:#2F4A2B">{{ msg }}</span>
+</div>
+</div>
+</sc-if>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const fmt = s => s ? new Date(String(s).slice(0, 10) + 'T00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+class Component extends DCLogic {
+  state = { em: '', code: '', loginErr: '', sess: null, pf: null, fb: '', fbConsent: false, msg: '', tick: 0 };
+  componentDidMount() { this.off = window.SOT && window.SOT.on(() => this.setState(s => ({ tick: s.tick + 1 }))); const A = window.ACAD; if (!A) return; let s = A.portal.current(); const m = window.SOTAuth && window.SOTAuth.current(); if (!s && m) { const st = A.list('students').find(x => x.email === m.email); if (st) s = { type: 'student', id: st.id, name: st.name }; } this.setState({ sess: s && s.type === 'student' ? s : null }); }
+  componentWillUnmount() { this.off && this.off(); }
+  renderVals() {
+    const A = window.ACAD; if (!A) return { out: true, noDirectory: true };
+    const st = this.state, arts = A.list('articles').filter(a => a.status === 'Published').sort((x, y) => (y.date || '').localeCompare(x.date || ''));
+    const board = (title, cat, emptyText) => { const items = arts.filter(a => a.category === cat).map(a => ({ title: a.title, date: fmt(a.date), summary: a.summary, body: a.body })); return { title, items, empty: !items.length, emptyText }; };
+    const alumni = A.list('students').filter(s => A.enrolments(s.id).some(e => e.status === 'Completed'));
+    const dir = alumni.filter(s => s.alumni && s.alumni.optIn);
+    const me = st.sess ? A.get('students', st.sess.id) : null, done = me ? A.enrolments(me.id).filter(e => e.status === 'Completed') : [];
+    const pf = st.pf || (me && me.alumni) || { headline: '', city: '', optIn: false };
+    const setPf = {}; ['headline', 'city'].forEach(k => setPf[k] = e => this.setState({ pf: { ...pf, [k]: e.target.value } }));
+    return {
+      boards: [board('Alumni announcements', 'Alumni announcement', 'Announcements for graduates will appear here.'), board('Career opportunities', 'Career opportunity', 'Opportunities shared with the Institute will be posted here. We don’t promise placements.'), board('Continuing education news', 'Continuing education', 'Advanced workshop and refresher announcements will appear here.')],
+      nextCourses: A.list('courses').filter(c => c.status === 'Published' && /Advanced|Train-the|workshop/i.test(c.product)).map(c => ({ title: c.title, product: c.product, level: c.level, href: 'Institute.dc.html#course/' + c.code })),
+      directory: dir.map(s => { const cs = A.enrolments(s.id).filter(e => e.status === 'Completed').map(e => (A.course(e.courseId) || {}).title).join(', '); return { name: s.name, headline: s.alumni.headline || 'Graduate', meta: [s.alumni.city, cs].filter(Boolean).join(' · ') }; }), noDirectory: !dir.length,
+      out: !me, notGrad: !!me && !done.length, isGrad: !!me && done.length > 0, who: me ? me.name : '', first: me ? me.name.split(' ')[0] : '',
+      em: st.em, code: st.code, loginErr: st.loginErr, setEm: e => this.setState({ em: e.target.value }), setCode: e => this.setState({ code: e.target.value }),
+      login: () => { const r = A.portal.login(st.em, st.code); if (r.error || r.session.type !== 'student') return this.setState({ loginErr: r.error || 'Use a student account.' }); this.setState({ sess: r.session, loginErr: '' }); },
+      logout: () => { A.portal.logout(); this.setState({ sess: null, pf: null }); },
+      grads: done.map(e => { const c = A.course(e.courseId) || {}, cert = A.list('certificates').find(x => x.studentId === me.id && x.courseId === e.courseId && x.status === 'Valid'); return { course: c.title, date: fmt(e.completedAt), cert: cert ? 'Certificate ' + cert.id + ' · verify ↗' : 'Certificate being prepared', verify: cert ? 'Institute.dc.html#verify/' + cert.id : '#signin' }; }),
+      pf, setPf, setOptIn: e => this.setState({ pf: { ...pf, optIn: e.target.checked } }),
+      saveProfile: () => { A.upd('students', me.id, { alumni: { ...pf, updatedAt: new Date().toISOString() } }); A.add('consents-log', { id: 'CNS-' + A.rnd(5), studentId: me.id, consent: { alumniDirectory: pf.optIn ? 1 : 0 } }); this.setState({ pf: null, msg: 'Profile saved.' }); },
+      fb: st.fb, fbConsent: st.fbConsent, setFb: e => this.setState({ fb: e.target.value }), setFbConsent: e => this.setState({ fbConsent: e.target.checked }), msg: st.msg,
+      sendFb: () => { if (st.fb.trim().length < 10) return this.setState({ msg: 'Tell us a little more.' }); const c = A.course(done[0].courseId) || {}; A.add('alumni-feedback', { id: 'AFB-' + A.rnd(5), studentId: me.id, text: st.fb.trim(), consent: st.fbConsent }); if (st.fbConsent) A.add('stories', { id: 'STY-' + A.rnd(5), name: me.name, course: c.title, quote: st.fb.trim(), consent: true, status: 'Draft', addedBy: 'Graduate feedback' }); A.internal('Graduate feedback · ' + me.name, 'Institute Director'); this.setState({ fb: '', fbConsent: false, msg: 'Thank you — your feedback has been sent.' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

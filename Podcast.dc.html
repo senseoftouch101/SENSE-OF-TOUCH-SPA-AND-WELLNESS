@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>SOT Podcast · Sense of Touch</title>
+<meta name="description" content="The Sense of Touch Podcast — conversations on wellness, skincare, beauty business and the stories behind African-inspired care.">
+<meta property="og:title" content="SOT Podcast · Sense of Touch">
+<meta property="og:description" content="Conversations on wellness, skincare and building a beauty business in Ghana.">
+<meta property="og:image" content="assets/logo.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-podcast.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<section data-screen-label="Podcast hero" style="background:#24221D;color:#F8F4ED">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:40px 64px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:22px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">The Sense of Touch Podcast</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(56px,8vw,120px);line-height:0.9">SOT<br><span style="font-style:italic;color:#C6A15B">Podcast</span></h1>
+<p style="margin:0;font-size:17px;line-height:1.75;color:#E9DDC9;max-width:48ch;text-wrap:pretty">Honest conversations about wellness, skin, self-care and building a beauty business in Ghana — hosted by founder Woselande Carmelle Theus, with therapists, entrepreneurs and guests.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><sc-for list="{{ listen }}" as="l" hint-placeholder-count="2"><a href="{{ l.url }}" target="_blank" rel="noopener" style="min-height:48px;padding:0 20px;display:inline-flex;align-items:center;gap:10px;border:1px solid {{ l.bd }};background:{{ l.bg }};color:{{ l.fg }};font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;white-space:nowrap" style-hover="opacity:0.85">Listen on {{ l.l }}</a></sc-for></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-if value="{{ hasLatest }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#C6A15B">Latest episode · {{ latest.num }}</span>
+<div style="position:relative;width:100%;aspect-ratio:16/9;background:#3A362F;overflow:hidden">
+<sc-if value="{{ latestPlaying }}" hint-placeholder-val="{{ false }}"><iframe src="{{ latest.embed }}" title="{{ latest.title }}" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></sc-if>
+<sc-if value="{{ latestIdle }}" hint-placeholder-val="{{ true }}"><button onClick="{{ playLatest }}" aria-label="{{ latest.aria }}" style="all:unset;cursor:pointer;position:absolute;inset:0;display:block">
+<sc-for list="{{ latestImgs }}" as="im" hint-placeholder-count="0"><img loading="lazy" src="{{ im.u }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.85"></sc-for>
+<span aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:#C6A15B;display:flex;align-items:center;justify-content:center"><span style="width:0;height:0;border-left:22px solid #24221D;border-top:14px solid transparent;border-bottom:14px solid transparent;margin-left:6px"></span></span>
+</button></sc-if>
+</div>
+<span style="font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.15">{{ latest.title }}</span>
+<span style="font-size:13px;color:#E9DDC9">{{ latest.meta }}</span>
+</sc-if>
+<sc-if value="{{ noEpisodes }}" hint-placeholder-val="{{ true }}">
+<div style="border:1px solid rgba(233,221,201,0.3);padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;gap:14px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1.1">First episodes coming soon</span>
+<span style="font-size:15px;line-height:1.7;color:#E9DDC9">Subscribe on YouTube to be the first to hear them, or suggest a topic below.</span>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Episodes" style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Episodes</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3.4vw + 14px,52px);line-height:1.05;color:#493126">Listen &amp; watch</h2></div>
+<div role="tablist" aria-label="Filter by topic" style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ topics }}" as="t" hint-placeholder-count="7"><button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.go }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 14px;display:inline-flex;align-items:center;font-size:12px;font-weight:600;border:1px solid #493126;background:{{ t.bg }};color:{{ t.fg }}">{{ t.l }}</button></sc-for></div>
+</div>
+<sc-if value="{{ noneInTopic }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;font-size:15px;color:#4A453C">{{ emptyMsg }}</div></sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px">
+<sc-for list="{{ eps }}" as="e" hint-placeholder-count="3">
+<article style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<button onClick="{{ e.play }}" aria-label="{{ e.aria }}" style="all:unset;cursor:pointer;position:relative;display:block;aspect-ratio:16/9;background:#493126;overflow:hidden">
+<sc-if value="{{ e.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ e.image }}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+<sc-if value="{{ e.noImg }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:56px;color:#C6A15B">{{ e.num }}</span></sc-if>
+<span style="position:absolute;left:12px;bottom:12px;background:rgba(36,34,29,0.85);color:#F8F4ED;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:5px 8px">{{ e.kind }} · {{ e.duration }}</span>
+</button>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1">
+<span style="font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ e.num }} · {{ e.topic }}</span>
+<h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:24px;line-height:1.15;color:#493126">{{ e.title }}</h3>
+<span style="font-size:13px;color:#6B665C">{{ e.meta }}</span>
+<p style="margin:0;font-size:14px;line-height:1.6;color:#4A453C;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">{{ e.summary }}</p>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<section data-screen-label="Podcast suggest" style="background:#F3EEE6">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:32px 64px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Get involved</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,3.4vw + 14px,52px);line-height:1.05;color:#493126">Suggest a topic or be a guest</h2><p style="margin:0;font-size:15px;line-height:1.75;color:#4A453C;max-width:44ch">Have a question you’d like answered on the show, or a story worth sharing? We read every suggestion.</p></div>
+<sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#FFFDF9;border:1px solid #536B4E;padding:28px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">Thank you — received.</span><span style="font-size:15px;line-height:1.7">We’ll be in touch if it’s a fit for an upcoming episode.</span><button onClick="{{ again }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">Send another</button></div></sc-if>
+<sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{ send }}" noValidate="{{ true }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:16px">
+<div role="radiogroup" aria-label="Type" style="display:grid;grid-template-columns:1fr 1fr;border:1px solid #493126"><sc-for list="{{ kinds }}" as="k" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{ k.on }}" onClick="{{ k.go }}" style="all:unset;cursor:pointer;text-align:center;min-height:46px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;background:{{ k.bg }};color:{{ k.fg }}">{{ k.l }}</button></sc-for></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Name<input autoComplete="name" value="{{ f.name }}" onChange="{{ setName }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ errName }}</span></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Email<input type="email" autoComplete="email" value="{{ f.email }}" onChange="{{ setEmail }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ errEmail }}</span></label>
+</div>
+<sc-if value="{{ isGuest }}" hint-placeholder-val="{{ false }}"><label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Link to your work (optional)<input value="{{ f.link }}" onChange="{{ setLink }}" placeholder="Instagram, website or LinkedIn" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"></label></sc-if>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">{{ ideaLabel }}<textarea rows="4" value="{{ f.idea }}" onChange="{{ setIdea }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit;resize:vertical;line-height:1.6"></textarea><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:500;color:#9A3B2A">{{ errIdea }}</span></label>
+<label style="display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.6;color:#4A453C"><input type="checkbox" checked="{{ f.consent }}" onChange="{{ setConsent }}" style="width:20px;height:20px;accent-color:#536B4E;flex:none;margin-top:1px"><span>I agree that Sense of Touch may contact me about this suggestion.</span></label>
+<span style="font-size:12px;font-weight:500;color:#9A3B2A">{{ errConsent }}</span>
+<button type="submit" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:50px;padding:0 26px;align-self:flex-start;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600" style-hover="background:#536B4E">Send</button>
+</form>
+</sc-if>
+</div>
+</section>
+
+<sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="{{ openTitle }}" onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;background:rgba(36,34,29,0.88);display:flex;align-items:center;justify-content:center;padding:16px">
+<div onClick="{{ stop }}" style="background:#FFFDF9;width:min(100%,960px);display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 8px 8px 16px;border-bottom:1px solid #E9DDC9"><span style="font-size:14px;font-weight:600;color:#493126;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ openTitle }}</span><div style="display:flex;gap:6px;flex:none"><a href="{{ openUrl }}" target="_blank" rel="noopener" style="min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid #493126">Open on {{ openKind }}</a><button onClick="{{ close }}" aria-label="Close" style="all:unset;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#493126">×</button></div></div>
+<div style="position:relative;width:100%;height:{{ openH }};aspect-ratio:{{ openRatio }};background:#24221D"><iframe src="{{ openEmbed }}" title="{{ openTitle }}" allow="autoplay; encrypted-media; picture-in-picture; clipboard-write" allowFullScreen="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>
+</div>
+</div>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { topic: 'All', open: null, playLatest: false, f: { kind: 'Topic', name: '', email: '', link: '', idea: '', consent: false }, err: {}, sent: false, tick: 0 };
+  componentDidMount() { this.off = window.SOT && window.SOT.on(() => this.setState(s => ({ tick: s.tick + 1 }))); this._esc = e => { if (e.key === 'Escape') this.setState({ open: null }); }; window.addEventListener('keydown', this._esc); }
+  componentWillUnmount() { this.off && this.off(); window.removeEventListener('keydown', this._esc); }
+  renderVals() {
+    const X = window.SOTPod, st = this.state; if (!X) return { listen: [], eps: [], topics: [], noEpisodes: true, kinds: [] };
+    const c = X.cfg(), all = X.episodes(), fmt = d => d ? new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+    const map = e => { const m = X.media(e.url) || {}; return { ...e, m, num: 'Ep. ' + e.number, hasImg: !!e.image, noImg: !e.image, kind: m.kind || e.kind, duration: e.duration || '—', meta: [e.guest ? 'with ' + e.guest : '', fmt(e.date)].filter(Boolean).join(' · '), aria: 'Play episode ' + e.number + ': ' + e.title, summary: e.summary || '', play: () => this.setState({ open: e }) }; };
+    const eps = all.filter(e => st.topic === 'All' || e.topic === st.topic).map(map);
+    const L = all[0] ? map(all[0]) : null, o = st.open, om = o ? X.media(o.url) || {} : {};
+    const f = st.f, e = st.err, set = p => this.setState({ f: { ...f, ...p }, err: { ...e, ...Object.fromEntries(Object.keys(p).map(k => [k, ''])) } });
+    return {
+      listen: [['YouTube', c.youtube, '#C6A15B', '#C6A15B', '#24221D'], ['Spotify', c.spotify, '#E9DDC9', 'transparent', '#F8F4ED'], ['Apple Podcasts', c.apple, '#E9DDC9', 'transparent', '#F8F4ED']].filter(x => x[1]).map(([l, url, bd, bg, fg]) => ({ l, url, bd, bg, fg })),
+      hasLatest: !!L, latestImgs: L && L.image ? [{ u: L.image }] : [], noEpisodes: !L, latest: L ? { ...L, embed: L.m.embed, title: L.title } : { meta: '', title: '' }, latestPlaying: !!L && st.playLatest && L.m.kind === 'YouTube', latestIdle: !(L && st.playLatest && L.m.kind === 'YouTube'),
+      playLatest: () => L && (L.m.kind === 'YouTube' ? this.setState({ playLatest: true }) : this.setState({ open: all[0] })),
+      topics: ['All', ...X.TOPICS].map(t => ({ l: t, on: st.topic === t ? 'true' : 'false', bg: st.topic === t ? '#493126' : 'transparent', fg: st.topic === t ? '#F8F4ED' : '#493126', go: () => this.setState({ topic: t }) })),
+      eps, noneInTopic: !eps.length, emptyMsg: all.length ? 'No episodes in this topic yet.' : 'Episodes will appear here as soon as they’re released.',
+      isOpen: !!o, openTitle: o ? 'Ep. ' + o.number + ' · ' + o.title : '', openUrl: o ? o.url : '', openKind: om.kind || '', openEmbed: om.embed || '', openRatio: om.ratio || 'auto', openH: om.ratio ? 'auto' : '232px',
+      close: () => this.setState({ open: null }), stop: ev => ev.stopPropagation(),
+      kinds: [['Topic', 'Suggest a topic'], ['Guest', 'Be a guest']].map(([k, l]) => ({ l, on: f.kind === k ? 'true' : 'false', bg: f.kind === k ? '#493126' : 'transparent', fg: f.kind === k ? '#F8F4ED' : '#493126', go: () => set({ kind: k }) })),
+      f, isGuest: f.kind === 'Guest', ideaLabel: f.kind === 'Guest' ? 'Your story and what you’d talk about' : 'Your topic or question',
+      errName: e.name || '', errEmail: e.email || '', errIdea: e.idea || '', errConsent: e.consent || '',
+      setName: ev => set({ name: ev.target.value }), setEmail: ev => set({ email: ev.target.value }), setLink: ev => set({ link: ev.target.value }), setIdea: ev => set({ idea: ev.target.value }), setConsent: ev => set({ consent: ev.target.checked }),
+      sent: st.sent, notSent: !st.sent, again: () => this.setState({ sent: false, f: { kind: 'Topic', name: '', email: '', link: '', idea: '', consent: false } }),
+      send: ev => { ev.preventDefault(); const r = X.suggest(f); if (r.errors) return this.setState({ err: r.errors }); this.setState({ sent: true, err: {} }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

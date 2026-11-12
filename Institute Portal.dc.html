@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Institute Portal · Sense of Touch</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<style>@media print{body *{visibility:hidden!important}#sot-cert,#sot-cert *{visibility:visible!important}#sot-cert{position:fixed!important;inset:0!important;margin:0!important;border:0!important}}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-auth.js"></script>
+<script src="./academy-core.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F3EEE6">
+<header style="background:#493126;color:#F8F4ED;position:sticky;top:0;z-index:10">
+<div style="max-width:1200px;margin:0 auto;padding:8px clamp(14px,3vw,28px);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between">
+<a href="Institute.dc.html" style="display:flex;align-items:baseline;gap:8px;color:#F8F4ED;min-height:44px;align-items:center"><span style="font-family:'Cormorant Garamond',serif;font-size:21px">Sense of Touch</span><span style="font-family:Allura,cursive;font-size:24px;color:#C6A15B">Institute</span></a>
+<sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:10px;align-items:center"><span style="font-size:12px;color:#E9DDC9">{{ whoLabel }}</span><button onClick="{{ logout }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #C6A15B;color:#F8F4ED">Sign out</button></div></sc-if>
+</div>
+<sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}">
+<nav aria-label="Portal sections" style="max-width:1200px;margin:0 auto;padding:0 clamp(14px,3vw,28px);display:flex;gap:2px;overflow-x:auto;scrollbar-width:none">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="7"><button onClick="{{ t.go }}" aria-current="{{ t.on }}" style="all:unset;cursor:pointer;white-space:nowrap;min-height:44px;padding:0 12px;display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:{{ t.fg }};border-bottom:2px solid {{ t.line }}">{{ t.label }}<span style="color:#C6A15B">{{ t.badge }}</span></button></sc-for>
+</nav>
+</sc-if>
+</header>
+
+<sc-if value="{{ signedOut }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Portal sign-in" style="max-width:460px;margin:0 auto;padding:clamp(48px,9vw,104px) 20px;display:flex;flex-direction:column;gap:16px">
+<span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:#536B4E;font-weight:600">Student &amp; instructor portal</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:44px;line-height:1.05;color:#493126">Sign in</h1>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Email<input type="email" autoComplete="username" value="{{ em }}" onChange="{{ setEm }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;width:100%"></label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Student or instructor ID<input value="{{ code }}" onChange="{{ setCode }}" onKeyDown="{{ codeKey }}" placeholder="STU-XXXXX" style="font-size:16px;letter-spacing:0.1em;text-transform:uppercase;font-weight:400;padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;width:100%"></label>
+<sc-if value="{{ loginErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:12px 14px;font-size:14px;color:#6B2A1E">{{ loginErrText }}</div></sc-if>
+<button onClick="{{ login }}" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:50px;padding:15px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Sign in</button>
+<span style="font-size:12px;line-height:1.6;color:#6B665C">Your student ID is in your enrolment confirmation. Prototype sign-in; before launch this moves to the shared Sense of Touch sign-in with server-side roles, so students only ever see their own records.</span>
+<sc-if value="{{ hasSample }}" hint-placeholder-val="{{ false }}"><div style="background:#E9DDC9;border-left:3px solid #C6A15B;padding:12px 14px;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:6px"><strong style="color:#493126">Sample accounts (test data)</strong><sc-for list="{{ demoAccounts }}" as="d" hint-placeholder-count="3"><button onClick="{{ d.use }}" style="all:unset;cursor:pointer;min-height:36px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center"><strong>{{ d.label }}</strong><span style="color:#6B665C">{{ d.detail }}</span></button></sc-for></div></sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1200px;margin:0 auto;padding:clamp(18px,3vw,32px) clamp(14px,3vw,28px) 72px;display:flex;flex-direction:column;gap:18px">
+
+<sc-if value="{{ flash }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#DCE5D6;border-left:3px solid #536B4E;padding:12px 14px;font-size:14px;color:#2F4A2B;display:flex;justify-content:space-between;gap:10px;align-items:center">{{ flashText }}<button onClick="{{ clearFlash }}" aria-label="Dismiss" style="all:unset;cursor:pointer;min-width:32px;min-height:32px;text-align:center">×</button></div></sc-if>
+
+<sc-if value="{{ sHome }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Student welcome" style="display:flex;flex-direction:column;gap:18px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,3vw + 14px,44px);color:#493126">Welcome, {{ first }}</h1>
+<sc-for list="{{ onboarding }}" as="o" hint-placeholder-count="0">
+<div data-screen-label="Student onboarding" style="background:#FFFDF9;border:1px solid #C6A15B;padding:clamp(18px,3vw,28px);display:flex;flex-direction:column;gap:14px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Getting started · {{ o.course }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126;line-height:1.1">Welcome to the Institute</span>
+<span style="font-size:14px;line-height:1.65">Before your first lesson, please read the student handbook and confirm the policies. Your student ID is <strong>{{ o.sid }}</strong>.</span>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ handbook }}" as="b" hint-placeholder-count="6"><details style="border-top:1px solid #E9DDC9"><summary style="cursor:pointer;min-height:48px;display:flex;align-items:center;font-size:14px;font-weight:600;color:#493126">{{ b.t }}</summary><p style="margin:0 0 14px;font-size:14px;line-height:1.65">{{ b.b }}</p></details></sc-for>
+</div>
+<span style="font-size:12px;color:#6B665C">Handbook draft — final policies to be approved by the Institute Director.</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
+<div style="border:1px solid #E9DDC9;padding:14px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">Your instructor</span><strong style="font-size:15px">{{ o.insName }}</strong><span style="font-size:13px;color:#6B665C">{{ o.insTitle }}</span></div>
+<div style="border:1px solid #E9DDC9;padding:14px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">Orientation</span><sc-for list="{{ o.orient }}" as="x" hint-placeholder-count="2"><span style="font-size:13px;line-height:1.5">{{ x }}</span></sc-for></div>
+</div>
+<label style="display:flex;gap:10px;align-items:center;font-size:14px;min-height:44px"><input type="checkbox" checked="{{ o.hb }}" onChange="{{ o.setHb }}" style="width:20px;height:20px;accent-color:#536B4E">I have read the student handbook</label>
+<label style="display:flex;gap:10px;align-items:center;font-size:14px;min-height:44px"><input type="checkbox" checked="{{ o.pol }}" onChange="{{ o.setPol }}" style="width:20px;height:20px;accent-color:#536B4E">I agree to the attendance, hygiene and conduct policies</label>
+<div style="display:flex;flex-wrap:wrap;gap:8px"><button onClick="{{ o.finish }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;opacity:{{ o.op }}">Complete onboarding</button><button onClick="{{ o.timetable }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">View timetable</button></div>
+</div>
+</sc-for>
+<div data-screen-label="Student ID card" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;background:#493126;color:#F8F4ED;padding:18px 20px;max-width:460px;border:1px solid #C6A15B">
+<div style="width:64px;height:64px;border-radius:50%;background:#E9DDC9;color:#493126;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;flex:none">{{ initials }}</div>
+<div style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:#C6A15B;font-weight:600">Student ID</span><strong style="font-size:17px">{{ meName }}</strong><span style="font-family:ui-monospace,Menlo,monospace;font-size:14px;letter-spacing:0.1em">{{ meId }}</span><span style="font-size:12px;color:#E9DDC9">Sense of Touch Institute of Beauty &amp; Wellness</span></div>
+</div>
+<sc-for list="{{ myCourses }}" as="c" hint-placeholder-count="1">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ c.code }} · {{ c.status }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126;line-height:1.1">{{ c.title }}</span><span style="font-size:13px;color:#6B665C">{{ c.cohort }}</span></div>
+<div style="display:flex;gap:14px;align-items:center"><svg viewBox="0 0 64 64" width="72" height="72" role="img" aria-label="{{ c.pct }}% of learning activities completed" style="flex:none;transform:rotate(-90deg)"><circle cx="32" cy="32" r="27" fill="none" stroke="#E9DDC9" stroke-width="6"></circle><circle cx="32" cy="32" r="27" fill="none" stroke="#536B4E" stroke-width="6" stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="{{ c.dash }}" style="transition:stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1)"></circle></svg><div style="display:flex;flex-direction:column;gap:4px"><strong style="font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:#493126">{{ c.pct }}%</strong><span style="font-size:12px;color:#6B665C">{{ c.detail }}</span><span style="font-size:11px;color:#6B665C">Online activities only — practical competency is recorded separately.</span></div></div>
+<button onClick="{{ c.resume }}" style="all:unset;cursor:pointer;justify-self:start;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">{{ c.resumeLabel }}</button>
+</div>
+</sc-for>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Next classes</span>
+<sc-if value="{{ noNext }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">No upcoming classes.</span></sc-if>
+<sc-for list="{{ nextSessions }}" as="s" hint-placeholder-count="2"><div style="display:flex;flex-wrap:wrap;gap:4px 12px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:14px"><strong>{{ s.date }} · {{ s.time }}</strong><span style="flex:1 1 160px">{{ s.title }}</span><span style="font-size:12px;color:#536B4E">{{ s.kind }}</span></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Announcements</span>
+<sc-if value="{{ noAnn }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">Nothing new.</span></sc-if>
+<sc-for list="{{ anns }}" as="a" hint-placeholder-count="1"><div style="display:flex;flex-direction:column;gap:4px;padding:10px 0;border-top:1px solid #E9DDC9"><strong style="font-size:14px">{{ a.title }}</strong><span style="font-size:14px;line-height:1.55">{{ a.body }}</span><span style="font-size:12px;color:#6B665C">{{ a.meta }}</span></div></sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ sLearn }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Course modules" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;align-items:start">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<div style="padding:16px 18px;border-bottom:1px solid #E9DDC9;display:flex;flex-direction:column;gap:6px">
+<select aria-label="Course" value="{{ courseId }}" onChange="{{ pickCourse }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:44px"><sc-for list="{{ courseOpts }}" as="o" hint-placeholder-count="1"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<span style="font-size:12px;color:#6B665C">{{ lc.summary }}</span>
+</div>
+<sc-for list="{{ lc.modules }}" as="m" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;border-bottom:1px solid #E9DDC9">
+<span style="padding:12px 18px 6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ m.title }}</span>
+<sc-for list="{{ m.lessons }}" as="l" hint-placeholder-count="3"><button onClick="{{ l.open }}" style="all:unset;cursor:pointer;box-sizing:border-box;display:flex;gap:10px;align-items:center;padding:10px 18px;min-height:48px;font-size:14px;background:{{ l.bg }}"><span aria-hidden="true" style="width:20px;height:20px;flex:none;border:1px solid {{ l.ring }};background:{{ l.dot }};color:#F8F4ED;font-size:12px;display:flex;align-items:center;justify-content:center">{{ l.tick }}</span><span style="flex:1">{{ l.title }}</span><span style="font-size:11px;color:#6B665C">{{ l.type }}</span></button></sc-for>
+</div>
+</sc-for>
+<button onClick="{{ openAssignment }}" style="all:unset;cursor:pointer;box-sizing:border-box;display:flex;gap:10px;align-items:center;padding:14px 18px;min-height:52px;font-size:14px;font-weight:600;color:#493126;background:{{ asgBg }}"><span aria-hidden="true" style="width:20px;height:20px;flex:none;border:1px solid #C6A15B;background:{{ asgDot }}"></span>Assignment · {{ lc.asgTitle }}</button>
+</div>
+
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(18px,3vw,28px);display:flex;flex-direction:column;gap:16px;min-height:360px">
+<sc-if value="{{ gated }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#F3E3C4;padding:14px 16px;font-size:14px;line-height:1.6;color:#6B4A12">{{ gateMsg }}</div></sc-if>
+<sc-if value="{{ noLesson }}" hint-placeholder-val="{{ true }}"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Choose a lesson to begin</span><span style="font-size:14px;color:#6B665C">Your place is saved automatically, so you can stop and resume any time.</span></sc-if>
+<sc-if value="{{ showLesson }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ ls.module }} · {{ ls.type }}</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(28px,2vw + 16px,38px);color:#493126;line-height:1.1">{{ ls.title }}</h1>
+<sc-if value="{{ ls.isVideo }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:8px"><div style="aspect-ratio:16/9;background:#24221D;color:#E9DDC9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px"><span style="font-size:13px;letter-spacing:0.16em;text-transform:uppercase">{{ ls.videoLabel }}</span><span style="font-size:12px;color:#B5AC9C;max-width:420px">Streams from access-controlled video hosting once connected. Signed links expire, so lessons can’t be shared outside the portal.</span></div>
+<label style="display:flex;gap:10px;align-items:center;font-size:13px;min-height:44px"><input type="checkbox" checked="{{ lowData }}" onChange="{{ toggleLowData }}" style="width:20px;height:20px;accent-color:#536B4E">Low-data mode — audio and transcript instead of video</label></div>
+</sc-if>
+<sc-if value="{{ ls.isPdf }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #C6A15B;padding:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;font-size:14px"><span>{{ ls.title }}.pdf · permitted download</span><span style="font-size:12px;color:#6B665C">File is uploaded by your instructor</span></div></sc-if>
+<sc-if value="{{ ls.isPractical }}" hint-placeholder-val="{{ false }}"><div style="background:#E9DDC9;padding:14px 16px;font-size:14px;line-height:1.6">Practical demonstration. Watch, then practise at your next supervised session. Competency is only recorded by an instructor in person.</div></sc-if>
+<p style="margin:0;font-size:15px;line-height:1.75">{{ ls.body }}</p>
+<sc-if value="{{ ls.isQuiz }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<span style="font-size:13px;color:#6B665C">Pass mark {{ ls.pass }}% · {{ ls.attemptsLabel }}</span>
+<sc-for list="{{ ls.questions }}" as="q" hint-placeholder-count="3">
+<fieldset style="border:1px solid #E9DDC9;padding:14px;margin:0;display:flex;flex-direction:column;gap:6px"><legend style="font-size:15px;font-weight:600;color:#493126;padding:0 6px">{{ q.n }}. {{ q.q }}</legend>
+<sc-for list="{{ q.opts }}" as="o" hint-placeholder-count="4"><label style="display:flex;gap:10px;align-items:center;font-size:14px;min-height:44px;padding:0 6px;background:{{ o.bg }}"><input type="radio" name="{{ q.name }}" checked="{{ o.on }}" onChange="{{ o.pick }}" disabled="{{ q.locked }}" style="width:18px;height:18px;accent-color:#536B4E">{{ o.t }}</label></sc-for>
+</fieldset>
+</sc-for>
+<span role="alert" style="font-size:14px;font-weight:600;color:{{ ls.resultC }}">{{ ls.result }}</span>
+<sc-if value="{{ ls.canSubmit }}" hint-placeholder-val="{{ false }}"><button onClick="{{ submitQuiz }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:48px;padding:0 22px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Submit answers</button></sc-if>
+<sc-if value="{{ ls.canRetry }}" hint-placeholder-val="{{ false }}"><button onClick="{{ retryQuiz }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:48px;padding:0 22px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Try again</button></sc-if>
+</div>
+</sc-if>
+<div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid #E9DDC9;padding-top:14px">
+<span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">Questions for your instructor</span>
+<sc-for list="{{ myQs }}" as="q" hint-placeholder-count="0"><div style="font-size:14px;line-height:1.55;padding:8px 10px;background:#F8F4ED;display:flex;flex-direction:column;gap:4px"><span><strong>You:</strong> {{ q.text }}</span><span style="color:{{ q.c }}">{{ q.answer }}</span></div></sc-for>
+<div style="display:flex;flex-wrap:wrap;gap:8px"><input aria-label="Ask a question" value="{{ qText }}" onChange="{{ setQText }}" placeholder="Ask about this lesson…" style="flex:1 1 220px;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px"><button onClick="{{ askQ }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Ask</button></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;border-top:1px solid #E9DDC9;padding-top:16px;margin-top:auto">
+<sc-if value="{{ ls.canComplete }}" hint-placeholder-val="{{ false }}"><button onClick="{{ completeLesson }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 22px;display:inline-flex;align-items:center;background:#536B4E;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Mark lesson complete</button></sc-if>
+<sc-if value="{{ ls.done }}" hint-placeholder-val="{{ false }}"><span style="min-height:48px;display:inline-flex;align-items:center;font-size:13px;font-weight:600;color:#2F4A2B">✓ Completed</span></sc-if>
+<sc-if value="{{ ls.hasNext }}" hint-placeholder-val="{{ false }}"><button onClick="{{ nextLesson }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 22px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Next lesson →</button></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{ showAsg }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">Assignment</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(28px,2vw + 16px,38px);color:#493126;line-height:1.1">{{ lc.asgTitle }}</h1>
+<p style="margin:0;font-size:15px;line-height:1.7">{{ lc.asgBrief }}</p>
+<sc-for list="{{ asgSubs }}" as="s" hint-placeholder-count="1"><div style="border:1px solid #E9DDC9;padding:12px 14px;font-size:14px;line-height:1.55;display:flex;flex-direction:column;gap:4px"><strong>{{ s.status }} · {{ s.score }}</strong><span>{{ s.feedback }}</span><span style="font-size:12px;color:#6B665C">{{ s.when }}</span></div></sc-for>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Your answer<textarea rows="6" value="{{ asgText }}" onChange="{{ setAsgText }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;resize:vertical;line-height:1.5"></textarea></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Attach a file (optional)<input type="file" accept=".pdf,.doc,.docx,.jpg,.png" onChange="{{ setAsgFile }}" style="font-size:14px;letter-spacing:0;text-transform:none;font-weight:400;padding:10px;border:1px dashed #C6A15B"></label>
+<span role="alert" style="font-size:13px;font-weight:500;color:#9A3B2A">{{ asgErr }}</span>
+<button onClick="{{ submitAsg }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:48px;padding:0 22px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Submit assignment</button>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ sLibrary }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Learning library" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Library</h1>
+<span style="font-size:14px;color:#6B665C">Video lessons, readings, downloads and authorised class recordings from your courses.</span>
+<sc-for list="{{ library }}" as="g" hint-placeholder-count="1">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<span style="padding:12px 16px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #E9DDC9">{{ g.course }}</span>
+<sc-for list="{{ g.items }}" as="i" hint-placeholder-count="4"><button onClick="{{ i.open }}" style="all:unset;cursor:pointer;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;padding:12px 16px;min-height:52px;border-bottom:1px solid #F3EEE6;font-size:14px"><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#493126;min-width:96px">{{ i.type }}</span><span style="flex:1 1 200px">{{ i.title }}</span><span style="font-size:12px;color:#6B665C">{{ i.meta }}</span></button></sc-for>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ sDiscuss }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Student course discussion" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Course discussion</h1>
+<span style="font-size:13px;color:#6B665C">Visible to everyone enrolled on the course and its instructors. Be kind; don’t share client details or other people’s photos.</span>
+<select aria-label="Course" value="{{ dCourse }}" onChange="{{ setDCourse }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:46px;max-width:520px"><sc-for list="{{ dCourseOpts }}" as="o" hint-placeholder-count="1"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px"><textarea aria-label="New post" rows="3" value="{{ dText }}" onChange="{{ setDText }}" placeholder="Start a discussion or share a tip…" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea><button onClick="{{ post }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Post</button></div>
+<sc-if value="{{ noPosts }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px;font-size:14px;color:#6B665C">No posts yet — start the conversation.</div></sc-if>
+<sc-for list="{{ posts }}" as="p" hint-placeholder-count="2"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline"><strong style="font-size:14px">{{ p.author }}</strong><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:{{ p.roleC }};font-weight:600">{{ p.role }}</span><span style="font-size:12px;color:#6B665C">{{ p.when }}</span><sc-if value="{{ p.canHide }}" hint-placeholder-val="{{ false }}"><button onClick="{{ p.hide }}" style="all:unset;cursor:pointer;margin-left:auto;min-height:32px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#9A3B2A">Hide</button></sc-if></div><span style="font-size:15px;line-height:1.6;white-space:pre-line">{{ p.text }}</span>
+<sc-for list="{{ p.replies }}" as="r" hint-placeholder-count="0"><div style="margin-left:16px;padding:8px 12px;border-left:2px solid #C6A15B;background:#F8F4ED;display:flex;flex-direction:column;gap:2px"><span style="font-size:12px"><strong>{{ r.author }}</strong> <span style="color:{{ r.roleC }}">{{ r.role }}</span> · <span style="color:#6B665C">{{ r.when }}</span></span><span style="font-size:14px;line-height:1.55">{{ r.text }}</span></div></sc-for>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-left:16px"><input aria-label="Reply" value="{{ p.draft }}" onChange="{{ p.setDraft }}" placeholder="Reply…" style="flex:1 1 220px;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px"><button onClick="{{ p.reply }}" style="all:unset;cursor:pointer;min-height:42px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">Reply</button></div></div></sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ sSchedule }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Class schedule and attendance" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Schedule &amp; attendance</h1>
+<sc-for list="{{ schedule }}" as="h" hint-placeholder-count="1">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;align-items:baseline"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">{{ h.course }}</span><span style="font-size:13px">Attendance <strong>{{ h.att }}</strong> · required {{ h.req }}</span></div>
+<span style="font-size:13px;color:#6B665C">{{ h.eligibility }}</span>
+<sc-for list="{{ h.sessions }}" as="s" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:6px 14px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:14px;align-items:center">
+<strong>{{ s.date }}</strong><span>{{ s.time }} · {{ s.kind }}</span><span>{{ s.title }}</span>
+<span style="justify-self:start;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;padding:5px 8px;background:{{ s.sBg }};color:{{ s.sFg }}">{{ s.status }}</span>
+<sc-if value="{{ s.canBook }}" hint-placeholder-val="{{ false }}"><button onClick="{{ s.book }}" style="all:unset;cursor:pointer;justify-self:start;min-height:40px;padding:0 14px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Book practical place</button></sc-if>
+<sc-if value="{{ s.isBooked }}" hint-placeholder-val="{{ false }}"><button onClick="{{ s.cancel }}" style="all:unset;cursor:pointer;justify-self:start;min-height:40px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#2F4A2B">✓ Booked · cancel</button></sc-if>
+<sc-if value="{{ s.hasRec }}" hint-placeholder-val="{{ false }}"><button onClick="{{ s.watch }}" style="all:unset;cursor:pointer;justify-self:start;min-height:40px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #536B4E;color:#536B4E;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Watch recording</button></sc-if>
+<span style="font-size:12px;color:#6B665C">{{ s.bookNote }}</span>
+<sc-if value="{{ s.canJoin }}" hint-placeholder-val="{{ false }}"><button onClick="{{ s.join }}" style="all:unset;cursor:pointer;justify-self:start;min-height:40px;padding:0 14px;display:inline-flex;align-items:center;background:#536B4E;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Join live class</button></sc-if>
+</div>
+</sc-for>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ sResults }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Assessments and progress" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Results, progress &amp; certificates</h1>
+<sc-for list="{{ results }}" as="r" hint-placeholder-count="1">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:14px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">{{ r.course }}</span>
+<ol aria-label="Learning journey" style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,120px),1fr));gap:4px">
+<sc-for list="{{ r.journey }}" as="j" hint-placeholder-count="9"><li style="display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.35;color:{{ j.fg }}"><span style="height:4px;background:{{ j.bar }}"></span><span>{{ j.n }}. {{ j.label }}</span></li></sc-for>
+</ol>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px">
+<div style="display:flex;flex-direction:column"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-bottom:6px">Certificate requirements</span>
+<sc-for list="{{ r.checks }}" as="c" hint-placeholder-count="5"><div style="display:flex;gap:10px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:14px;align-items:center"><span aria-hidden="true" style="width:18px;height:18px;flex:none;background:{{ c.bg }};color:#F8F4ED;font-size:11px;display:flex;align-items:center;justify-content:center">{{ c.mark }}</span><span style="flex:1">{{ c.label }}</span><span style="font-size:12px;color:#6B665C">{{ c.detail }}</span></div></sc-for>
+<span style="font-size:13px;font-weight:600;color:{{ r.stateC }};padding-top:10px">{{ r.state }}</span>
+</div>
+<div style="display:flex;flex-direction:column"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-bottom:6px">Grades &amp; feedback</span>
+<sc-for list="{{ r.grades }}" as="g" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:2px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:14px"><span style="display:flex;justify-content:space-between;gap:10px"><span>{{ g.title }}</span><strong>{{ g.score }}</strong></span><span style="font-size:13px;color:#6B665C">{{ g.feedback }}</span></div></sc-for>
+<span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;margin:14px 0 6px">Practical competency</span>
+<sc-for list="{{ r.practicals }}" as="p" hint-placeholder-count="2"><div style="display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:14px"><span>{{ p.label }}</span><span style="font-size:12px;font-weight:600;color:{{ p.c }};white-space:nowrap">{{ p.state }}</span></div></sc-for>
+<sc-if value="{{ r.noPractical }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#6B665C">This course has no practical competency component.</span></sc-if>
+</div>
+</div>
+<sc-for list="{{ r.certs }}" as="c" hint-placeholder-count="0"><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;background:#DCE5D6;padding:14px 16px"><span style="font-size:14px"><strong>{{ c.id }}</strong> · {{ c.status }}</span><button onClick="{{ c.view }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">View &amp; download</button></div></sc-for>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ sPay }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Tuition and payments" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Tuition &amp; payments</h1>
+<sc-for list="{{ accounts }}" as="a" hint-placeholder-count="1">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:baseline"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">{{ a.course }}</span><span style="font-size:15px">Balance <strong style="color:{{ a.balC }}">{{ a.balance }}</strong></span></div>
+<span style="font-size:13px;color:#6B665C">Total {{ a.total }} · Paid and verified {{ a.paid }} {{ a.fx }}</span>
+<div style="display:flex;flex-direction:column"><sc-for list="{{ a.schedule }}" as="r" hint-placeholder-count="0"><div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;padding:7px 0;border-top:1px dashed #E9DDC9;font-size:13px"><span>{{ r.label }}</span><span style="color:#6B665C">{{ r.due }}</span><strong>{{ r.amount }}</strong></div></sc-for></div>
+<sc-for list="{{ a.pays }}" as="p" hint-placeholder-count="2"><div style="display:flex;flex-wrap:wrap;gap:6px 14px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:13px"><strong>{{ p.amount }}</strong><span>{{ p.kind }} · {{ p.method }}</span><span style="color:#6B665C">{{ p.ref }}</span><span style="margin-left:auto;font-weight:600;color:{{ p.c }}">{{ p.status }}</span><sc-if value="{{ p.verified }}" hint-placeholder-val="{{ false }}"><button onClick="{{ p.receipt }}" style="all:unset;cursor:pointer;min-height:32px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#536B4E">Receipt</button></sc-if></div></sc-for>
+<sc-if value="{{ a.owes }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:8px;align-items:end;border-top:1px solid #E9DDC9;padding-top:12px">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126">Method<select value="{{ pay.method }}" onChange="{{ setPayMethod }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;min-height:46px"><sc-for list="{{ payMethods }}" as="o" hint-placeholder-count="4"><option value="{{ o }}">{{ o }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126">Amount (GHS)<input inputMode="decimal" value="{{ pay.amount }}" onChange="{{ setPayAmount }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126">Transaction ID<input value="{{ pay.ref }}" onChange="{{ setPayRef }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED"></label>
+<button onClick="{{ a.pay }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Submit payment</button>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<span role="alert" style="font-size:13px;font-weight:500;color:#9A3B2A">{{ payErr }}</span>
+<span style="font-size:12px;line-height:1.6;color:#6B665C">Payments show as pending until our finance team verifies them with the provider. Need a refund or installment plan? Use Support.</span>
+</section>
+</sc-if>
+
+<sc-if value="{{ sDocs }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="My documents" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">My documents</h1>
+<span style="font-size:14px;color:#6B665C">Everything issued to you, in one place. Each opens as a page you can save as PDF.</span>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<sc-if value="{{ noDocs }}" hint-placeholder-val="{{ false }}"><span style="padding:16px;font-size:14px;color:#6B665C">No documents yet.</span></sc-if>
+<sc-for list="{{ docs }}" as="d" hint-placeholder-count="4"><button onClick="{{ d.open }}" style="all:unset;cursor:pointer;box-sizing:border-box;display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:6px 14px;align-items:center;padding:14px 16px;min-height:56px;border-bottom:1px solid #F3EEE6;font-size:14px"><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ d.type }}</span><span style="display:flex;flex-direction:column"><strong>{{ d.title }}</strong><span style="font-size:12px;color:#6B665C">{{ d.meta }}</span></span><span style="font-size:12px;color:#493126;font-weight:600">Open →</span></button></sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ letterOpen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="Document" style="position:fixed;inset:0;z-index:50;background:rgba(36,34,29,0.7);overflow:auto;padding:16px;display:flex">
+<div style="margin:auto;display:flex;flex-direction:column;gap:12px;width:100%;max-width:720px">
+<div id="sot-cert" style="background:#FFFDF9;padding:clamp(24px,5vw,48px);display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.7">
+<div style="display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #C6A15B;padding-bottom:14px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Sense of Touch Institute of Beauty &amp; Wellness</span><span style="font-size:12px;color:#6B665C">{{ dl.date }}</span></div>
+<span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126;line-height:1.1">{{ dl.title }}</span>
+<sc-for list="{{ dl.paras }}" as="p" hint-placeholder-count="3"><p style="margin:0">{{ p }}</p></sc-for>
+<sc-for list="{{ dl.rows }}" as="r" hint-placeholder-count="0"><div style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:10px;padding:6px 0;border-top:1px solid #E9DDC9"><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ r.l }}</span><span>{{ r.v }}</span></div></sc-for>
+<span style="font-family:Allura,cursive;font-size:28px;color:#493126;margin-top:8px">{{ dl.sig }}</span>
+</div>
+<div style="display:flex;gap:10px;justify-content:flex-end"><button onClick="{{ printCert }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;background:#C6A15B;color:#24221D;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Download PDF</button><button onClick="{{ closeDoc }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;border:1px solid #F8F4ED;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Close</button></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sSupport }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Support and profile" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:18px;align-items:start">
+<div data-screen-label="Refund requests" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Request a refund</span>
+<select aria-label="Payment" value="{{ rf.paymentId }}" onChange="{{ setRf.paymentId }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:46px"><option value="">Choose a verified payment…</option><sc-for list="{{ rfPays }}" as="o" hint-placeholder-count="2"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<input aria-label="Amount" inputMode="decimal" value="{{ rf.amount }}" onChange="{{ setRf.amount }}" placeholder="Amount (GHS)" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px">
+<textarea aria-label="Reason" rows="3" value="{{ rf.reason }}" onChange="{{ setRf.reason }}" placeholder="Reason for the request" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea>
+<span style="font-size:12px;color:#6B665C">Refunds follow the terms in your offer. You’ll see each step here.</span>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ rfErr }}</span>
+<button onClick="{{ sendRf }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Submit request</button>
+<sc-for list="{{ myRefunds }}" as="r" hint-placeholder-count="0"><div style="display:flex;flex-direction:column;gap:4px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:13px"><span style="display:flex;justify-content:space-between;gap:8px"><strong>{{ r.id }} · {{ r.amount }}</strong><span style="font-weight:600;color:{{ r.c }}">{{ r.status }}</span></span><ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px"><sc-for list="{{ r.steps }}" as="s" hint-placeholder-count="4"><li style="display:flex;flex-direction:column;gap:3px;font-size:10.5px;color:{{ s.fg }}"><span style="height:3px;background:{{ s.bar }}"></span>{{ s.l }}</li></sc-for></ol><span style="color:#6B665C">{{ r.note }}</span></div></sc-for>
+</div>
+<div data-screen-label="My data" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">My data & privacy</span>
+<select aria-label="Request type" value="{{ dr.type }}" onChange="{{ setDrType }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:46px"><sc-for list="{{ drTypes }}" as="o" hint-placeholder-count="3"><option value="{{ o }}">{{ o }}</option></sc-for></select>
+<textarea aria-label="Details" rows="2" value="{{ dr.details }}" onChange="{{ setDrDetails }}" placeholder="{{ drPh }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea>
+<span style="font-size:12px;color:#6B665C">Deletion removes your personal details. Payment and certificate records are kept for as long as the law requires.</span>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ drErr }}</span>
+<button onClick="{{ sendDr }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Send request</button>
+<sc-for list="{{ myData }}" as="r" hint-placeholder-count="0"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px"><span><strong>{{ r.type }}</strong> · {{ r.when }}</span><span style="font-weight:600;color:#536B4E">{{ r.status }}</span><sc-if value="{{ r.canDownload }}" hint-placeholder-val="{{ false }}"><button onClick="{{ r.download }}" style="all:unset;cursor:pointer;min-height:32px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#493126">Download my data</button></sc-if></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Support &amp; help</span>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Topic<select value="{{ sup.type }}" onChange="{{ setSupType }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;min-height:46px"><sc-for list="{{ supTypes }}" as="o" hint-placeholder-count="5"><option value="{{ o }}">{{ o }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Message<textarea rows="4" value="{{ sup.body }}" onChange="{{ setSupBody }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;resize:vertical"></textarea></label>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ supErr }}</span>
+<button onClick="{{ sendSup }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:46px;padding:0 18px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Send request</button>
+<sc-for list="{{ myTickets }}" as="t" hint-placeholder-count="1"><div style="display:flex;flex-direction:column;gap:2px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:14px"><span style="display:flex;justify-content:space-between;gap:8px"><strong>{{ t.type }}</strong><span style="font-size:12px;color:#536B4E">{{ t.status }}</span></span><span style="color:#6B665C">{{ t.body }}</span><span style="font-size:13px;color:#2F4A2B">{{ t.reply }}</span></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">My profile</span>
+<span style="font-size:14px"><strong>{{ me.name }}</strong> · {{ me.id }}<br>{{ me.email }}</span>
+<span style="font-size:12px;color:#6B665C">To change your name or email, send a data correction request — it keeps your certificates accurate.</span>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Phone<input type="tel" value="{{ prof.phone }}" onChange="{{ setProfPhone }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Location<input value="{{ prof.location }}" onChange="{{ setProfLoc }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED"></label>
+<fieldset style="border:1px solid #E9DDC9;padding:12px;margin:0;display:flex;flex-wrap:wrap;gap:4px 18px"><legend style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126;padding:0 6px">Message me by</legend><sc-for list="{{ profConsent }}" as="c" hint-placeholder-count="3"><label style="display:flex;gap:8px;align-items:center;font-size:14px;min-height:44px"><input type="checkbox" checked="{{ c.on }}" onChange="{{ c.toggle }}" style="width:20px;height:20px;accent-color:#536B4E">{{ c.label }}</label></sc-for></fieldset>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ profErr }}</span>
+<button onClick="{{ saveProf }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:46px;padding:0 18px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Save changes</button>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ iHome }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Instructor dashboard" style="display:flex;flex-direction:column;gap:16px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,3vw + 14px,44px);color:#493126">Instructor · {{ first }}</h1>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px">
+<sc-for list="{{ iKpis }}" as="k" hint-placeholder-count="4"><button onClick="{{ k.go }}" style="all:unset;cursor:pointer;box-sizing:border-box;background:#FFFDF9;border:1px solid #E9DDC9;padding:16px;display:flex;flex-direction:column;gap:6px;min-height:96px"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ k.label }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:38px;line-height:1;color:#493126">{{ k.value }}</span></button></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">My classes</span>
+<sc-for list="{{ iCohorts }}" as="h" hint-placeholder-count="2"><div style="display:flex;flex-wrap:wrap;gap:4px 16px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:14px"><strong style="flex:1 1 240px">{{ h.course }}</strong><span>{{ h.name }}</span><span style="color:#536B4E">{{ h.count }}</span><span style="color:#6B665C">{{ h.next }}</span></div></sc-for>
+<sc-if value="{{ iNone }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">No cohorts are assigned to you yet.</span></sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ iAttendance }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Attendance register" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Attendance register</h1>
+<sc-if value="{{ noSessions }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:16px;font-size:14px;color:#6B665C">No classes are scheduled for your cohorts yet.</div></sc-if>
+<sc-if value="{{ hasSessions }}" hint-placeholder-val="{{ true }}"><select aria-label="Session" value="{{ sessId }}" onChange="{{ pickSess }}" style="padding:12px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:15px;min-height:48px;max-width:640px"><sc-for list="{{ sessOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select></sc-if>
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+<sc-if value="{{ sessUpcoming }}" hint-placeholder-val="{{ false }}"><button onClick="{{ remind }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 14px;display:inline-flex;align-items:center;background:#536B4E;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Send class reminder</button></sc-if>
+<sc-if value="{{ sessLive }}" hint-placeholder-val="{{ false }}"><button onClick="{{ openRoom }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Start online class</button>
+<input aria-label="Recording reference" value="{{ recRef }}" onChange="{{ setRecRef }}" placeholder="Recording link or file reference" style="flex:1 1 220px;padding:10px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:14px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;min-height:44px"><input type="checkbox" checked="{{ recAuth }}" onChange="{{ setRecAuth }}" style="width:18px;height:18px;accent-color:#536B4E">Authorised for students</label>
+<button onClick="{{ saveRec }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Save recording</button></sc-if>
+</div>
+<sc-if value="{{ canMakeup }}" hint-placeholder-val="{{ false }}"><div style="background:#F3E3C4;padding:12px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;color:#6B4A12"><span style="flex:1 1 240px">{{ makeupNote }}</span><input type="date" aria-label="Make-up date" value="{{ muDate }}" onChange="{{ setMuDate }}" style="padding:9px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:14px"><button onClick="{{ scheduleMu }}" style="all:unset;cursor:pointer;min-height:42px;padding:0 14px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">Schedule make-up</button></div></sc-if>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<sc-if value="{{ noRegister }}" hint-placeholder-val="{{ false }}"><span style="padding:18px;font-size:14px;color:#6B665C">No students in this class.</span></sc-if>
+<sc-for list="{{ register }}" as="r" hint-placeholder-count="3">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:8px 14px;padding:12px 16px;border-bottom:1px solid #E9DDC9;align-items:center">
+<div style="display:flex;flex-direction:column"><strong style="font-size:15px">{{ r.name }}</strong><span style="font-size:12px;color:#6B665C">{{ r.id }} · overall {{ r.pct }} {{ r.booked }}</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px"><sc-for list="{{ r.opts }}" as="o" hint-placeholder-count="4"><button onClick="{{ o.set }}" aria-pressed="{{ o.on }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 10px;display:inline-flex;align-items:center;font-size:12px;font-weight:600;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">{{ o.l }}</button></sc-for></div>
+<input aria-label="Absence reason" value="{{ r.reason }}" onBlur="{{ r.setReason }}" placeholder="Reason (absent / excused)" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px">
+<span style="font-size:12px;color:#6B665C">{{ r.hist }}</span>
+</div>
+</sc-for>
+</div>
+<span style="font-size:12px;color:#6B665C">Changes to a recorded status are kept as corrections in the attendance history.</span>
+</section>
+</sc-if>
+
+<sc-if value="{{ iGrading }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Grading" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Grading &amp; feedback</h1>
+<sc-if value="{{ noQueue }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;font-size:14px;color:#6B665C">Nothing waiting to be graded.</div></sc-if>
+<sc-for list="{{ queue }}" as="q" hint-placeholder-count="2">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:space-between"><strong style="font-size:15px">{{ q.student }} · {{ q.title }}</strong><span style="font-size:12px;color:#536B4E">{{ q.kind }} · {{ q.course }}</span></div>
+<span style="font-size:14px;line-height:1.6;background:#F8F4ED;padding:10px 12px">{{ q.text }} {{ q.file }}</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:8px;align-items:end">
+<sc-if value="{{ q.scored }}" hint-placeholder-val="{{ true }}"><label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126">Score %<input inputMode="numeric" value="{{ q.score }}" onChange="{{ q.setScore }}" style="font-size:15px;letter-spacing:0;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED"></label></sc-if>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126;grid-column:span 2">Feedback<input value="{{ q.fb }}" onChange="{{ q.setFb }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED"></label>
+<button onClick="{{ q.save }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">{{ q.saveLabel }}</button>
+</div>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ q.err }}</span>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ iQA }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Student questions" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Student questions</h1>
+<sc-if value="{{ noQs }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;font-size:14px;color:#6B665C">No questions yet.</div></sc-if>
+<sc-for list="{{ iQs }}" as="q" hint-placeholder-count="2"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:16px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#536B4E">{{ q.student }} · {{ q.lesson }}</span><span style="font-size:15px">{{ q.text }}</span><span style="font-size:14px;color:#2F4A2B">{{ q.answer }}</span>
+<sc-if value="{{ q.open }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-wrap:wrap;gap:8px"><input aria-label="Answer" value="{{ q.draft }}" onChange="{{ q.setDraft }}" placeholder="Your answer" style="flex:1 1 240px;padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><button onClick="{{ q.send }}" style="all:unset;cursor:pointer;min-height:42px;padding:0 14px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">Answer</button></div></sc-if></div></sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ iDiscuss }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Instructor course discussion" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Course discussion</h1>
+<span style="font-size:13px;color:#6B665C">Visible to everyone enrolled on the course and its instructors. Be kind; don’t share client details or other people’s photos.</span>
+<select aria-label="Course" value="{{ dCourse }}" onChange="{{ setDCourse }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:46px;max-width:520px"><sc-for list="{{ dCourseOpts }}" as="o" hint-placeholder-count="1"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px"><textarea aria-label="New post" rows="3" value="{{ dText }}" onChange="{{ setDText }}" placeholder="Start a discussion or share a tip…" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea><button onClick="{{ post }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Post</button></div>
+<sc-if value="{{ noPosts }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px;font-size:14px;color:#6B665C">No posts yet — start the conversation.</div></sc-if>
+<sc-for list="{{ posts }}" as="p" hint-placeholder-count="2"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline"><strong style="font-size:14px">{{ p.author }}</strong><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:{{ p.roleC }};font-weight:600">{{ p.role }}</span><span style="font-size:12px;color:#6B665C">{{ p.when }}</span><sc-if value="{{ p.canHide }}" hint-placeholder-val="{{ false }}"><button onClick="{{ p.hide }}" style="all:unset;cursor:pointer;margin-left:auto;min-height:32px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#9A3B2A">Hide</button></sc-if></div><span style="font-size:15px;line-height:1.6;white-space:pre-line">{{ p.text }}</span>
+<sc-for list="{{ p.replies }}" as="r" hint-placeholder-count="0"><div style="margin-left:16px;padding:8px 12px;border-left:2px solid #C6A15B;background:#F8F4ED;display:flex;flex-direction:column;gap:2px"><span style="font-size:12px"><strong>{{ r.author }}</strong> <span style="color:{{ r.roleC }}">{{ r.role }}</span> · <span style="color:#6B665C">{{ r.when }}</span></span><span style="font-size:14px;line-height:1.55">{{ r.text }}</span></div></sc-for>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-left:16px"><input aria-label="Reply" value="{{ p.draft }}" onChange="{{ p.setDraft }}" placeholder="Reply…" style="flex:1 1 220px;padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px"><button onClick="{{ p.reply }}" style="all:unset;cursor:pointer;min-height:42px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">Reply</button></div></div></sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ iProfile }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Instructor profile" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:18px;align-items:start">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">My public profile</span><span style="font-size:13px;color:#6B665C">Changes are reviewed by the Institute Director before they appear on the Instructors page. Only list qualifications you can evidence.</span>
+<input aria-label="Title" value="{{ ip.title }}" onChange="{{ setIp.title }}" placeholder="Title / speciality" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px">
+<textarea aria-label="Bio" rows="4" value="{{ ip.bio }}" onChange="{{ setIp.bio }}" placeholder="Short bio" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea>
+<textarea aria-label="Qualifications" rows="3" value="{{ ip.qualifications }}" onChange="{{ setIp.qualifications }}" placeholder="Qualifications (one per line, with awarding body and year)" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126">Photo<input type="file" accept="image/*" onChange="{{ setIpPhoto }}" style="font-size:13px;letter-spacing:0;text-transform:none;font-weight:400"><span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:400;color:#6B665C">{{ ipPhotoName }}</span></label>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ ipErr }}</span>
+<button onClick="{{ sendIp }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Submit for approval</button></div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Status</span><span style="font-size:14px;line-height:1.6">{{ ipStatus }}</span><span style="font-size:13px;color:#6B665C">Live title: {{ ipLiveTitle }}</span><span style="font-size:13px;line-height:1.6;color:#6B665C">{{ ipLiveBio }}</span></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ iPractical }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Practical assessments" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Practical assessments</h1>
+<span style="font-size:14px;line-height:1.6;max-width:760px">Record competency only for activities you observed. Items marked “supervised” cannot be recorded as competent without direct supervision.</span>
+<sc-for list="{{ pracRows }}" as="s" hint-placeholder-count="2">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px">
+<strong style="font-size:15px">{{ s.name }} <span style="font-weight:400;color:#6B665C">· {{ s.course }}</span></strong>
+<sc-for list="{{ s.items }}" as="it" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:8px;padding:12px 0;border-top:1px solid #E9DDC9">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:6px 12px;align-items:center;font-size:14px">
+<span>{{ it.label }} <span style="font-size:11px;color:#536B4E;text-transform:uppercase;letter-spacing:0.1em">{{ it.sup }}</span></span>
+<span style="font-size:12px;font-weight:600;color:{{ it.c }}">{{ it.state }}</span>
+<button onClick="{{ it.toggle }}" style="all:unset;cursor:pointer;justify-self:start;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:1px solid #493126;color:#493126">{{ it.btn }}</button>
+</div>
+<sc-if value="{{ it.open }}" hint-placeholder-val="{{ false }}">
+<div style="background:#F8F4ED;padding:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px">
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Assessment date<input type="date" value="{{ ef.date }}" onChange="{{ setEf.date }}" style="padding:9px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:14px"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Performance rating<select value="{{ ef.rating }}" onChange="{{ setEf.rating }}" style="padding:9px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:14px;min-height:40px"><option value="">Choose…</option><sc-for list="{{ ratings }}" as="r" hint-placeholder-count="4"><option value="{{ r }}">{{ r }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Outcome<select value="{{ ef.outcome }}" onChange="{{ setEf.outcome }}" style="padding:9px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:14px;min-height:40px"><option>Pending</option><option>Pass</option><option>Resit</option></select></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;min-height:44px"><input type="checkbox" checked="{{ ef.supervised }}" onChange="{{ setEf.supervised }}" style="width:18px;height:18px;accent-color:#536B4E">Performed under my direct supervision</label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126;grid-column:1/-1">Assessment criteria<input value="{{ ef.criteria }}" onChange="{{ setEf.criteria }}" placeholder="{{ it.criteriaPh }}" style="padding:9px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126;grid-column:1/-1">Feedback<textarea rows="2" value="{{ ef.feedback }}" onChange="{{ setEf.feedback }}" style="padding:9px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400;resize:vertical"></textarea></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126;grid-column:1/-1">Improvement recommendations<textarea rows="2" value="{{ ef.improve }}" onChange="{{ setEf.improve }}" style="padding:9px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400;resize:vertical"></textarea></label>
+<div style="grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center"><button onClick="{{ it.save }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">Sign off evaluation</button><span role="alert" style="font-size:13px;color:#9A3B2A">{{ pracErr }}</span></div>
+<div style="grid-column:1/-1;display:flex;flex-direction:column"><span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#536B4E">History</span><sc-for list="{{ it.hist }}" as="x" hint-placeholder-count="0"><span style="font-size:12px;padding:5px 0;border-top:1px solid #E9DDC9">{{ x }}</span></sc-for></div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ iStudents }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Instructor students and content" style="display:flex;flex-direction:column;gap:16px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Students &amp; content</h1>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<sc-for list="{{ iStudentRows }}" as="s" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px 14px;padding:12px 16px;border-bottom:1px solid #E9DDC9;font-size:14px;align-items:center"><strong>{{ s.name }}</strong><span>{{ s.course }}</span><span>Progress {{ s.pct }}</span><span>Attendance {{ s.att }}</span><span style="color:{{ s.c }};font-weight:600;font-size:12px">{{ s.state }}</span></div></sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Add a lesson</span>
+<select aria-label="Module" value="{{ nl.moduleId }}" onChange="{{ setNlModule }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:46px"><sc-for list="{{ moduleOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<input aria-label="Lesson title" value="{{ nl.title }}" onChange="{{ setNlTitle }}" placeholder="Lesson title" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px">
+<select aria-label="Lesson type" value="{{ nl.type }}" onChange="{{ setNlType }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:46px"><option value="text">Reading</option><option value="video">Video</option><option value="pdf">PDF / download</option><option value="practical">Practical demonstration</option></select>
+<textarea aria-label="Lesson content" rows="3" value="{{ nl.body }}" onChange="{{ setNlBody }}" placeholder="Lesson content or notes" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea>
+<button onClick="{{ addLesson }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Add lesson</button></div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px;grid-column:1/-1"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Create a quiz</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:8px"><select aria-label="Module" value="{{ qz.moduleId }}" onChange="{{ setQz.moduleId }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:44px"><sc-for list="{{ moduleOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select><input aria-label="Quiz title" value="{{ qz.title }}" onChange="{{ setQz.title }}" placeholder="Quiz title" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><input aria-label="Pass mark" inputMode="numeric" value="{{ qz.pass }}" onChange="{{ setQz.pass }}" placeholder="Pass %" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><input aria-label="Attempts" inputMode="numeric" value="{{ qz.attempts }}" onChange="{{ setQz.attempts }}" placeholder="Attempts allowed" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></div>
+<sc-for list="{{ qzQs }}" as="q" hint-placeholder-count="1"><div style="border:1px solid #E9DDC9;padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Question" value="{{ q.q }}" onChange="{{ q.setQ }}" placeholder="Question {{ q.n }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:6px"><sc-for list="{{ q.opts }}" as="o" hint-placeholder-count="4"><label style="display:flex;gap:6px;align-items:center"><input type="radio" name="{{ q.name }}" checked="{{ o.correct }}" onChange="{{ o.mark }}" aria-label="Correct answer" style="width:18px;height:18px;accent-color:#536B4E"><input value="{{ o.t }}" onChange="{{ o.set }}" placeholder="Answer {{ o.n }}" style="flex:1;min-width:0;padding:8px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:14px"></label></sc-for></div></div></sc-for>
+<div style="display:flex;flex-wrap:wrap;gap:8px"><button onClick="{{ addQ }}" style="all:unset;cursor:pointer;min-height:40px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#536B4E">+ Add question</button><button onClick="{{ saveQuiz }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Publish quiz</button><span style="font-size:12px;color:#6B665C;align-self:center">Select the radio beside the correct answer.</span></div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Assignment</span>
+<select aria-label="Course" value="{{ as2.courseId }}" onChange="{{ setAs2.courseId }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:46px"><sc-for list="{{ iCourseOpts }}" as="o" hint-placeholder-count="1"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<input aria-label="Title" value="{{ as2.title }}" onChange="{{ setAs2.title }}" placeholder="Title" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px">
+<textarea aria-label="Brief" rows="3" value="{{ as2.brief }}" onChange="{{ setAs2.brief }}" placeholder="Brief" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea>
+<input aria-label="Grading criteria" value="{{ as2.criteria }}" onChange="{{ setAs2.criteria }}" placeholder="Grading criteria" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input aria-label="Pass mark" inputMode="numeric" value="{{ as2.pass }}" onChange="{{ setAs2.pass }}" placeholder="Pass %" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px"><input aria-label="Due date" type="date" value="{{ as2.due }}" onChange="{{ setAs2.due }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px"></div>
+<button onClick="{{ saveAsg }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Save assignment</button></div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Post an announcement</span>
+<select aria-label="Course" value="{{ an.courseId }}" onChange="{{ setAnCourse }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:46px"><sc-for list="{{ iCourseOpts }}" as="o" hint-placeholder-count="1"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<input aria-label="Title" value="{{ an.title }}" onChange="{{ setAnTitle }}" placeholder="Title" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px">
+<textarea aria-label="Message" rows="3" value="{{ an.body }}" onChange="{{ setAnBody }}" placeholder="Message to your students" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea>
+<button onClick="{{ postAnn }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Post</button></div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Performance report</span>
+<select aria-label="Student" value="{{ rp.studentId }}" onChange="{{ setRpStudent }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;min-height:46px"><sc-for list="{{ iStudentOpts }}" as="o" hint-placeholder-count="2"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<textarea aria-label="Report" rows="3" value="{{ rp.body }}" onChange="{{ setRpBody }}" placeholder="Strengths, areas to improve, recommendation" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;resize:vertical"></textarea>
+<button onClick="{{ sendReport }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Submit to Academic Coordinator</button></div>
+</div>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ formErr }}</span>
+</section>
+</sc-if>
+
+</main>
+</sc-if>
+
+<sc-if value="{{ rcptOpen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="Receipt" style="position:fixed;inset:0;z-index:50;background:rgba(36,34,29,0.7);overflow:auto;padding:16px;display:flex">
+<div style="margin:auto;display:flex;flex-direction:column;gap:12px;width:100%;max-width:520px">
+<div id="sot-cert" style="background:#FFFDF9;padding:28px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Payment receipt</span>
+<span style="font-size:12px;color:#6B665C">Sense of Touch Institute of Beauty &amp; Wellness · Community 25 Estate Junction, Tema</span>
+<sc-for list="{{ rcpt.rows }}" as="r" hint-placeholder-count="7"><div style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:10px;padding:7px 0;border-top:1px solid #E9DDC9"><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ r.l }}</span><span>{{ r.v }}</span></div></sc-for>
+</div>
+<div style="display:flex;gap:10px;justify-content:flex-end"><button onClick="{{ printCert }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;background:#C6A15B;color:#24221D;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Download PDF</button><button onClick="{{ closeRcpt }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;border:1px solid #F8F4ED;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Close</button></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ certOpen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="Certificate" style="position:fixed;inset:0;z-index:50;background:rgba(36,34,29,0.7);overflow:auto;padding:16px;display:flex">
+<div style="margin:auto;display:flex;flex-direction:column;gap:12px;width:100%;max-width:960px">
+<div id="sot-cert" style="background:#FFFDF9;border:1px solid #C6A15B;outline:1px solid #C6A15B;outline-offset:-14px;aspect-ratio:1.414/1;padding:clamp(28px,6%,64px);display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;gap:10px">
+<img src="assets/logo-transparent.png" alt="Sense of Touch" style="width:clamp(70px,11%,110px)">
+<span style="font-size:clamp(9px,1.2vw,12px);letter-spacing:0.32em;text-transform:uppercase;color:#536B4E;font-weight:600">{{ cert.org }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4.4vw,48px);color:#493126;line-height:1">{{ cert.kind }}</span>
+<span style="font-size:clamp(11px,1.3vw,14px)">This certifies that</span>
+<span style="font-family:Allura,cursive;font-size:clamp(38px,6.5vw,72px);color:#493126;line-height:1">{{ cert.name }}</span>
+<span style="font-size:clamp(11px,1.4vw,15px);max-width:640px;line-height:1.5">has completed <strong>{{ cert.course }}</strong> and met its assessed requirements on {{ cert.completed }}.</span>
+<div style="display:flex;width:100%;justify-content:space-between;align-items:flex-end;gap:12px">
+<div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-size:clamp(9px,1.1vw,12px);text-align:left"><span style="font-family:Allura,cursive;font-size:clamp(20px,3vw,30px);color:#493126">{{ cert.sig }}</span><span style="border-top:1px solid #493126;padding-top:4px">{{ cert.signatory }}</span></div>
+<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:clamp(8px,1vw,11px);text-align:right"><sc-if value="{{ hasQr }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ cert.qr }}" alt="QR code linking to certificate verification" style="width:clamp(56px,9vw,96px);height:clamp(56px,9vw,96px)"></sc-if><span>{{ cert.id }}</span><span>Verify: {{ cert.url }}</span></div>
+</div>
+<span style="font-size:clamp(8px,0.95vw,10.5px);color:#6B665C;max-width:720px;line-height:1.5">{{ cert.disclaimer }}</span>
+</div>
+<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap"><button onClick="{{ printCert }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;background:#C6A15B;color:#24221D;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Download PDF</button><button onClick="{{ closeCert }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;border:1px solid #F8F4ED;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Close</button></div>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TYPE = { text: 'Reading', video: 'Video', pdf: 'PDF', quiz: 'Quiz', practical: 'Practical demo' };
+const ATT_C = { Present: ['#DCE5D6', '#2F4A2B'], Late: ['#F3E3C4', '#6B4A12'], Absent: ['#F6E7E1', '#6B2A1E'], Excused: ['#E9DDC9', '#493126'], 'Not recorded': ['#EEE9E1', '#6B665C'], Upcoming: ['#F8F4ED', '#493126'] };
+const fmt = s => s ? new Date(s + 'T00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }) : '—';
+const fmtY = s => s ? new Date(String(s).slice(0, 10) + 'T00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '—';
+class Component extends DCLogic {
+  state = { dCourse: '', dText: '', dDrafts: {}, rf: { paymentId: '', amount: '', reason: '' }, rfErr: '', dr: { type: 'Correction', details: '' }, drErr: '', ip: null, ipPhoto: null, ipErr: '', muDate: '', evalOpen: '', ef: { date: '', rating: '', outcome: 'Pending', supervised: true, criteria: '', feedback: '', improve: '' }, qz: { moduleId: '', title: '', pass: '70', attempts: '3', qs: [{ q: '', o: ['', '', '', ''], a: null }] }, as2: null, sess: null, tab: 'home', em: '', code: '', loginErr: '', courseId: '', lessonId: '', asg: false, answers: {}, quizRes: null, lowData: false, asgText: '', asgFile: null, asgErr: '', pay: { method: 'MTN Mobile Money', amount: '', ref: '' }, payErr: '', sup: { type: 'Course content', body: '' }, supErr: '', prof: null, profErr: '', sessId: '', grades: {}, pracErr: '', nl: { moduleId: '', title: '', type: 'text', body: '' }, an: { courseId: '', title: '', body: '' }, rp: { studentId: '', body: '' }, formErr: '', certId: '', rcptId: '', qText: '', qDrafts: {}, recRef: '', recAuth: false, hb: {}, pol: {}, flash: '', tick: 0 };
+  componentDidMount() { this.off = window.SOT && window.SOT.on(() => this.setState(s => ({ tick: s.tick + 1 }))); if (!window.ACAD) return; let sess = window.ACAD.portal.current();
+    const m = window.SOTAuth && window.SOTAuth.current(); if (!sess && m && m.email) { const s = window.ACAD.list('students').find(x => x.email === m.email); if (s) { sess = { type: 'student', id: s.id, name: s.name }; sessionStorage.setItem('acad-portal-session', JSON.stringify(sess)); } }
+    if (!sess && m && m.email && window.SOTAuth.roleKey() === 'instructor') { const i = window.ACAD.list('instructors').find(x => x.email === m.email && x.active); if (i) { sess = { type: 'instructor', id: i.id, name: i.name }; sessionStorage.setItem('acad-portal-session', JSON.stringify(sess)); } }
+    this.setState({ sess }); }
+  componentWillUnmount() { this.off && this.off(); }
+  flash(t) { this.setState({ flash: t }); clearTimeout(this.ft); this.ft = setTimeout(() => this.setState({ flash: '' }), 4000); }
+  renderVals() {
+    const A = window.ACAD; if (!A) return { signedOut: true };
+    const st = this.state, sess = st.sess;
+    const doLogin = (em, code) => { const r = A.portal.login(em ?? st.em, code ?? st.code); this.setState(r.error ? { loginErr: r.error } : { sess: r.session, loginErr: '', tab: 'home', courseId: '', lessonId: '' }); };
+    const base = { signedIn: !!sess, signedOut: !sess, em: st.em, code: st.code, setEm: e => this.setState({ em: e.target.value }), setCode: e => this.setState({ code: e.target.value }), codeKey: e => { if (e.key === 'Enter') doLogin(); }, login: () => doLogin(), loginErr: !!st.loginErr, loginErrText: st.loginErr,
+      hasSample: A.hasSample(), demoAccounts: [...A.list('students').filter(s => s.sample).map(s => ({ label: s.name, detail: s.email + ' · ' + s.id, use: () => doLogin(s.email, s.id) })), ...A.list('instructors').map(i => ({ label: i.name + ' (instructor)', detail: i.email + ' · ' + i.id, use: () => doLogin(i.email, i.id) }))],
+      logout: () => { A.portal.logout(); this.setState({ sess: null, em: '', code: '' }); }, flash: !!st.flash, flashText: st.flash, clearFlash: () => this.setState({ flash: '' }), certOpen: false };
+    if (!sess) return base;
+    const first = sess.name.split(' ')[0];
+    const tabDefs = sess.type === 'student' ? [['home', 'Home'], ['learn', 'My courses'], ['library', 'Library'], ['schedule', 'Schedule'], ['results', 'Results & certificates'], ['pay', 'Payments'], ['docs', 'My documents'], ['discuss', 'Discussion'], ['support', 'Support & profile']] : [['home', 'Overview'], ['attendance', 'Classes & attendance'], ['grading', 'Grading'], ['qa', 'Questions'], ['discuss', 'Discussion'], ['profile', 'My profile'], ['practical', 'Practicals'], ['students', 'Students & content']];
+    const out = { ...base, first, whoLabel: sess.name + ' · ' + (sess.type === 'student' ? sess.id : 'Instructor') };
+    const tab = st.tab;
+    // ── certificate modal (students only see their own)
+    const certRec = st.certId ? A.get('certificates', st.certId) : null;
+    if (certRec && (sess.type !== 'student' || certRec.studentId === sess.id)) {
+      const url = location.href.replace(/Institute%20Portal\.dc\.html.*$|Institute Portal\.dc\.html.*$/, 'Institute.dc.html') + '#verify/' + certRec.id;
+      Object.assign(out, { certOpen: true, hasQr: true, cert: { ...certRec, completed: fmtY(certRec.completed), sig: certRec.signatory.split(',')[0], qr: 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=' + encodeURIComponent(url), url: 'Institute · Certificate verification', disclaimer: (certRec.accreditation || 'This is an internal certificate of completion issued by the Sense of Touch Institute of Beauty &amp; Wellness. It is not an accredited or nationally recognised qualification.') + (certRec.status !== 'Valid' ? ' STATUS: ' + certRec.status.toUpperCase() : '') },
+        printCert: () => window.print(), closeCert: () => this.setState({ certId: '' }) });
+    }
+    const rc = st.rcptId ? A.get('payments', st.rcptId) : null;
+    if (rc && rc.status === 'Verified' && (sess.type !== 'student' || rc.studentId === sess.id)) Object.assign(out, { rcptOpen: true, printCert: () => window.print(), closeRcpt: () => this.setState({ rcptId: '' }), rcpt: { rows: [['Receipt no.', 'R-' + rc.id], ['Received from', rc.payer || sess.name], ['Student ID', rc.studentId], ['Course', (A.course(rc.courseId) || {}).title], ['For', rc.kind], ['Amount', A.money(rc.amount)], ['Method', rc.method], ['Provider ref', rc.providerRef], ['Verified', fmtY(rc.verifiedAt || rc.updated || rc.created) + (rc.verifiedBy ? ' · ' + rc.verifiedBy : '')]].map(([l, v]) => ({ l, v })) } });
+    if (sess.type === 'student') {
+      const me = A.get('students', sess.id); if (!me) { A.portal.logout(); return { ...base, signedIn: false, signedOut: true }; }
+      const ens = A.enrolments(me.id).filter(e => e.status !== 'Withdrawn');
+      const pendingGrades = 0;
+      out.tabs = tabDefs.map(([k, l]) => ({ label: l, badge: '', go: () => this.setState({ tab: k }), on: tab === k ? 'page' : 'false', fg: tab === k ? '#F8F4ED' : '#E9DDC9', line: tab === k ? '#C6A15B' : 'transparent' }));
+      out.sHome = tab === 'home'; out.sLearn = tab === 'learn'; out.sLibrary = tab === 'library'; out.sSchedule = tab === 'schedule'; out.sResults = tab === 'results'; out.sPay = tab === 'pay'; out.sDiscuss = tab === 'discuss'; out.sDocs = tab === 'docs'; out.sSupport = tab === 'support';
+      const openCourse = (cid, lid) => { this.setState({ tab: 'learn', courseId: cid, lessonId: lid || '', asg: false, answers: {}, quizRes: null }); if (lid) A.setResume(me.id, cid, lid); };
+      const fmtL = s => s ? new Date(String(s).slice(0, 10) + 'T00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+      const docList = [];
+      ens.forEach(e => { const lt = e.appId ? A.admissionLetter(e.appId) : null; if (lt) docList.push({ type: 'Admission', title: 'Admission letter · ' + lt.course, meta: lt.date + ' · Ref ' + lt.ref, sort: '1', doc: { title: 'Offer of admission', date: lt.date, paras: ['Dear ' + lt.name + ',', 'We are pleased to confirm your admission to ' + lt.course + ' (' + lt.code + ') — ' + lt.cohort + ', starting ' + lt.start + ', delivered ' + lt.mode + '.', 'On completing every course requirement you will receive a ' + lt.certKind + '. This is an internal certificate of completion, not an accredited or nationally recognised qualification.'], rows: [['Student ID', me.id], ['Tuition', A.money(lt.fee)], ['Registration', A.money(lt.reg)], ...lt.schedule.map(r => [r.label, A.money(r.amount) + ' · ' + r.due])], sig: String(lt.signatory).split(',')[0] } });
+        const c = A.course(e.courseId), h = A.cohort(e.cohortId); docList.push({ type: 'Timetable', title: 'Class timetable · ' + c.title, meta: h ? h.name : '', sort: '2', doc: { title: 'Class timetable — ' + c.title, date: fmtL(A.today()), paras: [h ? h.name + ' · ' + h.venue : ''], rows: A.sessionsOf(e.cohortId).map(s => [fmt(s.date) + ' ' + s.start, s.title + ' · ' + s.kind]), sig: '' } });
+        const ev = A.list('practicals').filter(p => p.studentId === me.id && p.courseId === e.courseId && p.outcome); if (ev.length) docList.push({ type: 'Practical', title: 'Practical evaluation record · ' + c.code, meta: ev.length + ' evaluations', sort: '4', doc: { title: 'Practical evaluation record — ' + c.title, date: fmtL(A.today()), paras: ['Practical competency is recorded separately from online learning and knowledge assessment.'], rows: ev.map(p => [fmt(p.date), p.label + ' — ' + p.outcome + (p.rating ? ' · ' + p.rating : '') + ' · ' + p.by + (p.feedback ? ' · ' + p.feedback : '')]), sig: '' } }); });
+      A.list('payments').filter(p => p.studentId === me.id && p.status === 'Verified').forEach(p => docList.push({ type: 'Receipt', title: 'Receipt · ' + A.money(p.amount) + ' ' + p.kind, meta: fmtL(p.verifiedAt || p.created), sort: '3', receipt: p.id }));
+      A.list('certificates').filter(x => x.studentId === me.id).forEach(x => docList.push({ type: 'Certificate', title: x.courseTitle, meta: x.id + ' · ' + x.status, sort: '0', cert: x.id }));
+      docList.push({ type: 'Handbook', title: 'Student handbook & policies', meta: 'Draft — to be approved by the Institute Director', sort: '5', doc: { title: 'Student handbook', date: fmtL(A.today()), paras: A.HANDBOOK.map(b => b.t + ' — ' + b.b), rows: [], sig: '' } });
+      docList.sort((a, b) => a.sort.localeCompare(b.sort));
+      out.docs = docList.map(d => ({ type: d.type, title: d.title, meta: d.meta, open: () => d.cert ? this.setState({ certId: d.cert }) : d.receipt ? this.setState({ rcptId: d.receipt }) : this.setState({ docOpen: d.doc }) })); out.noDocs = !docList.length;
+      if (st.docOpen) Object.assign(out, { letterOpen: true, dl: st.docOpen, printCert: () => window.print(), closeDoc: () => this.setState({ docOpen: null }) });
+      out.handbook = A.HANDBOOK; out.meName = me.name; out.meId = me.id; out.initials = me.name.split(' ').map(x => x[0]).slice(0, 2).join('').toUpperCase();
+      out.onboarding = ens.filter(e => e.status === 'Active' && !(e.onboarded && e.onboarded.handbook && e.onboarded.policies)).slice(0, 1).map(e => { const hb = !!st.hb[e.id], pol = !!st.pol[e.id]; const ins0 = A.instructor((A.cohort(e.cohortId) || {}).instructorId || A.course(e.courseId).instructorId) || {}; const ori = A.list('events').filter(x => x.type === 'Orientation' && x.status === 'Published' && x.date >= A.today()).map(x => x.title + ' · ' + fmt(x.date) + ' ' + (x.time || '')); const firstS = A.sessionsOf(e.cohortId).find(s => s.date >= A.today());
+        return { insName: ins0.name || 'To be assigned', insTitle: ins0.title || '', orient: ori.length ? ori : [firstS ? 'First class: ' + firstS.title + ' · ' + fmt(firstS.date) + ' ' + firstS.start : 'Your timetable appears in Schedule', 'Bring comfortable clothing and tie back long hair for practical sessions.'], course: A.course(e.courseId).title, sid: me.id, hb, pol, op: hb && pol ? 1 : 0.45,
+        setHb: ev => this.setState(s => ({ hb: { ...s.hb, [e.id]: ev.target.checked } })), setPol: ev => this.setState(s => ({ pol: { ...s.pol, [e.id]: ev.target.checked } })), timetable: () => this.setState({ tab: 'schedule' }),
+        finish: () => { if (!(hb && pol)) return this.flash('Please tick both boxes to finish onboarding.'); A.onboard(e.id, { handbook: true, policies: true }); A.audit(me.name, 'Onboarding completed', e.id); this.flash('You’re all set — your course is open.'); } }; });
+      out.library = ens.map(e => { const c = A.course(e.courseId); const items = A.lessonsOf(c).filter(l => ['video', 'pdf', 'text', 'practical'].includes(l.type)).map(l => ({ type: TYPE[l.type], title: l.title, meta: l.type === 'pdf' ? 'Download (permitted)' : l.type === 'video' ? 'Stream · low-data option' : l.moduleTitle, open: () => openCourse(c.id, l.id) }));
+        const recs = A.sessionsOf(e.cohortId).filter(s => s.recording && s.recording.authorised).map(s => ({ type: 'Recording', title: s.title, meta: fmt(s.date), open: () => this.flash('Prototype: plays “' + s.recording.ref + '” from access-controlled video hosting.') }));
+        return { course: c.title, items: [...recs, ...items] }; });
+      out.myCourses = ens.map(e => { const c = A.course(e.courseId), p = A.progress(me.id, c.id), h = A.cohort(e.cohortId); const ls = A.lessonsOf(c); const nextL = e.lastLesson || (ls.find(l => !p.done.has(l.id) && l.type !== 'quiz') || ls[0]).id;
+        return { dash: (169.6 * (1 - p.pct / 100)).toFixed(1), code: c.code, title: c.title, status: e.status, cohort: h ? h.name : '', pct: p.pct, pctW: p.pct + '%', detail: `${p.lessonsDone}/${p.lessonsTotal} lessons · ${p.quizzesPassed}/${p.quizzesTotal} quizzes passed · assignment ${p.asgDone ? 'submitted' : 'not submitted'}`, resume: () => openCourse(c.id, nextL), resumeLabel: e.lastLesson ? 'Resume where you stopped' : p.finished ? 'Continue' : 'Start learning' }; });
+      const mySess = ens.flatMap(e => A.sessionsOf(e.cohortId).map(s => ({ ...s, courseId: e.courseId })));
+      const upcoming = mySess.filter(s => s.date >= A.today()).sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
+      out.nextSessions = upcoming.slice(0, 3).map(s => ({ date: fmt(s.date), time: s.start, title: s.title, kind: s.kind })); out.noNext = !upcoming.length;
+      const anns = A.list('announcements').filter(a => !a.courseId || ens.some(e => e.courseId === a.courseId));
+      out.anns = anns.slice(0, 4).map(a => ({ title: a.title, body: a.body, meta: (a.by || 'Institute') + ' · ' + fmt(String(a.created).slice(0, 10)) })); out.noAnn = !anns.length;
+      // learning
+      const cid = st.courseId || (ens[0] && ens[0].courseId); const c = cid ? A.course(cid) : null;
+      if (c) {
+        const p = A.progress(me.id, c.id), ls = A.lessonsOf(c), active = ens.find(e => e.courseId === c.id);
+        const acc = A.access(active), needsOnb = active && active.status === 'Active' && !(active.onboarded && active.onboarded.handbook && active.onboarded.policies);
+        out.gated = !acc.ok || needsOnb; out.gateMsg = !acc.ok ? acc.msg : 'Complete your onboarding on the Home tab to open your lessons.';
+        out.courseId = c.id; out.courseOpts = ens.map(e => ({ v: e.courseId, l: A.course(e.courseId).title }));
+        out.pickCourse = e => this.setState({ courseId: e.target.value, lessonId: '', asg: false });
+        out.lc = { summary: c.summary, asgTitle: c.assignment.title, asgBrief: c.assignment.brief,
+          modules: c.modules.map(m => ({ title: m.title, lessons: m.lessons.map(l => { const done = l.type === 'quiz' ? A.bestQuiz(me.id, c.id, l.id) >= (l.pass || 70) : p.done.has(l.id); const cur = st.lessonId === l.id; return { title: l.title, type: TYPE[l.type], tick: done ? '✓' : '', dot: done ? '#536B4E' : 'transparent', ring: done ? '#536B4E' : '#C6A15B', bg: cur ? '#F3EEE6' : 'transparent', open: () => openCourse(c.id, l.id) }; }) })) };
+        const asgSubs = A.list('submissions').filter(s => s.studentId === me.id && s.courseId === c.id && s.kind === 'assignment');
+        out.asgBg = st.asg ? '#F3EEE6' : 'transparent'; out.asgDot = asgSubs.length ? '#536B4E' : 'transparent';
+        out.openAssignment = () => this.setState({ asg: true, lessonId: '' });
+        const l = out.gated ? null : ls.find(x => x.id === st.lessonId);
+        out.noLesson = !l && !st.asg && !out.gated; out.showLesson = !!l; out.showAsg = st.asg && !out.gated;
+        out.qText = st.qText; out.setQText = e => this.setState({ qText: e.target.value });
+        out.myQs = l ? A.list('questions').filter(q => q.studentId === me.id && q.lessonId === l.id).map(q => ({ text: q.text, answer: q.answer ? 'Instructor: ' + q.answer : 'Awaiting an answer', c: q.answer ? '#2F4A2B' : '#6B665C' })) : [];
+        out.askQ = () => { if (!l || st.qText.trim().length < 5) return; A.add('questions', { id: 'QST-' + A.rnd(5), studentId: me.id, courseId: c.id, lessonId: l.id, lessonTitle: l.title, text: st.qText.trim(), answer: '' }); this.setState({ qText: '' }); this.flash('Question sent to your instructor.'); };
+        out.lowData = st.lowData; out.toggleLowData = e => this.setState({ lowData: e.target.checked });
+        if (l) {
+          const idx = ls.indexOf(l), nxt = ls[idx + 1];
+          const prev = A.list('submissions').filter(s => s.studentId === me.id && s.courseId === c.id && s.itemId === l.id && s.kind === 'quiz');
+          const best = A.bestQuiz(me.id, c.id, l.id), passed = best >= (l.pass || 70), left = (l.attempts || 3) - prev.length;
+          const res = st.quizRes, locked = !!res;
+          out.ls = { title: l.title, module: l.moduleTitle, type: TYPE[l.type], isVideo: l.type === 'video', isPdf: l.type === 'pdf', isPractical: l.type === 'practical', isQuiz: l.type === 'quiz', videoLabel: st.lowData ? 'Audio + transcript (low data)' : 'Video lesson',
+            body: l.body || (l.type === 'quiz' ? 'Answer every question. Your best score counts towards your knowledge assessment.' : 'Lesson content is written and uploaded by your instructor and appears here.'),
+            done: l.type !== 'quiz' && p.done.has(l.id), canComplete: l.type !== 'quiz' && !p.done.has(l.id) && !!active && active.status === 'Active', hasNext: !!nxt,
+            pass: l.pass, attemptsLabel: passed ? `Passed · best score ${best}%` : `${left} of ${l.attempts} attempts left` + (best >= 0 ? ` · best ${best}%` : ''),
+            questions: (l.questions || []).map((q, i) => ({ n: i + 1, q: q.q, name: l.id + '-q' + i, locked, opts: q.o.map((t, j) => ({ t, on: st.answers[i] === j, pick: () => this.setState(s => ({ answers: { ...s.answers, [i]: j } })), bg: locked && j === q.a ? '#DCE5D6' : locked && st.answers[i] === j ? '#F6E7E1' : 'transparent' })) })),
+            canSubmit: l.type === 'quiz' && !locked && left > 0 && !passed, canRetry: l.type === 'quiz' && locked && res && !res.passed && res.attemptsLeft > 0,
+            result: res ? (res.error ? res.error : `You scored ${res.score}% — ${res.passed ? 'passed.' : 'not yet passed.'}`) : '', resultC: res && res.passed ? '#2F4A2B' : '#9A3B2A' };
+          out.completeLesson = () => { const r = A.completeLesson(me.id, c.id, l.id); if (r.error) this.flash(r.error); };
+          out.nextLesson = () => nxt && openCourse(c.id, nxt.id);
+          out.submitQuiz = () => { const r = A.submitQuiz(me.id, c.id, l.id, st.answers); this.setState({ quizRes: r.error ? { error: r.error } : r }); };
+          out.retryQuiz = () => this.setState({ answers: {}, quizRes: null });
+        }
+        out.asgSubs = asgSubs.map(s => ({ status: s.status, score: s.score != null ? s.score + '%' : 'Awaiting grading', feedback: s.feedback || '', when: 'Submitted ' + fmt(String(s.created).slice(0, 10)) }));
+        out.asgText = st.asgText; out.asgErr = st.asgErr; out.setAsgText = e => this.setState({ asgText: e.target.value }); out.setAsgFile = e => { const f = e.target.files[0]; this.setState({ asgFile: f ? { name: f.name, size: f.size } : null }); };
+        out.submitAsg = () => { const r = A.submitWork(me.id, c.id, 'assignment', 'asg', st.asgText, st.asgFile); if (r.error) this.setState({ asgErr: r.error }); else { this.setState({ asgText: '', asgFile: null, asgErr: '' }); this.flash('Assignment submitted. Your instructor will grade it.'); } };
+      } else { out.lc = { modules: [] }; out.courseOpts = []; out.noLesson = true; }
+      // schedule
+      const att = A.list('attendance').filter(a => a.studentId === me.id);
+      out.schedule = ens.filter(e => e.cohortId).map(e => { const c = A.course(e.courseId), p = A.progress(me.id, c.id), pct = A.attendancePct(me.id, e.cohortId);
+        return { course: c.title, att: pct == null ? '—' : pct + '%', req: c.req.attendance ? c.req.attendance + '%' : 'n/a', eligibility: c.theoryFirst ? (p.theoryDone ? '✓ Theory complete — eligible for practical sessions' : 'Complete your online theory and knowledge checks to become eligible for practical assessment') : '',
+          sessions: A.sessionsOf(e.cohortId).map(s => { const r = att.find(a => a.sessionId === s.id), past = s.date < A.today(), status = r ? r.status : past ? 'Not recorded' : 'Upcoming'; const [sBg, sFg] = ATT_C[status];
+            const prac = /Practical|Assessment/.test(s.kind) && c.practical, isB = A.booked(me.id, s.id), pe = A.practicalEligible(me.id, c.id);
+            return { date: fmt(s.date), time: s.start + '–' + s.end, kind: s.kind, title: s.title, status, sBg, sFg, canBook: prac && !past && !isB && pe.ok && e.status === 'Active', isBooked: isB && !past, cancel: () => A.cancelBooking(me.id, s.id), book: () => { const r = A.bookPractical(me.id, s.id); this.flash(r.error || 'Practical place booked.'); }, bookNote: prac && !past && !pe.ok ? pe.msg : '', hasRec: !!(s.recording && s.recording.authorised), watch: () => this.flash('Prototype: plays “' + s.recording.ref + '” from access-controlled video hosting.'), canJoin: s.kind === 'Live online' && s.date >= A.today() && e.status === 'Active', join: () => this.flash('Prototype: this opens the private Zoom / Google Meet room once the classroom provider is connected. The link is never shown publicly.') }; }) }; });
+      // results
+      out.results = ens.map(e => { const c = A.course(e.courseId), el = A.eligibility(me.id, c.id), certs = A.list('certificates').filter(x => x.studentId === me.id && x.courseId === c.id);
+        const subs = A.list('submissions').filter(s => s.studentId === me.id && s.courseId === c.id);
+        const grades = [...A.lessonsOf(c).filter(l => l.type === 'quiz').map(l => { const b = A.bestQuiz(me.id, c.id, l.id); return { title: l.title, score: b >= 0 ? b + '%' : '—', feedback: b >= 0 ? (b >= l.pass ? 'Passed' : 'Below pass mark') : 'Not attempted' }; }), ...subs.filter(s => s.kind !== 'quiz').map(s => ({ title: s.itemTitle + (s.kind === 'video' ? ' (video)' : ''), score: s.score != null ? s.score + '%' : s.status === 'Graded' ? 'Reviewed' : 'Awaiting', feedback: s.feedback || '' }))];
+        const ps = c.practical ? A.practicalState(me.id, c.id) : [];
+        return { course: c.title, journey: A.journey(me.id, c.id).map((j, i) => ({ n: i + 1, label: j.label, bar: j.ok ? '#536B4E' : '#E9DDC9', fg: j.ok ? '#2F4A2B' : '#6B665C' })), checks: el.checks.map(x => ({ label: x.label, detail: x.detail, mark: x.ok ? '✓' : '', bg: x.ok ? '#536B4E' : '#E9DDC9' })),
+          state: e.status === 'Completed' ? 'Course completed' + (certs.length ? '' : ' — certificate being prepared') : el.eligible ? 'All requirements met — awaiting confirmation by the Institute' : 'In progress', stateC: el.eligible || e.status === 'Completed' ? '#2F4A2B' : '#6B665C',
+          grades, practicals: ps.map(x => ({ label: x.label, state: x.ok ? 'Competent' : x.rec ? x.rec.result : x.supervised ? 'Not yet assessed (in person)' : 'Not yet assessed', c: x.ok ? '#2F4A2B' : '#6B665C' })), noPractical: !c.practical,
+          certs: certs.map(x => ({ id: x.id, status: x.status, view: () => this.setState({ certId: x.id }) })) }; });
+      // payments
+      out.pay = st.pay; out.payErr = st.payErr; out.payMethods = A.PAY_METHODS;
+      out.setPayMethod = e => this.setState({ pay: { ...st.pay, method: e.target.value } }); out.setPayAmount = e => this.setState({ pay: { ...st.pay, amount: e.target.value } }); out.setPayRef = e => this.setState({ pay: { ...st.pay, ref: e.target.value } });
+      out.accounts = ens.map(e => { const c = A.course(e.courseId), pr = A.priceOf(c.id, e.cohortId), bal = A.balance(me.id, c.id, e.cohortId), pays = A.list('payments').filter(p => p.studentId === me.id && p.courseId === c.id);
+        return { fx: A.fxLine(bal), schedule: A.schedule(c.id, e.cohortId).map(r => ({ ...r, amount: A.money(r.amount) })), course: c.title, total: A.money(pr.total), paid: A.money(pays.filter(p => p.status === 'Verified').reduce((n, p) => n + p.amount, 0)), balance: bal == null ? 'No fee set' : A.money(bal), balC: bal ? '#9A3B2A' : '#2F4A2B', owes: !!bal,
+          pays: pays.map(p => ({ amount: A.money(p.amount), kind: p.kind, method: p.method, ref: p.providerRef, status: p.status, verified: p.status === 'Verified', receipt: () => this.setState({ rcptId: p.id }), c: p.status === 'Verified' ? '#2F4A2B' : p.status === 'Failed' ? '#9A3B2A' : '#6B4A12' })),
+          pay: () => { const r = A.notifyPayment({ studentId: me.id, courseId: c.id, cohortId: e.cohortId, payer: me.name, kind: 'Installment', amount: st.pay.amount, method: st.pay.method, providerRef: st.pay.ref }); if (r.error) this.setState({ payErr: r.error }); else { this.setState({ payErr: '', pay: { ...st.pay, amount: '', ref: '' } }); this.flash('Payment submitted — pending verification by finance.'); } } }; });
+      // support + profile
+      out.sup = st.sup; out.supErr = st.supErr; out.supTypes = ['Course content', 'Technical problem', 'Payments', 'Refund request', 'Schedule / absence', 'Data correction request', 'Other'];
+      out.setSupType = e => this.setState({ sup: { ...st.sup, type: e.target.value } }); out.setSupBody = e => this.setState({ sup: { ...st.sup, body: e.target.value } });
+      out.sendSup = () => { if (st.sup.body.trim().length < 5) return this.setState({ supErr: 'Tell us a little more.' }); A.add('support', { id: 'SUP-' + A.rnd(5), studentId: me.id, type: st.sup.type, subject: st.sup.type, body: st.sup.body.trim(), status: 'Open' }); A.internal('Support request · ' + me.name + ' · ' + st.sup.type, 'Student Support Officer'); this.setState({ sup: { ...st.sup, body: '' }, supErr: '' }); this.flash('Request sent to Student Support.'); };
+      Object.assign(out, this.discussVals(A, sess, ens.map(e => e.courseId), false, me.id));
+      const myPays = A.list('payments').filter(p => p.studentId === me.id && p.status === 'Verified' && !/Discount/.test(p.kind));
+      out.rf = st.rf; out.rfErr = st.rfErr; const setRf = {}; ['paymentId', 'amount', 'reason'].forEach(k => setRf[k] = e => this.setState({ rf: { ...st.rf, [k]: e.target.value } })); out.setRf = setRf;
+      out.rfPays = myPays.map(p => ({ v: p.id, l: A.money(p.amount) + ' · ' + p.kind + ' · ' + (A.course(p.courseId) || {}).code }));
+      out.sendRf = () => { const p = A.get('payments', st.rf.paymentId); const r = A.requestRefund(me.id, { ...st.rf, courseId: p ? p.courseId : '' }); if (r.error) return this.setState({ rfErr: r.error }); this.setState({ rf: { paymentId: '', amount: '', reason: '' }, rfErr: '' }); this.flash('Refund request submitted.'); };
+      const RS = ['Submitted', 'Under review', 'Approved', 'Refunded'];
+      out.myRefunds = A.list('refund-requests').filter(r => r.studentId === me.id).map(r => { const idx = r.status === 'Declined' ? -1 : RS.indexOf(r.status); const last = r.history[r.history.length - 1] || {}; return { id: r.id, amount: A.money(r.amount), status: r.status, c: r.status === 'Declined' ? '#9A3B2A' : r.status === 'Refunded' ? '#2F4A2B' : '#6B4A12', note: last.note || '', steps: RS.map((l, i) => ({ l, bar: i <= idx ? '#536B4E' : '#E9DDC9', fg: i <= idx ? '#2F4A2B' : '#9C9486' })) }; });
+      out.dr = st.dr; out.drErr = st.drErr; out.drTypes = A.DATA_TYPES; out.setDrType = e => this.setState({ dr: { ...st.dr, type: e.target.value } }); out.setDrDetails = e => this.setState({ dr: { ...st.dr, details: e.target.value } });
+      out.drPh = st.dr.type === 'Correction' ? 'What should be corrected? e.g. my name is spelled …' : st.dr.type === 'Deletion' ? 'Optional — anything we should know' : 'Optional';
+      out.sendDr = () => { const r = A.dataRequest(me.id, st.dr.type, st.dr.details); if (r.error) return this.setState({ drErr: r.error }); this.setState({ dr: { type: 'Correction', details: '' }, drErr: '' }); this.flash('Request sent. We’ll respond within the time the law allows.'); };
+      out.myData = A.list('data-requests').filter(r => r.studentId === me.id).map(r => ({ type: r.type, when: fmt(String(r.created).slice(0, 10)), status: r.status, canDownload: r.type === 'Copy of my data' && r.status === 'Completed', download: () => { const blob = new Blob([JSON.stringify(A.exportPerson(me.id), null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'my-institute-data.json'; a.click(); } }));
+      out.myTickets = A.list('support').filter(t => t.studentId === me.id).map(t => ({ type: t.type, status: t.status, body: t.body, reply: t.reply ? 'Reply: ' + t.reply : '' }));
+      const prof = st.prof || { phone: me.phone || '', location: me.location || '', consent: me.consent || { email: 1 } };
+      out.me = me; out.prof = prof; out.profErr = st.profErr;
+      out.setProfPhone = e => this.setState({ prof: { ...prof, phone: e.target.value } }); out.setProfLoc = e => this.setState({ prof: { ...prof, location: e.target.value } });
+      out.profConsent = [['email', 'Email'], ['wa', 'WhatsApp'], ['sms', 'SMS']].map(([k, label]) => ({ label, on: !!prof.consent[k], toggle: ev => this.setState({ prof: { ...prof, consent: { ...prof.consent, [k]: ev.target.checked ? 1 : 0 } } }) }));
+      out.saveProf = () => { const ph = prof.phone ? window.SOT.ghPhone(prof.phone) : ''; if (prof.phone && !ph) return this.setState({ profErr: 'That isn’t a valid Ghana number.' }); A.upd('students', me.id, { phone: ph, location: prof.location, consent: prof.consent }); A.add('consents-log', { id: 'CNS-' + A.rnd(5), studentId: me.id, consent: prof.consent }); this.setState({ prof: null, profErr: '' }); this.flash('Profile saved.'); };
+      return out;
+    }
+    // ── Instructor: only assigned cohorts and their students
+    const ins = A.instructor(sess.id);
+    const myCoh = A.list('cohorts').filter(h => h.instructorId === sess.id && h.status !== 'Cancelled');
+    const myCids = [...new Set([...myCoh.map(h => h.courseId), ...A.list('courses').filter(c => c.instructorId === sess.id && c.status === 'Published').map(c => c.id)])];
+    const myEns = A.list('enrolments').filter(e => myCoh.some(h => h.id === e.cohortId) && e.status !== 'Withdrawn');
+    const stuName = id => (A.get('students', id) || {}).name || id;
+    const qOpen = A.list('questions').filter(q => myCids.includes(q.courseId) && !q.answer).length;
+    const queue = A.list('submissions').filter(s => s.status === 'Submitted' && myEns.some(e => e.studentId === s.studentId && e.courseId === s.courseId));
+    out.tabs = tabDefs.map(([k, l]) => ({ label: l, badge: k === 'grading' && queue.length ? queue.length : k === 'qa' && qOpen ? qOpen : '', go: () => this.setState({ tab: k }), on: tab === k ? 'page' : 'false', fg: tab === k ? '#F8F4ED' : '#E9DDC9', line: tab === k ? '#C6A15B' : 'transparent' }));
+    out.iHome = tab === 'home'; out.iQA = tab === 'qa'; out.iDiscuss = tab === 'discuss'; out.iProfile = tab === 'profile'; out.iAttendance = tab === 'attendance'; out.iGrading = tab === 'grading'; out.iPractical = tab === 'practical'; out.iStudents = tab === 'students';
+    const allSess = myCoh.flatMap(h => A.sessionsOf(h.id).map(s => ({ ...s, h })));
+    const todays = allSess.filter(s => s.date === A.today());
+    out.iKpis = [['Assigned courses', myCids.length, 'students'], ['Active students', new Set(myEns.filter(e => e.status === 'Active').map(e => e.studentId)).size, 'students'], ['To grade', queue.length, 'grading'], ['Classes today', todays.length, 'attendance']].map(([label, value, t]) => ({ label, value, go: () => this.setState({ tab: t }) }));
+    out.iCohorts = myCoh.map(h => { const n = myEns.filter(e => e.cohortId === h.id).length, nx = A.sessionsOf(h.id).find(s => s.date >= A.today()); return { course: (A.course(h.courseId) || {}).title, name: h.name, count: n + ' students', next: nx ? 'Next: ' + fmt(nx.date) + ' ' + nx.start : 'No upcoming sessions' }; }); out.iNone = !myCoh.length;
+    // attendance
+    const sorted = allSess.slice().sort((a, b) => (b.date + b.start).localeCompare(a.date + a.start));
+    const defSess = (sorted.find(s => s.date <= A.today()) || sorted[0] || {}).id || '';
+    const sid = st.sessId || defSess, ses = allSess.find(s => s.id === sid);
+    out.sessId = sid; out.pickSess = e => this.setState({ sessId: e.target.value });
+    out.sessOpts = sorted.map(s => ({ v: s.id, l: fmt(s.date) + ' · ' + s.start + ' · ' + s.title + ' · ' + (A.course(s.h.courseId) || {}).code }));
+    out.noSessions = !sorted.length; out.hasSessions = sorted.length > 0;
+    const attAll = A.list('attendance');
+    out.register = ses ? myEns.filter(e => e.cohortId === ses.cohortId && (!ses.makeupFor || (ses.forStudents || []).includes(e.studentId))).map(e => { const r = attAll.find(a => a.sessionId === ses.id && a.studentId === e.studentId), cur = r ? r.status : 'Not recorded', pct = A.attendancePct(e.studentId, ses.cohortId);
+      return { name: stuName(e.studentId), id: e.studentId, booked: A.booked(e.studentId, ses.id) ? '· booked' : '', pct: pct == null ? '—' : pct + '%', reason: r ? r.reason : '', hist: r && r.history && r.history.length ? 'Corrected ' + r.history.length + '× · last ' + r.history[r.history.length - 1].from + ' → ' + r.history[r.history.length - 1].to : '',
+        opts: ['Present', 'Late', 'Absent', 'Excused'].map(o => ({ l: o, on: cur === o ? 'true' : 'false', bg: cur === o ? ATT_C[o][0] : 'transparent', fg: cur === o ? ATT_C[o][1] : '#493126', bd: cur === o ? ATT_C[o][1] : '#E9DDC9', set: () => A.markAttendance(ses.id, e.studentId, o, ins.name, r ? r.reason : '') })),
+        setReason: ev => A.markAttendance(ses.id, e.studentId, cur === 'Not recorded' ? 'Absent' : cur, ins.name, ev.target.value) }; }) : [];
+    out.noRegister = !out.register.length;
+    out.sessUpcoming = !!ses && ses.date >= A.today(); out.sessLive = !!ses && ses.kind === 'Live online';
+    out.remind = () => { const r = A.sendReminder(ses.id, ins.name); this.flash(r.error || 'Reminder queued for ' + r.n + ' students.'); };
+    out.openRoom = () => this.flash('Prototype: opens the private Zoom / Google Meet room as host once the classroom provider is connected. Attendance can then be imported from the meeting report.');
+    out.recRef = st.recRef || (ses && ses.recording ? ses.recording.ref : ''); out.recAuth = st.recRef ? st.recAuth : !!(ses && ses.recording && ses.recording.authorised);
+    out.setRecRef = e => this.setState({ recRef: e.target.value, recAuth: out.recAuth }); out.setRecAuth = e => this.setState({ recAuth: e.target.checked, recRef: out.recRef });
+    out.saveRec = () => { if (!out.recRef.trim()) return this.flash('Add the recording link or reference.'); A.upd('sessions', ses.id, { recording: { ref: out.recRef.trim(), authorised: !!out.recAuth, by: ins.name } }); A.audit(ins.name, 'Recording saved' + (out.recAuth ? ' (authorised)' : ''), ses.title); this.setState({ recRef: '', recAuth: false }); this.flash('Recording saved.'); };
+    const qs = A.list('questions').filter(q => myCids.includes(q.courseId)).sort((a, b) => (a.answer ? 1 : 0) - (b.answer ? 1 : 0));
+    out.noQs = !qs.length; out.iQs = qs.map(q => ({ student: stuName(q.studentId), lesson: (A.course(q.courseId) || {}).code + ' · ' + q.lessonTitle, text: q.text, answer: q.answer ? 'Answered: ' + q.answer : '', open: !q.answer, draft: st.qDrafts[q.id] || '', setDraft: e => this.setState(s => ({ qDrafts: { ...s.qDrafts, [q.id]: e.target.value } })),
+      send: () => { const a = (st.qDrafts[q.id] || '').trim(); if (!a) return; A.upd('questions', q.id, { answer: a, answeredBy: ins.name }); const s = A.get('students', q.studentId); s && A.notify(s, 'Hello {first}, your instructor answered your question on “' + q.lessonTitle + '”. See it in the portal.'); this.setState(s => ({ qDrafts: { ...s.qDrafts, [q.id]: '' } })); } }));
+    // grading
+    out.queue = queue.map(s => { const g = st.grades[s.id] || {}; return { student: stuName(s.studentId), title: s.itemTitle, kind: s.kind === 'video' ? 'Demonstration video (feedback only)' : 'Assignment', course: (A.course(s.courseId) || {}).code, text: s.text, file: s.file ? '· ' + s.file.name : '', scored: s.kind !== 'video', score: g.score || '', fb: g.fb || '', err: g.err || '', saveLabel: s.kind === 'video' ? 'Send feedback' : 'Save grade',
+      setScore: e => this.setState(x => ({ grades: { ...x.grades, [s.id]: { ...g, score: e.target.value } } })), setFb: e => this.setState(x => ({ grades: { ...x.grades, [s.id]: { ...g, fb: e.target.value } } })),
+      save: () => { const n = Number(g.score); if (s.kind !== 'video' && !(n >= 0 && n <= 100 && String(g.score).trim() !== '')) return this.setState(x => ({ grades: { ...x.grades, [s.id]: { ...g, err: 'Enter a score from 0 to 100.' } } })); if (!String(g.fb || '').trim()) return this.setState(x => ({ grades: { ...x.grades, [s.id]: { ...g, err: 'Add feedback for the student.' } } })); A.grade(s.id, n, g.fb.trim(), ins.name); this.flash('Saved and the student has been notified.'); } }; });
+    out.noQueue = !queue.length;
+    // practicals
+    out.pracErr = st.pracErr;
+    const setEf = {}; ['date', 'rating', 'outcome', 'criteria', 'feedback', 'improve'].forEach(k => setEf[k] = e => this.setState({ ef: { ...st.ef, [k]: e.target.value } })); setEf.supervised = e => this.setState({ ef: { ...st.ef, supervised: e.target.checked } });
+    out.ef = st.ef; out.setEf = setEf; out.ratings = A.RATINGS;
+    out.pracRows = myEns.filter(e => (A.course(e.courseId) || {}).practical).map(e => { const c = A.course(e.courseId); return { name: stuName(e.studentId), course: c.code, items: A.practicalState(e.studentId, c.id).map(it => { const key = e.studentId + '|' + it.id, open = st.evalOpen === key; const hist = A.evalHistory(e.studentId, c.id, it.id);
+      return { label: it.label, sup: it.supervised ? 'supervised' : 'video feedback allowed', state: it.ok ? 'Pass · ' + (it.rec.signedOff || it.rec.by || '') : it.rec ? (it.rec.outcome || it.rec.result) : 'Not assessed', c: it.ok ? '#2F4A2B' : it.rec && /Resit/.test(it.rec.result) ? '#9A3B2A' : '#6B665C', open, btn: open ? 'Close' : 'Evaluate', criteriaPh: it.criteria || 'e.g. Hygiene set-up, technique, client communication, timing',
+        toggle: () => this.setState({ evalOpen: open ? '' : key, pracErr: '', ef: { date: A.today(), rating: '', outcome: 'Pending', supervised: true, criteria: '', feedback: '', improve: '' } }),
+        save: () => { const r = A.recordEval(e.studentId, c.id, it.id, st.ef, ins.name); if (r.error) return this.setState({ pracErr: r.error }); this.setState({ evalOpen: '', pracErr: '' }); this.flash('Evaluation signed off and recorded.'); },
+        hist: hist.map(x => (x.date ? fmt(x.date) : fmt(String(x.created).slice(0, 10))) + ' · ' + (x.outcome || x.result) + (x.rating ? ' · ' + x.rating : '') + ' · ' + (x.by || '') + (x.feedback ? ' — ' + x.feedback : '') + (x.improve ? ' · Next: ' + x.improve : '')) }; }) }; });
+    // students & content
+    out.iStudentRows = myEns.map(e => { const c = A.course(e.courseId), p = A.progress(e.studentId, c.id), a = A.attendancePct(e.studentId, e.cohortId), el = A.eligibility(e.studentId, c.id); return { name: stuName(e.studentId), course: c.code, pct: p.pct + '%', att: a == null ? '—' : a + '%', state: e.status === 'Completed' ? 'Completed' : el.eligible ? 'Eligible for completion' : 'In progress', c: el.eligible || e.status === 'Completed' ? '#2F4A2B' : '#6B665C' }; });
+    const ic = A.course(myCids[0]);
+    out.moduleOpts = myCids.flatMap(id => { const c = A.course(id); return c.modules.map(m => ({ v: m.id, l: c.code + ' · ' + m.title })); });
+    out.nl = { ...st.nl, moduleId: st.nl.moduleId || (out.moduleOpts[0] || {}).v || '' };
+    ['moduleId', 'title', 'type', 'body'].forEach(k => out['setNl' + k[0].toUpperCase() + k.slice(1).replace('Id', '')] = e => this.setState({ nl: { ...out.nl, [k]: e.target.value } }));
+    out.setNlModule = e => this.setState({ nl: { ...out.nl, moduleId: e.target.value } });
+    out.addLesson = () => { const n = out.nl; if (!n.title.trim()) return this.setState({ formErr: 'Add a lesson title.' }); const c = A.list('courses').find(x => x.modules.some(m => m.id === n.moduleId)); if (!c || !myCids.includes(c.id)) return this.setState({ formErr: 'You can only add lessons to your assigned courses.' });
+      A.upd('courses', c.id, { modules: c.modules.map(m => m.id === n.moduleId ? { ...m, lessons: [...m.lessons, { id: m.id + '-l' + A.rnd(4), title: n.title.trim(), type: n.type, body: n.body.trim(), by: ins.name }] } : m) }); A.audit(ins.name, 'Lesson added · ' + n.title, c.code); this.setState({ nl: { moduleId: n.moduleId, title: '', type: 'text', body: '' }, formErr: '' }); this.flash('Lesson added.'); };
+    out.iCourseOpts = myCids.map(id => ({ v: id, l: A.course(id).title }));
+    out.an = { ...st.an, courseId: st.an.courseId || myCids[0] || '' };
+    out.setAnCourse = e => this.setState({ an: { ...out.an, courseId: e.target.value } }); out.setAnTitle = e => this.setState({ an: { ...out.an, title: e.target.value } }); out.setAnBody = e => this.setState({ an: { ...out.an, body: e.target.value } });
+    out.postAnn = () => { const a = out.an; if (!a.title.trim() || !a.body.trim()) return this.setState({ formErr: 'Add a title and message.' }); A.add('announcements', { id: 'ANN-' + A.rnd(5), courseId: a.courseId, title: a.title.trim(), body: a.body.trim(), by: ins.name }); this.setState({ an: { courseId: a.courseId, title: '', body: '' }, formErr: '' }); this.flash('Announcement posted to enrolled students.'); };
+    const stuOpts = [...new Set(myEns.map(e => e.studentId))].map(id => ({ v: id, l: stuName(id) }));
+    out.iStudentOpts = stuOpts; out.rp = { ...st.rp, studentId: st.rp.studentId || (stuOpts[0] || {}).v || '' };
+    out.setRpStudent = e => this.setState({ rp: { ...out.rp, studentId: e.target.value } }); out.setRpBody = e => this.setState({ rp: { ...out.rp, body: e.target.value } });
+    out.sendReport = () => { if (!out.rp.body.trim()) return this.setState({ formErr: 'Write the report first.' }); A.add('reports', { id: 'RPT-' + A.rnd(5), studentId: out.rp.studentId, by: ins.name, body: out.rp.body.trim() }); A.internal('Performance report · ' + stuName(out.rp.studentId), 'Academic Coordinator'); this.setState({ rp: { ...out.rp, body: '' }, formErr: '' }); this.flash('Report submitted.'); };
+    out.formErr = st.formErr;
+    Object.assign(out, this.discussVals(A, sess, myCids, true, ins.id));
+    const ip = st.ip || { title: (ins.pending || ins).title || '', bio: (ins.pending || ins).bio || '', qualifications: (ins.pending || ins).qualifications || '' }; out.ip = ip;
+    const setIp = {}; ['title', 'bio', 'qualifications'].forEach(k => setIp[k] = e => this.setState({ ip: { ...ip, [k]: e.target.value } })); out.setIp = setIp;
+    out.setIpPhoto = e => { const f = e.target.files[0]; this.setState({ ipPhoto: f ? f.name : null }); }; out.ipPhotoName = st.ipPhoto || (ins.photo ? 'Current photo on file' : 'No photo yet'); out.ipErr = st.ipErr;
+    out.sendIp = () => { const r = A.proposeProfile(ins.id, { ...ip, photo: st.ipPhoto ? 'Pending upload: ' + st.ipPhoto : '' }); if (r.error) return this.setState({ ipErr: r.error }); this.setState({ ip: null, ipErr: '' }); this.flash('Sent for approval.'); };
+    out.ipStatus = ins.pending ? 'Changes submitted ' + fmt(String(ins.pending.at).slice(0, 10)) + ' — awaiting approval.' : 'Your live profile is up to date.'; out.ipLiveTitle = ins.title || '—'; out.ipLiveBio = ins.bio || '';
+    const absentIds = ses && ses.date < A.today() && !ses.makeupFor ? attAll.filter(a => a.sessionId === ses.id && (a.status === 'Absent' || a.status === 'Excused')).map(a => a.studentId) : [];
+    const already = A.list('sessions').filter(x => x.makeupFor && ses && x.makeupFor.includes(ses.id)).flatMap(x => x.forStudents || []);
+    const need = absentIds.filter(id => !already.includes(id));
+    out.canMakeup = need.length > 0; out.makeupNote = need.length + ' student' + (need.length > 1 ? 's' : '') + ' missed this class (' + need.map(stuName).join(', ') + '). A make-up session counts towards their attendance once they attend.';
+    out.muDate = st.muDate; out.setMuDate = e => this.setState({ muDate: e.target.value });
+    out.scheduleMu = () => { const r = A.scheduleMakeup(ses.id, need, { date: st.muDate }, ins.name); if (r.error) return this.flash(r.error); this.setState({ muDate: '' }); this.flash('Make-up session scheduled and students notified.'); };
+    const qz = { ...st.qz, moduleId: st.qz.moduleId || (out.moduleOpts[0] || {}).v || '' }; out.qz = qz;
+    const setQz = {}; ['moduleId', 'title', 'pass', 'attempts'].forEach(k => setQz[k] = e => this.setState({ qz: { ...qz, [k]: e.target.value } })); out.setQz = setQz;
+    const updQ = (i, p) => this.setState({ qz: { ...qz, qs: qz.qs.map((x, j) => j === i ? { ...x, ...p } : x) } });
+    out.qzQs = qz.qs.map((x, i) => ({ n: i + 1, q: x.q, name: 'qb-' + i, setQ: e => updQ(i, { q: e.target.value }), opts: x.o.map((t, k) => ({ n: k + 1, t, correct: x.a === k, mark: () => updQ(i, { a: k }), set: e => updQ(i, { o: x.o.map((y, z) => z === k ? e.target.value : y) }) })) }));
+    out.addQ = () => this.setState({ qz: { ...qz, qs: [...qz.qs, { q: '', o: ['', '', '', ''], a: null }] } });
+    out.saveQuiz = () => { const c = A.list('courses').find(x => x.modules.some(m => m.id === qz.moduleId)); if (!c || !myCids.includes(c.id)) return this.setState({ formErr: 'Choose a module in one of your courses.' }); const r = A.addQuiz(c.id, qz.moduleId, { title: qz.title, questions: qz.qs, pass: qz.pass, attempts: qz.attempts }, ins.name); if (r.error) return this.setState({ formErr: r.error }); this.setState({ formErr: '', qz: { moduleId: qz.moduleId, title: '', pass: '70', attempts: '3', qs: [{ q: '', o: ['', '', '', ''], a: null }] } }); this.flash('Quiz published to the course.'); };
+    const ac = A.course((st.as2 && st.as2.courseId) || myCids[0]) || {}; const as2 = st.as2 || { courseId: ac.id || '', ...(ac.assignment || {}), pass: String((ac.assignment || {}).pass || 50) }; out.as2 = as2;
+    const setAs2 = {}; ['title', 'brief', 'criteria', 'pass', 'due'].forEach(k => setAs2[k] = e => this.setState({ as2: { ...as2, [k]: e.target.value } })); setAs2.courseId = e => { const c2 = A.course(e.target.value) || {}; this.setState({ as2: { courseId: e.target.value, ...(c2.assignment || {}), pass: String((c2.assignment || {}).pass || 50) } }); }; out.setAs2 = setAs2;
+    out.saveAsg = () => { if (!myCids.includes(as2.courseId)) return this.setState({ formErr: 'You can only edit your assigned courses.' }); const r = A.setAssignment(as2.courseId, as2, ins.name); if (r.error) return this.setState({ formErr: r.error }); this.setState({ formErr: '' }); this.flash('Assignment saved.'); };
+    return out;
+  }
+  discussVals(A, sess, cids, canHide, me) {
+    const st = this.state, cid = st.dCourse && cids.includes(st.dCourse) ? st.dCourse : cids[0], all = A.list('posts').filter(p => p.courseId === cid && !p.hidden);
+    const who = id => { const s = A.get('students', id); if (s) return { n: s.name, r: 'Student', c: '#6B665C' }; const i = A.instructor(id); return i ? { n: i.name, r: 'Instructor', c: '#536B4E' } : { n: 'Member', r: '', c: '#6B665C' }; };
+    const when = t => new Date(t).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+    const mk = p => { const w = who(p.authorId); return { author: w.n, role: w.r, roleC: w.c, when: when(p.created), text: p.text }; };
+    const add = (text, parentId) => { if (!cid || String(text || '').trim().length < 2) return; A.add('posts', { id: 'PST-' + A.rnd(6), courseId: cid, authorId: me, text: text.trim(), parentId: parentId || '' }); };
+    return { dCourse: cid, setDCourse: e => this.setState({ dCourse: e.target.value }), dCourseOpts: cids.map(id => ({ v: id, l: (A.course(id) || {}).title })), dText: st.dText, setDText: e => this.setState({ dText: e.target.value }),
+      post: () => { add(st.dText); this.setState({ dText: '' }); },
+      posts: all.filter(p => !p.parentId).map(p => ({ ...mk(p), canHide, hide: () => { A.upd('posts', p.id, { hidden: true, hiddenBy: sess.name }); A.audit(sess.name, 'Discussion post hidden', p.id); }, replies: all.filter(r => r.parentId === p.id).map(mk), draft: st.dDrafts[p.id] || '', setDraft: e => this.setState(s => ({ dDrafts: { ...s.dDrafts, [p.id]: e.target.value } })), reply: () => { add(st.dDrafts[p.id], p.id); this.setState(s => ({ dDrafts: { ...s.dDrafts, [p.id]: '' } })); } })),
+      noPosts: !all.filter(p => !p.parentId).length };
+  }
+}
+</script>
+</body>
+</html>

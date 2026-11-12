@@ -1,0 +1,110 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/"
+  to = "/Sense%20of%20Touch%20Homepage.dc.html"
+  status = 200
+[[redirects]]
+  from = "/book"
+  to = "/Book.dc.html"
+  status = 200
+[[redirects]]
+  from = "/services"
+  to = "/Services.dc.html"
+  status = 200
+[[redirects]]
+  from = "/shop"
+  to = "/Shop.dc.html"
+  status = 200
+[[redirects]]
+  from = "/institute"
+  to = "/Institute.dc.html"
+  status = 200
+[[redirects]]
+  from = "/institute/sign-in"
+  to = "/Sign%20In.dc.html"
+  status = 200
+[[redirects]]
+  from = "/customer/sign-in"
+  to = "/Sign%20In.dc.html"
+  status = 200
+[[redirects]]
+  from = "/staff/sign-in"
+  to = "/Sign%20In.dc.html"
+  status = 200
+[[redirects]]
+  from = "/sign-in"
+  to = "/Sign%20In.dc.html"
+  status = 200
+[[redirects]]
+  from = "/admin"
+  to = "/Admin.dc.html"
+  status = 200
+[[redirects]]
+  from = "/account"
+  to = "/Account.dc.html"
+  status = 200
+[[redirects]]
+  from = "/gift-cards"
+  to = "/GiftCards.dc.html"
+  status = 200
+[[redirects]]
+  from = "/rewards"
+  to = "/Rewards.dc.html"
+  status = 200
+[[redirects]]
+  from = "/membership"
+  to = "/Membership.dc.html"
+  status = 200
+[[redirects]]
+  from = "/lip-bar"
+  to = "/LipBar.dc.html"
+  status = 200
+[[redirects]]
+  from = "/afocure"
+  to = "/Aftercure.dc.html"
+  status = 200
+[[redirects]]
+  from = "/about"
+  to = "/About.dc.html"
+  status = 200
+[[redirects]]
+  from = "/contact"
+  to = "/Contact.dc.html"
+  status = 200
+[[redirects]]
+  from = "/reviews"
+  to = "/Reviews.dc.html"
+  status = 200
+[[redirects]]
+  from = "/policies"
+  to = "/Policy%20Centre.dc.html"
+  status = 200
+[[redirects]]
+  from = "/legal"
+  to = "/Legal.dc.html"
+  status = 200
+
+# Keep internal documents (handoff SQL, plans) off the public site.
+[[redirects]]
+  from = "/handoff/*"
+  to = "/404.dc.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/*"
+  to = "/404.dc.html"
+  status = 404
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

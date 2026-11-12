@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Leadership, team &amp; community · Sense of Touch</title>
+<meta name="description" content="The people behind Sense of Touch Spa &amp; Wellness and the Institute, and the community work we support.">
+<meta property="og:title" content="Leadership, team &amp; community · Sense of Touch">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}*{box-sizing:border-box}a{color:#493126;text-underline-offset:3px}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./motion.js"></script>
+</helmet>
+<div style="min-height:100vh">
+<dc-import name="SiteHeader" active="about" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+<section data-screen-label="Leadership" style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(20px,4vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,5vw,72px);align-items:center">
+<img src="assets/web/founder-studio.jpg" alt="Woselande Carmelle Theus, founder of Sense of Touch" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block">
+<div style="display:flex;flex-direction:column;gap:16px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Leadership</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,5.5vw,76px);line-height:0.98;color:#493126">Woselande Carmelle Theus</h1>
+<span style="font-family:Allura,cursive;font-size:32px;color:#536B4E;line-height:1.1">Founder &amp; Director</span>
+<p style="margin:0;font-size:16px;line-height:1.75;max-width:52ch;text-wrap:pretty">Founder of Sense of Touch Spa &amp; Wellness and the Sense of Touch Institute of Beauty &amp; Wellness in Tema Community 25.</p>
+<a href="Founder.dc.html" style="align-self:flex-start;min-height:48px;padding:0 22px;display:inline-flex;align-items:center;border:1px solid #493126;text-decoration:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Read her story</a>
+</div>
+</section>
+<section data-screen-label="Team" style="background:#E9DDC9">
+<div style="max-width:1180px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4vw,52px);color:#493126">The team</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:16px">
+<sc-for list="{{ team }}" as="t" hint-placeholder-count="1"><div style="background:#FFFDF9;padding:22px;display:flex;flex-direction:column;gap:4px"><strong style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:#493126">{{ t.name }}</strong><span style="font-size:13px;color:#536B4E;font-weight:600">{{ t.role }}</span><span style="font-size:13px;color:#4A453C">{{ t.services }}</span></div></sc-for>
+</div>
+<p style="margin:0;font-size:14px;line-height:1.6;color:#4A453C;max-width:60ch">Therapist and instructor profiles are added once each person has approved their bio and photo.</p>
+</div>
+</section>
+<section data-screen-label="Community impact" style="max-width:1180px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:20px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Community impact</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4vw,52px);color:#493126;max-width:20ch">Care that reaches beyond the treatment room</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+<a href="Foundation.dc.html" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#24221D"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">The Foundation</span><span style="font-size:14px;line-height:1.6">Our community programmes and how to support them.</span></a>
+<a href="Partners.dc.html" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#24221D"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Partnerships</span><span style="font-size:14px;line-height:1.6">Organisations we work with, and how to partner with us.</span></a>
+<a href="Careers.dc.html" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#24221D"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Careers</span><span style="font-size:14px;line-height:1.6">Join the team at the spa or the Institute.</span></a>
+</div>
+</section>
+<dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const S = window.SOT, staff = S ? S.list('staff').filter(s => s.active) : [];
+    return { team: staff.map(s => ({ name: s.name, role: s.role, services: (s.services || []).join(' · ') })) };
+  }
+}
+</script>
+</body>
+</html>

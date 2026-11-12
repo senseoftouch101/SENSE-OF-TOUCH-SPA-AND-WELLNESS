@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#F8F4ED}a{color:#536B4E}a:hover{color:#493126}</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="font-family:Montserrat,sans-serif;color:#24221D;background:#F8F4ED;min-height:100vh">
+
+<header data-screen-label="00 Cover" style="background:#493126;color:#F8F4ED;padding:64px 40px 56px">
+<div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end">
+<div style="display:flex;flex-direction:column;gap:16px">
+<span style="font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:#C6A15B">Merchandise collection · v1 · November 2026</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(44px,6vw,80px);line-height:1">Take the touch home.</h1>
+<p style="margin:0;max-width:560px;font-size:14px;line-height:1.7;color:#E9DDC9;text-wrap:pretty">Thirteen branded pieces for retail, gifting, in-room use and the team. Every item uses an approved colourway from the identity kit — gold, chocolate, forest and ivory only.</p>
+</div>
+<div style="width:120px;height:138px;overflow:hidden;position:relative"><div style="position:absolute;width:372px;height:372px;left:-125px;top:-68px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</header>
+
+<main data-screen-label="01 Collection" style="padding:64px 40px 96px">
+<div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:40px 24px">
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#FFFFFF;border:1px solid #E9DDC9;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-tote" shape="rect" placeholder="Canvas tote product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="position:relative;width:230px;height:250px;margin-top:50px;background:#E9DDC9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+<div style="position:absolute;top:-70px;left:36px;width:44px;height:70px;border:8px solid #D9C7A8;border-bottom:none;border-radius:30px 30px 0 0"></div>
+<div style="position:absolute;top:-70px;right:36px;width:44px;height:70px;border:8px solid #D9C7A8;border-bottom:none;border-radius:30px 30px 0 0"></div>
+<div style="width:80px;height:92px;overflow:hidden;position:relative"><div style="position:absolute;width:248px;height:248px;left:-84px;top:-45px;background:#493126;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+<div style="width:160px;height:37px;overflow:hidden;position:relative"><div style="position:absolute;width:250px;height:250px;left:-45px;top:-147px;background:#493126;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">RETAIL</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Canvas market tote</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">12oz natural cotton canvas · stacked logo, 1-colour chocolate screen print</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;overflow:hidden;background:#E9DDC9">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-robe" shape="rect" placeholder="Robe product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<img src="assets/web/robe-white-sofa.jpg" alt="Guest in white Sense of Touch robe" style="width:100%;height:100%;object-fit:cover;display:block">
+<div style="position:absolute;right:16px;bottom:16px;width:120px;height:120px;border-radius:50%;border:3px solid #F8F4ED;background-color:#FFFFFF;background-image:linear-gradient(#EEE6D8 1px,transparent 1px),linear-gradient(90deg,#EEE6D8 1px,transparent 1px);background-size:7px 7px;display:flex;align-items:center;justify-content:center">
+<div style="width:60px;height:69px;overflow:hidden;position:relative"><div style="position:absolute;width:186px;height:186px;left:-63px;top:-34px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">IN-ROOM · RETAIL</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Signature waffle robe</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">White cotton waffle · brand icon, gold thread embroidery on left chest, 7cm</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#E9DDC9;display:flex;align-items:center;justify-content:center;gap:22px">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-slippers" shape="rect" placeholder="Slippers product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="position:relative;width:96px;height:232px;background:#FFFFFF;border:1px solid #D9C7A8;border-radius:48px 48px 44px 44px / 64px 64px 52px 52px;transform:rotate(-6deg)">
+<div style="position:absolute;left:-4px;right:-4px;top:34px;height:66px;background:#F8F4ED;border:1px solid #D9C7A8;border-radius:10px;display:flex;align-items:center;justify-content:center">
+<div style="width:28px;height:32px;overflow:hidden;position:relative"><div style="position:absolute;width:87px;height:87px;left:-29px;top:-16px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+<div style="position:relative;width:96px;height:232px;background:#FFFFFF;border:1px solid #D9C7A8;border-radius:48px 48px 44px 44px / 64px 64px 52px 52px;transform:rotate(6deg)">
+<div style="position:absolute;left:-4px;right:-4px;top:34px;height:66px;background:#F8F4ED;border:1px solid #D9C7A8;border-radius:10px;display:flex;align-items:center;justify-content:center">
+<div style="width:28px;height:32px;overflow:hidden;position:relative"><div style="position:absolute;width:87px;height:87px;left:-29px;top:-16px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">IN-ROOM · RETAIL</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Spa slippers</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">White waffle, open toe, padded sole · gold-embroidered icon on each strap · pairs with the robe</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#F8F4ED;border:1px solid #E9DDC9;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-candle" shape="rect" placeholder="Candle product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="display:flex;flex-direction:column;align-items:center">
+<div style="width:184px;height:24px;background:#C6A15B;border-radius:6px 6px 2px 2px"></div>
+<div style="width:172px;height:176px;background:#493126;border-radius:4px 4px 18px 18px;display:flex;align-items:center;justify-content:center">
+<div style="width:128px;height:96px;background:#F8F4ED;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+<div style="width:28px;height:32px;overflow:hidden;position:relative"><div style="position:absolute;width:87px;height:87px;left:-29px;top:-16px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+<span style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#493126;line-height:1">Rest</span>
+<span style="font-size:7px;letter-spacing:0.3em;color:#536B4E">SHEA · VETIVER</span>
+</div>
+</div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">RETAIL · GIFT</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Treatment-room candle</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">Amber glass jar, brushed gold lid · ivory label with icon, scent name in Cormorant</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#E9DDC9;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-mug" shape="rect" placeholder="Mug product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="position:relative;width:150px;height:164px;margin-right:40px;background:#536B4E;border-radius:4px 4px 22px 22px;display:flex;align-items:center;justify-content:center">
+<div style="position:absolute;right:-50px;top:30px;width:44px;height:74px;border:14px solid #536B4E;border-left:none;border-radius:0 40px 40px 0"></div>
+<div style="width:60px;height:69px;overflow:hidden;position:relative"><div style="position:absolute;width:186px;height:186px;left:-63px;top:-34px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">LOUNGE · RETAIL</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Tea-ritual mug</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">Matte forest-green stoneware, 330ml · gold-fired icon decal</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#FFFFFF;border:1px solid #E9DDC9;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-bottle" shape="rect" placeholder="Water bottle product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="display:flex;flex-direction:column;align-items:center">
+<div style="width:54px;height:34px;background:#C6A15B;border-radius:8px 8px 2px 2px"></div>
+<div style="width:36px;height:10px;background:#3B271E"></div>
+<div style="width:92px;height:240px;background:#493126;border-radius:28px 28px 20px 20px;display:flex;align-items:center;justify-content:center">
+<div style="width:40px;height:46px;overflow:hidden;position:relative"><div style="position:absolute;width:124px;height:124px;left:-42px;top:-23px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">RETAIL · STAFF</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Insulated water bottle</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">Powder-coated steel in chocolate, 500ml · laser-etched icon, gold cap</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#F8F4ED;border:1px solid #E9DDC9;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-tee" shape="rect" placeholder="Tunic tee product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="position:relative;width:250px;height:270px;background:#536B4E;clip-path:polygon(32% 0,40% 6%,60% 6%,68% 0,100% 16%,90% 38%,80% 33%,80% 100%,20% 100%,20% 33%,10% 38%,0 16%)">
+<div style="position:absolute;top:62px;right:68px;width:28px;height:32px;overflow:hidden"><div style="position:absolute;width:87px;height:87px;left:-29px;top:-16px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">STAFF</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Therapist tunic tee</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">Forest-green bamboo jersey · small gold icon embroidered on left chest, wordmark across back yoke</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#FFFFFF;border:1px solid #E9DDC9;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-towels" shape="rect" placeholder="Towels product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="position:relative;display:flex;flex-direction:column;gap:3px">
+<div style="width:240px;height:52px;background:#F8F4ED;border:1px solid #E9DDC9;border-radius:6px"></div>
+<div style="width:240px;height:52px;background:#E9DDC9;border-radius:6px"></div>
+<div style="width:240px;height:52px;background:#536B4E;border-radius:6px"></div>
+<div style="position:absolute;right:26px;top:16px;width:34px;height:52px;background:#493126;display:flex;align-items:center;justify-content:center">
+<div style="width:24px;height:28px;overflow:hidden;position:relative"><div style="position:absolute;width:74px;height:74px;left:-25px;top:-13px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">IN-ROOM</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Hand &amp; face towels</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">Ivory, sand and forest terry · woven chocolate loop label with gold icon</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#E9DDC9;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-giftbox" shape="rect" placeholder="Gift box product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="display:flex;flex-direction:column;align-items:center">
+<div style="width:244px;height:44px;background:#3B271E;display:flex;align-items:center;justify-content:center">
+<div style="width:160px;height:37px;overflow:hidden;position:relative"><div style="position:absolute;width:250px;height:250px;left:-45px;top:-147px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+<div style="width:230px;height:150px;background:#493126;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:28px;box-sizing:border-box">
+<div style="height:8px;background:#C6A15B"></div>
+</div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">GIFT</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Ritual gift box</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">Rigid chocolate board, lift-off lid · gold-foil wordmark, gold grosgrain band</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#F8F4ED;border:1px solid #E9DDC9;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-journal" shape="rect" placeholder="Journal product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="position:relative;width:190px;height:250px;background:#536B4E;border-radius:3px 12px 12px 3px;display:flex;align-items:center;justify-content:center">
+<div style="position:absolute;left:0;top:0;bottom:0;width:14px;background:#455C41;border-radius:3px 0 0 3px"></div>
+<div style="position:absolute;bottom:-26px;right:40px;width:10px;height:40px;background:#C6A15B;clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%)"></div>
+<div style="width:80px;height:92px;overflow:hidden;position:relative"><div style="position:absolute;width:248px;height:248px;left:-84px;top:-45px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">RETAIL · INSTITUTE</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Linen journal</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">A5 forest linen cover · gold-foil icon, gold ribbon marker · student &amp; client wellness journal</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#493126;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-pin" shape="rect" placeholder="Lapel pin product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="width:150px;height:150px;border-radius:50%;background:#C6A15B;display:flex;align-items:center;justify-content:center">
+<div style="width:126px;height:126px;border-radius:50%;background:#536B4E;display:flex;align-items:center;justify-content:center">
+<div style="width:60px;height:69px;overflow:hidden;position:relative"><div style="position:absolute;width:186px;height:186px;left:-63px;top:-34px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">STAFF · ALUMNI</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Enamel lapel pin</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">25mm hard enamel, gold-plated · forest fill, raised icon · Institute graduates &amp; staff</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;position:relative;background:#FFFFFF;border:1px solid #E9DDC9;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-lipbalm" shape="rect" placeholder="Lip balm tin product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="width:170px;height:170px;border-radius:50%;background:#C6A15B;box-shadow:inset 0 0 0 6px #B08C48;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+<div style="width:60px;height:69px;overflow:hidden;position:relative"><div style="position:absolute;width:186px;height:186px;left:-63px;top:-34px;background:#493126;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+<span style="font-size:8px;letter-spacing:0.34em;color:#493126;font-weight:600">LIP BALM</span>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">RETAIL · LIP BAR</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Shea lip balm tin</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">15g brushed-gold slide tin · chocolate debossed icon · till-point add-on</p></sc-if></figcaption>
+</figure>
+
+<figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+<div style="height:340px;background:#E9DDC9;display:flex;align-items:center;justify-content:center;position:relative">
+<sc-if value="{{ showPhotos }}" hint-placeholder-val="{{ false }}"><image-slot id="merch-sleepmask" shape="rect" placeholder="Sleep mask product photo" style="position:absolute;inset:0;z-index:2"></image-slot></sc-if>
+<div style="position:absolute;left:20px;right:20px;top:50%;height:4px;background:#24221D"></div>
+<div style="position:relative;width:260px;height:112px;background:#493126;border-radius:56px 56px 64px 64px / 50px 50px 62px 62px;display:flex;align-items:center;justify-content:center">
+<div style="width:160px;height:37px;overflow:hidden;position:relative"><div style="position:absolute;width:250px;height:250px;left:-45px;top:-147px;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+</div>
+</div>
+<figcaption style="display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.28em;color:#536B4E">IN-ROOM · GIFT</span><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Silk sleep mask</h3><sc-if value="{{ showSpecs }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:12px;line-height:1.6;color:#5A544A">Chocolate mulberry silk · gold-printed wordmark · relaxation-room &amp; gift-box insert</p></sc-if></figcaption>
+</figure>
+
+</div>
+</main>
+
+<footer style="border-top:1px solid #E9DDC9;padding:32px 40px">
+<div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;font-size:11px;letter-spacing:0.08em;color:#5A544A">
+<span>Logo rules apply: clear space ≥ leaf-cluster height · icon min 24px · no recolouring outside palette.</span>
+<span style="display:flex;gap:24px"><a href="Merchandise Supplier Brief.dc.html">Supplier quote brief →</a><a href="Brand Identity Kit.dc.html">← Brand identity kit</a></span>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showSpecs&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Display&quot;},&quot;showPhotos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Display&quot;}}">
+class Component extends DCLogic {
+  renderVals() { return { showSpecs: this.props.showSpecs ?? true, showPhotos: this.props.showPhotos ?? false }; }
+}
+</script>
+</body>
+</html>

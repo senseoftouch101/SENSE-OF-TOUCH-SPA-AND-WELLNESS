@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Investor room · Sense of Touch</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F3EEE6;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-investors.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F3EEE6;display:flex;flex-direction:column">
+<header style="background:#493126;color:#F8F4ED">
+<div style="max-width:1180px;margin:0 auto;padding:14px clamp(20px,3vw,32px);display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between">
+<a href="Investors.dc.html" style="display:flex;align-items:center;gap:12px;color:#F8F4ED"><img src="assets/logo-transparent.png" alt="" style="width:36px;height:36px;object-fit:contain;filter:brightness(0) invert(1)"><span style="display:flex;flex-direction:column;gap:2px"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1">Sense of Touch</span><span style="font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:#C6A15B;font-weight:600">Investor room</span></span></a>
+<sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:14px;font-size:13px;color:#E9DDC9"><span>{{ who }}</span><button onClick="{{ out }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #E9DDC9;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#F8F4ED">Sign out</button></div></sc-if>
+</div>
+</header>
+
+<sc-if value="{{ showLogin }}" hint-placeholder-val="{{ true }}">
+<main data-screen-label="Investor sign-in" style="flex:1;display:flex;align-items:center;justify-content:center;padding:48px 20px">
+<form onSubmit="{{ signIn }}" style="width:min(100%,440px);background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(24px,5vw,40px);display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#536B4E;font-weight:600">Approved investors</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:40px;line-height:1.05;color:#493126">Sign in</h1><span style="font-size:14px;line-height:1.65;color:#4A453C">Use the email on your request and the access code from your approval email.</span></div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Email<input type="email" autoComplete="email" value="{{ em }}" onChange="{{ setEm }}" style="padding:13px 12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Access code<input autoComplete="one-time-code" value="{{ code }}" onChange="{{ setCode }}" placeholder="XXXX-XXXX" style="padding:13px 12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:18px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;font-family:inherit"></label>
+<sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:12px 14px;font-size:14px;line-height:1.55;color:#6B2A1E">{{ loginErr }}</div></sc-if>
+<button type="submit" style="all:unset;cursor:pointer;box-sizing:border-box;text-align:center;min-height:52px;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600" style-hover="background:#536B4E">Enter the investor room</button>
+<span style="font-size:13px;line-height:1.6;color:#6B665C">No code yet? <a href="Investors.dc.html#request" style="text-decoration:underline">Request access</a>.</span>
+</form>
+</main>
+</sc-if>
+
+<sc-if value="{{ showNda }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="NDA" style="flex:1;max-width:820px;width:100%;margin:0 auto;padding:clamp(40px,6vw,72px) 20px;display:flex;flex-direction:column;gap:20px">
+<span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#536B4E;font-weight:600">Before you continue</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4vw,52px);line-height:1.05;color:#493126">Confidentiality agreement</h1>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:12px;font-size:14.5px;line-height:1.75;color:#3A362F;max-height:46vh;overflow:auto">
+<p style="margin:0">Some of the documents shared with you contain confidential business information about Sense of Touch Spa &amp; Wellness and its divisions (“Confidential Information”). By accepting, you agree that:</p>
+<ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px">
+<li>You will use the Confidential Information only to evaluate a possible investment, loan or partnership with Sense of Touch.</li>
+<li>You will not share, forward, copy or publish it, except with your professional advisers who are bound by the same duty of confidence.</li>
+<li>You will not download or capture it for any other purpose, and will delete any copies if asked.</li>
+<li>Nothing in these materials is an offer to sell securities or a promise of returns. Figures are estimates and may change.</li>
+<li>This agreement lasts for two years from today and is governed by the laws of Ghana.</li>
+</ol>
+<p style="margin:0;font-size:13px;color:#6B665C">Template wording for the prototype — replace with the NDA approved by your lawyer before launch.</p>
+</div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126;max-width:420px">Type your full name to sign<input autoComplete="name" value="{{ ndaName }}" onChange="{{ setNdaName }}" placeholder="{{ ndaPh }}" style="padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"></label>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ ndaErr }}</span>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><button onClick="{{ acceptNda }}" style="all:unset;cursor:pointer;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#536B4E">I agree</button><button onClick="{{ skipNda }}" style="all:unset;cursor:pointer;min-height:50px;padding:0 18px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#536B4E">Continue with overview documents only</button></div>
+</main>
+</sc-if>
+
+<sc-if value="{{ showRoom }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Investor room" style="flex:1;max-width:1180px;width:100%;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#536B4E;font-weight:600">Welcome, {{ first }}</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4vw,56px);line-height:1.02;color:#493126">Your documents</h1></div>
+<span style="font-size:13px;color:#4A453C">Access until {{ expires }}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:14px">
+<sc-for list="{{ docs }}" as="d" hint-placeholder-count="3">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:22px;display:flex;flex-direction:column;gap:12px;opacity:{{ d.op }}">
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:start"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.1;color:#493126">{{ d.title }}</span><span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:5px 8px;background:{{ d.tagBg }};color:{{ d.tagFg }};flex:none">{{ d.tier }}</span></div>
+<span style="font-size:14px;line-height:1.6;color:#4A453C;flex:1">{{ d.desc }}</span>
+<span style="font-size:12px;color:#6B665C">{{ d.seen }}</span>
+<sc-if value="{{ d.open }}" hint-placeholder-val="{{ true }}"><button onClick="{{ d.view }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 18px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600" style-hover="background:#536B4E">Open document</button></sc-if>
+<sc-if value="{{ d.locked }}" hint-placeholder-val="{{ false }}"><button onClick="{{ reNda }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 18px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Sign NDA to open</button></sc-if>
+</div>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:14px;align-items:start">
+<div style="background:#FFFDF9;border:1px solid #C6A15B;padding:24px;display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1;color:#493126">Request a meeting</span>
+<span style="font-size:14px;line-height:1.6;color:#4A453C">Arrange a call with the founder or a visit to the spa in Tema, Community 25.</span>
+<sc-if value="{{ meetDone }}" hint-placeholder-val="{{ false }}"><span role="status" style="font-size:14px;font-weight:600;color:#536B4E">Request sent — we’ll be in touch to agree a time.</span></sc-if>
+<sc-if value="{{ meetOpen }}" hint-placeholder-val="{{ true }}"><textarea rows="3" aria-label="Preferred times and topics" value="{{ meetNote }}" onChange="{{ setMeetNote }}" placeholder="Preferred days, times and what you’d like to discuss" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit;resize:vertical;line-height:1.55"></textarea><button onClick="{{ meet }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:46px;padding:0 20px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Send request</button></sc-if>
+</div>
+<div style="padding:8px 4px;display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.7;color:#4A453C">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Shared in confidence</span>
+<span>These documents are shared personally with {{ who }}. Please don’t forward links or access codes. Views are logged.</span>
+<span>Nothing here is an offer to sell securities. Figures are estimates and may change.</span>
+<a href="{{ waHref }}" target="_blank" rel="noopener" style="text-decoration:underline;align-self:flex-start">Questions? Message us on WhatsApp</a>
+</div>
+</div>
+</main>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { em: '', code: '', err: '', ndaName: '', ndaErr: '', skip: false, meetNote: '', tick: 0 };
+  componentDidMount() { this.off = window.SOT && window.SOT.on(() => this.setState(s => ({ tick: s.tick + 1 }))); const p = new URLSearchParams(location.search); if (p.get('email')) this.setState({ em: p.get('email') }); }
+  componentWillUnmount() { this.off && this.off(); }
+  renderVals() {
+    const X = window.SOTInv, st = this.state, r = X ? X.session() : null;
+    const base = { em: st.em, code: st.code, setEm: e => this.setState({ em: e.target.value, err: '' }), setCode: e => this.setState({ code: e.target.value, err: '' }), hasErr: !!st.err, loginErr: st.err,
+      signIn: e => { e.preventDefault(); if (!X) return; const res = X.signIn(st.em, st.code); if (res.error) return this.setState({ err: res.error }); this.setState({ err: '', code: '' }); } };
+    if (!r) return { ...base, showLogin: true, showNda: false, showRoom: false, signedIn: false };
+    const ndaPending = r.nda && !r.ndaAccepted && !st.skip;
+    const tag = t => t === 'Confidential' ? { tagBg: '#493126', tagFg: '#C6A15B' } : { tagBg: '#E9DDC9', tagFg: '#493126' };
+    const fmt = s => new Date(s).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    const docs = (r.granted || []).map(k => X.material(k)).filter(Boolean).map(m => {
+      const locked = m.tier === 'Confidential' && !r.ndaAccepted, vs = (r.views || []).filter(v => v.key === m.key);
+      return { title: m.title, desc: m.desc, tier: m.tier, ...tag(m.tier), locked, open: !locked, op: locked ? 0.7 : 1, seen: vs.length ? 'Last opened ' + fmt(vs[vs.length - 1].at) : 'Not opened yet',
+        view: () => { X.logView(r.id, m.key); window.open(m.href, '_blank', 'noopener'); } };
+    });
+    return { ...base, signedIn: true, showLogin: false, showNda: ndaPending, showRoom: !ndaPending,
+      who: r.name + (r.org && r.org !== 'Individual' ? ', ' + r.org : ''), first: r.name.split(' ')[0], expires: fmt(r.expires),
+      out: () => { X.signOut(); this.setState({ skip: false, tick: st.tick + 1 }); },
+      ndaName: st.ndaName, ndaErr: st.ndaErr, ndaPh: r.name, setNdaName: e => this.setState({ ndaName: e.target.value, ndaErr: '' }),
+      acceptNda: () => { const res = X.acceptNda(r.id, st.ndaName); if (res.error) return this.setState({ ndaErr: res.error }); this.setState({ ndaName: '', skip: false }); },
+      skipNda: () => this.setState({ skip: true }), reNda: () => this.setState({ skip: false }),
+      docs, meetDone: !!r.meeting && !!r.meetingNote, meetOpen: !(r.meeting && r.meetingNote), meetNote: st.meetNote, setMeetNote: e => this.setState({ meetNote: e.target.value }),
+      meet: () => { X.requestMeeting(r.id, st.meetNote || 'Requested from the investor room'); this.setState({ meetNote: '' }); },
+      waHref: window.SOT ? window.SOT.wa('Hello Sense of Touch, this is ' + r.name + ' from the investor room (' + r.id + ').') : '#' };
+  }
+}
+</script>
+</body>
+</html>

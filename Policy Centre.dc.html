@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Legal &amp; Policies Centre · Sense of Touch</title>
+<meta name="description" content="Every Sense of Touch policy in one place, with version and effective date.">
+<meta property="og:title" content="Legal &amp; Policies Centre · Sense of Touch">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}*{box-sizing:border-box}a{color:#493126;text-underline-offset:3px}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-auth.js"></script>
+<script src="./sot-policy.js"></script>
+</helmet>
+<div style="min-height:100vh">
+<dc-import name="SiteHeader" active="" hint-size="100%,76px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<section data-screen-label="Policy centre hero" style="background:#E9DDC9">
+<div style="max-width:1100px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,3vw,32px) 40px;display:flex;flex-direction:column;gap:16px">
+<a href="Policy%20Centre.dc.html" style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600;text-decoration:none">Legal &amp; Policies Centre</a>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,6vw,80px);line-height:0.98;color:#493126">{{ heroTitle }}</h1>
+<p style="margin:0;font-size:16px;line-height:1.75;max-width:680px;text-wrap:pretty">{{ heroLead }}</p>
+<sc-if value="{{ staff }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED;padding:8px 12px">Staff view · {{ staffRole }}</span></sc-if>
+</div>
+</section>
+
+<sc-if value="{{ isIndex }}" hint-placeholder-val="{{ true }}">
+<main data-screen-label="Policy index" style="max-width:1100px;margin:0 auto;padding:40px clamp(20px,3vw,32px) 64px;display:flex;flex-direction:column;gap:40px">
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+<section style="display:flex;flex-direction:column">
+<h2 style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">{{ g.name }}</h2>
+<sc-for list="{{ g.items }}" as="p" hint-placeholder-count="5">
+<a href="{{ p.href }}" style="display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:6px 16px;align-items:center;padding:16px 0;border-top:1px solid #E9DDC9;text-decoration:none;color:#24221D" style-hover="background:#FFFDF9">
+<span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#C6A15B">{{ p.n }}</span>
+<span style="display:flex;flex-direction:column;gap:2px"><strong style="font-size:15px;font-weight:600;color:#493126">{{ p.title }}</strong><span style="font-size:13px;color:#4A453C">{{ p.meta }}</span></span>
+<span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:{{ p.color }};text-align:right">{{ p.status }}</span>
+</a>
+</sc-for>
+</section>
+</sc-for>
+<p style="margin:0;font-size:13px;line-height:1.6;color:#4A453C;max-width:70ch">Policies marked “In preparation” are being finalised and are not yet in force. Every policy will be reviewed by a Ghanaian lawyer before launch.</p>
+</main>
+</sc-if>
+
+<sc-if value="{{ isDoc }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Policy document" style="max-width:1100px;margin:0 auto;padding:40px clamp(20px,3vw,32px) 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:start">
+<article style="display:flex;flex-direction:column;gap:28px;max-width:680px">
+<sc-if value="{{ docNotInForce }}" hint-placeholder-val="{{ false }}"><div style="background:#F3E3C4;border-left:3px solid #C6A15B;padding:10px 14px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#6B4A12">In preparation · Not yet in force</div></sc-if>
+<div data-screen-label="Document control" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:1px;background:#FFFDF9;border:1px solid #E9DDC9;font-size:13px">
+<sc-for list="{{ docCtrl }}" as="c" hint-placeholder-count="8"><div style="background:#FFFDF9;padding:10px 12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ c.k }}</span><span style="color:#24221D">{{ c.v }}</span></div></sc-for>
+</div>
+<sc-if value="{{ docHidden }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;font-size:15px;line-height:1.7">This policy is being prepared and is not yet in force. <a href="Policy%20Centre.dc.html">Back to all policies</a></div></sc-if>
+<sc-for list="{{ docSections }}" as="s" hint-placeholder-count="3">
+<section style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px;color:#493126">{{ s.num }}. {{ s.h }}</h2>
+<sc-for list="{{ s.blocks }}" as="b" hint-placeholder-count="1">
+<sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.75;text-wrap:pretty">{{ b.text }}</p></sc-if>
+<sc-if value="{{ b.isTodo }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:14px;line-height:1.6;background:#F3E3C4;color:#6B4A12;padding:8px 12px">{{ b.text }}</p></sc-if>
+<sc-if value="{{ b.isList }}" hint-placeholder-val="{{ false }}"><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:15px;line-height:1.7"><sc-for list="{{ b.items }}" as="it" hint-placeholder-count="3"><li>{{ it }}</li></sc-for></ul></sc-if>
+</sc-for>
+</section>
+</sc-for>
+<a href="Policy%20Centre.dc.html" style="font-size:13px">← All policies</a>
+</article>
+
+<sc-if value="{{ staff }}" hint-placeholder-val="{{ false }}">
+<aside data-screen-label="Policy editor" style="display:flex;flex-direction:column;gap:16px;background:#FFFDF9;border:1px solid #493126;padding:clamp(18px,3vw,28px)">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Edit · {{ editState }}</span>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Title<input value="{{ eTitle }}" onChange="{{ setTitle }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;font-family:inherit"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Effective date<input type="date" value="{{ eEff }}" onChange="{{ setEff }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;letter-spacing:0;font-weight:400;font-family:inherit"></label>
+<fieldset style="border:1px solid #E9DDC9;margin:0;padding:12px;display:flex;flex-wrap:wrap;gap:6px"><legend style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126;padding:0 6px">Must be accepted for</legend>
+<sc-for list="{{ applyOpts }}" as="a" hint-placeholder-count="6"><button type="button" onClick="{{ a.toggle }}" aria-pressed="{{ a.on }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:12px;border:1px solid #493126;background:{{ a.bg }};color:{{ a.fg }}">{{ a.label }}</button></sc-for>
+</fieldset>
+<sc-if value="{{ canEditText }}" hint-placeholder-val="{{ true }}">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#493126">Text<span style="font-size:12px;letter-spacing:0;text-transform:none;font-weight:400;color:#6B665C">“## ” starts a section, “- ” a list item. Replace every [To confirm] line before publishing.</span><textarea rows="16" value="{{ eText }}" onChange="{{ setText }}" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;line-height:1.6;letter-spacing:0;text-transform:none;font-weight:400;font-family:ui-monospace,Menlo,monospace;resize:vertical"></textarea></label>
+</sc-if>
+<sc-if value="{{ legalBacked }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.6;color:#4A453C">The text of this policy is kept on the <a href="{{ legalHref }}">Legal page</a>. Saving here records a new version and effective date.</span></sc-if>
+<sc-if value="{{ hasMsg }}" hint-placeholder-val="{{ false }}"><div role="status" style="font-size:13px;padding:10px 12px;background:{{ msgBg }};color:{{ msgFg }}">{{ msg }}</div></sc-if>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<button onClick="{{ save }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 18px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Save draft</button>
+<button onClick="{{ publish }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 18px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600" style-hover="background:#536B4E">Publish</button>
+</div>
+<div style="display:flex;flex-direction:column;border-top:1px solid #E9DDC9;padding-top:12px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#493126;margin-bottom:6px">Revision history</span>
+<sc-for list="{{ hist }}" as="h" hint-placeholder-count="2"><div style="display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:10px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px"><strong style="color:#493126">v{{ h.v }}</strong><span style="color:#4A453C">{{ h.line }}</span><span style="font-weight:600;color:{{ h.color }}">{{ h.status }}</span></div></sc-for>
+</div>
+</aside>
+</sc-if>
+</main>
+</sc-if>
+
+<sc-if value="{{ showLog }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Consent records" style="max-width:1100px;margin:0 auto;padding:0 clamp(20px,3vw,32px) 96px;display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;color:#493126">Consent records</h2>
+<p style="margin:0;font-size:14px;color:#4A453C;max-width:70ch">One row per policy accepted at registration. Optional consents (marketing, photography) are separate rows and never required.</p>
+<div style="overflow-x:auto;border:1px solid #E9DDC9;background:#FFFDF9">
+<div style="min-width:720px;display:grid;grid-template-columns:1.2fr 1.4fr 0.6fr 1fr 0.9fr 1.2fr;font-size:13px">
+<sc-for list="{{ logHead }}" as="h" hint-placeholder-count="6"><span style="padding:10px 12px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126;border-bottom:1px solid #493126">{{ h }}</span></sc-for>
+<sc-for list="{{ logCells }}" as="c" hint-placeholder-count="0"><span style="padding:10px 12px;border-bottom:1px solid #E9DDC9;overflow-wrap:anywhere">{{ c }}</span></sc-for>
+</div>
+<sc-if value="{{ logEmpty }}" hint-placeholder-val="{{ true }}"><span style="display:block;padding:20px;font-size:14px;color:#4A453C">No acceptances recorded yet. They appear here when someone registers.</span></sc-if>
+</div>
+</section>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { key: new URLSearchParams(location.search).get('p') || '', ed: null, msg: '', ok: true, tick: 0 };
+  componentDidMount() { this.iv = setInterval(() => { if (window.SOTPolicy && window.SOTAuth) { clearInterval(this.iv); this.offA = window.SOTAuth.on(() => this.setState(s => ({ tick: s.tick + 1 }))); this.forceUpdate(); } }, 60); this.h = () => this.setState(s => ({ tick: s.tick + 1 })); addEventListener('sot-change', this.h); }
+  componentWillUnmount() { clearInterval(this.iv); this.offA && this.offA(); removeEventListener('sot-change', this.h); }
+  toText(s) { return (s || []).map(([h, bl]) => '## ' + h + '\n' + bl.map(b => Array.isArray(b) ? b.map(i => '- ' + i).join('\n') : b).join('\n')).join('\n\n'); }
+  fromText(t) { const out = []; let cur = null; String(t || '').split('\n').forEach(raw => { const l = raw.trim(); if (!l) return; if (l.startsWith('## ')) { cur = [l.slice(3).trim(), []]; out.push(cur); return; } if (!cur) { cur = ['Introduction', []]; out.push(cur); } if (l.startsWith('- ')) { const last = cur[1][cur[1].length - 1]; if (Array.isArray(last)) last.push(l.slice(2)); else cur[1].push([l.slice(2)]); } else cur[1].push(l); }); return out; }
+  renderVals() {
+    const P = window.SOTPolicy, A = window.SOTAuth, st = this.state;
+    if (!P) return { isIndex: true, groups: [], heroTitle: 'Legal & Policies Centre', heroLead: '' };
+    const staff = P.canEdit(), fmt = d => d ? new Date(d + (d.length === 10 ? 'T00:00' : '')).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+    const all = P.list(), b = st.key && P.get(st.key);
+    const base = { staff, staffRole: staff && A ? A.staffRole() || '' : '', isIndex: !b, isDoc: !!b };
+    if (!b) {
+      const rows = this.logRows();
+      return { ...base, heroTitle: 'Legal & Policies Centre', heroLead: 'Every policy that applies to the spa, the shop and the Institute, with its version and the date it took effect.',
+        groups: P.GROUPS.map(g => ({ name: g, items: all.filter(p => p.group === g).map(p => {
+          const pub = p.status === 'Published'; const showable = pub || staff;
+          return { n: p.n, title: p.title, href: !showable ? 'Policy%20Centre.dc.html?p=' + p.key : pub && p.legal && !staff && !(p.published && p.published.s) ? 'Legal.dc.html?p=' + p.legal : 'Policy%20Centre.dc.html?p=' + p.key,
+            meta: pub ? 'Version ' + p.published.v + ' · in force from ' + fmt(p.published.effective) : staff ? 'Draft v' + p.latest.v + (p.todo ? ' · has [To confirm] items' : '') : 'Not yet in force',
+            status: pub ? (p.latest.status === 'Draft' && staff ? 'Published · draft open' : 'Published') : staff ? 'Draft' : 'In preparation', color: pub ? '#2F4A2B' : '#6B4A12' }; }) })),
+        ...rows };
+    }
+    const hist = P.history(b.key), pub = P.published(b.key), top = hist[0];
+    const view = staff ? top : pub;
+    const ed = st.ed && st.ed.key === b.key ? st.ed : { key: b.key, title: top.title, eff: top.effective || '', applies: top.applies || b.applies, text: this.toText(top.s) };
+    const setEd = patch => this.setState({ ed: { ...ed, ...patch }, msg: '' });
+    const secs = view && view.s ? view.s : [];
+    return { ...base, ...this.logRows(),
+      heroTitle: (view || top).title, heroLead: view && view.legal ? 'The full text is on the Legal page.' : (ap => ap ? 'Applies to: ' + ap : 'Information only. No acceptance required.')(((view || top).applies || []).map(a => P.TYPES[a]).join(', ')),
+      docVersion: (view || top).v, docEffective: view && view.effective ? 'In force from ' + fmt(view.effective) : 'No effective date yet', docStatus: view ? view.status : 'In preparation', docColor: view && view.status === 'Published' ? '#2F4A2B' : '#6B4A12',
+      docHidden: !view && !staff,
+      docNotInForce: !view || view.status !== 'Published',
+      docCtrl: (() => { const v = view || top, pubd = view && view.status === 'Published', eff = pubd && view.effective ? new Date(view.effective + 'T00:00') : null, rv = eff ? new Date(eff.getFullYear() + 1, eff.getMonth(), eff.getDate()) : null, f = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+        return [{ k: 'Reference', v: b.ref }, { k: 'Version', v: v.v }, { k: 'Status', v: pubd ? 'Published' : 'In preparation' }, { k: 'Approval date', v: pubd ? f(new Date(String(view.at).slice(0, 10) + 'T00:00')) : 'Not yet approved' }, { k: 'Effective date', v: eff ? f(eff) : 'Assigned after approval' }, { k: 'Policy owner', v: b.owner }, { k: 'Approving authority', v: b.authority }, { k: 'Next review', v: rv ? f(rv) : 'One year after approval' }, { k: 'Review cycle', v: b.review }].concat([{ k: 'Issued by', v: b.group === 'Institute' ? 'Sense of Touch Institute of Beauty & Wellness' : 'Sense of Touch Spa & Wellness' }, { k: 'Address', v: 'Estate Junction, Tema Community 25, Ghana' }, { k: 'Contact', v: (b.group === 'Institute' ? 'senseoftouch101@gmail.com' : 'info@senseoftouch.co') + ' · +233 59 718 2026' }]); })(),
+      docSections: view && view.legal ? [{ num: 1, h: 'Full text', blocks: [{ isP: true, text: 'Read the current text on the Legal page: Legal.dc.html?p=' + b.legal }] }] : secs.map(([h, bl], i) => ({ num: i + 1, h, blocks: bl.map(x => Array.isArray(x) ? { isList: true, items: x } : String(x).startsWith('[To confirm]') ? { isTodo: true, text: x } : { isP: true, text: x }) })),
+      editState: top.status === 'Draft' ? 'Draft v' + top.v : 'Published v' + top.v + ' · saving opens a new draft',
+      eTitle: ed.title, eEff: ed.eff, eText: ed.text, setTitle: e => setEd({ title: e.target.value }), setEff: e => setEd({ eff: e.target.value }), setText: e => setEd({ text: e.target.value }),
+      canEditText: !top.legal, legalBacked: !!top.legal, legalHref: 'Legal.dc.html?p=' + b.legal,
+      applyOpts: Object.entries(P.TYPES).map(([k, label]) => { const on = ed.applies.includes(k); return { label, on, bg: on ? '#493126' : 'transparent', fg: on ? '#F8F4ED' : '#493126', toggle: () => setEd({ applies: on ? ed.applies.filter(x => x !== k) : [...ed.applies, k] }) }; }),
+      hasMsg: !!st.msg, msg: st.msg, msgBg: st.ok ? '#EEF2EC' : '#F6E7E1', msgFg: st.ok ? '#2F4A2B' : '#6B2A1E',
+      save: () => { const patch = { title: ed.title, effective: ed.eff, applies: ed.applies }; if (!top.legal) patch.s = this.fromText(ed.text); const r = P.saveDraft(b.key, patch); this.setState({ msg: r.error || 'Draft v' + r.v + ' saved.', ok: !r.error, ed: null }); },
+      publish: () => { const patch = { title: ed.title, effective: ed.eff, applies: ed.applies }; if (!top.legal) patch.s = this.fromText(ed.text); const r0 = P.saveDraft(b.key, patch); if (r0.error) return this.setState({ msg: r0.error, ok: false }); const r = P.publish(b.key, ed.eff); this.setState({ msg: r.error || 'Published as v' + r.v + '. The previous version is archived.', ok: !r.error, ed: null }); },
+      hist: hist.map(h => ({ v: h.v, status: h.status, color: h.status === 'Published' ? '#2F4A2B' : h.status === 'Draft' ? '#6B4A12' : '#6B665C', line: (h.effective ? 'Effective ' + fmt(h.effective) + ' · ' : '') + 'saved ' + new Date(h.at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ' by ' + h.by }))
+    };
+  }
+  logRows() {
+    const P = window.SOTPolicy; if (!P || !P.canEdit() || this.state.key) return { showLog: false };
+    const rows = P.acceptances().slice(0, 200);
+    return { showLog: true, logHead: ['When', 'Person', 'Version', 'Policy', 'Type', 'Registration'], logEmpty: !rows.length,
+      logCells: rows.flatMap(r => [new Date(r.at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }), r.userId, r.version, (P.get(r.policy) || {}).title || r.policy, r.consentType === 'mandatory' ? 'Required' : r.consentType + (r.granted ? ' · yes' : ' · no'), P.TYPES[r.type] || r.type]) };
+  }
+}
+</script>
+</body>
+</html>

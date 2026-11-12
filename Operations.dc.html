@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Operations · Sense of Touch</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#F3EEE6;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126}a:hover{color:#536B4E}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}@media print{[data-screen-only]{display:none!important}body{background:#fff}}</style>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-auth.js"></script>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column">
+<header data-screen-only="1" style="background:#24221D;color:#F8F4ED">
+<div style="max-width:1320px;margin:0 auto;padding:16px clamp(16px,3vw,32px);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between">
+<a href="Admin.dc.html" style="display:flex;align-items:center;gap:12px;color:#F8F4ED;text-decoration:none"><img src="assets/logo-transparent.png" alt="" style="width:36px;height:36px;object-fit:contain;filter:brightness(0) invert(1)"><span style="display:flex;flex-direction:column"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:0.06em;line-height:1">SENSE OF TOUCH</span><span style="font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:#C6A15B;font-weight:600">Operations</span></span></a>
+<sc-if value="{{ ok }}" hint-placeholder-val="{{ false }}">
+<nav aria-label="Operations" style="display:flex;flex-wrap:wrap;gap:4px">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5"><button onClick="{{ t.go }}" aria-pressed="{{ t.on }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 12px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:{{ t.fg }};border-bottom:2px solid {{ t.line }}">{{ t.label }}</button></sc-for>
+</nav>
+<span style="display:flex;align-items:center;gap:14px;font-size:12px;color:#B8B2A6">{{ who }}<a href="Admin.dc.html" style="color:#C6A15B;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;text-decoration:none">Admin</a></span>
+</sc-if>
+</div>
+</header>
+
+<sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Operations locked" style="max-width:460px;margin:0 auto;padding:clamp(56px,10vw,120px) 20px;display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:42px;color:#493126">{{ lockTitle }}</h1>
+<p style="margin:0;font-size:15px;line-height:1.7">{{ lockText }}</p>
+<a href="Sign%20In.dc.html" style="align-self:flex-start;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;text-decoration:none;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600">Sign in</a>
+</section>
+</sc-if>
+
+<sc-if value="{{ ok }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1320px;width:100%;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,3vw,32px) 80px;display:flex;flex-direction:column;gap:24px">
+<sc-if value="{{ hasFlash }}" hint-placeholder-val="{{ false }}"><div role="status" data-screen-only="1" style="position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:50;background:#24221D;color:#F8F4ED;padding:12px 18px;font-size:13px;max-width:90vw">{{ flash }}</div></sc-if>
+
+<sc-if value="{{ tSched }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Therapist schedule" style="display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:4px"><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,4vw,44px);color:#493126">Therapist schedule</h1><span style="font-size:13px;color:#4A453C">{{ weekLabel }} · blocked times close those slots on the booking page.</span></div>
+<div style="display:flex;gap:6px"><button onClick="{{ prevWeek }}" aria-label="Previous week" style="all:unset;cursor:pointer;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #493126;color:#493126">←</button><button onClick="{{ thisWeek }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;font-weight:600;white-space:nowrap">This week</button><button onClick="{{ nextWeek }}" aria-label="Next week" style="all:unset;cursor:pointer;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #493126;color:#493126">→</button></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:1px;background:#E9DDC9;border:1px solid #E9DDC9">
+<sc-for list="{{ days }}" as="d" hint-placeholder-count="7">
+<div style="background:{{ d.bg }};padding:14px;display:flex;flex-direction:column;gap:8px;min-height:180px">
+<span style="display:flex;justify-content:space-between;align-items:baseline"><strong style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#493126">{{ d.dow }}</strong><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">{{ d.num }}</span></span>
+<sc-for list="{{ d.blocks }}" as="x" hint-placeholder-count="0"><div style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:6px 8px;font-size:12px;line-height:1.4;display:flex;justify-content:space-between;gap:6px"><span><strong>{{ x.time }}</strong> · {{ x.who }}<br>{{ x.reason }}</span><button onClick="{{ x.remove }}" aria-label="Remove blocked time" style="all:unset;cursor:pointer;color:#9A3B2A;font-weight:600;padding:0 4px">×</button></div></sc-for>
+<sc-for list="{{ d.items }}" as="b" hint-placeholder-count="0"><div style="background:#FFFDF9;border-left:3px solid {{ b.c }};padding:6px 8px;font-size:12px;line-height:1.4"><strong>{{ b.time }}</strong> · {{ b.service }}<br><span style="color:#4A453C">{{ b.name }} · {{ b.ther }}</span></div></sc-for>
+<sc-if value="{{ d.empty }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:#6B665C">No bookings</span></sc-if>
+</div>
+</sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(16px,2.5vw,24px);display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Block time</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px;align-items:end">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Who<select value="{{ bk.therapist }}" onChange="{{ bkSet.therapist }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit;letter-spacing:0;text-transform:none;font-weight:400"><sc-for list="{{ therOpts }}" as="o" hint-placeholder-count="2"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Date<input type="date" value="{{ bk.date }}" onChange="{{ bkSet.date }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit;letter-spacing:0;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">From<input type="time" value="{{ bk.from }}" onChange="{{ bkSet.from }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit;letter-spacing:0;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">To<input type="time" value="{{ bk.to }}" onChange="{{ bkSet.to }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit;letter-spacing:0;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Reason<input value="{{ bk.reason }}" onChange="{{ bkSet.reason }}" placeholder="Leave, training…" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit;letter-spacing:0;text-transform:none;font-weight:400"></label>
+<button onClick="{{ addBlock }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 18px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Block</button>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tSup }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Suppliers and purchase orders" style="display:flex;flex-direction:column;gap:18px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,4vw,44px);color:#493126">Suppliers &amp; purchase orders</h1>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;align-items:start">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(16px,2.5vw,24px);display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Suppliers</h2>
+<sc-for list="{{ suppliers }}" as="s" hint-placeholder-count="0"><div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:14px"><span style="display:flex;flex-direction:column;gap:2px"><strong style="color:#493126">{{ s.name }}</strong><span style="color:#4A453C">{{ s.supplies }}</span><span style="font-size:12px;color:#6B665C">{{ s.contact }}</span></span><span style="font-size:12px;color:#536B4E;font-weight:600;white-space:nowrap">{{ s.open }}</span></div></sc-for>
+<sc-if value="{{ noSuppliers }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px;color:#6B665C">No suppliers yet.</span></sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px;border-top:1px solid #E9DDC9;padding-top:12px">
+<input aria-label="Supplier name" placeholder="Supplier name" value="{{ sp.name }}" onChange="{{ spSet.name }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<input aria-label="Contact" placeholder="Phone or email" value="{{ sp.contact }}" onChange="{{ spSet.contact }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<input aria-label="Supplies" placeholder="What they supply" value="{{ sp.supplies }}" onChange="{{ spSet.supplies }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<button onClick="{{ addSupplier }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Add supplier</button>
+</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(16px,2.5vw,24px);display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Purchase orders</h2>
+<sc-for list="{{ pos }}" as="p" hint-placeholder-count="0"><div style="display:flex;flex-direction:column;gap:6px;padding:12px 0;border-top:1px solid #E9DDC9;font-size:14px">
+<span style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><strong style="color:#493126">{{ p.id }} · {{ p.supplier }}</strong><span style="font-weight:600;color:{{ p.c }}">{{ p.status }}</span></span>
+<span style="color:#4A453C">{{ p.items }} · {{ p.amount }} · expected {{ p.expected }}</span>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ p.acts }}" as="a" hint-placeholder-count="0"><button onClick="{{ a.go }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 12px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">{{ a.l }}</button></sc-for></div>
+</div></sc-for>
+<sc-if value="{{ noPos }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px;color:#6B665C">No purchase orders yet.</span></sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;border-top:1px solid #E9DDC9;padding-top:12px">
+<select aria-label="Supplier" value="{{ po.supplier }}" onChange="{{ poSet.supplier }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit"><option value="">Choose supplier</option><sc-for list="{{ suppliers }}" as="s" hint-placeholder-count="0"><option value="{{ s.id }}">{{ s.name }}</option></sc-for></select>
+<input aria-label="Items" placeholder="Items and quantities" value="{{ po.items }}" onChange="{{ poSet.items }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<input aria-label="Amount in GHS" inputMode="decimal" placeholder="Amount (GHS)" value="{{ po.amount }}" onChange="{{ poSet.amount }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<input aria-label="Expected date" type="date" value="{{ po.expected }}" onChange="{{ poSet.expected }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<button onClick="{{ addPo }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Create order</button>
+</div>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tInv }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Invoices and receipts" style="display:flex;flex-direction:column;gap:18px">
+<div data-screen-only="1" style="display:flex;flex-direction:column;gap:4px"><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,4vw,44px);color:#493126">Invoices &amp; receipts</h1><span style="font-size:13px;color:#4A453C;max-width:80ch">For spa services paid at the spa. Staff record each payment with its reference, and a receipt is issued only after that. Online payments are confirmed by the payment provider. Shop orders keep their own invoices in the Shop.</span></div>
+<sc-if value="{{ showReceipt }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Receipt" style="background:#FFFFFF;border:1px solid #493126;padding:clamp(20px,4vw,40px);max-width:640px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start"><span style="display:flex;flex-direction:column"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;letter-spacing:0.06em;color:#493126">SENSE OF TOUCH</span><span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#536B4E;font-weight:600">Spa &amp; Wellness · Tema Community 25</span></span><span style="text-align:right;font-size:13px"><strong style="display:block;font-size:15px;color:#493126">{{ rc.title }}</strong>{{ rc.number }}<br>{{ rc.date }}</span></div>
+<div style="font-size:14px;line-height:1.6;border-top:1px solid #E9DDC9;padding-top:12px">Billed to <strong>{{ rc.customer }}</strong> · {{ rc.phone }}</div>
+<div style="display:flex;justify-content:space-between;gap:16px;font-size:15px;padding:10px 0;border-top:1px solid #E9DDC9;border-bottom:1px solid #E9DDC9"><span>{{ rc.desc }}</span><strong>{{ rc.amount }}</strong></div>
+<span style="font-size:13px;color:#4A453C">{{ rc.payLine }}</span>
+<div data-screen-only="1" style="display:flex;gap:8px"><button onClick="{{ printIt }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 18px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Print</button><button onClick="{{ closeReceipt }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 18px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Close</button></div>
+</div>
+</sc-if>
+<div data-screen-only="1" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(16px,2.5vw,24px);display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">New invoice</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:10px;align-items:end">
+<select aria-label="From booking" value="{{ iv.booking }}" onChange="{{ ivSet.booking }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit"><option value="">From a booking (optional)</option><sc-for list="{{ bookOpts }}" as="o" hint-placeholder-count="0"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<input aria-label="Customer name" placeholder="Customer name" value="{{ iv.customer }}" onChange="{{ ivSet.customer }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<input aria-label="Phone" placeholder="Phone" value="{{ iv.phone }}" onChange="{{ ivSet.phone }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<input aria-label="Description" placeholder="Service or item" value="{{ iv.desc }}" onChange="{{ ivSet.desc }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<input aria-label="Amount in GHS" inputMode="decimal" placeholder="Amount (GHS)" value="{{ iv.amount }}" onChange="{{ ivSet.amount }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<button onClick="{{ addInvoice }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Create invoice</button>
+</div>
+</div>
+<div data-screen-only="1" style="display:flex;flex-direction:column;background:#FFFDF9;border:1px solid #E9DDC9">
+<sc-for list="{{ invoices }}" as="i" hint-placeholder-count="0">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px 16px;align-items:center;padding:14px 18px;border-bottom:1px solid #E9DDC9;font-size:14px">
+<span style="display:flex;flex-direction:column"><strong style="color:#493126">{{ i.number }}</strong><span style="font-size:12px;color:#6B665C">{{ i.date }}</span></span>
+<span>{{ i.customer }}<br><span style="font-size:12px;color:#6B665C">{{ i.desc }}</span></span>
+<strong>{{ i.amount }}</strong>
+<span style="font-weight:600;color:{{ i.c }}">{{ i.status }}</span>
+<sc-if value="{{ i.unpaid }}" hint-placeholder-val="{{ false }}"><span style="display:flex;gap:6px;flex-wrap:wrap"><select aria-label="Method" value="{{ i.method }}" onChange="{{ i.setMethod }}" style="padding:8px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:13px;font-family:inherit"><option>Cash</option><option>Mobile Money</option><option>Card</option><option>Bank transfer</option></select><input aria-label="Payment reference" placeholder="Reference" value="{{ i.ref }}" onChange="{{ i.setRef }}" style="padding:8px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:13px;font-family:inherit;min-width:0;width:120px"><button onClick="{{ i.pay }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;background:#536B4E;color:#F8F4ED;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">Record payment</button></span></sc-if>
+<span style="display:flex;gap:6px;flex-wrap:wrap"><button onClick="{{ i.view }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">{{ i.viewLabel }}</button><sc-if value="{{ i.paid }}" hint-placeholder-val="{{ false }}"><button onClick="{{ i.refund }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;color:#9A3B2A;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">Refund</button></sc-if></span>
+</div>
+</sc-for>
+<sc-if value="{{ noInvoices }}" hint-placeholder-val="{{ true }}"><span style="padding:18px;font-size:13px;color:#6B665C">No invoices yet.</span></sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tContent }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Content and media" style="display:flex;flex-direction:column;gap:18px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,4vw,44px);color:#493126">Content &amp; media</h1>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(16px,2.5vw,24px);display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Announcement bar</h2>
+<span style="font-size:13px;color:#4A453C">Shown at the top of every public page while switched on.</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;align-items:end">
+<input aria-label="Announcement text" placeholder="e.g. Now taking bookings for December" value="{{ bn.text }}" onChange="{{ bnSet.text }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<input aria-label="Link" placeholder="Link, e.g. Book.dc.html" value="{{ bn.href }}" onChange="{{ bnSet.href }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<label style="display:flex;gap:10px;align-items:center;font-size:14px;min-height:44px"><input type="checkbox" checked="{{ bn.on }}" onChange="{{ bnSet.on }}" style="width:20px;height:20px;accent-color:#536B4E">Show on the website</label>
+<button onClick="{{ saveBanner }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Save</button>
+</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(16px,2.5vw,24px);display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Media library</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;align-items:end">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Image (JPG, PNG or WebP, up to 1 MB)<input type="file" accept="image/jpeg,image/png,image/webp" onChange="{{ pickFile }}" style="font-size:13px;font-family:inherit;letter-spacing:0;text-transform:none;font-weight:400"></label>
+<input aria-label="Alt text" placeholder="Describe the image (required)" value="{{ md.alt }}" onChange="{{ mdSet.alt }}" style="padding:11px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:15px;font-family:inherit">
+<label style="display:flex;gap:10px;align-items:center;font-size:13px;min-height:44px"><input type="checkbox" checked="{{ md.people }}" onChange="{{ mdSet.people }}" style="width:20px;height:20px;accent-color:#536B4E">Shows identifiable people</label>
+<sc-if value="{{ md.people }}" hint-placeholder-val="{{ false }}"><label style="display:flex;gap:10px;align-items:center;font-size:13px;min-height:44px"><input type="checkbox" checked="{{ md.consent }}" onChange="{{ mdSet.consent }}" style="width:20px;height:20px;accent-color:#536B4E">Written photo consent is on file</label></sc-if>
+<button onClick="{{ addMedia }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Upload</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:12px">
+<sc-for list="{{ media }}" as="m" hint-placeholder-count="0"><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><div role="img" aria-label="{{ m.alt }}" style="width:100%;aspect-ratio:1;background-color:#E9DDC9;background-size:cover;background-position:center;background-image:{{ m.bg }}"></div><figcaption style="font-size:12px;line-height:1.4;color:#4A453C">{{ m.alt }}<br><span style="color:#6B665C">{{ m.meta }}</span></figcaption><button onClick="{{ m.remove }}" style="all:unset;cursor:pointer;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#9A3B2A;min-height:32px">Delete</button></figure></sc-for>
+</div>
+<sc-if value="{{ noMedia }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px;color:#6B665C">No uploads yet. In this prototype, images are kept in this browser, so keep uploads small.</span></sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tLog }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Activity and backup" style="display:flex;flex-direction:column;gap:18px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,4vw,44px);color:#493126">Activity, messages &amp; backup</h1>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ logFilters }}" as="f" hint-placeholder-count="6"><button onClick="{{ f.go }}" aria-pressed="{{ f.on }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:12px;font-weight:600;border:1px solid #493126;background:{{ f.bg }};color:{{ f.fg }};gap:8px"><span>{{ f.label }}</span><span style="opacity:0.8">{{ f.n }}</span></button></sc-for></div>
+<div style="overflow-x:auto;background:#FFFDF9;border:1px solid #E9DDC9"><div style="min-width:720px;display:grid;grid-template-columns:130px 130px minmax(0,1fr) 180px;font-size:13px">
+<sc-for list="{{ logHead }}" as="h" hint-placeholder-count="4"><span style="padding:10px 12px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#493126;border-bottom:1px solid #493126">{{ h }}</span></sc-for>
+<sc-for list="{{ logCells }}" as="c" hint-placeholder-count="0"><span style="padding:9px 12px;border-bottom:1px solid #E9DDC9;overflow-wrap:anywhere">{{ c }}</span></sc-for>
+</div></div>
+<sc-if value="{{ logEmpty }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#6B665C">Nothing recorded yet.</span></sc-if>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:clamp(16px,2.5vw,24px);display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:#493126">Backup</h2>
+<span style="font-size:13px;line-height:1.6;color:#4A453C;max-width:80ch">Downloads every record saved in this browser as one file. After launch, the database is backed up automatically, with a restore test every quarter.</span>
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><button onClick="{{ exportAll }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 18px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Download backup</button>
+<sc-if value="{{ canRestore }}" hint-placeholder-val="{{ false }}"><label style="display:flex;gap:10px;align-items:center;font-size:13px;min-height:46px;padding:0 14px;border:1px solid #9A3B2A;color:#9A3B2A;font-weight:600;cursor:pointer">Restore from file<input type="file" accept="application/json" onChange="{{ restore }}" style="font-size:12px;font-family:inherit;max-width:180px"></label></sc-if></div>
+</div>
+</section>
+</sc-if>
+</main>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TABDEF = [['sched', 'Schedule', ['dept_manager', 'receptionist']], ['sup', 'Suppliers', ['dept_manager', 'inventory', 'finance']], ['inv', 'Invoices', ['dept_manager', 'receptionist', 'finance']], ['content', 'Content & media', ['content', 'marketing']], ['log', 'Activity & backup', []]];
+const FULL = ['super_admin', 'director', 'general_admin'];
+const GHS = n => 'GHS ' + Number(n || 0).toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+const when = d => d ? new Date(d).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+class Component extends DCLogic {
+  state = { tab: '', week: 0, bk: { therapist: 'All', date: '', from: '09:00', to: '18:00', reason: '' }, sp: { name: '', contact: '', supplies: '' }, po: { supplier: '', items: '', amount: '', expected: '' },
+    iv: { booking: '', customer: '', phone: '', desc: '', amount: '' }, pay: {}, rcId: '', md: { alt: '', people: false, consent: false, file: null }, bn: null, logF: 'All', flash: '', tick: 0 };
+  componentDidMount() { this.iv = setInterval(() => { if (window.SOTAuth && window.SOT) { clearInterval(this.iv); this.offA = window.SOTAuth.on(() => this.bump()); this.offS = window.SOT.on(() => this.bump()); this.forceUpdate(); } }, 60); }
+  componentWillUnmount() { clearInterval(this.iv); this.offA && this.offA(); this.offS && this.offS(); clearTimeout(this.ft); }
+  bump() { this.setState(s => ({ tick: s.tick + 1 })); }
+  say(t) { this.setState({ flash: t }); clearTimeout(this.ft); this.ft = setTimeout(() => this.setState({ flash: '' }), 3500); }
+  log(action, target) { const A = window.SOTAuth, s = A.current(); window.SOT.add('ops-audit', { who: s ? s.email : 'unknown', action, target: target || '' }, 'OA'); }
+  next(prefix, key) { const y = new Date().getFullYear(), n = window.SOT.list(key).filter(x => String(x[prefix === 'RCT' ? 'receipt' : 'number'] || '').startsWith(prefix + '-' + y)).length + 1; return prefix + '-' + y + '-' + String(n).padStart(4, '0'); }
+  renderVals() {
+    const A = window.SOTAuth, S = window.SOT, st = this.state;
+    if (!A || !S) return { locked: true, ok: false, lockTitle: 'Loading…', lockText: '' };
+    const rk = A.roleKey(), allowed = TABDEF.filter(t => FULL.includes(rk) || t[2].includes(rk));
+    if (!A.current() || !allowed.length) return { locked: true, ok: false, lockTitle: A.current() ? 'No access' : 'Staff sign-in', lockText: A.current() ? 'Your role doesn’t include Operations. Ask the Super Administrator if you need access.' : 'Sign in with your staff account.' };
+    const tab = allowed.some(t => t[0] === st.tab) ? st.tab : allowed[0][0];
+    const set = (k, f) => e => this.setState({ [k]: { ...st[k], [f]: e.target.type === 'checkbox' ? e.target.checked : e.target.value } });
+    const out = { ok: true, locked: false, who: A.current().name + ' · ' + ((A.roleDef() || {}).label || ''), hasFlash: !!st.flash, flash: st.flash,
+      tabs: allowed.map(([k, label]) => ({ label, on: tab === k, fg: tab === k ? '#F8F4ED' : '#B8B2A6', line: tab === k ? '#C6A15B' : 'transparent', go: () => this.setState({ tab: k, rcId: '' }) })),
+      tSched: tab === 'sched', tSup: tab === 'sup', tInv: tab === 'inv', tContent: tab === 'content', tLog: tab === 'log' };
+    if (tab === 'sched') {
+      const start = new Date(); start.setHours(0, 0, 0, 0); const dow = (start.getDay() + 6) % 7; start.setDate(start.getDate() - dow + st.week * 7);
+      const bookings = S.list('bookings'), blocks = S.list('schedule-blocks'), today = iso(new Date());
+      const staff = S.list('staff').filter(x => x.active).map(x => x.name.split(' ')[0]);
+      const days = Array.from({ length: 7 }, (_, i) => { const d = new Date(start); d.setDate(d.getDate() + i); const k = iso(d);
+        const items = bookings.filter(b => b.date === k && !['Cancelled', 'Declined'].includes(b.status)).sort((a, b) => a.time.localeCompare(b.time, undefined, { numeric: true }));
+        const bl = blocks.filter(x => x.date === k);
+        return { dow: d.toLocaleDateString('en-GB', { weekday: 'short' }), num: d.getDate(), bg: k === today ? '#FBF6EC' : '#FFFDF9', empty: !items.length,
+          items: items.map(b => ({ time: b.time, service: b.service, name: b.name, ther: b.therapist || 'No preference', c: b.status === 'Confirmed' ? '#536B4E' : '#C6A15B' })),
+          blocks: bl.map(x => ({ time: x.from + '–' + x.to, who: x.therapist === 'All' ? 'Whole spa' : x.therapist, reason: x.reason || 'Unavailable', remove: () => { S.remove('schedule-blocks', x.id); this.log('Removed blocked time', x.date + ' ' + x.from); } })) }; });
+      const end = new Date(start); end.setDate(end.getDate() + 6);
+      Object.assign(out, { days, weekLabel: start.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ' – ' + end.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+        prevWeek: () => this.setState({ week: st.week - 1 }), nextWeek: () => this.setState({ week: st.week + 1 }), thisWeek: () => this.setState({ week: 0 }),
+        therOpts: [{ v: 'All', l: 'Whole spa (closed)' }, ...staff.map(n => ({ v: n, l: n }))], bk: st.bk, bkSet: Object.fromEntries(['therapist', 'date', 'from', 'to', 'reason'].map(f => [f, set('bk', f)])),
+        addBlock: () => { const b = st.bk; if (!b.date) return this.say('Choose a date.'); if (!(b.to > b.from)) return this.say('“To” must be later than “From”.'); S.add('schedule-blocks', { therapist: b.therapist, date: b.date, from: b.from, to: b.to, reason: b.reason.trim() }, 'BL'); this.log('Blocked time', b.therapist + ' ' + b.date + ' ' + b.from + '–' + b.to); this.setState({ bk: { ...b, reason: '' } }); this.say('Time blocked. Those slots now show as unavailable on the booking page.'); } });
+    }
+    if (tab === 'sup') {
+      const sups = S.list('suppliers'), pos = S.list('purchase-orders');
+      const C = { Draft: '#6B4A12', Ordered: '#493126', Received: '#2F4A2B', Cancelled: '#6B665C' };
+      const mv = (p, status) => () => { S.update('purchase-orders', p.id, { status, [status.toLowerCase() + 'At']: new Date().toISOString() }); this.log('Purchase order ' + status.toLowerCase(), p.id); };
+      Object.assign(out, { suppliers: sups.map(s => ({ ...s, open: pos.filter(p => p.supplierId === s.id && ['Draft', 'Ordered'].includes(p.status)).length + ' open' })), noSuppliers: !sups.length,
+        pos: pos.map(p => ({ id: p.id, supplier: (sups.find(s => s.id === p.supplierId) || {}).name || '—', items: p.items, amount: GHS(p.amount), expected: p.expected ? new Date(p.expected + 'T00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '—', status: p.status, c: C[p.status],
+          acts: p.status === 'Draft' ? [{ l: 'Mark ordered', go: mv(p, 'Ordered') }, { l: 'Cancel', go: mv(p, 'Cancelled') }] : p.status === 'Ordered' ? [{ l: 'Mark received', go: mv(p, 'Received') }, { l: 'Cancel', go: mv(p, 'Cancelled') }] : [] })), noPos: !pos.length,
+        sp: st.sp, spSet: Object.fromEntries(['name', 'contact', 'supplies'].map(f => [f, set('sp', f)])), po: st.po, poSet: Object.fromEntries(['supplier', 'items', 'amount', 'expected'].map(f => [f, set('po', f)])),
+        addSupplier: () => { const s = st.sp; if (!s.name.trim()) return this.say('Add the supplier’s name.'); const r = S.add('suppliers', { name: s.name.trim(), contact: s.contact.trim(), supplies: s.supplies.trim() }, 'SU'); this.log('Added supplier', r.name); this.setState({ sp: { name: '', contact: '', supplies: '' } }); },
+        addPo: () => { const p = st.po, amt = Number(p.amount); if (!p.supplier) return this.say('Choose a supplier.'); if (!p.items.trim()) return this.say('List the items.'); if (!(amt > 0)) return this.say('Enter the amount in GHS.'); const r = S.add('purchase-orders', { supplierId: p.supplier, items: p.items.trim(), amount: amt, expected: p.expected, status: 'Draft' }, 'PO'); this.log('Created purchase order', r.id); this.setState({ po: { supplier: '', items: '', amount: '', expected: '' } }); } });
+    }
+    if (tab === 'inv') {
+      const invs = S.list('invoices'), bks = S.list('bookings').filter(b => ['Confirmed', 'Completed'].includes(b.status) && !invs.some(i => i.bookingId === b.id));
+      const C = { Unpaid: '#6B4A12', Paid: '#2F4A2B', Refunded: '#9A3B2A', Void: '#6B665C' };
+      const rc = invs.find(i => i.id === st.rcId);
+      Object.assign(out, { iv: st.iv, bookOpts: bks.slice(0, 40).map(b => ({ v: b.id, l: b.date + ' · ' + b.name + ' · ' + b.service })),
+        ivSet: { ...Object.fromEntries(['customer', 'phone', 'desc', 'amount'].map(f => [f, set('iv', f)])), booking: e => { const b = bks.find(x => x.id === e.target.value); this.setState({ iv: { ...st.iv, booking: e.target.value, ...(b ? { customer: b.name, phone: b.phone || '', desc: b.service + ' · ' + b.date + ' ' + b.time } : {}) } }); } },
+        addInvoice: () => { const v = st.iv, amt = Number(v.amount); if (!v.customer.trim() || !v.desc.trim()) return this.say('Add the customer and the service.'); if (!(amt > 0)) return this.say('Enter the amount in GHS.'); const r = S.add('invoices', { number: this.next('INV', 'invoices'), bookingId: v.booking, customer: v.customer.trim(), phone: v.phone.trim(), desc: v.desc.trim(), amount: amt, status: 'Unpaid' }, 'IV'); this.log('Created invoice', r.number); this.setState({ iv: { booking: '', customer: '', phone: '', desc: '', amount: '' } }); },
+        invoices: invs.map(i => { const p = st.pay[i.id] || { method: 'Cash', ref: '' }; const setP = patch => this.setState({ pay: { ...st.pay, [i.id]: { ...p, ...patch } } });
+          return { number: i.number, date: when(i.created), customer: i.customer, desc: i.desc, amount: GHS(i.amount), status: i.status, c: C[i.status], unpaid: i.status === 'Unpaid', paid: i.status === 'Paid', method: p.method, ref: p.ref,
+            setMethod: e => setP({ method: e.target.value }), setRef: e => setP({ ref: e.target.value }), viewLabel: i.status === 'Paid' ? 'Receipt' : 'Invoice', view: () => this.setState({ rcId: i.id }),
+            pay: () => { if (p.method !== 'Cash' && p.ref.trim().length < 4) return this.say('Enter the transaction reference from the ' + p.method + ' record.'); const by = A.current().email; S.update('invoices', i.id, { status: 'Paid', method: p.method, ref: p.ref.trim(), paidAt: new Date().toISOString(), recordedBy: by, receipt: this.next('RCT', 'invoices') }); this.log('Recorded payment', i.number + ' · ' + p.method); this.say('Payment recorded. Receipt issued.'); },
+            refund: () => { const why = prompt('Reason for the refund'); if (!why || why.trim().length < 5) return; S.update('invoices', i.id, { status: 'Refunded', refundReason: why.trim(), refundedAt: new Date().toISOString(), refundedBy: A.current().email }); this.log('Refunded invoice', i.number); } }; }),
+        noInvoices: !invs.length, showReceipt: !!rc, closeReceipt: () => this.setState({ rcId: '' }), printIt: () => window.print(),
+        rc: rc ? { title: rc.status === 'Paid' ? 'Receipt' : rc.status === 'Refunded' ? 'Refunded receipt' : 'Invoice', number: rc.status !== 'Unpaid' && rc.receipt ? rc.receipt + ' · ' + rc.number : rc.number, date: when(rc.paidAt || rc.created), customer: rc.customer, phone: rc.phone || '', desc: rc.desc, amount: GHS(rc.amount),
+          payLine: rc.status === 'Paid' ? 'Paid by ' + rc.method + (rc.ref ? ' · ref ' + rc.ref : '') + ' · recorded by ' + rc.recordedBy : rc.status === 'Refunded' ? 'Refunded ' + when(rc.refundedAt) + ' · ' + rc.refundReason : 'Not yet paid.' } : {} });
+    }
+    if (tab === 'content') {
+      const saved = S.list('site-banner')[0] || { text: '', href: '', on: false }, bn = st.bn || saved, md = S.list('media');
+      Object.assign(out, { bn, bnSet: Object.fromEntries(['text', 'href', 'on'].map(f => [f, e => this.setState({ bn: { ...bn, [f]: e.target.type === 'checkbox' ? e.target.checked : e.target.value } })])),
+        saveBanner: () => { if (bn.on && !String(bn.text).trim()) return this.say('Add the announcement text.'); S.save('site-banner', [{ text: String(bn.text).trim(), href: String(bn.href || '').trim(), on: !!bn.on }]); this.log('Updated announcement bar', bn.on ? bn.text : 'Hidden'); this.setState({ bn: null }); this.say('Announcement saved.'); },
+        md: st.md, mdSet: Object.fromEntries(['alt', 'people', 'consent'].map(f => [f, set('md', f)])),
+        pickFile: e => { const f = e.target.files && e.target.files[0]; if (!f) return; if (!/^image\/(jpeg|png|webp)$/.test(f.type)) return this.say('Use a JPG, PNG or WebP image.'); if (f.size > 1024 * 1024) return this.say('That image is over 1 MB. Compress it first.'); const r = new FileReader(); r.onload = () => this.setState({ md: { ...this.state.md, file: { name: f.name, size: f.size, src: r.result } } }); r.readAsDataURL(f); },
+        addMedia: () => { const m = st.md; if (!m.file) return this.say('Choose an image.'); if (m.alt.trim().length < 5) return this.say('Describe the image in the alt text.'); if (m.people && !m.consent) return this.say('Images of people need written photo consent on file.'); try { S.add('media', { name: m.file.name, size: m.file.size, src: m.file.src, alt: m.alt.trim(), people: m.people, consent: m.consent, by: A.current().email }, 'MD'); } catch (x) { return this.say('Browser storage is full. Delete older images first.'); } this.log('Uploaded media', m.file.name); this.setState({ md: { alt: '', people: false, consent: false, file: null } }); this.say('Uploaded.'); },
+        media: md.map(m => ({ bg: 'url("' + m.src + '")', alt: m.alt, meta: m.name + ' · ' + Math.round(m.size / 1024) + ' KB' + (m.people ? ' · consent on file' : ''), remove: () => { S.remove('media', m.id); this.log('Deleted media', m.name); } })), noMedia: !md.length });
+    }
+    if (tab === 'log') {
+      let sess = []; try { sess = JSON.parse(localStorage.getItem('sot-auth-sessions-v1')) || []; } catch (e) {}
+      let errs = []; try { errs = JSON.parse(localStorage.getItem('sot-v1-error-log')) || []; } catch (e) {}
+      const rows = [
+        ...S.list('ops-audit').map(x => [x.created, 'Operations', x.action + (x.target ? ' · ' + x.target : ''), x.who]),
+        ...S.list('acad-audit').map(x => [x.created, 'Institute', x.action + (x.target ? ' · ' + x.target : ''), x.who]),
+        ...S.list('crm-audit').map(x => [x.created, 'CRM', x.action + ' · ' + (x.phone || ''), x.by]),
+        ...sess.map(x => [x.at, 'Sign-in', 'Signed in on ' + x.device + (x.ended ? ' · ended (' + (x.why || '') + ')' : ''), x.email]),
+        ...S.list('acad-comms').map(x => [x.created, 'Messages', x.channel + ' · ' + x.template + ' → ' + x.to + ' · ' + x.status, 'Institute']),
+        ...S.list('comm-log').map(x => [x.created || x.at, 'Messages', (x.channel || 'WhatsApp') + ' · ' + (x.template || '') + ' · ' + (x.status || 'opened in WhatsApp, delivery not confirmed'), x.by || 'Spa']),
+        ...errs.map(x => [x.at, 'Errors', x.msg, x.src])
+      ].filter(r => r[0]).sort((a, b) => String(b[0]).localeCompare(String(a[0])));
+      const KINDS = ['All', 'Operations', 'Institute', 'CRM', 'Sign-in', 'Messages', 'Errors'];
+      const shown = rows.filter(r => st.logF === 'All' || r[1] === st.logF).slice(0, 300);
+      Object.assign(out, { logFilters: KINDS.map(k => ({ label: k, n: k === 'All' ? rows.length : rows.filter(r => r[1] === k).length, on: st.logF === k, bg: st.logF === k ? '#493126' : 'transparent', fg: st.logF === k ? '#F8F4ED' : '#493126', go: () => this.setState({ logF: k }) })),
+        logHead: ['When', 'Area', 'What happened', 'Who / where'], logCells: shown.flatMap(r => [when(r[0]), r[1], String(r[2] || ''), String(r[3] || '')]), logEmpty: !shown.length,
+        canRestore: rk === 'super_admin',
+        exportAll: () => { const data = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^(sot-|acad)/.test(k) && k !== 'sot-auth-session-v1') data[k] = localStorage.getItem(k); } const blob = new Blob([JSON.stringify({ exported: new Date().toISOString(), by: A.current().email, data }, null, 1)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'sense-of-touch-backup-' + iso(new Date()) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); this.log('Downloaded backup', Object.keys(data).length + ' collections'); },
+        restore: e => { const f = e.target.files && e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { try { const j = JSON.parse(r.result); if (!j || !j.data) throw 0; if (!confirm('Replace the records in this browser with the backup from ' + when(j.exported) + '? This can’t be undone.')) return; Object.entries(j.data).forEach(([k, v]) => { if (/^(sot-|acad)/.test(k) && k !== 'sot-auth-session-v1') localStorage.setItem(k, v); }); this.log('Restored backup', j.exported); location.reload(); } catch (x) { this.say('That file isn’t a Sense of Touch backup.'); } }; r.readAsText(f); } });
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

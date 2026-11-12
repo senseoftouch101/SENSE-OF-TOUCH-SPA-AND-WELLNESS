@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Institute · Sense of Touch</title>
+<meta name="description" content="The Sense of Touch Institute of Beauty &amp; Wellness — professional beauty, spa, skincare and wellness training in Tema, Ghana, with online theory and supervised practical training.">
+<meta property="og:title" content="Sense of Touch Institute of Beauty &amp; Wellness">
+<meta property="og:description" content="Professional beauty, spa and wellness training in Tema — in person, online and hybrid.">
+<meta property="og:image" content="assets/logo.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<style>summary{cursor:pointer;list-style:none}summary::-webkit-details-marker{display:none}details[open] summary span:last-child{transform:rotate(45deg)}@keyframes sotFadeUp{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}@keyframes sotLineIn{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}@media print{body *{visibility:hidden!important}#sot-letter,#sot-letter *{visibility:visible!important}#sot-letter{position:fixed!important;inset:0!important;margin:0!important;border:0!important;overflow:visible!important}}</style>
+<script src="./image-slot.js"></script>
+<script src="./motion.js"></script>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-auth.js"></script>
+<script src="./academy-core.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED">
+<dc-import name="SiteHeader" active="academy" hint-size="100%,72px" style="position:sticky;top:0;z-index:20;display:block"></dc-import>
+
+<nav aria-label="Institute" style="background:#536B4E;color:#F8F4ED">
+<div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,3vw,32px);display:flex;align-items:center;gap:20px;overflow-x:auto;scrollbar-width:none">
+<a href="#" style="display:flex;align-items:center;flex:none;color:#F8F4ED;white-space:nowrap;min-height:48px;padding-right:12px;border-right:1px solid rgba(248,244,237,0.3)"><span style="display:flex;align-items:baseline;gap:8px;padding-top:4px"><span style="font-family:Allura,cursive;font-size:26px;line-height:1.2">Institute</span><span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;font-weight:600">of Beauty &amp; Wellness</span></span></a>
+<div style="display:flex;gap:2px">
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="9">
+<a href="{{ n.href }}" style="white-space:nowrap;min-height:48px;padding:0 10px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#F8F4ED;border-bottom:2px solid {{ n.line }}" style-hover="color:#E9DDC9">{{ n.label }}</a>
+</sc-for>
+</div>
+</div>
+</nav>
+
+<sc-if value="{{ vHome }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Institute home" style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:48px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:24px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Sense of Touch Institute of Beauty &amp; Wellness</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(46px,6vw,84px);line-height:1;color:#493126;text-wrap:balance">Learn the Art. <em style="color:#536B4E">Master the Touch.</em> Transform Your Future.</h1>
+<p style="margin:0;font-size:17px;line-height:1.75;text-wrap:pretty">Professional training in massage, skincare, body therapy, lip care and spa business — taught by the team behind Sense of Touch Spa &amp; Wellness in Tema. Learn the theory online, then practise in a working spa under supervision.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<a href="#courses" style="white-space:nowrap;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600" style-hover="background:#24221D;color:#F8F4ED">Explore courses</a>
+<a href="Institute%20Registration.dc.html" style="white-space:nowrap;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600" style-hover="background:#493126;color:#F8F4ED">Apply now</a>
+</div>
+</div>
+<div data-no-reveal="1" style="position:relative;aspect-ratio:4/5;max-height:620px;width:100%;overflow:hidden;background:radial-gradient(circle at 50% 42%, #FFFDF9 0%, #F3EADC 48%, #E9DDC9 100%)">
+<img src="assets/web/body-massage.jpg" alt="A therapist giving a back massage at Sense of Touch" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:{{ heroImgOp }};transition:opacity .8s ease">
+<div ref="{{ heroRef }}" aria-hidden="true" style="position:absolute;inset:0;cursor:default"></div>
+<span style="position:absolute;left:16px;bottom:14px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#493126;opacity:{{ heroCapOp }};pointer-events:none">The tools of the trade</span>
+</div>
+</section>
+
+<sc-if value="{{ hasNotice }}" hint-placeholder-val="{{ false }}"><section style="background:#536B4E;color:#F8F4ED"><div style="max-width:1280px;margin:0 auto;padding:14px clamp(16px,3vw,32px);font-size:14px;line-height:1.6;display:flex;gap:12px;align-items:center"><strong style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#C6A15B">News</strong><span>{{ notice }}</span></div></section></sc-if>
+<section style="background:#E9DDC9">
+<div style="max-width:1280px;margin:0 auto;padding:18px clamp(16px,3vw,32px);display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;font-size:13px;line-height:1.6;color:#493126">
+<strong style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase">Please note</strong>
+<span style="flex:1 1 420px">Courses shown are the Institute’s proposed programmes. Fees, dates and entry requirements are confirmed for each intake. Institute certificates are internal certificates of completion — not accredited or nationally recognised qualifications.</span>
+</div>
+</section>
+
+<section data-screen-label="Philosophy" style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:760px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">How we teach</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">Knowledge first. Hands in the room. Assessed properly.</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1px;background:#E9DDC9;border:1px solid #E9DDC9">
+<sc-for list="{{ pillars }}" as="p" hint-placeholder-count="3">
+<div style="background:#F8F4ED;padding:32px;display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:#C6A15B">{{ p.n }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126;line-height:1.1">{{ p.t }}</span>
+<p style="margin:0;font-size:14px;line-height:1.7">{{ p.b }}</p>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section data-screen-label="Departments" style="background:#FFFFFF;border-top:1px solid #E9DDC9;border-bottom:1px solid #E9DDC9">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Training departments</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">Ten areas of practice</h2></div>
+<a href="#courses" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #536B4E">All courses →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:0 32px">
+<sc-for list="{{ depts }}" as="d" hint-placeholder-count="10">
+<a href="{{ d.href }}" style="padding:20px 0;border-top:1px solid #E9DDC9;display:flex;flex-direction:column;gap:6px;color:#24221D" style-hover="color:#536B4E">
+<span style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">{{ d.name }}</span><span style="font-size:12px;color:#536B4E;white-space:nowrap">{{ d.count }}</span></span>
+<span style="font-size:13px;line-height:1.55;color:#6B665C">{{ d.areas }}</span>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Ways to learn" style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(16px,3vw,32px) 0;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:760px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Ways to learn</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">From a first workshop to teaching others</h2><p style="margin:0;font-size:15px;line-height:1.7">For beginners and experienced beauty professionals — in person, live online, self-paced or hybrid.</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+<sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+<a data-tilt="1" href="{{ p.href }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:22px;display:flex;flex-direction:column;gap:8px;color:#24221D" style-hover="border-color:#536B4E">
+<span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126;line-height:1.1">{{ p.name }}</span>
+<span style="font-size:13px;line-height:1.6;color:#6B665C">{{ p.note }}</span>
+<span style="margin-top:auto;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ p.count }}</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section data-screen-label="Upcoming intakes" style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Upcoming intakes</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">Open for applications</h2></div>
+<a href="#calendar" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #536B4E">Training calendar →</a>
+</div>
+<sc-if value="{{ noIntakes }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between"><span style="font-size:15px;line-height:1.6;max-width:640px">The first intake dates haven’t been announced yet. Register your interest and we’ll contact you as soon as applications open.</span><a href="#contact" style="min-height:48px;padding:0 20px;display:inline-flex;align-items:center;background:#536B4E;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Register interest</a></div>
+</sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px">
+<sc-for list="{{ intakes }}" as="h" hint-placeholder-count="3">
+<a href="{{ h.href }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:10px;color:#24221D" style-hover="border-color:#536B4E">
+<span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ h.mode }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126;line-height:1.1">{{ h.course }}</span>
+<span style="font-size:14px">{{ h.name }}</span>
+<span style="font-size:13px;color:#6B665C">Starts {{ h.start }} · Applications close {{ h.close }}</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section data-screen-label="Apply process" style="position:relative;isolation:isolate;overflow:hidden;background:#493126;color:#F8F4ED">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;pointer-events:none;z-index:-1"></div>
+<div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:720px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">How to join</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);line-height:1.05">From application to your first class</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:24px">
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid rgba(198,161,91,0.5);padding-top:18px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1;color:#C6A15B">{{ s.n }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:24px">{{ s.t }}</span>
+<span style="font-size:14px;line-height:1.65;color:#E9DDC9">{{ s.b }}</span>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><a href="Institute%20Registration.dc.html" style="min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#C6A15B;color:#24221D;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Start an application</a><a href="#admissions" style="min-height:50px;padding:0 24px;display:inline-flex;align-items:center;border:1px solid #C6A15B;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Admissions details</a></div>
+</div>
+</section>
+
+<section data-screen-label="Careers" style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(16px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:48px;align-items:center">
+<div style="position:relative;aspect-ratio:4/3"><img src="assets/web/founder-studio.jpg" alt="Sense of Touch founder in the studio" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:flex;flex-direction:column;gap:18px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Careers &amp; entrepreneurship</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,52px);color:#493126;line-height:1.05">Skills for a spa career — or your own business</h2>
+<p style="margin:0;font-size:15px;line-height:1.75">Alongside treatment skills, our business and entrepreneurship courses cover pricing, client care, records and marketing — what it takes to work in a professional spa or to start your own studio. We don’t promise jobs; we help you build real, supervised experience and the confidence to use it.</p>
+<a href="#instructors" style="align-self:flex-start;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #536B4E">Meet the instructors →</a>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ vAbout }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="About the Institute" style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:56px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:48px">
+<div style="display:flex;flex-direction:column;gap:18px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">About the Institute</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">A training division of Sense of Touch Spa &amp; Wellness</h1>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;font-size:15px;line-height:1.75">
+<p style="margin:0"><strong style="color:#493126">Our vision.</strong> To develop professional skills, encourage entrepreneurship and prepare students for opportunities in the beauty, spa and wellness industry.</p>
+<p style="margin:0">The Institute teaches the same standards of hygiene, consultation and care that guide our spa. Students learn from working practitioners and practise in real treatment rooms in Tema.</p>
+<p style="margin:0">We are honest about what our certificates mean: they record that you completed an Institute course and met its assessed requirements. They are not, at present, accredited or nationally recognised qualifications.</p>
+</div>
+</div>
+<div data-screen-label="Gallery" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
+<sc-for list="{{ gallery }}" as="g" hint-placeholder-count="6">
+<div style="position:relative;aspect-ratio:1/1"><img src="{{ g.src }}" alt="{{ g.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+</sc-for>
+</div>
+<div data-screen-label="Mission, vision and values" style="position:relative;isolation:isolate;overflow:hidden;background:#493126;color:#F8F4ED;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;pointer-events:none;z-index:-1"></div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#C6A15B;font-weight:600">Mission</span><p style="margin:0;font-size:15px;line-height:1.75;color:#E9DDC9">To develop professional skills, encourage entrepreneurship and prepare students for opportunities in the beauty, spa and wellness industry.</p></div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#C6A15B;font-weight:600">Vision</span><p style="margin:0;font-size:15px;line-height:1.75;color:#E9DDC9">An international standard of beauty and wellness education with a distinctive African identity — rooted in Tema, open to the world.</p></div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#C6A15B;font-weight:600">Values</span><p style="margin:0;font-size:15px;line-height:1.75;color:#E9DDC9">Care before technique · Hygiene and safety, always · Honest assessment · Respect and consent · Enterprise and independence.</p></div>
+</div>
+<div data-screen-label="Founder and leadership" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px;align-items:center">
+<div style="position:relative;aspect-ratio:4/3"><img src="assets/web/founder-web.jpg" alt="Woselande Carmelle Theus, founder" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#536B4E;font-weight:600">Founder &amp; leadership</span><span style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#493126;line-height:1.05">Woselande Carmelle Theus</span><p style="margin:0;font-size:15px;line-height:1.7">Founder of Sense of Touch Spa &amp; Wellness, The Lip Bar and AFTERCARE, and lead instructor at the Institute. Further leadership appointments will be introduced here.</p><a href="Founder.dc.html" style="align-self:flex-start;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #536B4E">Read her story →</a></div>
+</div>
+<sc-if value="{{ hasStories }}" hint-placeholder-val="{{ false }}"><div data-screen-label="Student success stories" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px"><sc-for list="{{ stories }}" as="s" hint-placeholder-count="2"><figure data-tilt="1" style="margin:0;background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:12px"><blockquote style="margin:0;font-family:'Cormorant Garamond',serif;font-size:24px;line-height:1.3;color:#493126">“{{ s.quote }}”</blockquote><figcaption style="font-size:13px;color:#536B4E">{{ s.name }} · {{ s.course }}</figcaption></figure></sc-for></div></sc-if>
+<sc-if value="{{ noStories }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Testimonials" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-direction:column;gap:8px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Student stories</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Coming after our first cohort</span>
+<span style="font-size:14px;line-height:1.6;color:#6B665C">We’ll share graduate stories here only with each student’s written permission.</span>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ vCourses }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Training programmes" style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Courses &amp; programmes</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">Training programmes</h1></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<select aria-label="Department" value="{{ fDept }}" onChange="{{ setDept }}" style="padding:12px;border:1px solid #E9DDC9;background:#FFFDF9;min-height:48px;flex:1 1 220px"><sc-for list="{{ deptOpts }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<select aria-label="Course type" value="{{ fProd }}" onChange="{{ setProd }}" style="padding:12px;border:1px solid #E9DDC9;background:#FFFDF9;min-height:48px;flex:1 1 220px"><sc-for list="{{ prodOpts }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<select aria-label="Delivery" value="{{ fMode }}" onChange="{{ setMode }}" style="padding:12px;border:1px solid #E9DDC9;background:#FFFDF9;min-height:48px;flex:1 1 220px"><sc-for list="{{ modeOpts }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+</div>
+<sc-if value="{{ noCourses }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;font-size:14px;color:#6B665C">No courses match those filters.</div></sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:20px">
+<sc-for list="{{ courseCards }}" as="c" hint-placeholder-count="6">
+<a data-tilt="1" href="{{ c.href }}" style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column;color:#24221D" style-hover="border-color:#536B4E">
+<div style="position:relative;aspect-ratio:3/2"><img src="{{ c.img }}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><span style="position:absolute;left:12px;top:12px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;padding:6px 9px;background:{{ c.bBg }};color:{{ c.bFg }}">{{ c.badge }}</span></div>
+<div style="padding:22px;display:flex;flex-direction:column;gap:8px;flex:1">
+<span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ c.product }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1;color:#493126">{{ c.title }}</span>
+<span style="font-size:14px;line-height:1.6">{{ c.summary }}</span>
+<span style="margin-top:auto;padding-top:10px;font-size:12px;color:#6B665C">{{ c.code }} · {{ c.modes }} · {{ c.level }}</span>
+</div>
+</a>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ vCourse }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Course details" style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:36px">
+<a href="#courses" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;align-self:flex-start">← All courses</a>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:40px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:20px">
+<span style="font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#536B4E;font-weight:600">{{ cd.code }} · {{ cd.dept }}</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,64px);color:#493126;line-height:1.02">{{ cd.title }}</h1>
+<p style="margin:0;font-size:16px;line-height:1.75">{{ cd.summary }}</p>
+<sc-if value="{{ cd.proposed }}" hint-placeholder-val="{{ true }}"><div style="background:#E9DDC9;padding:14px 16px;font-size:13px;line-height:1.6;color:#493126"><strong>Proposed curriculum.</strong> Content, trainer qualifications and safety requirements are being finalised and may change before the first intake.</div></sc-if>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">What you’ll learn</span>
+<sc-for list="{{ cd.objectives }}" as="o" hint-placeholder-count="4"><span style="display:flex;gap:12px;font-size:15px;line-height:1.6;padding:8px 0;border-top:1px solid #E9DDC9"><span style="color:#C6A15B">—</span>{{ o }}</span></sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Course modules</span>
+<sc-for list="{{ cd.modules }}" as="m" hint-placeholder-count="3">
+<details style="border-top:1px solid #E9DDC9">
+<summary style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;font-size:15px;font-weight:600;color:#493126"><span>{{ m.n }} · {{ m.title }}</span><span style="font-size:20px;color:#C6A15B;transition:transform .2s">+</span></summary>
+<div style="display:flex;flex-direction:column;padding:0 0 14px">
+<sc-for list="{{ m.lessons }}" as="l" hint-placeholder-count="3"><span style="display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:8px 0;border-top:1px dashed #E9DDC9"><span>{{ l.title }}</span><span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#536B4E;white-space:nowrap">{{ l.type }}</span></span></sc-for>
+</div>
+</details>
+</sc-for>
+</div>
+<sc-if value="{{ cd.hasChecklist }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Practical requirements</span>
+<sc-for list="{{ cd.checklist }}" as="p" hint-placeholder-count="3"><span style="display:flex;justify-content:space-between;gap:12px;font-size:14px;line-height:1.5;padding:10px 0;border-top:1px solid #E9DDC9"><span>{{ p.label }}</span><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:{{ p.c }};white-space:nowrap;font-weight:600">{{ p.how }}</span></span></sc-for>
+</div>
+</sc-if>
+</div>
+<aside style="display:flex;flex-direction:column;gap:16px;position:sticky;top:140px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column">
+<sc-for list="{{ cd.facts }}" as="f" hint-placeholder-count="10"><div style="display:grid;grid-template-columns:130px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid #E9DDC9;font-size:14px;line-height:1.5"><span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#536B4E;padding-top:2px">{{ f.l }}</span><span>{{ f.v }}</span></div></sc-for>
+<div style="padding-top:14px;font-size:12px;line-height:1.6;color:#6B665C">{{ cd.certNote }}</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Intakes</span>
+<sc-if value="{{ cd.noIntakes }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;line-height:1.6">No intake is open for this course yet.</span><a href="{{ cd.interestHref }}" style="min-height:48px;justify-content:center;display:flex;align-items:center;background:#536B4E;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Register interest</a></sc-if>
+<sc-for list="{{ cd.intakes }}" as="h" hint-placeholder-count="1">
+<div style="border-top:1px solid #E9DDC9;padding-top:12px;display:flex;flex-direction:column;gap:6px;font-size:14px">
+<strong style="color:#493126">{{ h.name }}</strong><span>{{ h.dates }} · {{ h.mode }}</span><span style="color:#6B665C">{{ h.venue }}</span><span>Tuition {{ h.fee }} · Registration {{ h.reg }}</span><span style="font-size:12px;color:#536B4E">{{ h.seats }}</span><span style="font-size:12px;color:#9A3B2A">{{ h.sampleNote }}</span>
+<a href="{{ h.href }}" style="min-height:48px;justify-content:center;display:flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;margin-top:4px" style-hover="background:#24221D;color:#F8F4ED">Apply for this intake</a>
+</div>
+</sc-for>
+</div>
+</aside>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ vCalendar }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Training calendar" style="max-width:1080px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Training calendar</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">Intakes and class dates</h1><p style="margin:0;font-size:14px;line-height:1.6;color:#6B665C">Online class links are shared privately with enrolled students in the student portal.</p></div>
+<sc-if value="{{ noCal }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;font-size:14px">No intakes are scheduled yet. <a href="#contact" style="color:#536B4E;font-weight:600">Register interest</a> to hear first.</div></sc-if>
+<sc-for list="{{ cal }}" as="h" hint-placeholder-count="2">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:baseline"><a href="{{ h.href }}" style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">{{ h.course }}</a><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:6px 9px;background:{{ h.sBg }};color:{{ h.sFg }}">{{ h.status }}</span></div>
+<span style="font-size:14px">{{ h.name }} · {{ h.dates }} · {{ h.mode }}</span>
+<sc-for list="{{ h.sessions }}" as="s" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:minmax(120px,170px) 110px minmax(0,1fr);gap:8px 14px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px"><strong>{{ s.date }}</strong><span>{{ s.time }}</span><span>{{ s.title }} · <span style="color:#536B4E">{{ s.kind }}</span></span></div></sc-for>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ vAdmissions }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Admissions" style="max-width:1080px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Admissions</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">Requirements, process and tuition</h1></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">Admission requirements</span><p style="margin:0;font-size:15px;line-height:1.7">Each course lists its own entry requirements. Most foundation courses are planned for beginners aged 18 and over. You’ll tell us about your education, any experience and your goals — there’s no exam to enter.</p><p style="margin:0;font-size:15px;line-height:1.7">We only ask for an identification document where a course genuinely requires it, and store it privately.</p></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">Tuition and payment</span><p style="margin:0;font-size:15px;line-height:1.7">Fees are published for each intake and confirmed in your offer. Pay by Mobile Money (MTN, Telecel, AirtelTigo) or card. Where an intake offers instalments, the plan is shown in your offer.</p><p style="margin:0;font-size:15px;line-height:1.7">Your place is confirmed only once our finance team verifies the payment with the provider — keep your transaction ID.</p></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">Application process</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 28px">
+<sc-for list="{{ process }}" as="p" hint-placeholder-count="8"><div style="display:flex;gap:14px;padding:14px 0;border-top:1px solid #E9DDC9;font-size:14px;line-height:1.55"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:#536B4E;min-width:22px">{{ p.n }}</span><span>{{ p.t }}</span></div></sc-for>
+</div>
+</div>
+<sc-if value="{{ scholarships }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">Scholarships and financial assistance</span><span style="font-size:15px;line-height:1.7">A limited number of authorised fee discounts are available for this intake. Mention it in your applicant statement and our admissions team will explain eligibility.</span></div></sc-if>
+<div data-screen-label="FAQ" style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126;margin-bottom:8px">Frequently asked questions</span>
+<sc-for list="{{ faqs }}" as="f" hint-placeholder-count="7">
+<details style="border-top:1px solid #E9DDC9"><summary style="display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:60px;font-size:16px;font-weight:500;color:#493126"><span>{{ f.q }}</span><span style="font-size:22px;color:#C6A15B;transition:transform .2s">+</span></summary><p style="margin:0 0 18px;font-size:15px;line-height:1.7">{{ f.a }}</p></details>
+</sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><a href="Institute%20Registration.dc.html" style="min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Apply now</a><a href="#track" style="min-height:50px;padding:0 24px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Track an application</a></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ vInstructors }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Meet the instructors" style="max-width:1080px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Our instructors</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">Meet the instructors</h1></div>
+<sc-for list="{{ instructors }}" as="i" hint-placeholder-count="0">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:32px;align-items:center;background:#FFFDF9;border:1px solid #E9DDC9;padding:24px">
+<div style="position:relative;aspect-ratio:4/5;max-width:360px"><sc-if value="{{ i.hasPhoto }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ i.photo }}" alt="{{ i.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ i.title }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#493126;line-height:1.05">{{ i.name }}</span><p style="margin:0;font-size:15px;line-height:1.7">{{ i.bio }}</p><span style="font-size:13px;line-height:1.6;color:#6B665C;white-space:pre-line">{{ i.quals }}</span><a href="Founder.dc.html" style="align-self:flex-start;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #536B4E">Read her story →</a></div>
+</div>
+</sc-for>
+<span style="font-size:14px;line-height:1.6;color:#6B665C">Further instructors will be introduced here once appointed, with their verified qualifications.</span>
+</section>
+</sc-if>
+
+<sc-if value="{{ vMethods }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Learning methods" style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:820px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Learning methods</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">Four ways to learn — one standard</h1><p style="margin:0;font-size:16px;line-height:1.7">Every course is configured for one or more delivery methods. Wherever you study, practical skills are assessed in person.</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+<sc-for list="{{ methods }}" as="m" hint-placeholder-count="4"><div data-tilt="1" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:26px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:#C6A15B">{{ m.n }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126;line-height:1.05">{{ m.t }}</span><p style="margin:0;font-size:14px;line-height:1.7">{{ m.b }}</p><a href="{{ m.href }}" style="margin-top:auto;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ m.count }}</a></div></sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px;align-items:start;border-top:1px solid #E9DDC9;padding-top:40px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#493126">The hybrid journey</span><p style="margin:0;font-size:15px;line-height:1.7">Theory online first, then supervised practice in our treatment rooms. Each step is recorded separately, and each course decides which steps it requires.</p><span style="font-size:13px;color:#6B665C">Designed for phones and slower connections: low-data audio and transcripts, and you resume exactly where you stopped.</span></div>
+<ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:0 24px">
+<sc-for list="{{ journeySteps }}" as="j" hint-placeholder-count="9"><li style="display:flex;gap:12px;padding:12px 0;border-top:1px solid #E9DDC9;font-size:14px"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#536B4E;min-width:24px;line-height:1">{{ j.n }}</span>{{ j.t }}</li></sc-for>
+</ol>
+</div>
+<div data-screen-label="3D learning lab" style="display:flex;flex-direction:column;gap:18px;border-top:1px solid #E9DDC9;padding-top:40px">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:760px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Learning lab</span><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);color:#493126;line-height:1.05">Explore before you practise</span><span style="font-size:13px;line-height:1.6;color:#9A3B2A;font-weight:500">Illustrative teaching models only — not anatomically exact, and not a medical or diagnostic tool.</span></div>
+<div role="tablist" aria-label="Learning models" style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ labTabs }}" as="t" hint-placeholder-count="3"><button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.go }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:{{ t.bg }};color:{{ t.fg }};border:1px solid #493126">{{ t.l }}</button></sc-for></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px;align-items:stretch">
+<div style="position:relative;min-height:420px;background:radial-gradient(circle at 50% 45%, #FFFDF9 0%, #F3EADC 55%, #E9DDC9 100%);border:1px solid #E9DDC9;touch-action:pan-y;cursor:grab">
+<div ref="{{ labRef }}" style="position:absolute;inset:0"></div>
+<span style="position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#536B4E;pointer-events:none">{{ labHint }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">{{ lab.title }}</span><span style="font-size:14px;line-height:1.65;margin-bottom:8px">{{ lab.intro }}</span>
+<sc-for list="{{ lab.keys }}" as="k" hint-placeholder-count="4"><button onClick="{{ k.go }}" aria-pressed="{{ k.on }}" style="all:unset;cursor:pointer;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;padding:12px 14px;min-height:56px;border:1px solid {{ k.bd }};background:{{ k.bg }}"><strong style="font-size:14px;color:#493126">{{ k.l }}</strong><span style="font-size:13px;line-height:1.5;color:#6B665C">{{ k.d }}</span></button></sc-for>
+</div>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ vWorkshops }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Workshops and masterclasses" style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:820px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Workshops &amp; masterclasses</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">Short, focused, hands-on</h1><p style="margin:0;font-size:16px;line-height:1.7">Advanced specialist workshops for practising professionals and masterclasses on a single technique.</p></div>
+<sc-if value="{{ noWorkshops }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;font-size:14px;line-height:1.6">No workshop dates are announced yet. <a href="#contact" style="color:#536B4E;font-weight:600">Register interest</a> and we’ll tell you first.</div></sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px"><sc-for list="{{ workshopEvents }}" as="e" hint-placeholder-count="2"><a data-tilt="1" href="{{ e.href }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:22px;display:flex;flex-direction:column;gap:8px;color:#24221D"><span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ e.type }} · {{ e.date }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126;line-height:1.1">{{ e.title }}</span><span style="font-size:14px;line-height:1.6">{{ e.desc }}</span><span style="font-size:12px;color:#6B665C">{{ e.meta }}</span></a></sc-for></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">Workshop courses</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px"><sc-for list="{{ workshopCourses }}" as="c" hint-placeholder-count="2"><a data-tilt="1" href="{{ c.href }}" style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column;color:#24221D"><div style="position:relative;aspect-ratio:3/2"><img src="{{ c.img }}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div><div style="padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ c.product }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126;line-height:1.1">{{ c.title }}</span><span style="font-size:12px;color:#6B665C">{{ c.level }} · {{ c.modes }}</span></div></a></sc-for></div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ vEvents }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Events and graduation" style="max-width:1080px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:820px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Events &amp; graduation</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">Open days, orientations and celebrations</h1></div>
+<sc-if value="{{ noEvents }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;font-size:14px">No events are scheduled yet.</div></sc-if>
+<sc-for list="{{ eventList }}" as="e" hint-placeholder-count="2">
+<div id="{{ e.anchor }}" style="background:#FFFDF9;border:1px solid {{ e.border }};padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ e.type }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126;line-height:1.1">{{ e.title }}</span><span style="font-size:14px">{{ e.date }} · {{ e.time }} · {{ e.mode }}</span><span style="font-size:13px;color:#6B665C">{{ e.venue }} · {{ e.fee }} · {{ e.places }}</span><p style="margin:0;font-size:14px;line-height:1.65">{{ e.desc }}</p></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-if value="{{ e.done }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:#DCE5D6;padding:14px;font-size:14px;color:#2F4A2B">You’re registered. We’ve sent a confirmation.</div></sc-if>
+<sc-if value="{{ e.canReg }}" hint-placeholder-val="{{ false }}">
+<input aria-label="Name" value="{{ ev.name }}" onChange="{{ setEv.name }}" placeholder="Your name" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px">
+<input aria-label="Phone" type="tel" value="{{ ev.phone }}" onChange="{{ setEv.phone }}" placeholder="Phone (e.g. 024 123 4567)" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px">
+<input aria-label="Email" type="email" value="{{ ev.email }}" onChange="{{ setEv.email }}" placeholder="Email (optional)" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:16px">
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ e.err }}</span>
+<button onClick="{{ e.register }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:48px;padding:0 22px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Register</button>
+</sc-if>
+<span style="font-size:13px;color:#6B665C">{{ e.closedNote }}</span>
+</div>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ vTour }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Facilities and virtual tour" style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:820px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Facilities &amp; virtual tour</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">Step inside</h1><p style="margin:0;font-size:16px;line-height:1.7">Move between our spaces in Community 25, Tema. Every space shown is an actual working facility.</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:12px;grid-column:span 2;min-width:0">
+<div style="position:relative;aspect-ratio:16/10;background:#E9DDC9;overflow:hidden">
+<sc-if value="{{ sp.hasPhoto }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="{{ sp.alt }}" style="position:absolute;inset:0;background-image:{{ sp.bg }};background-size:cover;background-position:center;animation:sotFadeUp .6s ease both"></div></sc-if>
+<sc-if value="{{ sp.noPhoto }}" hint-placeholder-val="{{ true }}"><image-slot id="{{ sp.slot }}" shape="rect" placeholder="{{ sp.slotLabel }}" style="position:absolute;inset:0"></image-slot></sc-if>
+<span style="position:absolute;left:14px;top:14px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:7px 10px;background:#536B4E;color:#F8F4ED">{{ sp.tag }}</span>
+<button onClick="{{ prevSpace }}" aria-label="Previous space" style="all:unset;cursor:pointer;position:absolute;left:10px;top:50%;transform:translateY(-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(248,244,237,0.92);color:#493126;font-size:20px">←</button>
+<button onClick="{{ nextSpace }}" aria-label="Next space" style="all:unset;cursor:pointer;position:absolute;right:10px;top:50%;transform:translateY(-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(248,244,237,0.92);color:#493126;font-size:20px">→</button>
+</div>
+<div aria-live="polite" style="display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#536B4E;font-weight:600">{{ sp.n }} of {{ spaceCount }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:34px;color:#493126;line-height:1.05">{{ sp.name }}</span><p style="margin:0;font-size:15px;line-height:1.7">{{ sp.desc }}</p><span style="font-size:13px;color:#6B665C">Used for: {{ sp.use }}</span></div>
+</div>
+<nav aria-label="Spaces" style="display:flex;flex-direction:column;border-top:1px solid #493126">
+<sc-for list="{{ spaces }}" as="s" hint-placeholder-count="8"><button onClick="{{ s.go }}" aria-current="{{ s.on }}" style="all:unset;cursor:pointer;box-sizing:border-box;display:flex;justify-content:space-between;gap:10px;align-items:center;padding:14px 4px;min-height:52px;border-bottom:1px solid #E9DDC9;font-size:15px;color:{{ s.fg }};font-weight:{{ s.fw }}"><span>{{ s.name }}</span><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#6B665C">{{ s.photoNote }}</span></button></sc-for>
+</nav>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ vNews }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="News and articles" style="max-width:1080px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:820px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">News &amp; articles</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,5vw,68px);color:#493126;line-height:1.02">From the Institute</h1></div>
+<sc-if value="{{ noNews }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;font-size:14px;line-height:1.6">Institute news will appear here. Meanwhile, read skincare and wellness articles in the <a href="Journal.dc.html" style="color:#536B4E;font-weight:600">Sense of Touch Journal</a>.</div></sc-if>
+<sc-for list="{{ articles }}" as="a" hint-placeholder-count="2"><article style="background:#FFFDF9;border:1px solid #E9DDC9;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))"><div style="position:relative;min-height:220px"><img src="{{ a.img }}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div><div style="padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ a.date }}</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#493126;line-height:1.1">{{ a.title }}</h2><p style="margin:0;font-size:15px;line-height:1.7">{{ a.summary }}</p><details><summary style="cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#536B4E">Read more</summary><p style="margin:0;font-size:15px;line-height:1.75;white-space:pre-line">{{ a.body }}</p></details></div></article></sc-for>
+<a href="Journal.dc.html" style="align-self:flex-start;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #536B4E">Sense of Touch Journal →</a>
+</section>
+</sc-if>
+
+<sc-if value="{{ vTrack }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Track application" style="max-width:820px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Admissions</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,4.5vw,56px);color:#493126;line-height:1.05">Track your application</h1></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;align-items:end">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Reference<input value="{{ tRef }}" onChange="{{ setTRef }}" placeholder="APP-XXXXXX" style="font-size:16px;letter-spacing:0.08em;text-transform:uppercase;font-weight:400;padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;color:#24221D;width:100%"></label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Email<input type="email" value="{{ tEmail }}" onChange="{{ setTEmail }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;color:#24221D;width:100%"></label>
+<button onClick="{{ doTrack }}" style="all:unset;cursor:pointer;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Find application</button>
+</div>
+<sc-if value="{{ trackErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:12px 14px;font-size:14px;color:#6B2A1E">{{ trackErrText }}</div></sc-if>
+<sc-if value="{{ hasTracked }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center"><div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">{{ ta.courseTitle }}</span><span style="font-size:13px;color:#6B665C">{{ ta.id }} · {{ ta.cohortName }}</span></div><span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;padding:7px 10px;background:{{ ta.sBg }};color:{{ ta.sFg }}">{{ ta.status }}</span></div>
+<span style="font-size:15px;line-height:1.65">{{ ta.message }}</span>
+<sc-if value="{{ ta.appFeeDue }}" hint-placeholder-val="{{ false }}"><div style="background:#F3E3C4;padding:14px 16px;font-size:14px;line-height:1.6;color:#6B4A12">An application fee of <strong>{{ ta.appFee }}</strong> applies. Pay by Mobile Money or card and enter the transaction ID below — review begins once it’s verified.</div></sc-if>
+<sc-if value="{{ ta.hasLetter }}" hint-placeholder-val="{{ false }}"><button onClick="{{ openLetter }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;border:1px solid #493126;color:#493126;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">View admission letter</button></sc-if>
+<sc-if value="{{ ta.canAccept }}" hint-placeholder-val="{{ false }}"><button onClick="{{ acceptOffer }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#536B4E;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Accept my offer</button></sc-if>
+<sc-if value="{{ ta.showPayBlock }}" hint-placeholder-val="{{ false }}">
+<div style="border-top:1px solid #E9DDC9;padding-top:16px;display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Payment instructions</span>
+<span style="font-size:14px;line-height:1.65">To confirm your place, pay <strong>{{ ta.deposit }}</strong> (tuition {{ ta.fee }}, registration {{ ta.reg }}). Pay by Mobile Money or card, then enter the transaction ID below. Your enrolment is activated once our finance team verifies it with the provider.</span>
+<span style="font-size:12px;color:#6B665C">{{ ta.fx }}</span>
+<span style="font-size:12px;color:#9A3B2A">{{ ta.sampleNote }}</span>
+<div style="display:flex;flex-direction:column"><sc-for list="{{ ta.schedule }}" as="r" hint-placeholder-count="2"><div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px"><span>{{ r.label }}</span><span style="color:#6B665C">{{ r.due }}</span><strong>{{ r.amount }}</strong></div></sc-for></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px;align-items:end">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Method<select value="{{ pay.method }}" onChange="{{ setPayMethod }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;min-height:48px"><sc-for list="{{ payMethods }}" as="o" hint-placeholder-count="5"><option value="{{ o }}">{{ o }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Amount (GHS)<input inputMode="decimal" value="{{ pay.amount }}" onChange="{{ setPayAmount }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:12px;border:1px solid #E9DDC9;background:#F8F4ED"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#493126">Transaction ID<input value="{{ pay.ref }}" onChange="{{ setPayRef }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:12px;border:1px solid #E9DDC9;background:#F8F4ED"></label>
+<button onClick="{{ sendPay }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 18px;display:inline-flex;align-items:center;justify-content:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Submit payment</button>
+</div>
+<span role="alert" style="font-size:13px;font-weight:500;color:#9A3B2A">{{ payErr }}</span>
+</div>
+</sc-if>
+<sc-if value="{{ ta.hasPays }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column"><sc-for list="{{ ta.pays }}" as="p" hint-placeholder-count="1"><div style="display:flex;flex-wrap:wrap;gap:6px 14px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:13px"><strong>{{ p.amount }}</strong><span>{{ p.method }}</span><span style="color:#6B665C">{{ p.ref }}</span><span style="margin-left:auto;font-weight:600;color:{{ p.c }}">{{ p.status }}</span></div></sc-for></div></sc-if>
+<sc-if value="{{ ta.enrolled }}" hint-placeholder-val="{{ false }}"><a href="Institute%20Portal.dc.html" style="align-self:flex-start;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;background:#536B4E;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Go to the student portal</a></sc-if>
+<div style="display:flex;flex-direction:column;border-top:1px solid #E9DDC9;padding-top:12px"><span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-bottom:6px">History</span><sc-for list="{{ ta.history }}" as="h" hint-placeholder-count="2"><div style="display:flex;gap:14px;font-size:13px;padding:6px 0"><span style="color:#6B665C;min-width:110px">{{ h.at }}</span><span>{{ h.status }}</span></div></sc-for></div>
+<sc-if value="{{ ta.canWithdraw }}" hint-placeholder-val="{{ false }}"><button onClick="{{ withdraw }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#9A3B2A">Withdraw application</button></sc-if>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ vVerify }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Certificate verification" style="max-width:820px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Certificate verification</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,4.5vw,56px);color:#493126;line-height:1.05">Verify an Institute certificate</h1><p style="margin:0;font-size:15px;line-height:1.7">Enter the certificate ID printed on the certificate, or scan its QR code.</p></div>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><input aria-label="Certificate ID" value="{{ vId }}" onChange="{{ setVId }}" onKeyDown="{{ vKey }}" placeholder="SOT-AC-2026-0001XX" style="flex:1 1 260px;font-size:17px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 12px;border:1px solid #493126;background:#FFFDF9;color:#24221D"><button onClick="{{ doVerify }}" style="all:unset;cursor:pointer;min-height:52px;padding:0 26px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Verify</button></div>
+<sc-if value="{{ vNone }}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:#F6E7E1;border-left:3px solid #9A3B2A;padding:14px 16px;font-size:14px;color:#6B2A1E">No certificate with that ID was found. Check the ID, or contact the Institute.</div></sc-if>
+<sc-if value="{{ vFound }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFDF9;border:1px solid {{ vr.border }};padding:28px;display:flex;flex-direction:column;gap:14px">
+<span style="align-self:flex-start;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:8px 12px;background:{{ vr.bg }};color:{{ vr.fg }}">{{ vr.statusLabel }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#493126;line-height:1.05">{{ vr.name }}</span>
+<sc-for list="{{ vr.rows }}" as="r" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:14px"><span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ r.l }}</span><span>{{ r.v }}</span></div></sc-for>
+<span style="font-size:13px;line-height:1.6;color:#6B665C">{{ vr.note }}</span>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ vContact }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Contact the Institute" style="max-width:1080px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:48px">
+<div style="display:flex;flex-direction:column;gap:18px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Contact the Institute</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,4.5vw,56px);color:#493126;line-height:1.05">Ask us about a course</h1>
+<p style="margin:0;font-size:15px;line-height:1.7">Questions about courses, intakes or fees? Send an enquiry and our admissions team will reply — or register interest in a course that isn’t open yet.</p>
+<div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #493126;padding-top:16px"><a href="tel:+233597182026" style="font-family:'Cormorant Garamond',serif;font-size:24px">+233 59 718 2026</a><a href="https://wa.me/233597182026" target="_blank" rel="noopener" style="font-size:13px;color:#536B4E;font-weight:600;letter-spacing:0.12em;text-transform:uppercase">Chat on WhatsApp →</a><a href="mailto:info@senseoftouch.co" style="font-size:15px">info@senseoftouch.co</a><a href="http://senseoftouch.co" target="_blank" rel="noopener" style="font-size:15px">senseoftouch.co</a><span style="font-size:14px;line-height:1.6;margin-top:6px">Community 25 Estate Junction, Tema, Ghana</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-if value="{{ enqDone }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #536B4E;padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">Thank you — we’ve got it</span><span style="font-size:14px;line-height:1.6">Reference {{ enqRef }}. We’ll be in touch by phone or email.</span></div></sc-if>
+<sc-if value="{{ enqForm }}" hint-placeholder-val="{{ true }}">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Name *<input value="{{ enq.name }}" onChange="{{ setEnq.name }}" autoComplete="name" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;width:100%"></label>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Phone<input type="tel" value="{{ enq.phone }}" onChange="{{ setEnq.phone }}" autoComplete="tel" placeholder="024 123 4567" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;width:100%"></label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Email<input type="email" value="{{ enq.email }}" onChange="{{ setEnq.email }}" autoComplete="email" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;width:100%"></label>
+</div>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Course of interest<select value="{{ enq.courseId }}" onChange="{{ setEnq.courseId }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;width:100%"><option value="">General enquiry</option><sc-for list="{{ courseOpts }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#493126">Message<textarea rows="4" value="{{ enq.message }}" onChange="{{ setEnq.message }}" style="font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;width:100%;resize:vertical"></textarea></label>
+<span role="alert" style="font-size:13px;font-weight:500;color:#9A3B2A">{{ enqErr }}</span>
+<button onClick="{{ sendEnq }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:50px;padding:0 26px;display:inline-flex;align-items:center;background:#493126;color:#F8F4ED;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Send enquiry</button>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ letterOpen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="Admission letter" style="position:fixed;inset:0;z-index:60;background:rgba(36,34,29,0.7);overflow:auto;padding:16px;display:flex">
+<div style="margin:auto;display:flex;flex-direction:column;gap:12px;width:100%;max-width:760px">
+<div id="sot-letter" style="background:#FFFDF9;padding:clamp(24px,5vw,56px);display:flex;flex-direction:column;gap:14px;font-size:14px;line-height:1.7">
+<div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid #C6A15B;padding-bottom:16px"><div style="display:flex;flex-direction:column"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">{{ lt.org }}</span><span style="font-size:12px;color:#6B665C">Community 25 Estate Junction, Tema, Ghana · +233 59 718 2026</span></div><img src="assets/logo-transparent.png" alt="" style="width:64px"></div>
+<span>{{ lt.date }} · Ref {{ lt.ref }}</span>
+<span>Dear {{ lt.name }},</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126;line-height:1.1">Offer of admission</span>
+<p style="margin:0">We are pleased to offer you a place on <strong>{{ lt.course }}</strong> ({{ lt.code }}, {{ lt.product }}) — {{ lt.cohort }}, starting {{ lt.start }}, delivered {{ lt.mode }} at {{ lt.venue }}.</p>
+<p style="margin:0">On successful completion of every course requirement you will receive a {{ lt.certKind }} from the Institute. This is an internal certificate of completion and not an accredited or nationally recognised qualification.</p>
+<div style="display:flex;flex-direction:column"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">Fees</span><span>Tuition {{ lt.fee }} · Registration {{ lt.reg }}</span><sc-for list="{{ lt.schedule }}" as="r" hint-placeholder-count="2"><span>{{ r.label }} — {{ r.amount }} · {{ r.due }}</span></sc-for></div>
+<p style="margin:0">To accept, open your application with reference {{ lt.ref }} and select “Accept my offer”, then complete your deposit. Your place and student ID are confirmed once payment is verified.{{ lt.sidLine }}</p>
+<div style="display:flex;flex-direction:column;margin-top:10px"><span style="font-family:Allura,cursive;font-size:30px;color:#493126">{{ lt.sig }}</span><span style="border-top:1px solid #493126;padding-top:4px;align-self:flex-start">{{ lt.signatory }}</span></div>
+</div>
+<div style="display:flex;gap:10px;justify-content:flex-end"><button onClick="{{ printLetter }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;background:#C6A15B;color:#24221D;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Download PDF</button><button onClick="{{ closeLetter }}" style="all:unset;cursor:pointer;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;border:1px solid #F8F4ED;color:#F8F4ED;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Close</button></div>
+</div>
+</div>
+</sc-if>
+{{ intro }}
+<dc-import name="SocialFeed" placement="institute" heading="Inside the Institute" hint-size="100%,640px"></dc-import>
+<dc-import name="SiteFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const IMG = { massage: 'assets/web/body-massage.jpg', wood: 'assets/web/wood-therapy.jpg', facial: 'assets/web/facial-treatment.jpg', body: 'assets/web/robe-white-sofa.jpg', scalp: 'assets/web/robe-red-portrait.jpg', waxing: 'assets/web/robe-blue.jpg', lip: 'assets/web/lip-closeup.jpg', business: 'assets/web/lounge-group.jpg', entre: 'assets/web/founder-studio.jpg', product: 'assets/web/facial-greenwall.jpg' };
+const TYPE = { text: 'Reading', video: 'Video', pdf: 'PDF', quiz: 'Knowledge check', practical: 'Practical demo' };
+const STATUS_C = { Submitted: ['#E9DDC9', '#493126'], 'Under review': ['#E9DDC9', '#493126'], 'Additional information required': ['#F3E3C4', '#6B4A12'], 'Interview required': ['#F3E3C4', '#6B4A12'], Accepted: ['#DCE5D6', '#2F4A2B'], 'Offer accepted': ['#DCE5D6', '#2F4A2B'], Enrolled: ['#536B4E', '#F8F4ED'], Waitlisted: ['#E9DDC9', '#493126'], Declined: ['#F6E7E1', '#6B2A1E'], Withdrawn: ['#EEE', '#555'] };
+const MSG = { Submitted: 'We’ve received your application. Our admissions team will review it shortly.', 'Under review': 'Your application is being reviewed.', 'Additional information required': 'We need a little more information. Please check your messages or contact the Institute.', 'Interview required': 'We’d like a short admissions conversation with you. We’ll contact you to arrange a time.', Accepted: 'Congratulations — you’ve been offered a place. Accept your offer to see payment instructions.', 'Offer accepted': 'You’ve accepted your offer. Make your payment below; enrolment activates once it’s verified.', Enrolled: 'You’re enrolled. Sign in to the student portal with your email and student ID: ', Waitlisted: 'You’re on the waiting list. We’ll contact you if a place opens.', Declined: 'We’re unable to offer you a place on this intake. You’re welcome to apply for a future one.', Withdrawn: 'This application has been withdrawn.' };
+const NAV = [['', 'Home'], ['about', 'About'], ['courses', 'Courses'], ['methods', 'Learning methods'], ['workshops', 'Workshops'], ['tour', 'Facilities & tour'], ['events', 'Events'], ['admissions', 'Admissions'], ['calendar', 'Calendar'], ['instructors', 'Instructors'], ['news', 'News'], ['alumni', 'Alumni'], ['portal', 'Student & instructor login'], ['verify', 'Verify a certificate'], ['contact', 'Contact']];
+const SPACES = [['Reception', '', 'Where every visit and every student day begins — check-in, consultations and enquiries.', 'Arrivals, admissions enquiries'], ['Lounge', 'assets/web/lounge-group.jpg', 'A calm space to unwind before and after treatments.', 'Client relaxation, student breaks'], ['Facial room', 'assets/web/facial-greenwall.jpg', 'Our facial and skincare treatment room.', 'Facial & skincare practicals'], ['Massage room', 'assets/web/body-massage.jpg', 'Treatment room for massage therapy.', 'Massage practicals'], ['Body therapy room', 'assets/web/wood-therapy.jpg', 'For body treatments and wood therapy.', 'Body & wood therapy practicals'], ['The Lip Bar', 'assets/web/lip-closeup.jpg', 'Our dedicated lip-care studio.', 'Lip care workshops'], ['Training room', '', 'Our dedicated teaching space for demonstrations and theory.', 'Classes and demonstrations'], ['AFTERCARE area', '', 'The home of our AFTERCARE skincare range.', 'Product knowledge sessions']];
+const LAB = { face: { title: 'Facial zones', intro: 'A stylised head showing the zones used when analysing skin and planning a facial.', hint: 'Drag to turn', keys: [['forehead', 'Forehead', 'Often checked for oiliness, texture and fine lines.'], ['tzone', 'T-zone', 'Forehead and nose — typically the oiliest area.'], ['eyes', 'Eye area', 'Delicate skin: lighter pressure and gentler products.'], ['cheeks', 'Cheeks', 'Checked for dryness, sensitivity and pigmentation.'], ['jaw', 'Jaw and chin', 'Where congestion is often noted during analysis.']] }, back: { title: 'Swedish massage strokes', intro: 'Animated paths for three core strokes on a stylised back, viewed from above.', hint: 'Drag to tilt', keys: [['effleurage', 'Effleurage', 'Long gliding strokes up either side of the spine and out over the shoulders.'], ['petrissage', 'Petrissage', 'Circular kneading movements over the muscles beside the spine.'], ['friction', 'Friction', 'Small, focused movements close to — never on — the spine.']] }, wood: { title: 'Wood therapy roller', intro: 'How the roller travels along the body, shown on a stylised limb.', hint: 'Drag to tilt', keys: [['direction', 'Stroke direction', 'The roller moves in one consistent direction, as demonstrated in class.']] } };
+const STEP_T = ['Choose your course', 'About you', 'Your background', 'Documents and declarations'];
+const STEP_F = [['courseId', 'cohortId', 'level', 'format', 'startDate'], ['name', 'dob', 'email', 'phone', 'location', 'country', 'emergency', 'password'], ['education', 'experience', 'goals', 'statement'], ['docs', 'idDoc', 'privacy', 'declaration']];
+const BLANK = { courseId: '', cohortId: '', level: 'Beginner', format: '', startDate: '', makeAccount: false, password: '', name: '', dob: '', email: '', phone: '', location: '', country: 'Ghana', emergency: '', education: '', experience: '', goals: '', statement: '', source: 'Website', privacy: false, declaration: false, consent: { email: 1, wa: 0, sms: 0 } };
+const fmt = s => s ? new Date(s + 'T00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+const DK = 'sot-acad-apply-draft';
+class Component extends DCLogic {
+  labRef = React.createRef(); heroRef = React.createRef();
+  state = { lab: 'face', labKey: null, space: 0, ev: { name: '', phone: '', email: '' }, evErr: {}, evDone: {}, letter: false, heroOn: false, intro: null, route: '', fDept: '', fMode: '', fProd: '', idDoc: null, step: 1, f: (() => { try { return { ...BLANK, ...JSON.parse(localStorage.getItem(DK)) }; } catch (e) { return { ...BLANK }; } })(), docs: [], err: {}, done: null, tRef: '', tEmail: '', trackedId: '', trackErr: '', pay: { method: 'MTN Mobile Money', amount: '', ref: '' }, payErr: '', vId: '', vRes: undefined, enq: { name: '', phone: '', email: '', courseId: '', message: '' }, enqErr: '', enqRef: '', tick: 0 };
+  onHash = () => { if (!location.hash || location.hash === '#') this.startIntro(); const r = decodeURIComponent(location.hash.replace(/^#/, '')); if (r === 'portal') { location.href = 'Institute%20Portal.dc.html'; return; } if (r === 'alumni') { location.href = 'Institute%20Alumni.dc.html'; return; } this.setState({ route: r }); this.applyRoute(r); window.scrollTo(0, 0); };
+  applyRoute(r) {
+    const [v, a, b] = r.split('/');
+    if (v === 'apply') { location.href = 'Institute%20Registration.dc.html' + (a ? '#' + a + (b ? '/' + b : '') : ''); return; }
+    if (v === 'tour' && a) this.setState({ space: Math.max(0, SPACES.findIndex(x => x[0].toLowerCase().replace(/\W+/g, '-') === a)) });
+    if (v === 'verify' && a) this.setState({ vId: a, vRes: window.ACAD.verify(a) });
+    if (v === 'contact' && a) { const c = window.ACAD.list('courses').find(x => x.code === a); if (c) this.setState(s => ({ enq: { ...s.enq, courseId: c.id } })); }
+  }
+  componentDidMount() { addEventListener('hashchange', this.onHash); this.off = window.SOT && window.SOT.on(() => this.setState(s => ({ tick: s.tick + 1 }))); const r = decodeURIComponent(location.hash.replace(/^#/, '')); this.setState({ route: r }); if (window.ACAD) this.applyRoute(r); }
+  componentWillUnmount() { removeEventListener('hashchange', this.onHash); this.off && this.off(); this.hero && this.hero.dispose(); this.labH && this.labH.dispose(); clearTimeout(this.t1); clearTimeout(this.t2); this.splash3 && this.splash3.dispose(); }
+  componentDidUpdate() { this.syncHero(); this.syncLab(); }
+  canRun3d() { try { const c = navigator.connection || {}; return !(c.saveData || /(^|-)2g|3g/.test(c.effectiveType || '')) && !matchMedia('(pointer: coarse)').matches && innerWidth >= 900 && !((navigator.deviceMemory && navigator.deviceMemory < 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4)) && !matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+  async syncHero() { const el = this.heroRef.current; if (!el || this.heroBusy === el) return; if (!this.canRun3d()) { this.heroBusy = el; return; } if (document.readyState !== 'complete') { await new Promise(r => addEventListener('load', r, { once: true })); if (this.heroRef.current !== el) return; } this.heroBusy = el; this.hero && this.hero.dispose(); try { const m = await import(new URL('institute3d.js', document.baseURI).href); this.hero = await m.mount(el, 'hero'); this.setState({ heroOn: true }); } catch (e) { console.warn('3D hero unavailable; photo shown', e); } }
+  async syncLab() { const el = this.labRef.current; const key = el && this.state.lab; if (!el) { this.labEl = null; return; } if (this.labEl === el && this.labVar === key) { this.labH && this.labH.focus(this.state.labKey); return; } this.labEl = el; this.labVar = key; this.labH && this.labH.dispose(); this.labH = null; try { const m = await import(new URL('institute3d.js', document.baseURI).href); if (this.labVar !== key) return; this.labH = await m.mount(el, key, { focus: this.state.labKey }); } catch (e) { this.setState({ labFail: true }); } }
+  startIntro() { let seen = false; try { seen = sessionStorage.getItem('sot-inst-intro') === '1'; sessionStorage.setItem('sot-inst-intro', '1'); } catch (e) {} if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) return; this.introRef = React.createRef(); this.setState({ intro: 'in', introFlat: !this.canRun3d() }, async () => { if (this.state.introFlat) return; try { const m = await import(new URL('splash3d.js', document.baseURI).href); if (this.state.intro !== 'in' || !this.introRef.current) return; this.splash3 = await m.mount(this.introRef.current); this.setState({ introGl: true }); } catch (e) { this.setState({ introFlat: true }); } }); this.t1 = setTimeout(() => this.endIntro(), 4400); }
+  endIntro() { if (this.state.intro !== 'in') return; clearTimeout(this.t1); this.setState({ intro: 'out' }); this.t2 = setTimeout(() => { this.splash3 && this.splash3.dispose(); this.splash3 = null; this.setState({ intro: 'done' }); }, 800); }
+  buildIntro() { const ph = this.state.intro; if (!ph || ph === 'done') return null; const e = React.createElement;
+    return e('div', { role: 'dialog', 'aria-label': 'Welcome', onClick: () => this.endIntro(), style: { position: 'fixed', inset: 0, zIndex: 100, background: 'radial-gradient(ellipse at 50% 45%, #FFFDF9 0%, #F8F4ED 55%, #E9DDC9 100%)', opacity: ph === 'out' ? 0 : 1, transition: 'opacity .8s ease', cursor: 'pointer' } },
+      e('div', { ref: this.introRef, style: { position: 'absolute', inset: 0 } }),
+      this.state.introFlat ? e('img', { src: 'assets/logo.png', alt: 'Sense of Touch', style: { position: 'absolute', left: '50%', top: '44%', width: 'min(56vw, 360px)', transform: 'translate(-50%,-50%)', animation: 'sotFadeUp 1s ease both' } }) : null,
+      e('div', { style: { position: 'absolute', left: 0, right: 0, bottom: '10vh', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, pointerEvents: 'none', fontFamily: 'Montserrat, sans-serif' } },
+        e('div', { style: { width: 120, height: 1, background: '#C6A15B', animation: 'sotLineIn 1s ease 1.2s both', transformOrigin: 'center' } }),
+        e('div', { style: { fontSize: 12, letterSpacing: '0.32em', textTransform: 'uppercase', color: '#536B4E', fontWeight: 600, animation: 'sotFadeUp 1s ease 1.4s both' } }, 'Institute of Beauty & Wellness'),
+        e('div', { style: { fontFamily: 'Allura, cursive', fontSize: 30, color: '#493126', animation: 'sotFadeUp 1s ease 1.8s both' } }, 'Learn the Art. Master the Touch. Transform Your Future.')),
+      e('button', { onClick: ev => { ev.stopPropagation(); this.endIntro(); }, style: { position: 'absolute', top: 18, right: 18, minHeight: 44, padding: '0 18px', background: 'transparent', border: '1px solid #493126', color: '#493126', fontFamily: 'Montserrat, sans-serif', fontSize: 12, letterSpacing: '0.16em', textTransform: 'uppercase', fontWeight: 600, cursor: 'pointer' } }, 'Skip intro')); }
+  setF(p) { this.setState(s => { const f = { ...s.f, ...p }; try { const { password, ...safe } = f; localStorage.setItem(DK, JSON.stringify(safe)); } catch (e) {} const err = { ...s.err }; Object.keys(p).forEach(k => delete err[k]); return { f, err }; }); }
+  renderVals() {
+    const A = window.ACAD; if (!A) return {};
+    const st = this.state, [view, arg] = st.route.split('/'), v = view || 'home';
+    const courses = A.list('courses').filter(c => c.status === 'Published'), cohorts = A.list('cohorts');
+    const openFor = cid => cohorts.filter(h => h.courseId === cid && h.status === 'Open' && (!h.closeDate || h.closeDate >= A.today())).sort((a, b) => a.start.localeCompare(b.start));
+    const seatsLeft = h => h.capacity ? h.capacity - A.list('enrolments').filter(e => e.cohortId === h.id && e.status !== 'Withdrawn').length : null;
+    const allOpen = cohorts.filter(h => h.status === 'Open' && (!h.closeDate || h.closeDate >= A.today())).sort((a, b) => a.start.localeCompare(b.start));
+    const out = {
+      nav: NAV.map(([k, l]) => ({ label: l, href: '#' + k, line: (k || 'home') === v || (k === 'courses' && v === 'course') || (k === 'admissions' && v === 'track') ? '#C6A15B' : 'transparent' })),
+      vHome: v === 'home', vAbout: v === 'about', vCourses: v === 'courses', vCourse: v === 'course', vCalendar: v === 'calendar', vAdmissions: v === 'admissions', vInstructors: v === 'instructors', vMethods: v === 'methods', vWorkshops: v === 'workshops', vEvents: v === 'events', vTour: v === 'tour', vNews: v === 'news', intro: this.buildIntro(), heroRef: this.heroRef, heroImgOp: st.heroOn ? 0 : 1, heroCapOp: st.heroOn ? 1 : 0, labRef: this.labRef, hasNotice: !!A.settings().notice, notice: A.settings().notice || '', stories: A.list('stories').filter(s => s.status === 'Published' && s.consent).map(s => ({ quote: s.quote, name: s.name, course: s.course })), hasStories: A.list('stories').some(s => s.status === 'Published' && s.consent), noStories: !A.list('stories').some(s => s.status === 'Published' && s.consent), vApplyOld: false, vTrack: v === 'track', vVerify: v === 'verify', vContact: v === 'contact',
+      pillars: [{ n: 'i.', t: 'Theory, online', b: 'Learn anatomy, hygiene, consultation and product knowledge through live or self-paced online lessons — and pick up where you left off.' }, { n: 'ii.', t: 'Practice, in person', b: 'Hands-on skills are practised in our treatment rooms in Tema, under the direct supervision of an instructor.' }, { n: 'iii.', t: 'Assessed honestly', b: 'Knowledge checks, assignments and supervised practical assessments are recorded separately. Watching a video is never enough to be certified.' }],
+      depts: A.DEPTS.map(d => { const n = courses.filter(c => c.dept === d.id).length; return { ...d, count: n ? n + (n > 1 ? ' courses' : ' course') : '', href: '#courses/' + d.id }; }),
+      intakes: allOpen.slice(0, 3).map(h => { const c = A.course(h.courseId) || {}; return { course: c.title, name: h.name, mode: h.mode, start: fmt(h.start), close: fmt(h.closeDate), href: '#course/' + c.code }; }),
+      noIntakes: !allOpen.length,
+      steps: [{ n: '1', t: 'Choose a course', b: 'Browse programmes and intakes, and check the entry requirements.' }, { n: '2', t: 'Apply online', b: 'Tell us about yourself, your background and your goals. You’ll get a reference straight away.' }, { n: '3', t: 'Admissions review', b: 'Our team reviews your application and may ask for more information or a short conversation.' }, { n: '4', t: 'Accept and pay', b: 'Accept your offer and pay by Mobile Money or card. We verify every payment.' }, { n: '5', t: 'Start learning', b: 'Sign in to the student portal to begin your online theory and see your class schedule.' }],
+      gallery: [['assets/web/facial-treatment.jpg', 'Facial treatment at Sense of Touch'], ['assets/web/wood-therapy.jpg', 'Wood therapy treatment'], ['assets/web/lip-closeup.jpg', 'Lip care at The Lip Bar'], ['assets/web/lounge-group.jpg', 'The Sense of Touch lounge'], ['assets/web/facial-greenwall.jpg', 'Treatment room with green wall'], ['assets/web/robe-green-lounge.jpg', 'Relaxation lounge']].map(([src, alt]) => ({ src, alt })),
+      scholarships: !!A.settings().scholarships,
+      products: A.PRODUCTS.map(p => { const n = courses.filter(c => c.product === p.name).length; return { name: p.name, note: p.note || (p.name === 'Short introductory course' ? 'A focused first step into a treatment area.' : 'Learn online at your own pace, on your phone.'), count: n ? n + (n > 1 ? ' courses →' : ' course →') : 'Coming soon — register interest', href: n ? '#courses/p:' + encodeURIComponent(p.name) : (p.name === 'Corporate training' ? 'Corporate.dc.html' : '#contact') }; })
+    };
+    if (v === 'courses') {
+      const pArg = arg && arg.startsWith('p:') ? arg.slice(2) : ''; const fDept = st.fDept || (arg && !pArg ? arg : ''); const fProd = st.fProd || pArg; const list = courses.filter(c => (!fDept || c.dept === fDept) && (!fProd || c.product === fProd) && (!st.fMode || c.modes.includes(st.fMode)));
+      Object.assign(out, { fDept, fProd, setProd: e => this.setState({ fProd: e.target.value }), prodOpts: [{ v: '', l: 'All course types' }, ...A.PRODUCTS.map(p => ({ v: p.name, l: p.name }))], fMode: st.fMode, setDept: e => { this.setState({ fDept: e.target.value }); }, setMode: e => this.setState({ fMode: e.target.value }),
+        deptOpts: [{ v: '', l: 'All departments' }, ...A.DEPTS.map(d => ({ v: d.id, l: d.name }))], modeOpts: [{ v: '', l: 'All delivery modes' }, ...A.MODES.map(m => ({ v: m, l: m }))],
+        noCourses: !list.length,
+        courseCards: list.map(c => { const o = openFor(c.id).length > 0; return { code: c.code, title: c.title, dept: A.deptName(c.dept), product: c.product, level: c.level, summary: c.summary, modes: c.modes.join(' · '), href: '#course/' + c.code, img: IMG[c.dept], badge: o ? 'Intake open' : c.proposed ? 'Proposed · register interest' : 'Register interest', bBg: o ? '#536B4E' : '#F8F4ED', bFg: o ? '#F8F4ED' : '#493126' }; }) });
+    }
+    if (v === 'course') {
+      const c = courses.find(x => x.code === arg) || courses[0]; const ins = A.instructor(c.instructorId); const r = c.req;
+      const assess = ['Knowledge checks (' + r.quiz + '% pass)', c.assignment ? 'Written assignment' : '', c.practical ? 'Supervised practical assessment' : ''].filter(Boolean).join(' · ');
+      out.cd = { code: c.code, title: c.title, dept: A.deptName(c.dept), summary: c.summary, proposed: !!c.proposed, objectives: c.objectives,
+        modules: c.modules.map((m, i) => ({ n: 'Module ' + (i + 1), title: m.title, lessons: m.lessons.map(l => ({ title: l.title, type: TYPE[l.type] })) })),
+        hasChecklist: c.checklist.length > 0, checklist: c.checklist.map(p => ({ label: p.label, how: p.supervised ? 'In person, supervised' : 'Video may be submitted', c: p.supervised ? '#493126' : '#536B4E' })),
+        facts: [['Course type', c.product + ((A.PRODUCTS.find(p => p.name === c.product) || {}).note ? ' — ' + A.PRODUCTS.find(p => p.name === c.product).note : '')], ['Level', c.level], ['Course code', c.code], ['Department', A.deptName(c.dept)], ['Delivery', c.modes.join(' · ')], ['Duration', c.duration || 'To be confirmed'], ['Location', c.location], ['Course fee', A.money(c.fee)], ['Registration', A.money(c.regFee)], ['Class size', c.classSize ? 'Up to ' + c.classSize : 'To be confirmed'], ['Instructor', ins ? ins.name : 'To be appointed'], ['Assessment', assess], ['Attendance', r.attendance ? r.attendance + '% minimum' : 'Self-paced'], ['Entry', c.entry + (c.requiresId ? ' Identification document required.' : '')], ['Certificate', c.certKind]].map(([l, v]) => ({ l, v })),
+        certNote: 'Institute certificates are internal certificates of completion issued by Sense of Touch. ' + (A.settings().accreditation ? A.settings().accreditation : 'They are not accredited or nationally recognised qualifications.') + ' Eligibility depends on meeting every course requirement — not on enrolment or payment alone.',
+        intakes: openFor(c.id).map(h => { const p = A.priceOf(c.id, h.id), s = seatsLeft(h); return { name: h.name, dates: fmt(h.start) + ' – ' + fmt(h.end), mode: h.mode, venue: h.venue, fee: A.money(p.fee), reg: A.money(p.reg), seats: s == null ? '' : s > 0 ? s + ' places left' : 'Full — join the waiting list', sampleNote: h.sample ? 'Sample intake and figures for testing — not published fees.' : '', href: 'Institute%20Registration.dc.html#' + c.code + '/' + h.id }; }),
+        noIntakes: !openFor(c.id).length, interestHref: '#contact/' + c.code };
+    }
+    if (v === 'calendar') {
+      const cal = cohorts.filter(h => ['Open', 'Running'].includes(h.status)).sort((a, b) => a.start.localeCompare(b.start));
+      out.noCal = !cal.length;
+      out.cal = cal.map(h => { const c = A.course(h.courseId) || {}; const [sBg, sFg] = h.status === 'Open' ? ['#536B4E', '#F8F4ED'] : ['#E9DDC9', '#493126']; return { course: c.title, href: '#course/' + c.code, name: h.name, dates: fmt(h.start) + ' – ' + fmt(h.end), mode: h.mode, status: h.status === 'Open' ? 'Applications open' : 'In progress', sBg, sFg, sessions: A.sessionsOf(h.id).filter(s => s.date >= A.today()).slice(0, 6).map(s => ({ date: fmt(s.date), time: s.start + '–' + s.end, title: s.title, kind: s.kind })) }; });
+    }
+    if (v === 'admissions') {
+      out.process = ['Select a course and intake', 'Complete the online application', 'Receive your application reference', 'Admissions review — we may ask for more information or an interview', 'Accepted, waitlisted or declined', 'Accept your offer and receive payment instructions', 'Pay by Mobile Money or card — we verify it', 'Enrolment activated and student portal access sent'].map((t, i) => ({ n: i + 1, t }));
+      out.faqs = [['Are the certificates accredited?', 'Not at present. Institute certificates are internal certificates of completion issued by Sense of Touch. If a course gains external accreditation, the course page will name the accrediting body.'], ['Do I need experience?', 'Most foundation courses are planned for beginners. Each course page lists its own entry requirements.'], ['Can I study online?', 'Yes — theory for many courses is taught online, live or self-paced, and works on a phone. Practical skills are assessed in person under supervision; watching videos alone never earns a practical certificate.'], ['How do I pay?', 'After you accept an offer, pay by MTN Mobile Money, Telecel Cash, AirtelTigo Money or card through our payment provider. Your place is confirmed once our finance team verifies the payment.'], ['Can I pay in instalments?', 'Where an intake offers instalments, the plan is set out in your offer.'], ['Does completing a course guarantee a job?', 'No. We help you build skills, supervised experience and business knowledge, but we don’t promise employment.'], ['What happens to my documents and data?', 'They are stored privately and seen only by authorised staff. You can ask us to correct or delete your data at any time.']].map(([q, a]) => ({ q, a }));
+    }
+    if (v === 'instructors') out.instructors = A.list('instructors').filter(i => i.active).map(i => ({ ...i, hasPhoto: true, photo: i.photo || 'assets/logo.png', quals: i.qualifications ? 'Qualifications: ' + i.qualifications : '' }));
+    const courseOpts = courses.map(c => ({ v: c.id, l: c.title + ' (' + c.code + ')' }));
+    out.courseOpts = courseOpts;
+    const evs = A.list('events').filter(e => e.status === 'Published').sort((x, y) => x.date.localeCompare(y.date)), upcoming = evs.filter(e => e.date >= A.today());
+    if (v === 'methods') {
+      const cnt = m => courses.filter(c => c.modes.some(x => m.test(x))).length;
+      out.methods = [['i.', 'In person', 'Learn and practise in our treatment rooms in Tema, with an instructor beside you.', /In-person|Workshop|Intensive/], ['ii.', 'Live online', 'Scheduled online classes with your instructor and classmates; recordings where authorised.', /Live online/], ['iii.', 'Self-paced online', 'Video, reading and knowledge checks you complete on your own schedule.', /Self-paced/], ['iv.', 'Hybrid', 'Online theory first, then supervised practical sessions and assessment in person.', /Hybrid/]].map(([n, t, b, re]) => ({ n, t, b, count: cnt(re) + ' courses →', href: '#courses' }));
+      out.journeySteps = ['Online theory enrolment', 'Lesson completion', 'Knowledge assessment', 'Practical training eligibility', 'Practical session booking', 'Attendance', 'Practical assessment', 'Final course completion', 'Certificate eligibility'].map((t, i) => ({ n: i + 1, t }));
+      const L = LAB[st.lab];
+      out.labTabs = Object.entries(LAB).map(([k, x]) => ({ l: x.title, on: st.lab === k ? 'true' : 'false', bg: st.lab === k ? '#493126' : 'transparent', fg: st.lab === k ? '#F8F4ED' : '#493126', go: () => this.setState({ lab: k, labKey: null }) }));
+      out.lab = { title: L.title, intro: L.intro, keys: L.keys.map(([k, l, d]) => ({ l, d, on: st.labKey === k ? 'true' : 'false', bg: st.labKey === k ? '#F3EADC' : '#FFFDF9', bd: st.labKey === k ? '#C6A15B' : '#E9DDC9', go: () => this.setState({ labKey: st.labKey === k ? null : k }) })) };
+      out.labHint = st.labFail ? '3D not available on this device — use the descriptions' : L.hint;
+    }
+    if (v === 'workshops') {
+      const we = upcoming.filter(e => /Workshop|Masterclass/.test(e.type));
+      out.workshopEvents = we.map(e => ({ type: e.type, date: fmt(e.date), title: e.title, desc: e.description, meta: e.mode + ' · ' + (e.fee ? A.money(e.fee) : 'Fee to be confirmed'), href: '#events' }));
+      out.noWorkshops = !we.length;
+      out.workshopCourses = courses.filter(c => /workshop|introductory/i.test(c.product) || c.modes.includes('Workshop')).map(c => ({ title: c.title, product: c.product, level: c.level, modes: c.modes.join(' · '), img: IMG[c.dept], href: '#course/' + c.code }));
+    }
+    if (v === 'events') {
+      const setEv = {}; ['name', 'phone', 'email'].forEach(k => setEv[k] = e => this.setState({ ev: { ...st.ev, [k]: e.target.value } })); out.ev = st.ev; out.setEv = setEv;
+      out.eventList = upcoming.map(e => { const regs = A.list('event-regs').filter(r => r.eventId === e.id && r.status !== 'Cancelled').length, full = e.capacity && regs >= e.capacity, done = !!st.evDone[e.id];
+        return { anchor: 'ev-' + e.id, type: e.type, title: e.title, date: fmt(e.date), time: e.time || '', mode: e.mode, venue: e.venue, fee: e.fee ? A.money(e.fee) : 'Free / fee to be confirmed', places: e.capacity ? Math.max(0, e.capacity - regs) + ' places left' : 'Open', desc: e.description, border: e.type === 'Graduation' ? '#C6A15B' : '#E9DDC9', done, canReg: !done && !full && e.type !== 'Graduation', closedNote: e.type === 'Graduation' ? 'Graduation invitations go to eligible graduates and their guests.' : full ? 'This event is full.' : '', err: st.evErr[e.id] || '',
+          register: () => { const r = A.registerEvent(e.id, st.ev); this.setState(r.error ? { evErr: { ...st.evErr, [e.id]: r.error } } : { evDone: { ...st.evDone, [e.id]: true }, evErr: { ...st.evErr, [e.id]: '' } }); } }; });
+      out.noEvents = !upcoming.length;
+    }
+    if (v === 'tour') {
+      const n = SPACES.length, i = ((st.space % n) + n) % n, [name, img, desc, use] = SPACES[i];
+      out.sp = { n: i + 1, name, img, desc, use, alt: name + ' at Sense of Touch', hasPhoto: !!img, noPhoto: !img, bg: img ? 'url("' + img + '")' : 'none', slot: 'tour-' + name.toLowerCase().replace(/\W+/g, '-'), slotLabel: name + ' — drop a real photo here', tag: 'Actual facility' };
+      out.spaceCount = n; out.prevSpace = () => this.setState({ space: i - 1 }); out.nextSpace = () => this.setState({ space: i + 1 });
+      out.spaces = SPACES.map(([nm, im], j) => ({ name: nm, photoNote: im ? '' : 'Photo coming', on: j === i ? 'true' : 'false', fg: j === i ? '#536B4E' : '#493126', fw: j === i ? 600 : 400, go: () => this.setState({ space: j }) }));
+    }
+    if (v === 'news') { const arts = A.list('articles').filter(a => a.status === 'Published' && (!a.category || a.category === 'News')).sort((x, y) => (y.date || '').localeCompare(x.date || '')); out.articles = arts.map(a => ({ title: a.title, date: fmt(a.date), summary: a.summary, body: a.body, img: a.img || 'assets/web/lounge-group.jpg' })); out.noNews = !arts.length; }
+    if (v === 'track') {
+      const a = st.trackedId ? A.get('applications', st.trackedId) : null;
+      const [sBg, sFg] = a ? (STATUS_C[a.status] || ['#E9DDC9', '#493126']) : ['', ''];
+      const pr = a ? A.priceOf(a.courseId, a.cohortId) : {};
+      const pays = a ? A.list('payments').filter(p => p.appId === a.id) : [];
+      const appFee = A.settings().appFee, appPaid = a ? A.list('payments').some(p => p.appId === a.id && p.kind === 'Application' && p.status === 'Verified') : false;
+      const letter = a ? A.admissionLetter(a.id) : null;
+      Object.assign(out, { letterOpen: st.letter && !!letter, lt: letter ? { ...letter, fee: A.money(letter.fee), reg: A.money(letter.reg), schedule: letter.schedule.map(r => ({ ...r, amount: A.money(r.amount) })), sig: String(letter.signatory).split(',')[0], sidLine: letter.studentId ? ' Your student ID is ' + letter.studentId + '.' : '' } : {}, openLetter: () => this.setState({ letter: true }), closeLetter: () => this.setState({ letter: false }), printLetter: () => window.print(), tRef: st.tRef, tEmail: st.tEmail, setTRef: e => this.setState({ tRef: e.target.value }), setTEmail: e => this.setState({ tEmail: e.target.value }),
+        doTrack: () => { const r = A.track(st.tRef, st.tEmail); this.setState(r ? { trackedId: r.id, trackErr: '', pay: { method: 'MTN Mobile Money', amount: '', ref: '' } } : { trackedId: '', trackErr: 'We couldn’t find an application with that reference and email.' }); },
+        trackErr: !!st.trackErr, trackErrText: st.trackErr, hasTracked: !!a, payErr: st.payErr, pay: st.pay, payMethods: A.PAY_METHODS,
+        setPayMethod: e => this.setState({ pay: { ...st.pay, method: e.target.value } }), setPayAmount: e => this.setState({ pay: { ...st.pay, amount: e.target.value } }), setPayRef: e => this.setState({ pay: { ...st.pay, ref: e.target.value } }),
+        acceptOffer: () => a && A.setAppStatus(a.id, 'Offer accepted', 'Applicant'),
+        withdraw: () => { if (a && confirm('Withdraw this application? This can’t be undone.')) A.setAppStatus(a.id, 'Withdrawn', 'Applicant'); },
+        sendPay: () => { if (!a) return; const r = A.notifyPayment({ appId: a.id, courseId: a.courseId, cohortId: a.cohortId, payer: a.name, kind: a.status === 'Offer accepted' ? (pr.reg ? 'Registration' : 'Tuition') : 'Application', amount: st.pay.amount, method: st.pay.method, providerRef: st.pay.ref }); this.setState(r.error ? { payErr: r.error } : { payErr: '', pay: { method: st.pay.method, amount: '', ref: '' } }); },
+        ta: a ? { id: a.id, courseTitle: a.courseTitle, cohortName: a.cohortName, status: a.status, sBg, sFg, message: (MSG[a.status] || '') + (a.status === 'Enrolled' ? a.studentId + '.' : ''),
+          canAccept: a.status === 'Accepted', showPay: a.status === 'Offer accepted', appFeeDue: !!(appFee > 0) && !appPaid && ['Submitted', 'Under review'].includes(a.status), appFee: A.money(appFee), showPayBlock: a.status === 'Offer accepted' || (!!(appFee > 0) && !appPaid && ['Submitted', 'Under review'].includes(a.status)), hasLetter: !!letter, fx: A.fxLine(pr.deposit), schedule: A.schedule(a.courseId, a.cohortId).map(r => ({ ...r, amount: A.money(r.amount) })), enrolled: a.status === 'Enrolled', canWithdraw: !['Withdrawn', 'Declined', 'Enrolled'].includes(a.status),
+          deposit: A.money(pr.deposit), fee: A.money(pr.fee), reg: A.money(pr.reg), sampleNote: pr.sample ? 'Sample figures for testing — not published fees.' : '',
+          hasPays: pays.length > 0, pays: pays.map(p => ({ amount: A.money(p.amount), method: p.method, ref: p.providerRef, status: p.status, c: p.status === 'Verified' ? '#2F4A2B' : p.status === 'Failed' ? '#9A3B2A' : '#6B4A12' })),
+          history: (a.history || []).map(h => ({ at: new Date(h.at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }), status: h.status })).reverse() } : {} });
+    }
+    if (v === 'verify') {
+      const r = st.vRes;
+      const doVerify = () => { const id = st.vId.trim(); if (!id) return; this.setState({ vRes: A.verify(id) }); history.replaceState(null, '', '#verify/' + id.toUpperCase()); };
+      Object.assign(out, { vId: st.vId, setVId: e => this.setState({ vId: e.target.value }), vKey: e => { if (e.key === 'Enter') doVerify(); }, doVerify, vNone: r === null, vFound: !!r,
+        vr: r ? { name: r.name, statusLabel: r.status === 'Valid' ? '✓ Valid certificate' : r.status === 'Revoked' ? 'Revoked — not valid' : r.status, bg: r.status === 'Valid' ? '#536B4E' : '#9A3B2A', fg: '#F8F4ED', border: r.status === 'Valid' ? '#536B4E' : '#9A3B2A',
+          rows: [['Certificate ID', r.id], ['Course', r.course], ['Type', r.kind], ['Completed', fmt(r.completed)], ['Issued by', r.org]].map(([l, v]) => ({ l, v })),
+          note: r.accreditation ? r.accreditation : 'This is an internal Sense of Touch Institute of Beauty &amp; Wellness certificate of completion. It is not an accredited or nationally recognised qualification.' } : {} });
+    }
+    if (v === 'contact') {
+      const setEnq = {}; ['name', 'phone', 'email', 'courseId', 'message'].forEach(k => setEnq[k] = e => this.setState({ enq: { ...st.enq, [k]: e.target.value } }));
+      Object.assign(out, { enq: st.enq, setEnq, enqErr: st.enqErr, enqDone: !!st.enqRef, enqForm: !st.enqRef, enqRef: st.enqRef,
+        sendEnq: () => { const r = A.enquire(st.enq); this.setState(r.error ? { enqErr: r.error } : { enqErr: '', enqRef: r.enquiry.id }); } });
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

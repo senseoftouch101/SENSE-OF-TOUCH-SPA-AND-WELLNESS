@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Print gift card · Sense of Touch</title>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>@media print{[data-screen-only]{display:none!important}}body{margin:0}*{box-sizing:border-box}a{color:#536B4E}a:hover{color:#493126}doc-page:not(:defined){visibility:hidden}</style>
+<script src="./doc-page.js"></script>
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script src="./sot-scan.js"></script>
+</helmet>
+<doc-page size="a4">
+<section class="page" data-screen-label="Gift card" style="background:#FFFFFF;font-family:Montserrat,sans-serif;color:#24221D;padding:18mm;display:flex;flex-direction:column;align-items:center;gap:10mm">
+<nav data-screen-only="1" aria-label="Back" style="display:flex;gap:16px;flex-wrap:wrap;font-size:10pt"><a href="GiftCards.dc.html" style="color:#536B4E">← Gift cards</a><a href="Sense%20of%20Touch%20Homepage.dc.html" style="color:#536B4E">Website home</a></nav>
+<span style="font-size:8pt;letter-spacing:0.24em;color:#6B665C">PRINT AT 100% · CUT ALONG THE DASHED LINES · FOLD OR MOUNT BACK-TO-BACK</span>
+
+<div style="outline:0.3mm dashed #C9BBA3;outline-offset:3mm;width:128mm;height:81mm;background:#493126;color:#F8F4ED;padding:8mm;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+<div style="position:absolute;right:-22mm;top:-22mm;width:80mm;height:80mm;border-radius:50%;border:0.3mm solid #C6A15B"></div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative">
+<div style="width:16mm;height:18.4mm;overflow:hidden;position:relative"><div style="position:absolute;width:49.6mm;height:49.6mm;left:-16.7mm;top:-9mm;background:#C6A15B;-webkit-mask:url(assets/logo-transparent.png) center/contain no-repeat;mask:url(assets/logo-transparent.png) center/contain no-repeat"></div></div>
+<span style="font-size:7pt;letter-spacing:0.3em;color:#C6A15B;font-weight:600">GIFT CARD</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:2mm;position:relative">
+<span style="font-family:'Cormorant Garamond',serif;font-size:30pt;line-height:1">{{ label }}</span>
+<span style="font-size:8.5pt;color:#E9DDC9">For {{ to }} · from {{ from }}</span>
+<span style="font-family:Allura,cursive;font-size:18pt;color:#C6A15B;line-height:1.1">{{ msg }}</span>
+</div>
+</div>
+
+<div style="outline:0.3mm dashed #C9BBA3;outline-offset:3mm;width:128mm;height:81mm;background:#F8F4ED;padding:8mm;display:flex;flex-direction:column;justify-content:space-between;border:0.3mm solid #E9DDC9">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 26mm;gap:5mm;align-items:start"><div style="display:flex;flex-direction:column;gap:1.5mm"><span style="font-size:7pt;letter-spacing:0.26em;color:#536B4E;font-weight:600">CARD CODE</span><span style="font-family:'Courier New',monospace;font-size:18pt;letter-spacing:0.1em;color:#493126">{{ code }}</span><span style="font-size:8pt;color:#493126">{{ valid }}</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:1mm"><div data-no-full="1" role="img" aria-label="QR code — scan to check balance" style="width:26mm;height:26mm;background-color:#FFFFFF;background-image:{{ qrBg }};background-size:100% 100%;-webkit-print-color-adjust:exact;print-color-adjust:exact"></div><span style="font-size:6pt;letter-spacing:0.16em;color:#493126">SCAN TO CHECK</span></div></div>
+<div data-no-full="1" role="img" aria-label="Barcode {{ code }}" style="height:11mm;width:100%;background-color:#FFFFFF;background-image:{{ barBg }};background-size:100% 100%;background-repeat:no-repeat;-webkit-print-color-adjust:exact;print-color-adjust:exact"></div>
+<div style="display:flex;flex-direction:column;gap:1.2mm;font-size:7.5pt;line-height:1.5">
+<span><b>To use:</b> book at senseoftouch.co or WhatsApp +233 59 718 2026 and quote the code. Show this card at reception.</span>
+<span>Value cards can be used over several visits. Not exchangeable for cash. Replacement only with proof of purchase.</span>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:0.3mm solid #C6A15B;padding-top:2.5mm;font-size:7pt;letter-spacing:0.14em;color:#493126"><span>SENSE OF TOUCH · COMMUNITY 25, TEMA</span><span>BOOKINGS@SENSEOFTOUCH.CO</span></div>
+</div>
+
+<sc-if value="{{ missing }}" hint-placeholder-val="{{ false }}"><span data-screen-only="1" style="font-size:10pt;color:#9A3B2A">No gift card found for this code — showing a sample. Open this page from Admin → Gift cards → Print card.</span></sc-if>
+</section>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { g: null, code: '' };
+  componentDidMount() { const code = new URLSearchParams(location.search).get('code') || ''; const load = () => { const S = window.SOT, Q = window.SOTScan; if (!S || !Q || !window.qrcode) return setTimeout(load, 100); const g = code ? S.gcGet(code) : null; this.setState({ code, g, qr: Q.qrSvg(Q.checkUrl(g ? g.id : 'GC-SAMPLE'), 240), bar: Q.barcodeSvg(g ? g.id : 'GC-SAMPLE', 60) }); }; load(); }
+  renderVals() {
+    const g = this.state.g, S = window.SOT;
+    return {
+      label: g ? g.label : 'GHS 500', to: g ? g.recipient : 'Someone special', from: g ? g.from : 'Sense of Touch',
+      msg: (g && g.message) || 'Feel the Touch.', code: g ? g.id : 'GC-SAMPLE',
+      valid: g && g.expires && S ? 'Valid until ' + S.fmtDate(g.expires) : 'Valid for 6 months from purchase',
+      missing: !g, qrBg: this.state.qr ? 'url("' + this.state.qr + '")' : 'none', barBg: this.state.bar ? 'url("' + this.state.bar + '")' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

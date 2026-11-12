@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Institute Management · Sense of Touch Admin</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-base.css">
+<script src="./sot-store.js?v=20261110b"></script>
+<script src="./sot-auth.js"></script>
+<script src="./academy-core.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F3EEE6">
+<header style="background:#24221D;color:#F8F4ED;position:sticky;top:0;z-index:10">
+<div style="max-width:1440px;margin:0 auto;padding:10px clamp(14px,3vw,28px);display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between">
+<a href="Admin.dc.html" style="display:flex;align-items:center;gap:10px;color:#F8F4ED;min-height:44px"><span style="font-family:'Cormorant Garamond',serif;font-size:22px">Sense of Touch</span><span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C6A15B;font-weight:600">Admin · Institute</span></a>
+<sc-if value="{{ ok }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+<span style="font-size:12px;color:#E9DDC9">{{ whoLabel }}</span>
+<sc-if value="{{ isFounder }}" hint-placeholder-val="{{ false }}"><select aria-label="Preview permissions as role" value="{{ viewAs }}" onChange="{{ setViewAs }}" style="min-height:40px;padding:0 8px;background:#24221D;color:#F8F4ED;border:1px solid #C6A15B;font-size:12px"><option value="">View as: Founder</option><sc-for list="{{ roleOpts }}" as="r" hint-placeholder-count="6"><option value="{{ r }}">View as: {{ r }}</option></sc-for></select></sc-if>
+<a href="Institute.dc.html" style="min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #C6A15B;color:#F8F4ED">Public site</a>
+<a href="Institute%20Portal.dc.html" style="min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #C6A15B;color:#F8F4ED">Portal</a>
+<a href="CRM.dc.html" style="min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#C6A15B;color:#24221D">Client CRM</a>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{ ok }}" hint-placeholder-val="{{ false }}">
+<nav aria-label="Institute sections" style="max-width:1440px;margin:0 auto;padding:0 clamp(14px,3vw,28px);display:flex;gap:2px;overflow-x:auto;scrollbar-width:none">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="10"><button onClick="{{ t.go }}" aria-current="{{ t.on }}" style="all:unset;cursor:pointer;white-space:nowrap;min-height:44px;padding:0 12px;display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:{{ t.fg }};border-bottom:2px solid {{ t.line }}">{{ t.label }}<span style="color:#C6A15B">{{ t.badge }}</span></button></sc-for>
+</nav>
+</sc-if>
+</header>
+
+<sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Institute admin sign-in" style="max-width:480px;margin:0 auto;padding:clamp(56px,10vw,120px) 20px;display:flex;flex-direction:column;gap:16px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:44px;color:#493126">{{ lockTitle }}</h1>
+<p style="margin:0;font-size:15px;line-height:1.7">{{ lockText }}</p>
+<a href="Admin.dc.html" style="align-self:flex-start;min-height:50px;padding:0 24px;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Staff sign-in</a>
+</section>
+</sc-if>
+
+<sc-if value="{{ ok }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1440px;margin:0 auto;padding:clamp(20px,3vw,32px) clamp(14px,3vw,28px) 72px;display:flex;flex-direction:column;gap:18px">
+<sc-if value="{{ flash }}" hint-placeholder-val="{{ false }}"><div role="status" style="background:{{ flashBg }};border-left:3px solid {{ flashLine }};padding:12px 14px;font-size:14px;display:flex;justify-content:space-between;gap:10px;align-items:center">{{ flashText }}<button onClick="{{ clearFlash }}" aria-label="Dismiss" style="all:unset;cursor:pointer;min-width:32px;min-height:32px;text-align:center">×</button></div></sc-if>
+
+<sc-if value="{{ tOverview }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Institute overview" style="display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center"><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,3vw + 14px,44px);color:#493126">Institute overview</h1><span style="font-size:12px;color:#6B665C">{{ sampleNote }}</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:10px">
+<sc-for list="{{ kpis }}" as="k" hint-placeholder-count="11"><button onClick="{{ k.go }}" style="all:unset;cursor:pointer;box-sizing:border-box;background:#FFFDF9;border:1px solid #E9DDC9;padding:16px;display:flex;flex-direction:column;gap:6px;min-height:100px"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ k.label }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:36px;line-height:1;color:#493126">{{ k.value }}</span></button></sc-for>
+</div>
+<div data-screen-label="Dashboard charts" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px">
+<sc-for list="{{ charts }}" as="ch" hint-placeholder-count="3"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#493126">{{ ch.title }}</span><span style="font-size:12px;color:#6B665C">{{ ch.total }}</span></div>
+<div role="img" aria-label="{{ ch.aria }}" style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;align-items:end;height:140px;border-bottom:1px solid #E9DDC9"><sc-for list="{{ ch.bars }}" as="b" hint-placeholder-count="6"><div style="display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%"><span style="font-size:11px;color:#493126;font-weight:600">{{ b.v }}</span><span style="width:100%;max-width:36px;height:{{ b.h }};background:{{ ch.color }};transition:height 1s cubic-bezier(.2,.7,.2,1)"></span></div></sc-for></div>
+<div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px"><sc-for list="{{ ch.bars }}" as="b" hint-placeholder-count="6"><span style="font-size:11px;text-align:center;color:#6B665C">{{ b.l }}</span></sc-for></div></div></sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Needs attention</span>
+<sc-if value="{{ noAttention }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">All clear.</span></sc-if>
+<sc-for list="{{ attention }}" as="a" hint-placeholder-count="4"><button onClick="{{ a.go }}" style="all:unset;cursor:pointer;display:flex;gap:10px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:14px;min-height:44px;align-items:center"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:{{ a.c }};flex:none"></span>{{ a.t }}</button></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Notifications</span>
+<sc-if value="{{ noNotices }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">No notifications yet.</span></sc-if>
+<sc-for list="{{ notices }}" as="n" hint-placeholder-count="4"><div style="display:flex;gap:10px;justify-content:space-between;padding:9px 0;border-top:1px solid #E9DDC9;font-size:13px"><span>{{ n.text }}</span><span style="color:#6B665C;white-space:nowrap">{{ n.role }}</span></div></sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tAdmissions }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Applications and admissions" style="display:flex;flex-direction:column;gap:16px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Applications &amp; admissions</h1>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,110px),1fr));gap:6px">
+<sc-for list="{{ pipeline }}" as="p" hint-placeholder-count="9"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ p.stage }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1;color:#493126">{{ p.n }}</span></div></sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<input aria-label="Search applications" value="{{ q }}" onChange="{{ setQ }}" placeholder="Search name, email, reference…" style="flex:1 1 240px;padding:12px;border:1px solid #E9DDC9;background:#FFFDF9">
+<select aria-label="Status" value="{{ fStatus }}" onChange="{{ setFStatus }}" style="padding:12px;border:1px solid #E9DDC9;background:#FFFDF9;min-height:46px"><option value="">All statuses</option><sc-for list="{{ appStatuses }}" as="o" hint-placeholder-count="6"><option value="{{ o }}">{{ o }}</option></sc-for></select>
+</div>
+<sc-if value="{{ noApps }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;font-size:14px;color:#6B665C">No applications match. Applications from the Institute “Apply now” page appear here.</div></sc-if>
+<sc-for list="{{ apps }}" as="a" hint-placeholder-count="4">
+<div style="background:#FFFDF9;border:1px solid {{ a.border }};display:flex;flex-direction:column">
+<button onClick="{{ a.toggle }}" style="all:unset;cursor:pointer;box-sizing:border-box;padding:14px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:6px 16px;align-items:center;font-size:14px">
+<span style="display:flex;flex-direction:column"><strong style="font-size:15px">{{ a.name }}</strong><span style="font-size:12px;color:#6B665C">{{ a.id }} · {{ a.source }}</span></span>
+<span>{{ a.course }}</span><span style="color:#6B665C">{{ a.cohort }}</span><span style="color:#6B665C">{{ a.date }}</span>
+<span style="justify-self:start;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;padding:6px 9px;background:{{ a.sBg }};color:{{ a.sFg }}">{{ a.status }}</span>
+</button>
+<sc-if value="{{ a.open }}" hint-placeholder-val="{{ false }}">
+<div style="border-top:1px solid #E9DDC9;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px">
+<div style="display:flex;flex-direction:column"><sc-for list="{{ a.fields }}" as="f" hint-placeholder-count="8"><div style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:10px;padding:7px 0;border-bottom:1px solid #F3EEE6;font-size:13px;line-height:1.5"><span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ f.l }}</span><span>{{ f.v }}</span></div></sc-for>
+<span style="font-size:12px;color:#9A3B2A;padding-top:8px">{{ a.dupNote }}</span></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">Decision</span>
+<input aria-label="Note" value="{{ note }}" onChange="{{ setNote }}" placeholder="Note for the record (optional)" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px">
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ a.actions }}" as="x" hint-placeholder-count="6"><button onClick="{{ x.go }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:1px solid {{ x.bd }};background:{{ x.bg }};color:{{ x.fg }}">{{ x.l }}</button></sc-for></div>
+<span style="font-size:13px;color:#6B665C">{{ a.enrolNote }}</span>
+<span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-top:6px">History</span>
+<sc-for list="{{ a.history }}" as="h" hint-placeholder-count="2"><div style="display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px;padding:5px 0;border-top:1px solid #F3EEE6"><span style="color:#6B665C;min-width:96px">{{ h.at }}</span><strong>{{ h.status }}</strong><span>{{ h.by }}</span><span style="color:#6B665C">{{ h.note }}</span></div></sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Enquiries &amp; prospective students</span><span style="font-size:12px;color:#6B665C">Each enquiry is linked to the client CRM by phone or email — no duplicate profiles.</span>
+<sc-if value="{{ noEnq }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">No enquiries yet.</span></sc-if>
+<sc-for list="{{ enqs }}" as="e" hint-placeholder-count="2"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:6px 14px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:14px;align-items:center"><span style="display:flex;flex-direction:column"><strong>{{ e.name }}</strong><span style="font-size:12px;color:#6B665C">{{ e.contact }}</span></span><span>{{ e.course }}</span><span style="color:#6B665C">{{ e.message }}</span><select aria-label="Source" value="{{ e.source }}" onChange="{{ e.setSource }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;min-height:42px"><sc-for list="{{ sources }}" as="o" hint-placeholder-count="5"><option value="{{ o }}">{{ o }}</option></sc-for></select><select aria-label="Stage" value="{{ e.stage }}" onChange="{{ e.setStage }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;min-height:42px"><sc-for list="{{ stages }}" as="o" hint-placeholder-count="5"><option value="{{ o }}">{{ o }}</option></sc-for></select></div></sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tStudents }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Students" style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center"><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Students · {{ studentCount }}</h1><sc-if value="{{ canExport }}" hint-placeholder-val="{{ false }}"><button onClick="{{ exportStudents }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #493126;color:#493126">Export CSV</button></sc-if></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px"><input aria-label="Search students" value="{{ sq }}" onChange="{{ setSq }}" placeholder="Search name, email, phone, ID…" style="flex:1 1 240px;padding:12px;border:1px solid #E9DDC9;background:#FFFDF9"><select aria-label="Enrolment status" value="{{ sStatus }}" onChange="{{ setSStatus }}" style="padding:12px;border:1px solid #E9DDC9;background:#FFFDF9;min-height:46px"><option value="">All</option><option value="Active">Active</option><option value="Completed">Completed</option><option value="Withdrawn">Withdrawn</option></select></div>
+<sc-if value="{{ noStudents }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;font-size:14px;color:#6B665C">No students yet. A student record is created automatically when an accepted applicant’s payment is verified.</div></sc-if>
+<sc-for list="{{ students }}" as="s" hint-placeholder-count="3">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<button onClick="{{ s.toggle }}" style="all:unset;cursor:pointer;box-sizing:border-box;padding:14px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:6px 16px;align-items:center;font-size:14px"><span style="display:flex;flex-direction:column"><strong style="font-size:15px">{{ s.name }}</strong><span style="font-size:12px;color:#6B665C">{{ s.id }} · {{ s.email }}</span></span><span>{{ s.courses }}</span><span style="color:#6B665C">{{ s.phone }}</span><span style="font-size:12px;color:#536B4E">{{ s.crm }}</span></button>
+<sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}">
+<div style="border-top:1px solid #E9DDC9;padding:16px;display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ s.enrols }}" as="e" hint-placeholder-count="1">
+<div style="border:1px solid #E9DDC9;padding:14px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between"><strong style="font-size:15px">{{ e.course }} <span style="font-weight:400;color:#6B665C">· {{ e.cohort }}</span></strong><span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ e.status }}</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px 14px;font-size:13px"><span>Online lessons <strong>{{ e.lessons }}</strong></span><span>Knowledge checks <strong>{{ e.quizzes }}</strong></span><span>Attendance <strong>{{ e.att }}</strong></span><span>Practical <strong>{{ e.prac }}</strong></span><span>Balance <strong>{{ e.balance }}</strong></span><span>Certificate <strong>{{ e.cert }}</strong></span></div>
+<span style="font-size:12px;color:{{ e.eligC }}">{{ e.elig }}</span>
+<sc-if value="{{ e.canWithdraw }}" hint-placeholder-val="{{ false }}"><button onClick="{{ e.withdraw }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:40px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#9A3B2A">Withdraw from course</button></sc-if>
+</div>
+</sc-for>
+<span style="font-size:13px;color:#6B665C">{{ s.extra }}</span>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ tCourses }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Courses" style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center"><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Courses &amp; departments</h1><button onClick="{{ newCourse }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">New course</button></div>
+<sc-if value="{{ editing }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFDF9;border:1px solid #C6A15B;padding:clamp(16px,3vw,24px);display:flex;flex-direction:column;gap:16px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126">{{ editTitle }}</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
+<sc-for list="{{ ceFields }}" as="f" hint-placeholder-count="12">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126;grid-column:{{ f.span }}">{{ f.l }}
+<sc-if value="{{ f.isInput }}" hint-placeholder-val="{{ true }}"><input type="{{ f.type }}" value="{{ f.v }}" onChange="{{ f.on }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:10px;border:1px solid #E9DDC9;background:#F8F4ED"></sc-if>
+<sc-if value="{{ f.isArea }}" hint-placeholder-val="{{ false }}"><textarea rows="3" value="{{ f.v }}" onChange="{{ f.on }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;resize:vertical;line-height:1.5"></textarea></sc-if>
+<sc-if value="{{ f.isSelect }}" hint-placeholder-val="{{ false }}"><select value="{{ f.v }}" onChange="{{ f.on }}" style="font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;min-height:44px"><sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select></sc-if>
+</label>
+</sc-for>
+</div>
+<fieldset style="border:1px solid #E9DDC9;padding:12px;margin:0;display:flex;flex-wrap:wrap;gap:4px 18px"><legend style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126;padding:0 6px">Delivery modes</legend><sc-for list="{{ ceModes }}" as="m" hint-placeholder-count="6"><label style="display:flex;gap:8px;align-items:center;font-size:14px;min-height:40px"><input type="checkbox" checked="{{ m.on }}" onChange="{{ m.toggle }}" style="width:18px;height:18px;accent-color:#536B4E">{{ m.l }}</label></sc-for></fieldset>
+<fieldset style="border:1px solid #E9DDC9;padding:12px;margin:0;display:flex;flex-wrap:wrap;gap:4px 18px"><legend style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126;padding:0 6px">Certificate eligibility requires</legend><sc-for list="{{ ceReqs }}" as="m" hint-placeholder-count="6"><label style="display:flex;gap:8px;align-items:center;font-size:14px;min-height:40px"><input type="checkbox" checked="{{ m.on }}" onChange="{{ m.toggle }}" style="width:18px;height:18px;accent-color:#536B4E">{{ m.l }}</label></sc-for></fieldset>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126">Modules → lessons</span>
+<sc-for list="{{ ceModules }}" as="m" hint-placeholder-count="3">
+<div style="border:1px solid #E9DDC9;padding:12px;display:flex;flex-direction:column;gap:6px">
+<input aria-label="Module title" value="{{ m.title }}" onChange="{{ m.setTitle }}" style="font-size:15px;font-weight:600;padding:9px;border:1px solid #E9DDC9;background:#F8F4ED">
+<sc-for list="{{ m.lessons }}" as="l" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:36px 36px minmax(0,1fr) 150px minmax(0,170px) 40px;gap:6px;align-items:center"><button onClick="{{ l.up }}" aria-label="Move lesson up" style="all:unset;cursor:pointer;min-height:40px;text-align:center;color:#493126">↑</button><button onClick="{{ l.down }}" aria-label="Move lesson down" style="all:unset;cursor:pointer;min-height:40px;text-align:center;color:#493126">↓</button><input aria-label="Lesson title" value="{{ l.title }}" onChange="{{ l.setTitle }}" style="font-size:14px;padding:8px;border:1px solid #E9DDC9;background:#FFFDF9"><select aria-label="Lesson type" value="{{ l.type }}" onChange="{{ l.setType }}" style="font-size:14px;padding:8px;border:1px solid #E9DDC9;background:#FFFDF9;min-height:40px"><sc-for list="{{ lessonTypes }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select><label style="font-size:11px;color:#536B4E;display:flex;flex-direction:column;gap:2px;min-width:0"><input type="file" aria-label="Upload video or document" onChange="{{ l.setMedia }}" style="font-size:11px;max-width:100%"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ l.media }}</span></label><button onClick="{{ l.remove }}" aria-label="Remove lesson" style="all:unset;cursor:pointer;min-height:40px;text-align:center;color:#9A3B2A;font-size:18px">×</button></div></sc-for>
+<button onClick="{{ m.addLesson }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:36px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#536B4E">+ Add lesson</button>
+</div>
+</sc-for>
+<button onClick="{{ addModule }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:40px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#536B4E">+ Add module</button>
+</div>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ ceErr }}</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button onClick="{{ saveCourse }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 20px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Save course</button><button onClick="{{ cancelEdit }}" style="all:unset;cursor:pointer;min-height:46px;padding:0 20px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #493126;color:#493126">Cancel</button></div>
+</div>
+</sc-if>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<sc-for list="{{ courseRows }}" as="c" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:6px 14px;padding:12px 16px;border-bottom:1px solid #E9DDC9;font-size:14px;align-items:center">
+<span style="display:flex;flex-direction:column;grid-column:span 2"><strong style="font-size:15px">{{ c.title }}</strong><span style="font-size:12px;color:#6B665C">{{ c.code }} · {{ c.dept }} · {{ c.modes }}</span></span>
+<span style="font-size:13px;color:#6B665C">{{ c.meta }}</span>
+<span style="justify-self:start;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;padding:6px 9px;background:{{ c.sBg }};color:{{ c.sFg }}">{{ c.status }}</span>
+<div style="display:flex;gap:4px;flex-wrap:wrap"><sc-for list="{{ c.actions }}" as="x" hint-placeholder-count="4"><button onClick="{{ x.go }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;border:1px solid #E9DDC9;color:#493126">{{ x.l }}</button></sc-for></div>
+</div>
+</sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Departments</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:0 24px"><sc-for list="{{ deptRows }}" as="d" hint-placeholder-count="10"><div style="display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:14px"><span>{{ d.name }}</span><span style="color:#536B4E">{{ d.n }}</span></div></sc-for></div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tCohorts }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Cohorts, classes and attendance" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Cohorts, classes &amp; attendance</h1>
+<sc-for list="{{ cohortRows }}" as="h" hint-placeholder-count="3">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:6px 14px;padding:14px 16px;font-size:14px;align-items:center">
+<button onClick="{{ h.toggle }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;grid-column:span 2"><strong style="font-size:15px">{{ h.course }}</strong><span style="font-size:12px;color:#6B665C">{{ h.name }} · {{ h.dates }}</span></button>
+<span>{{ h.seats }}</span><span style="color:#6B665C">{{ h.instructor }} · {{ h.fee }}</span>
+<select aria-label="Cohort status" value="{{ h.status }}" onChange="{{ h.setStatus }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;min-height:42px"><sc-for list="{{ cohortStatuses }}" as="o" hint-placeholder-count="5"><option value="{{ o }}">{{ o }}</option></sc-for></select>
+</div>
+<sc-if value="{{ h.open }}" hint-placeholder-val="{{ false }}">
+<div style="border-top:1px solid #E9DDC9;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+<div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:12px;min-width:100%"><thead><tr><th style="text-align:left;padding:6px 8px;border-bottom:1px solid #E9DDC9;font-weight:600">Student</th><sc-for list="{{ h.sessHeads }}" as="s" hint-placeholder-count="4"><th style="padding:6px 8px;border-bottom:1px solid #E9DDC9;font-weight:600;white-space:nowrap">{{ s }}</th></sc-for><th style="padding:6px 8px;border-bottom:1px solid #E9DDC9;font-weight:600">%</th></tr></thead>
+<tbody><sc-for list="{{ h.grid }}" as="r" hint-placeholder-count="2"><tr><td style="padding:6px 8px;border-bottom:1px solid #F3EEE6;white-space:nowrap">{{ r.name }}</td><sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="4"><td style="padding:6px 8px;border-bottom:1px solid #F3EEE6;text-align:center;background:{{ c.bg }};color:{{ c.fg }};font-weight:600">{{ c.t }}</td></sc-for><td style="padding:6px 8px;border-bottom:1px solid #F3EEE6;text-align:center;font-weight:600">{{ r.pct }}</td></tr></sc-for></tbody></table></div>
+<span style="font-size:12px;color:#6B665C">P present · L late · A absent · E excused · – not recorded. Instructors mark registers in the portal; corrections keep a history.</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:8px;align-items:end;border-top:1px solid #E9DDC9;padding-top:12px">
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Date<input type="date" value="{{ ns.date }}" onChange="{{ setNs.date }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Start<input type="time" value="{{ ns.start }}" onChange="{{ setNs.start }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">End<input type="time" value="{{ ns.end }}" onChange="{{ setNs.end }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Type<select value="{{ ns.kind }}" onChange="{{ setNs.kind }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:40px"><option>Live online</option><option>In-person</option><option>Practical</option><option>Make-up session</option><option>Assessment</option></select></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Title<input value="{{ ns.title }}" onChange="{{ setNs.title }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></label>
+<button onClick="{{ h.addSession }}" style="all:unset;cursor:pointer;min-height:42px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Add class</button>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<div style="background:#FFFDF9;border:1px solid #C6A15B;padding:18px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">New cohort / intake</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px">
+<sc-for list="{{ ncFields }}" as="f" hint-placeholder-count="10"><label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">{{ f.l }}<sc-if value="{{ f.isInput }}" hint-placeholder-val="{{ true }}"><input type="{{ f.type }}" value="{{ f.v }}" onChange="{{ f.on }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400"></sc-if><sc-if value="{{ f.isSelect }}" hint-placeholder-val="{{ false }}"><select value="{{ f.v }}" onChange="{{ f.on }}" style="padding:9px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:40px;letter-spacing:0;text-transform:none;font-weight:400"><sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select></sc-if></label></sc-for>
+</div>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ ncErr }}</span>
+<button onClick="{{ createCohort }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Create cohort</button>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tAssess }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Assessments and grades" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Assessments &amp; grades</h1>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ subFilters }}" as="f" hint-placeholder-count="3"><button onClick="{{ f.go }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 14px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;background:{{ f.bg }};color:{{ f.fg }};border:1px solid #493126">{{ f.l }}</button></sc-for></div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;display:flex;flex-direction:column">
+<sc-if value="{{ noSubs }}" hint-placeholder-val="{{ false }}"><span style="padding:16px;font-size:14px;color:#6B665C">Nothing here.</span></sc-if>
+<sc-for list="{{ subs }}" as="s" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px 14px;padding:12px 16px;border-bottom:1px solid #E9DDC9;font-size:14px;align-items:center"><strong>{{ s.student }}</strong><span>{{ s.title }}</span><span style="color:#6B665C">{{ s.kind }} · {{ s.course }}</span><span>{{ s.score }}</span><span style="color:#6B665C;font-size:13px">{{ s.feedback }}</span><span style="font-size:12px;color:#536B4E">{{ s.by }}</span></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Practical competency records</span><span style="font-size:12px;color:#6B665C">Recorded only by authorised instructors, separately from online completion and knowledge assessment.</span>
+<sc-if value="{{ noPracs }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C;padding-top:6px">No practical records yet.</span></sc-if>
+<sc-for list="{{ pracs }}" as="p" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px 14px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:13px"><strong>{{ p.student }}</strong><span>{{ p.label }}</span><span style="color:{{ p.c }};font-weight:600">{{ p.result }}</span><span style="color:#6B665C">{{ p.sup }} · {{ p.by }} · {{ p.at }}</span></div></sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tCerts }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Certificates" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Completion &amp; certificates</h1>
+<div style="background:#E9DDC9;padding:12px 14px;font-size:13px;line-height:1.6;color:#493126">Certificates are issued only after every configured course requirement is met and completion is confirmed. They are internal certificates of completion — do not describe them as accredited unless documentary confirmation is recorded in Settings.</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Enrolments to review</span>
+<sc-if value="{{ noReview }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">No active enrolments.</span></sc-if>
+<sc-for list="{{ review }}" as="r" hint-placeholder-count="2"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:6px 14px;padding:12px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><span style="display:flex;flex-direction:column"><strong style="font-size:14px">{{ r.name }}</strong><span style="color:#6B665C">{{ r.course }}</span></span><span style="grid-column:span 2;display:flex;flex-wrap:wrap;gap:4px 12px"><sc-for list="{{ r.checks }}" as="c" hint-placeholder-count="5"><span style="color:{{ c.c }}">{{ c.t }}</span></sc-for></span>
+<sc-if value="{{ r.canConfirm }}" hint-placeholder-val="{{ false }}"><button onClick="{{ r.confirm }}" style="all:unset;cursor:pointer;justify-self:start;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;background:#536B4E;color:#F8F4ED">Confirm completion</button></sc-if>
+<sc-if value="{{ r.canIssue }}" hint-placeholder-val="{{ false }}"><button onClick="{{ r.issue }}" style="all:unset;cursor:pointer;justify-self:start;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Issue certificate</button></sc-if>
+<span style="font-size:12px;color:#6B665C">{{ r.state }}</span></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Issued certificates</span>
+<sc-if value="{{ noCerts }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">None issued yet.</span></sc-if>
+<sc-for list="{{ certs }}" as="c" hint-placeholder-count="2"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:6px 14px;padding:12px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><span style="display:flex;flex-direction:column"><strong style="font-size:14px">{{ c.id }}</strong><span style="color:#6B665C">{{ c.name }}</span></span><span>{{ c.course }}</span><span style="color:#6B665C">{{ c.hist }}</span><span style="font-weight:600;color:{{ c.sc }}">{{ c.status }}</span>
+<div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><a href="{{ c.verify }}" target="_blank" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#536B4E">Verify ↗</a><sc-if value="{{ c.canRevoke }}" hint-placeholder-val="{{ false }}"><button onClick="{{ c.correct }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 8px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Correct name</button><button onClick="{{ c.revoke }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 8px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#9A3B2A">Revoke</button></sc-if></div></div></sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tFinance }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Tuition and payments" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Tuition &amp; payments</h1>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:10px"><sc-for list="{{ finKpis }}" as="k" hint-placeholder-count="4"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:16px;display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ k.label }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1;color:#493126">{{ k.value }}</span></div></sc-for></div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Refund requests</span>
+<sc-if value="{{ noRefunds }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">No refund requests.</span></sc-if>
+<sc-for list="{{ refunds }}" as="r" hint-placeholder-count="1"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:6px 14px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><span style="display:flex;flex-direction:column"><strong style="font-size:14px">{{ r.name }}</strong><span style="color:#6B665C">{{ r.id }} · {{ r.payment }}</span></span><strong>{{ r.amount }}</strong><span style="color:#6B665C;grid-column:span 2">{{ r.reason }}</span><span style="font-weight:600;color:{{ r.c }}">{{ r.status }}</span>
+<sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-wrap:wrap;gap:6px;grid-column:1/-1"><input aria-label="Note" value="{{ r.note }}" onChange="{{ r.setNote }}" placeholder="Note to the student" style="flex:1 1 200px;padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><sc-for list="{{ r.actions }}" as="x" hint-placeholder-count="3"><button onClick="{{ x.go }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:1px solid #493126;color:#493126">{{ x.l }}</button></sc-for></div></sc-if></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #C6A15B;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Payments to verify</span><span style="font-size:12px;color:#6B665C">Check each transaction ID against the Paystack / Hubtel / MoMo merchant dashboard before verifying. Once connected, provider webhooks verify automatically on the server — a payer’s “success” screen never grants access on its own.</span>
+<sc-if value="{{ noPending }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C;padding-top:6px">Nothing waiting.</span></sc-if>
+<sc-for list="{{ pending }}" as="p" hint-placeholder-count="2"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px 14px;padding:12px 0;border-top:1px solid #E9DDC9;font-size:14px;align-items:center"><strong>{{ p.payer }}</strong><span>{{ p.amount }} · {{ p.kind }}</span><span style="color:#6B665C">{{ p.method }} · {{ p.ref }}</span><span style="color:#6B665C">{{ p.course }}</span><sc-if value="{{ canVerify }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:6px"><button onClick="{{ p.verify }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;background:#536B4E;color:#F8F4ED">Verified</button><button onClick="{{ p.fail }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:1px solid #9A3B2A;color:#9A3B2A">Not found</button></div></sc-if></div></sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Student balances</span>
+<sc-for list="{{ balances }}" as="b" hint-placeholder-count="3"><div style="display:flex;flex-wrap:wrap;gap:4px 14px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><strong style="flex:1 1 140px">{{ b.name }}</strong><span>{{ b.course }}</span><span style="font-weight:600;color:{{ b.c }}">{{ b.bal }}</span><sc-if value="{{ b.owes }}" hint-placeholder-val="{{ false }}"><button onClick="{{ b.remind }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#536B4E">Send reminder</button></sc-if></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Record a payment, discount or scholarship</span>
+<select aria-label="Enrolment" value="{{ mp.enr }}" onChange="{{ setMp.enr }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:44px"><option value="">Choose student and course…</option><sc-for list="{{ enrOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:8px"><select aria-label="Type" value="{{ mp.kind }}" onChange="{{ setMp.kind }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:44px"><option>Tuition</option><option>Installment</option><option>Registration</option><option>Application</option><option>Discount / scholarship</option></select><input aria-label="Amount" inputMode="decimal" value="{{ mp.amount }}" onChange="{{ setMp.amount }}" placeholder="Amount GHS" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><select aria-label="Method" value="{{ mp.method }}" onChange="{{ setMp.method }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:44px"><sc-for list="{{ payMethods }}" as="o" hint-placeholder-count="4"><option value="{{ o }}">{{ o }}</option></sc-for></select><input aria-label="Reference" value="{{ mp.ref }}" onChange="{{ setMp.ref }}" placeholder="Receipt / transaction ID or authorisation" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></div>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ mpErr }}</span>
+<button onClick="{{ recordPay }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Record</button>
+</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Payment history &amp; refunds</span><button onClick="{{ exportPays }}" style="all:unset;cursor:pointer;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid #493126;color:#493126">Reconciliation CSV</button></div>
+<sc-for list="{{ allPays }}" as="p" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:6px 14px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><strong>{{ p.payer }}</strong><span>{{ p.amount }} · {{ p.kind }}</span><span style="color:#6B665C">{{ p.method }}</span><span style="color:#6B665C">{{ p.ref }}</span><span style="font-weight:600;color:{{ p.c }}">{{ p.status }}</span><sc-if value="{{ p.canRefund }}" hint-placeholder-val="{{ false }}"><button onClick="{{ p.refund }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#9A3B2A">{{ p.refundLabel }}</button></sc-if></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Financial report by period</span><select aria-label="Period" value="{{ period }}" onChange="{{ setPeriod }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:44px"><sc-for list="{{ periodOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select></div>
+<sc-for list="{{ periodRows }}" as="r" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:14px"><span>{{ r.l }}</span><strong>{{ r.v }}</strong></div></sc-for></div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Revenue by course (verified)</span>
+<sc-for list="{{ revenue }}" as="r" hint-placeholder-count="2"><div style="display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:14px"><span>{{ r.course }}</span><strong>{{ r.total }}</strong></div></sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tEvents }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Events and workshops" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Events &amp; workshops</h1>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px;border-color:#C6A15B"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">{{ evTitle }}</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px">
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Type<select value="{{ ne.type }}" onChange="{{ setNe.type }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:42px"><sc-for list="{{ eventTypes }}" as="o" hint-placeholder-count="4"><option value="{{ o }}">{{ o }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Title<input value="{{ ne.title }}" onChange="{{ setNe.title }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Date<input type="date" value="{{ ne.date }}" onChange="{{ setNe.date }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Time<input type="time" value="{{ ne.time }}" onChange="{{ setNe.time }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Delivery<select value="{{ ne.mode }}" onChange="{{ setNe.mode }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:42px"><option>In-person</option><option>Live online</option><option>Hybrid</option></select></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Venue<input value="{{ ne.venue }}" onChange="{{ setNe.venue }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Capacity<input inputMode="numeric" value="{{ ne.capacity }}" onChange="{{ setNe.capacity }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Fee GHS (blank = free / TBC)<input inputMode="decimal" value="{{ ne.fee }}" onChange="{{ setNe.fee }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Status<select value="{{ ne.status }}" onChange="{{ setNe.status }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:42px"><option>Draft</option><option>Published</option><option>Cancelled</option></select></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126;grid-column:1/-1">Description<textarea rows="2" value="{{ ne.description }}" onChange="{{ setNe.description }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400;resize:vertical"></textarea></label>
+</div>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ neErr }}</span>
+<div style="display:flex;gap:8px"><button onClick="{{ saveEvent }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Save event</button><sc-if value="{{ editingEvent }}" hint-placeholder-val="{{ false }}"><button onClick="{{ newEvent }}" style="all:unset;cursor:pointer;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #493126;color:#493126">New event</button></sc-if></div>
+</div>
+<sc-if value="{{ noEventsA }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px;font-size:14px;color:#6B665C">No events yet.</div></sc-if>
+<sc-for list="{{ eventRows }}" as="e" hint-placeholder-count="2"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:6px 14px;align-items:center;font-size:14px"><span style="display:flex;flex-direction:column;grid-column:span 2"><strong style="font-size:15px">{{ e.title }}</strong><span style="font-size:12px;color:#6B665C">{{ e.type }} · {{ e.when }} · {{ e.mode }}</span></span><span>{{ e.regs }}</span><span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:{{ e.sc }}">{{ e.status }}</span><div style="display:flex;gap:8px"><button onClick="{{ e.edit }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Edit</button><button onClick="{{ e.toggle }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ e.toggleL }}</button></div></div>
+<sc-for list="{{ e.people }}" as="p" hint-placeholder-count="0"><div style="display:flex;flex-wrap:wrap;gap:4px 14px;padding:6px 0;border-top:1px solid #F3EEE6;font-size:13px"><strong>{{ p.name }}</strong><span style="color:#6B665C">{{ p.contact }}</span><span style="color:#536B4E">{{ p.status }}</span></div></sc-for></div></sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{ tContent }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Website content" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Website content</h1>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Home page notice</span><input aria-label="Notice" value="{{ noticeV }}" onChange="{{ setNotice }}" placeholder="Leave blank to hide — e.g. Applications for the January intake are open" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><span style="font-size:12px;color:#6B665C">Shown as a green banner on the Institute home page.</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px;align-items:start">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">{{ arTitle }}</span>
+<input aria-label="Title" value="{{ na.title }}" onChange="{{ setNa.title }}" placeholder="Title" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input aria-label="Date" type="date" value="{{ na.date }}" onChange="{{ setNa.date }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><select aria-label="Image" value="{{ na.img }}" onChange="{{ setNa.img }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:42px"><sc-for list="{{ imgOpts }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select></div>
+<textarea aria-label="Summary" rows="2" value="{{ na.summary }}" onChange="{{ setNa.summary }}" placeholder="Summary" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;resize:vertical"></textarea>
+<textarea aria-label="Body" rows="6" value="{{ na.body }}" onChange="{{ setNa.body }}" placeholder="Article" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;resize:vertical;line-height:1.5"></textarea>
+<select aria-label="Category" value="{{ na.category }}" onChange="{{ setNa.category }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:42px"><option>News</option><option>Alumni announcement</option><option>Career opportunity</option><option>Continuing education</option></select>
+<select aria-label="Status" value="{{ na.status }}" onChange="{{ setNa.status }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:42px"><option>Draft</option><option>Published</option></select>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ naErr }}</span>
+<button onClick="{{ saveArticle }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Save article</button>
+<sc-for list="{{ articleRows }}" as="a" hint-placeholder-count="1"><div style="display:flex;flex-wrap:wrap;gap:6px 12px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><strong style="flex:1 1 200px">{{ a.title }}</strong><span style="color:#6B665C">{{ a.date }} · {{ a.status }}</span><button onClick="{{ a.edit }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">Edit</button><button onClick="{{ a.remove }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#9A3B2A">Delete</button></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Student success stories</span><span style="font-size:12px;color:#6B665C">Publish only with the student’s written permission. Stories without recorded consent cannot be published.</span>
+<input aria-label="Name" value="{{ ns2.name }}" onChange="{{ setNs2.name }}" placeholder="Name as it should appear" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px">
+<input aria-label="Course" value="{{ ns2.course }}" onChange="{{ setNs2.course }}" placeholder="Course" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px">
+<textarea aria-label="Quote" rows="3" value="{{ ns2.quote }}" onChange="{{ setNs2.quote }}" placeholder="Their words" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;resize:vertical"></textarea>
+<label style="display:flex;gap:10px;align-items:center;font-size:14px;min-height:44px"><input type="checkbox" checked="{{ ns2.consent }}" onChange="{{ setNs2Consent }}" style="width:20px;height:20px;accent-color:#536B4E">Written permission received and filed</label>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ nsErr }}</span>
+<button onClick="{{ saveStory }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Add story</button>
+<sc-for list="{{ storyRows }}" as="s" hint-placeholder-count="0"><div style="display:flex;flex-wrap:wrap;gap:6px 12px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><strong style="flex:1 1 160px">{{ s.name }}</strong><span style="color:#6B665C">{{ s.consent }}</span><button onClick="{{ s.toggle }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ s.toggleL }}</button></div></sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tComms }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Announcements and communications" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:16px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Communications</h1>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Post an announcement</span>
+<select aria-label="Audience" value="{{ an.courseId }}" onChange="{{ setAn.courseId }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;min-height:44px"><option value="">All students</option><sc-for list="{{ courseOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+<input aria-label="Title" value="{{ an.title }}" onChange="{{ setAn.title }}" placeholder="Title" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px">
+<textarea aria-label="Message" rows="3" value="{{ an.body }}" onChange="{{ setAn.body }}" placeholder="Message" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;resize:vertical"></textarea>
+<button onClick="{{ postAnn }}" style="all:unset;cursor:pointer;align-self:flex-start;min-height:44px;padding:0 16px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Post</button>
+<sc-for list="{{ anns }}" as="a" hint-placeholder-count="1"><div style="display:flex;flex-direction:column;gap:2px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:13px"><strong>{{ a.title }}</strong><span style="color:#6B665C">{{ a.meta }}</span></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Automations</span><span style="font-size:12px;color:#6B665C;margin-bottom:6px">Triggered by workflow events. Channel follows each person’s consent (WhatsApp → SMS → email). Messages queue until a provider is connected.</span>
+<sc-for list="{{ templates }}" as="t" hint-placeholder-count="6"><div style="display:flex;flex-direction:column;gap:2px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px"><strong>{{ t.name }}</strong><span style="color:#6B665C">{{ t.text }}</span></div></sc-for>
+</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Message history</span>
+<sc-if value="{{ noComms }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">No messages yet.</span></sc-if>
+<sc-for list="{{ comms }}" as="m" hint-placeholder-count="5"><div style="display:flex;flex-direction:column;gap:2px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:13px"><span style="display:flex;flex-wrap:wrap;gap:4px 12px"><strong>{{ m.to }}</strong><span style="color:#536B4E">{{ m.channel }}</span><span style="color:#6B665C">{{ m.template }}</span><span style="margin-left:auto;font-size:11px;color:#6B4A12">{{ m.status }}</span></span><span style="color:#6B665C">{{ m.text }}</span></div></sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tSupport }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Student support" style="display:flex;flex-direction:column;gap:14px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Student support</h1>
+<sc-if value="{{ noTickets }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;font-size:14px;color:#6B665C">No support requests.</div></sc-if>
+<sc-for list="{{ tickets }}" as="t" hint-placeholder-count="2"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:16px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:space-between"><strong style="font-size:15px">{{ t.student }} · {{ t.type }}</strong><span style="font-size:12px;font-weight:600;color:{{ t.c }}">{{ t.status }}</span></div><span style="font-size:14px;line-height:1.55">{{ t.body }}</span><span style="font-size:13px;color:#2F4A2B">{{ t.reply }}</span>
+<div style="display:flex;flex-wrap:wrap;gap:8px"><input aria-label="Reply" value="{{ t.draft }}" onChange="{{ t.setDraft }}" placeholder="Reply to the student" style="flex:1 1 260px;padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><button onClick="{{ t.send }}" style="all:unset;cursor:pointer;min-height:42px;padding:0 14px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Reply &amp; resolve</button></div></div></sc-for>
+<div data-screen-label="Data requests" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Data requests</span><span style="font-size:12px;color:#6B665C">Correction, copy and deletion requests. Deletion anonymises personal details; financial and certificate records are kept for legal retention.</span>
+<sc-if value="{{ noDataReq }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">No requests.</span></sc-if>
+<sc-for list="{{ dataReqs }}" as="d" hint-placeholder-count="1"><div style="display:flex;flex-direction:column;gap:6px;padding:10px 0;border-top:1px solid #E9DDC9;font-size:13px"><span style="display:flex;flex-wrap:wrap;gap:6px 12px"><strong style="font-size:14px">{{ d.name }}</strong><span>{{ d.type }}</span><span style="color:#6B665C">{{ d.when }}</span><span style="margin-left:auto;font-weight:600;color:#536B4E">{{ d.status }}</span></span><span style="color:#6B665C">{{ d.details }}</span>
+<sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-if value="{{ d.isCorr }}" hint-placeholder-val="{{ false }}"><input aria-label="Name" value="{{ d.fixName }}" onChange="{{ d.setFixName }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><input aria-label="Email" value="{{ d.fixEmail }}" onChange="{{ d.setFixEmail }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><input aria-label="Phone" value="{{ d.fixPhone }}" onChange="{{ d.setFixPhone }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"></sc-if><button onClick="{{ d.act }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:1px solid #493126;color:#493126">{{ d.actL }}</button><button onClick="{{ d.decline }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:1px solid #9A3B2A;color:#9A3B2A">Decline</button></div></sc-if></div></sc-for>
+</div>
+<div data-screen-label="Retention" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Retention</span><div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px"><span>Anonymise declined / withdrawn applications after</span><input aria-label="Months" inputMode="numeric" value="{{ retMonths }}" onChange="{{ setRetMonths }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;width:80px"><span>months</span></div>
+<span style="font-size:13px;color:#6B665C">{{ retNote }}</span>
+<sc-for list="{{ retDue }}" as="a" hint-placeholder-count="0"><div style="display:flex;flex-wrap:wrap;gap:6px 12px;padding:7px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><span style="flex:1 1 200px">{{ a.id }} · {{ a.status }} · {{ a.when }}</span><button onClick="{{ a.go }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:1px solid #9A3B2A;color:#9A3B2A">Anonymise</button></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Instructor performance reports</span>
+<sc-if value="{{ noReports }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">None submitted.</span></sc-if>
+<sc-for list="{{ reports }}" as="r" hint-placeholder-count="1"><div style="display:flex;flex-direction:column;gap:2px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:13px"><strong>{{ r.student }} · {{ r.by }}</strong><span>{{ r.body }}</span></div></sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ tReports }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Institute reports" style="display:flex;flex-direction:column;gap:16px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Reports</h1>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Application funnel</span>
+<sc-for list="{{ funnel }}" as="f" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:170px minmax(0,1fr) 36px;gap:10px;align-items:center;font-size:13px"><span>{{ f.l }}</span><span style="height:10px;background:#E9DDC9"><span style="display:block;height:10px;width:{{ f.w }};background:#536B4E"></span></span><strong style="text-align:right">{{ f.n }}</strong></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Lead sources</span>
+<sc-for list="{{ sourcesRep }}" as="f" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:170px minmax(0,1fr) 36px;gap:10px;align-items:center;font-size:13px"><span>{{ f.l }}</span><span style="height:10px;background:#E9DDC9"><span style="display:block;height:10px;width:{{ f.w }};background:#C6A15B"></span></span><strong style="text-align:right">{{ f.n }}</strong></div></sc-for>
+</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Revenue by course type</span>
+<sc-for list="{{ prodRep }}" as="p" hint-placeholder-count="6"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #E9DDC9;font-size:14px"><span>{{ p.l }} <span style="color:#6B665C;font-size:12px">· {{ p.courses }} published</span></span><strong>{{ p.n }}</strong></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;overflow-x:auto"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Cohorts</span>
+<table style="border-collapse:collapse;font-size:13px;width:100%;margin-top:8px"><thead><tr><sc-for list="{{ cohHeads }}" as="h" hint-placeholder-count="6"><th style="text-align:left;padding:8px;border-bottom:1px solid #E9DDC9;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#536B4E">{{ h }}</th></sc-for></tr></thead>
+<tbody><sc-for list="{{ cohRep }}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{ r }}" as="c" hint-placeholder-count="6"><td style="padding:8px;border-bottom:1px solid #F3EEE6">{{ c }}</td></sc-for></tr></sc-for></tbody></table>
+</div>
+<span style="font-size:12px;color:#6B665C">All figures are calculated from stored records — nothing is estimated.</span>
+</section>
+</sc-if>
+
+<sc-if value="{{ tSettings }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Institute settings" style="display:flex;flex-direction:column;gap:16px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3vw + 12px,40px);color:#493126">Institute settings</h1>
+<sc-if value="{{ canSettings }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Certificates &amp; policy</span>
+<sc-for list="{{ setFields }}" as="f" hint-placeholder-count="4"><label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#493126">{{ f.l }}<input value="{{ f.v }}" onChange="{{ f.on }}" placeholder="{{ f.ph }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400"></label></sc-for>
+<sc-for list="{{ setToggles }}" as="f" hint-placeholder-count="2"><label style="display:flex;gap:10px;align-items:center;font-size:14px;min-height:44px"><input type="checkbox" checked="{{ f.on }}" onChange="{{ f.toggle }}" style="width:20px;height:20px;accent-color:#536B4E">{{ f.l }}</label></sc-for>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:8px;border-top:1px solid #E9DDC9;padding-top:10px"><sc-for list="{{ feeFields }}" as="f" hint-placeholder-count="3"><label style="display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#493126">{{ f.l }}<input inputMode="decimal" value="{{ f.v }}" onChange="{{ f.on }}" placeholder="{{ f.ph }}" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400"></label></sc-for></div>
+<span style="font-size:12px;color:#6B665C">Application fee: blank or 0 = none. Exchange rates are GHS per 1 USD / GBP, set by finance; used only for indicative amounts — tuition is charged in GHS.</span>
+<span style="font-size:12px;color:#6B665C">Only enter an accreditation statement once documentary confirmation from the accrediting body is on file. It then appears on certificates and the verification page.</span>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Integrations</span><span style="font-size:12px;color:#6B665C;margin-bottom:6px">Credentials are stored on the server only — never in this page.</span>
+<sc-for list="{{ integrations }}" as="i" hint-placeholder-count="8"><div style="display:flex;flex-wrap:wrap;gap:6px 12px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><span style="flex:1 1 200px">{{ i.name }}</span><span style="font-weight:600;color:{{ i.c }}">{{ i.status }}</span><button onClick="{{ i.test }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#536B4E">Test</button></div></sc-for>
+</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Instructors</span>
+<sc-for list="{{ insPending }}" as="p" hint-placeholder-count="0"><div style="background:#F3E3C4;padding:12px 14px;display:flex;flex-direction:column;gap:4px;font-size:13px;color:#6B4A12"><strong>{{ p.name }} — profile changes awaiting approval</strong><span>Title: {{ p.title }}</span><span>{{ p.bio }}</span><span style="white-space:pre-line">Qualifications: {{ p.quals }}</span><span>{{ p.photo }}</span><span style="font-size:12px">Check qualification evidence before approving.</span><div style="display:flex;gap:8px"><button onClick="{{ p.approve }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:1px solid #2F4A2B;color:#2F4A2B">Approve &amp; publish</button><button onClick="{{ p.reject }}" style="all:unset;cursor:pointer;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:1px solid #9A3B2A;color:#9A3B2A">Return</button></div></div></sc-for>
+<sc-for list="{{ insRows }}" as="i" hint-placeholder-count="1"><div style="display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 0;border-top:1px solid #E9DDC9;font-size:13px;align-items:center"><strong style="flex:1 1 200px">{{ i.name }}</strong><span>{{ i.email }}</span><span style="color:#6B665C">{{ i.id }}</span><button onClick="{{ i.toggle }}" style="all:unset;cursor:pointer;min-height:36px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:{{ i.c }}">{{ i.state }}</button></div></sc-for>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:8px"><input aria-label="Name" value="{{ ni.name }}" onChange="{{ setNi.name }}" placeholder="Full name" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><input aria-label="Email" value="{{ ni.email }}" onChange="{{ setNi.email }}" placeholder="Work email" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><input aria-label="Title" value="{{ ni.title }}" onChange="{{ setNi.title }}" placeholder="Title / speciality" style="padding:10px;border:1px solid #E9DDC9;background:#F8F4ED;font-size:14px"><button onClick="{{ addIns }}" style="all:unset;cursor:pointer;min-height:42px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;background:#493126;color:#F8F4ED">Add instructor</button></div>
+<span role="alert" style="font-size:13px;color:#9A3B2A">{{ niErr }}</span>
+</div>
+</sc-if>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;overflow-x:auto"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Roles &amp; permissions</span>
+<table style="border-collapse:collapse;font-size:12px;margin-top:8px;min-width:100%"><thead><tr><th style="text-align:left;padding:8px;border-bottom:1px solid #E9DDC9">Permission</th><sc-for list="{{ roleHeads }}" as="r" hint-placeholder-count="7"><th style="padding:8px;border-bottom:1px solid #E9DDC9;font-weight:600;vertical-align:bottom;min-width:84px">{{ r }}</th></sc-for></tr></thead>
+<tbody><sc-for list="{{ permRows }}" as="p" hint-placeholder-count="8"><tr><td style="padding:7px 8px;border-bottom:1px solid #F3EEE6">{{ p.label }}</td><sc-for list="{{ p.cells }}" as="c" hint-placeholder-count="7"><td style="padding:7px 8px;border-bottom:1px solid #F3EEE6;text-align:center;color:#536B4E;font-weight:600">{{ c }}</td></sc-for></tr></sc-for></tbody></table>
+<span style="font-size:12px;color:#6B665C;display:block;margin-top:8px">Instructor: own assigned courses and their students only. Student: own records in the portal. Alumni: own profile and certificates. Enforced on the server with row-level security before launch; assign roles in Admin → Staff.</span>
+</div>
+<sc-if value="{{ canAudit }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">Audit log</span>
+<sc-if value="{{ noAudit }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#6B665C">No entries yet.</span></sc-if>
+<sc-for list="{{ audit }}" as="a" hint-placeholder-count="5"><div style="display:flex;flex-wrap:wrap;gap:4px 14px;padding:7px 0;border-top:1px solid #E9DDC9;font-size:12px"><span style="color:#6B665C;min-width:130px">{{ a.at }}</span><strong>{{ a.who }}</strong><span>{{ a.action }}</span><span style="color:#6B665C">{{ a.target }}</span></div></sc-for>
+</div></sc-if>
+</section>
+</sc-if>
+</main>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const SC = { Draft: ['#EEE9E1', '#6B665C'], Submitted: ['#E9DDC9', '#493126'], 'Under review': ['#E9DDC9', '#493126'], 'Additional information required': ['#F3E3C4', '#6B4A12'], 'Interview required': ['#F3E3C4', '#6B4A12'], Accepted: ['#DCE5D6', '#2F4A2B'], 'Offer accepted': ['#DCE5D6', '#2F4A2B'], Enrolled: ['#536B4E', '#F8F4ED'], Waitlisted: ['#E9DDC9', '#493126'], Declined: ['#F6E7E1', '#6B2A1E'], Withdrawn: ['#EEE', '#555'], Published: ['#536B4E', '#F8F4ED'], Archived: ['#EEE', '#555'] };
+const AC = { Present: ['#DCE5D6', '#2F4A2B', 'P'], Late: ['#F3E3C4', '#6B4A12', 'L'], Absent: ['#F6E7E1', '#6B2A1E', 'A'], Excused: ['#E9DDC9', '#493126', 'E'] };
+const TABS = [['overview', 'Overview', null], ['admissions', 'Applications & admissions', 'apps.review'], ['students', 'Students', 'students.view'], ['courses', 'Courses & lessons', 'courses.edit'], ['cohorts', 'Cohorts & attendance', 'cohorts.manage'], ['assess', 'Assessments & grades', 'grades.record'], ['certs', 'Certificates', 'certs.issue'], ['finance', 'Tuition & payments', 'finance.view'], ['events', 'Events & workshops', 'comms.send'], ['content', 'Website content', 'comms.send'], ['comms', 'Communications', 'comms.send'], ['support', 'Student support', 'support.manage'], ['reports', 'Reports', 'students.view'], ['settings', 'Settings & roles', null]];
+const d10 = s => s ? new Date(String(s).length === 10 ? s + 'T00:00' : s).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+const csv = (name, rows) => { const t = rows.map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(',')).join('\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([t], { type: 'text/csv' })); a.download = name; a.click(); };
+const BLANK_COURSE = () => ({ id: '', code: '', title: '', dept: 'massage', product: 'Short introductory course', level: 'Beginner', requiresId: false, summary: '', objectives: [], entry: '', duration: '', modes: ['In-person'], location: 'Sense of Touch, Community 25 Estate Junction, Tema', fee: null, regFee: null, classSize: null, instructorId: 'INS-WOSE', status: 'Draft', practical: true, theoryFirst: false, modules: [{ id: '', title: 'Module 1', lessons: [] }], checklist: [], assignment: { title: 'Assignment', brief: '', pass: 50 }, req: { lessons: true, quiz: 70, assignment: true, attendance: 80, practical: true, balance: true }, openDate: '', closeDate: '', certKind: 'Certificate of completion', proposed: false });
+class Component extends DCLogic {
+  state = { rfNotes: {}, openRf: '', fix: {}, period: '', ne: null, editEv: '', neErr: '', na: null, editAr: '', naErr: '', ns2: { name: '', course: '', quote: '', consent: false }, nsErr: '', tab: 'overview', viewAs: '', flash: '', flashBad: false, q: '', fStatus: '', openApp: '', note: '', sq: '', sStatus: '', openStu: '', ce: null, ceErr: '', openCoh: '', ns: { date: '', start: '10:00', end: '12:00', kind: 'In-person', title: '' }, nc: { instalments: '1', accessFrom: '', accessTo: '', courseId: 'crs-mt-101', name: '', start: '', end: '', venue: 'Sense of Touch, Tema', mode: 'Hybrid', capacity: '8', instructorId: 'INS-WOSE', fee: '', regFee: '', deposit: '', openDate: '', closeDate: '', status: 'Open' }, ncErr: '', subF: 'Submitted', mp: { enr: '', kind: 'Tuition', amount: '', method: 'Cash at reception', ref: '' }, mpErr: '', an: { courseId: '', title: '', body: '' }, drafts: {}, ni: { name: '', email: '', title: '' }, niErr: '', tick: 0 };
+  componentDidMount() { const up = () => this.setState(s => ({ tick: s.tick + 1 })); this.off = window.SOT && window.SOT.on(up); this.off2 = window.SOTAuth && window.SOTAuth.on(up); }
+  componentWillUnmount() { this.off && this.off(); this.off2 && this.off2(); }
+  flash(t, bad) { this.setState({ flash: t, flashBad: !!bad }); clearTimeout(this.ft); this.ft = setTimeout(() => this.setState({ flash: '' }), 5000); }
+  res(r, okMsg) { if (r && r.error) this.flash(r.error, true); else if (okMsg) this.flash(okMsg); }
+  renderVals() {
+    const A = window.ACAD, AU = window.SOTAuth; const st = this.state;
+    if (!A || !AU) return { locked: true, lockTitle: 'Loading…', lockText: '' };
+    const ses = AU.current(), staff = AU.canStaff(), real = staff && AU.canArea('institute') ? A.roleFor(AU.moduleRole('acad')) : null;
+    if (!staff || !real) return { locked: true, ok: false, lockTitle: staff ? 'No Institute access' : 'Staff sign-in', lockText: staff ? 'Your staff role doesn’t include the Institute. Ask the Founder to assign an Institute role in Admin → Staff.' : 'Sign in with your staff account in the Admin dashboard, then return here.' };
+    const founder = real === 'Founder / Super Administrator', role = (founder && st.viewAs) || real, can = p => A.can(role, p), who = ses.name;
+    const M = A.metrics();
+    const tabs = TABS.filter(([, , p]) => !p || can(p));
+    const tab = tabs.some(t => t[0] === st.tab) ? st.tab : 'overview';
+    const go = t => () => this.setState({ tab: t });
+    const subsAll = A.list('submissions'), queueN = subsAll.filter(s => s.status === 'Submitted').length;
+    const badges = { admissions: M.pending || '', finance: M.toVerify || '', assess: queueN || '', support: A.list('support').filter(t => t.status === 'Open').length || '' };
+    const courses = A.list('courses'), cohorts = A.list('cohorts'), students = A.list('students'), ens = A.list('enrolments');
+    const cTitle = id => (A.course(id) || {}).title || '—', sName = id => (A.get('students', id) || {}).name || id;
+    const out = { ok: true, locked: false, whoLabel: who + ' · ' + role, isFounder: founder, viewAs: st.viewAs, setViewAs: e => this.setState({ viewAs: e.target.value }), roleOpts: Object.keys(A.ROLES).filter(r => !['Founder / Super Administrator', 'Student', 'Alumni'].includes(r)),
+      tabs: tabs.map(([k, l]) => ({ label: l, badge: badges[k] || '', go: go(k), on: tab === k ? 'page' : 'false', fg: tab === k ? '#F8F4ED' : '#B5AC9C', line: tab === k ? '#C6A15B' : 'transparent' })),
+      flash: !!st.flash, flashText: st.flash, flashBg: st.flashBad ? '#F6E7E1' : '#DCE5D6', flashLine: st.flashBad ? '#9A3B2A' : '#536B4E', clearFlash: () => this.setState({ flash: '' }) };
+    TABS.forEach(([k]) => out['t' + { overview: 'Overview', admissions: 'Admissions', students: 'Students', courses: 'Courses', cohorts: 'Cohorts', assess: 'Assess', certs: 'Certs', finance: 'Finance', events: 'Events', content: 'Content', comms: 'Comms', support: 'Support', reports: 'Reports', settings: 'Settings' }[k]] = tab === k);
+    const goIf = (t, p) => can(p) ? go(t) : () => {};
+    if (tab === 'overview') {
+      const pct = v => v == null ? '—' : v + '%';
+      out.sampleNote = A.hasSample() ? 'Includes sample data — remove it in Settings before launch.' : '';
+      out.kpis = [['Total applicants', M.applicants, 'admissions', 'apps.review'], ['Pending applications', M.pending, 'admissions', 'apps.review'], ['Accepted applicants', M.accepted, 'admissions', 'apps.review'], ['Active students', M.activeStudents, 'students', 'students.view'], ['Active courses', M.activeCourses, 'courses', 'courses.edit'], ['Active cohorts', M.activeCohorts, 'cohorts', 'cohorts.manage'], ['Attendance rate', pct(M.attendance), 'cohorts', 'cohorts.manage'], ['Completion rate', pct(M.completion), 'certs', 'certs.issue'], ['Tuition collected', A.money(M.collected), 'finance', 'finance.view'], ['Outstanding tuition', A.money(M.outstanding), 'finance', 'finance.view'], ['Certificates issued', M.certs, 'certs', 'certs.issue']].map(([label, value, t, p]) => ({ label, value: can('finance.view') || !/Tuition/.test(label) ? value : '—', go: goIf(t, p) }));
+      const elig = ens.filter(e => e.status === 'Active' && A.eligibility(e.studentId, e.courseId).eligible).length;
+      const att = [[M.pending, 'applications waiting for review', 'admissions', 'apps.review', '#C6A15B'], [M.toVerify, 'payments to verify', 'finance', 'finance.verify', '#9A3B2A'], [queueN, 'submissions to grade', 'assess', 'grades.record', '#C6A15B'], [elig, 'students ready for completion review', 'certs', 'certs.issue', '#536B4E'], [A.list('support').filter(t => t.status === 'Open').length, 'open support requests', 'support', 'support.manage', '#C6A15B'], [A.list('enquiries').filter(e => e.stage === 'New enquiry').length, 'new enquiries to contact', 'admissions', 'apps.review', '#C6A15B']].filter(x => x[0] > 0 && can(x[3]));
+      const ser = A.series(6), mk = (title, key, color, fmtv) => { const mx = Math.max(1, ...ser.map(x => x[key])); const tot = ser.reduce((n, x) => n + x[key], 0); return { title, color, total: fmtv(tot) + ' · 6 months', aria: title + ': ' + ser.map(x => x.label + ' ' + fmtv(x[key])).join(', '), bars: ser.map(x => ({ l: x.label, v: x[key] ? fmtv(x[key]) : '', h: Math.round(x[key] / mx * 100) + '%' })) }; };
+      out.charts = [mk('Applications', 'apps', '#536B4E', n => String(n)), mk('Enrolments', 'enrol', '#C6A15B', n => String(n))].concat(can('finance.view') ? [mk('Verified revenue', 'revenue', '#493126', n => n >= 1000 ? 'GHS ' + (n / 1000).toFixed(1) + 'k' : n ? 'GHS ' + n : '0')] : []);
+      out.attention = att.map(([n, t, tb, , c]) => ({ t: n + ' ' + t, c, go: go(tb) })); out.noAttention = !att.length;
+      const nts = A.list('notices').filter(n => founder || n.role === role).slice(0, 8); out.notices = nts.map(n => ({ text: n.text, role: n.role })); out.noNotices = !nts.length;
+    }
+    if (tab === 'admissions') {
+      const apps = A.list('applications'), enqs = A.list('enquiries');
+      const stageOf = s => ({ Draft: 'Application started', Submitted: 'Application submitted', 'Under review': 'Under review', 'Additional information required': 'Under review', 'Interview required': 'Under review', Waitlisted: 'Under review', Accepted: 'Accepted', 'Offer accepted': 'Accepted', Enrolled: 'Enrolled', Declined: 'Lost', Withdrawn: 'Lost' })[s];
+      const stages = [...enqs.map(e => e.stage), ...apps.map(a => stageOf(a.status))];
+      out.pipeline = A.PIPELINE.map(p => ({ stage: p, n: stages.filter(x => x === p).length }));
+      const q = st.q.trim().toLowerCase();
+      const list = apps.filter(a => (!st.fStatus || a.status === st.fStatus) && (!q || [a.name, a.email, a.id, a.phone].join(' ').toLowerCase().includes(q)));
+      Object.assign(out, { q: st.q, setQ: e => this.setState({ q: e.target.value }), fStatus: st.fStatus, setFStatus: e => this.setState({ fStatus: e.target.value }), appStatuses: A.APP_STATUSES, noApps: !list.length, note: st.note, setNote: e => this.setState({ note: e.target.value }), sources: A.LEAD_SOURCES, stages: A.PIPELINE });
+      out.apps = list.map(a => { const [sBg, sFg] = SC[a.status] || SC.Submitted, open = st.openApp === a.id, pr = A.priceOf(a.courseId, a.cohortId);
+        const dups = apps.filter(x => x.id !== a.id && (x.email === a.email || (a.phone && x.phone === a.phone)));
+        const paid = A.list('payments').filter(p => p.appId === a.id);
+        const acts = ['Under review', 'Additional information required', 'Interview required', 'Accepted', 'Waitlisted', 'Declined'].filter(s => s !== a.status && !['Enrolled', 'Withdrawn'].includes(a.status));
+        return { id: a.id, name: a.name, source: a.source || 'Website', course: a.courseTitle, cohort: a.cohortName, date: d10(a.created), status: a.status, sBg, sFg, open, border: open ? '#C6A15B' : '#E9DDC9',
+          toggle: () => this.setState({ openApp: open ? '' : a.id, note: '' }),
+          fields: [['Level · format', (a.level || '—') + ' · ' + (a.format || 'As offered')], ['Preferred start', a.startDate ? d10(a.startDate) : '—'], ['Email', a.email], ['Phone', a.phone], ['Location', a.location + ', ' + a.country], ['Date of birth', a.dob || '—'], ['Education', a.education], ['Experience', a.experience || '—'], ['Career goals', a.goals], ['Statement', a.statement], ['Emergency contact', a.emergency || '—'], ['ID document', a.idDoc ? a.idDoc.name + ' (restricted)' : 'Not provided'], ['Documents', (a.docs || []).map(d => d.name).join(', ') || 'None'], ['Account', a.accountEmail ? 'Linked to ' + a.accountEmail : 'No account'], ['Contact consent', Object.entries(a.consent || {}).filter(([, v]) => v).map(([k]) => ({ email: 'Email', wa: 'WhatsApp', sms: 'SMS' })[k]).join(', ') || '—'], ['Fees', 'Tuition ' + A.money(pr.fee) + ' · Registration ' + A.money(pr.reg) + ' · Due to enrol ' + A.money(pr.deposit)], ['Payments', paid.map(p => A.money(p.amount) + ' ' + p.status).join(' · ') || 'None']].map(([l, v]) => ({ l, v })),
+          dupNote: dups.length ? 'Possible duplicate: ' + dups.map(x => x.id + ' (' + x.status + ')').join(', ') : '',
+          actions: acts.map(s => ({ l: s === 'Additional information required' ? 'Request info' : s === 'Interview required' ? 'Interview' : s === 'Accepted' ? 'Accept & send offer' : s, bg: s === 'Accepted' ? '#536B4E' : 'transparent', fg: s === 'Accepted' ? '#F8F4ED' : s === 'Declined' ? '#9A3B2A' : '#493126', bd: s === 'Accepted' ? '#536B4E' : s === 'Declined' ? '#9A3B2A' : '#E9DDC9', go: () => { this.res(A.setAppStatus(a.id, s, who + ' (' + role + ')', st.note), 'Status updated — applicant notified.'); this.setState({ note: '' }); } })),
+          enrolNote: a.status === 'Offer accepted' ? 'Offer accepted. Enrolment activates automatically once ' + A.money(pr.deposit) + ' is verified (verified so far: ' + A.money(paid.filter(p => p.status === 'Verified').reduce((n, p) => n + p.amount, 0)) + ').' : a.status === 'Accepted' ? 'Waiting for the applicant to accept the offer (Track application page).' : a.status === 'Enrolled' ? 'Enrolled as ' + a.studentId : '',
+          history: (a.history || []).slice().reverse().map(h => ({ at: d10(h.at), status: h.status, by: h.by, note: h.note || '' })) }; });
+      out.enqs = enqs.map(e => ({ name: e.name, contact: [e.phone, e.email].filter(Boolean).join(' · '), course: e.courseTitle, message: e.message, source: e.source, stage: e.stage, setSource: ev => A.upd('enquiries', e.id, { source: ev.target.value }), setStage: ev => { A.upd('enquiries', e.id, { stage: ev.target.value }); A.audit(who, 'Enquiry stage → ' + ev.target.value, e.name); } })); out.noEnq = !enqs.length;
+    }
+    if (tab === 'students') {
+      const q = st.sq.trim().toLowerCase();
+      const list = students.filter(s => (!q || [s.name, s.email, s.phone, s.id].join(' ').toLowerCase().includes(q)) && (!st.sStatus || ens.some(e => e.studentId === s.id && e.status === st.sStatus)));
+      const leads = window.SOT.list('leads');
+      Object.assign(out, { sq: st.sq, setSq: e => this.setState({ sq: e.target.value }), sStatus: st.sStatus, setSStatus: e => this.setState({ sStatus: e.target.value }), studentCount: students.length, noStudents: !list.length, canExport: can('students.export'),
+        exportStudents: () => { csv('academy-students.csv', [['Student ID', 'Name', 'Email', 'Phone', 'Course', 'Cohort', 'Status', 'Progress %', 'Attendance %', 'Balance GHS'], ...ens.map(e => { const s = A.get('students', e.studentId) || {}; return [s.id, s.name, s.email, s.phone, cTitle(e.courseId), (A.cohort(e.cohortId) || {}).name, e.status, A.progress(e.studentId, e.courseId).pct, A.attendancePct(e.studentId, e.cohortId), A.balance(e.studentId, e.courseId, e.cohortId)]; })]); A.audit(who, 'Exported student data', ens.length + ' rows'); } });
+      out.students = list.map(s => { const mine = ens.filter(e => e.studentId === s.id), open = st.openStu === s.id, lead = leads.find(l => (s.phone && l.phone === s.phone) || (l.email && l.email === s.email));
+        return { id: s.id, name: s.name, email: s.email, phone: s.phone, courses: mine.map(e => cTitle(e.courseId)).join(', '), crm: lead ? 'Linked to CRM' : 'Not in CRM', open, toggle: () => this.setState({ openStu: open ? '' : s.id }),
+          enrols: mine.map(e => { const p = A.progress(s.id, e.courseId), c = A.course(e.courseId), el = A.eligibility(s.id, e.courseId), a = A.attendancePct(s.id, e.cohortId), ps = c.practical ? A.practicalState(s.id, c.id) : [], cert = A.list('certificates').find(x => x.studentId === s.id && x.courseId === c.id), bal = A.balance(s.id, c.id, e.cohortId);
+            return { course: c.title, cohort: (A.cohort(e.cohortId) || {}).name || '', status: e.status, lessons: p.lessonsDone + '/' + p.lessonsTotal, quizzes: p.quizzesPassed + '/' + p.quizzesTotal, att: a == null ? '—' : a + '%', prac: c.practical ? ps.filter(x => x.ok).length + '/' + ps.length : 'n/a', balance: can('finance.view') ? (bal == null ? '—' : A.money(bal)) : 'Restricted', cert: cert ? cert.id + ' (' + cert.status + ')' : 'Not issued',
+              elig: e.status === 'Completed' ? 'Course completed' : el.eligible ? 'All requirements met' : 'Outstanding: ' + el.checks.filter(x => !x.ok).map(x => x.label.replace(/ \(.*\)/, '')).join(', '), eligC: el.eligible || e.status === 'Completed' ? '#2F4A2B' : '#6B665C',
+              canWithdraw: e.status === 'Active' && can('apps.review'), withdraw: () => { if (!confirm('Withdraw ' + s.name + ' from ' + c.title + '?')) return; A.upd('enrolments', e.id, { status: 'Withdrawn', withdrawnBy: who }); A.audit(who, 'Withdrew student', s.id + ' · ' + c.code); } }; }),
+          extra: [A.list('support').filter(t => t.studentId === s.id).length + ' support requests', A.list('reports').filter(r => r.studentId === s.id).length + ' instructor reports', 'Location: ' + (s.location || '—')].join(' · ') }; });
+    }
+    if (tab === 'courses') {
+      const ce = st.ce, insOpts = A.list('instructors').map(i => ({ v: i.id, l: i.name }));
+      const setCe = p => this.setState({ ce: { ...st.ce, ...p } });
+      out.newCourse = () => this.setState({ ce: BLANK_COURSE(), ceErr: '' });
+      out.editing = !!ce;
+      if (ce) {
+        const f = (k, l, type, extra = {}) => ({ l, type: type || 'text', isInput: !extra.area && !extra.opts, isArea: !!extra.area, isSelect: !!extra.opts, opts: extra.opts || [], span: extra.span || 'auto', v: extra.v !== undefined ? extra.v : (ce[k] ?? ''), on: extra.on || (e => setCe({ [k]: type === 'number' ? (e.target.value === '' ? null : Number(e.target.value)) : e.target.value })) });
+        out.editTitle = ce.id ? 'Edit ' + ce.code : 'New course';
+        out.ceFields = [f('title', 'Course title *'), f('code', 'Course code *'), f('dept', 'Department', '', { opts: A.DEPTS.map(d => ({ v: d.id, l: d.name })) }), f('product', 'Course type', '', { opts: A.PRODUCTS.map(p => ({ v: p.name, l: p.name })) }), f('level', 'Training level', '', { opts: A.LEVELS.map(v => ({ v, l: v })) }), f('status', 'Status', '', { opts: ['Draft', 'Published', 'Archived'].map(v => ({ v, l: v })) }),
+          f('summary', 'Description', '', { area: true, span: '1/-1' }), f('objectives', 'Learning objectives (one per line)', '', { area: true, span: '1/-1', v: (ce.objectives || []).join('\n'), on: e => setCe({ objectives: e.target.value.split('\n') }) }), f('entry', 'Entry requirements', '', { area: true, span: '1/-1' }),
+          f('duration', 'Duration'), f('location', 'Training location'), f('fee', 'Course fee (GHS)', 'number'), f('regFee', 'Registration fee (GHS)', 'number'), f('classSize', 'Class size', 'number'), f('instructorId', 'Instructor', '', { opts: insOpts }),
+          f('openDate', 'Applications open', 'date'), f('closeDate', 'Applications close', 'date'), f('certKind', 'Certificate title'),
+          f('quiz', 'Knowledge check pass %', 'number', { v: ce.req.quiz ?? '', on: e => setCe({ req: { ...ce.req, quiz: e.target.value === '' ? null : Number(e.target.value) } }) }), f('att', 'Minimum attendance % (blank = none)', 'number', { v: ce.req.attendance ?? '', on: e => setCe({ req: { ...ce.req, attendance: e.target.value === '' ? null : Number(e.target.value) } }) }),
+          f('asgT', 'Assignment title', '', { v: ce.assignment.title, on: e => setCe({ assignment: { ...ce.assignment, title: e.target.value } }) }), f('asgB', 'Assignment brief & grading criteria', '', { area: true, span: '1/-1', v: ce.assignment.brief, on: e => setCe({ assignment: { ...ce.assignment, brief: e.target.value } }) }),
+          f('checklist', 'Practical checklist (one per line; start with * if supervision required)', '', { area: true, span: '1/-1', v: (ce.checklist || []).map(x => (x.supervised ? '* ' : '') + x.label).join('\n'), on: e => setCe({ checklist: e.target.value.split('\n').filter(x => x.trim()).map((x, i) => ({ id: 'pr' + (i + 1), label: x.replace(/^\*\s*/, ''), supervised: /^\*/.test(x) })) }) })];
+        out.ceModes = A.MODES.map(m => ({ l: m, on: ce.modes.includes(m), toggle: e => setCe({ modes: e.target.checked ? [...ce.modes, m] : ce.modes.filter(x => x !== m) }) }));
+        out.ceReqs = [{ l: 'Applicants must upload an ID document', on: !!ce.requiresId, toggle: e => setCe({ requiresId: e.target.checked }) }].concat([['lessons', 'All online lessons'], ['assignment', 'Graded assignment'], ['practical', 'Practical competency'], ['balance', 'Tuition balance cleared']].map(([k, l]) => ({ l, on: !!ce.req[k], toggle: e => setCe({ req: { ...ce.req, [k]: e.target.checked }, ...(k === 'practical' ? { practical: e.target.checked } : {}) }) })).concat([{ l: 'Theory must be completed before practical (hybrid)', on: !!ce.theoryFirst, toggle: e => setCe({ theoryFirst: e.target.checked }) }]));
+        out.lessonTypes = [['text', 'Reading'], ['video', 'Video'], ['pdf', 'PDF'], ['quiz', 'Quiz'], ['practical', 'Practical demo']].map(([v, l]) => ({ v, l }));
+        const setMods = mods => setCe({ modules: mods });
+        out.ceModules = ce.modules.map((m, i) => ({ title: m.title, setTitle: e => setMods(ce.modules.map((x, j) => j === i ? { ...x, title: e.target.value } : x)),
+          lessons: m.lessons.map((l, k) => ({ title: l.title, type: l.type, media: l.media ? '✓ ' + l.media.name : (l.type === 'video' || l.type === 'pdf' ? 'No file yet' : ''),
+            setMedia: e => { const x = e.target.files[0]; if (!x) return; if (x.size > 2 * 1024 * 1024 * 1024) return this.flash('Files over 2 GB must be uploaded to the video host directly.', true); setMods(ce.modules.map((mm, j) => j === i ? { ...mm, lessons: mm.lessons.map((y, z) => z === k ? { ...y, media: { name: x.name, size: x.size, stored: 'Prototype — production uploads to private storage / access-controlled video hosting' } } : y) } : mm)); },
+            up: () => { if (!k) return; const ls = m.lessons.slice(); [ls[k - 1], ls[k]] = [ls[k], ls[k - 1]]; setMods(ce.modules.map((mm, j) => j === i ? { ...mm, lessons: ls } : mm)); },
+            down: () => { if (k >= m.lessons.length - 1) return; const ls = m.lessons.slice(); [ls[k + 1], ls[k]] = [ls[k], ls[k + 1]]; setMods(ce.modules.map((mm, j) => j === i ? { ...mm, lessons: ls } : mm)); }, setTitle: e => setMods(ce.modules.map((x, j) => j === i ? { ...x, lessons: x.lessons.map((y, z) => z === k ? { ...y, title: e.target.value } : y) } : x)), setType: e => setMods(ce.modules.map((x, j) => j === i ? { ...x, lessons: x.lessons.map((y, z) => z === k ? { ...y, type: e.target.value } : y) } : x)), remove: () => setMods(ce.modules.map((x, j) => j === i ? { ...x, lessons: x.lessons.filter((_, z) => z !== k) } : x)) })),
+          addLesson: () => setMods(ce.modules.map((x, j) => j === i ? { ...x, lessons: [...x.lessons, { id: '', title: 'New lesson', type: 'text' }] } : x)) }));
+        out.addModule = () => setMods([...ce.modules, { id: '', title: 'Module ' + (ce.modules.length + 1), lessons: [] }]);
+        out.ceErr = st.ceErr; out.cancelEdit = () => this.setState({ ce: null });
+        out.saveCourse = () => {
+          const c = st.ce; if (!c.title.trim() || !c.code.trim()) return this.setState({ ceErr: 'Title and course code are required.' });
+          if (!c.modes.length) return this.setState({ ceErr: 'Choose at least one delivery mode.' });
+          if (courses.some(x => x.code.toLowerCase() === c.code.trim().toLowerCase() && x.id !== c.id)) return this.setState({ ceErr: 'That course code is already used.' });
+          const id = c.id || 'crs-' + c.code.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+          const Q = (A.course('crs-mt-101') || {}).modules?.[0]?.lessons?.find(l => l.type === 'quiz') || {};
+          const modules = c.modules.map((m, i) => { const mid = m.id || id + '-m' + (i + 1) + A.rnd(2); return { ...m, id: mid, lessons: m.lessons.map(l => ({ ...l, id: l.id || mid + '-l' + A.rnd(4), ...(l.type === 'quiz' && !l.questions ? { questions: Q.questions || [], pass: c.req.quiz || 70, attempts: 3 } : {}) })) }; });
+          const rec = { ...c, id, code: c.code.trim(), objectives: (c.objectives || []).filter(x => x.trim()), modules, proposed: c.proposed && !c.verified };
+          if (c.id) A.upd('courses', id, rec); else A.save('courses', [rec, ...courses]);
+          A.audit(who, (c.id ? 'Edited' : 'Created') + ' course', rec.code); this.setState({ ce: null, ceErr: '' }); this.flash('Course saved.');
+        };
+      }
+      out.courseRows = courses.map(c => { const [sBg, sFg] = SC[c.status] || SC.Draft, n = cohorts.filter(h => h.courseId === c.id).length;
+        return { title: c.title, code: c.code, dept: A.deptName(c.dept), modes: c.modes.join(', '), status: c.status + (c.proposed ? ' · proposed' : ''), sBg, sFg, meta: (c.product || '') + ' · ' + A.lessonsOf(c).length + ' lessons · ' + n + ' cohorts',
+          actions: [{ l: 'Edit', go: () => this.setState({ ce: JSON.parse(JSON.stringify(c)), ceErr: '' }) }, { l: c.status === 'Published' ? 'Unpublish' : 'Publish', go: () => { A.upd('courses', c.id, { status: c.status === 'Published' ? 'Draft' : 'Published' }); A.audit(who, 'Course status changed', c.code); } }, { l: 'Duplicate', go: () => { const code = c.code + '-COPY' + A.rnd(2); A.save('courses', [{ ...JSON.parse(JSON.stringify(c)), id: 'crs-' + code.toLowerCase(), code, title: c.title + ' (copy)', status: 'Draft' }, ...courses]); A.audit(who, 'Duplicated course', c.code); this.flash('Duplicated as a draft.'); } }, { l: c.status === 'Archived' ? 'Restore' : 'Archive', go: () => A.upd('courses', c.id, { status: c.status === 'Archived' ? 'Draft' : 'Archived' }) }] }; });
+      out.deptRows = A.DEPTS.map(d => ({ name: d.name, n: courses.filter(c => c.dept === d.id).length + ' courses' }));
+    }
+    if (tab === 'cohorts') {
+      const att = A.list('attendance');
+      out.cohortStatuses = ['Open', 'Running', 'Closed', 'Completed', 'Cancelled'];
+      const setNs = {}; ['date', 'start', 'end', 'kind', 'title'].forEach(k => setNs[k] = e => this.setState({ ns: { ...st.ns, [k]: e.target.value } })); out.ns = st.ns; out.setNs = setNs;
+      out.cohortRows = cohorts.slice().sort((a, b) => b.start.localeCompare(a.start)).map(h => { const mine = ens.filter(e => e.cohortId === h.id && e.status !== 'Withdrawn'), open = st.openCoh === h.id, ss = A.sessionsOf(h.id), past = ss.filter(s => s.date <= A.today()), pr = A.priceOf(h.courseId, h.id);
+        return { course: cTitle(h.courseId), name: h.name, dates: d10(h.start) + ' – ' + d10(h.end) + ' · ' + h.mode, seats: mine.length + ' / ' + (h.capacity || '—') + ' enrolled' + (h.accessTo ? ' · access to ' + d10(h.accessTo) : ''), instructor: (A.instructor(h.instructorId) || {}).name || 'Unassigned', fee: A.money(pr.fee), status: h.status, open, toggle: () => this.setState({ openCoh: open ? '' : h.id }),
+          setStatus: e => { const v = e.target.value; if (v === 'Cancelled' && !confirm('Cancel this cohort? Enrolled students will be notified.')) return; A.upd('cohorts', h.id, { status: v }); A.audit(who, 'Cohort → ' + v, h.name); if (v === 'Cancelled') mine.forEach(en => { A.upd('enrolments', en.id, { status: 'Cancelled' }); const s = A.get('students', en.studentId); s && A.notify(s, 'Hello {first}, we are sorry — the ' + h.name + ' cohort of ' + cTitle(h.courseId) + ' has been cancelled. Our team will contact you about a transfer or refund.'); }); },
+          sessHeads: past.map(s => s.date.slice(5).replace('-', '/')), grid: mine.map(en => ({ name: sName(en.studentId), pct: (A.attendancePct(en.studentId, h.id) ?? '—') + (A.attendancePct(en.studentId, h.id) == null ? '' : '%'), cells: past.map(s => { const r = att.find(a => a.sessionId === s.id && a.studentId === en.studentId), c = r && AC[r.status]; return c ? { t: c[2], bg: c[0], fg: c[1] } : { t: '–', bg: 'transparent', fg: '#6B665C' }; }) })),
+          addSession: () => { const n = st.ns; if (!n.date || !n.title.trim()) return this.flash('Add a date and title for the class.', true); A.add('sessions', { id: 'SES-' + A.rnd(5), cohortId: h.id, date: n.date, start: n.start, end: n.end, kind: n.kind, title: n.title.trim(), venue: n.kind === 'Live online' ? 'Online classroom' : h.venue, link: n.kind === 'Live online' ? 'Private meeting link (generated when the classroom provider is connected)' : '' }); this.setState({ ns: { ...n, title: '' } }); this.flash('Class added.'); } }; });
+      const nc = st.nc, setNc = k => e => this.setState({ nc: { ...st.nc, [k]: e.target.value } });
+      const fi = (k, l, type, opts) => ({ l, type: type || 'text', v: nc[k], on: setNc(k), isInput: !opts, isSelect: !!opts, opts: opts || [] });
+      out.ncFields = [fi('courseId', 'Course', '', courses.filter(c => c.status !== 'Archived').map(c => ({ v: c.id, l: c.code + ' · ' + c.title }))), fi('name', 'Cohort name'), fi('mode', 'Delivery', '', A.MODES.map(v => ({ v, l: v }))), fi('venue', 'Venue'), fi('start', 'Start date', 'date'), fi('end', 'End date', 'date'), fi('openDate', 'Applications open', 'date'), fi('closeDate', 'Applications close', 'date'), fi('capacity', 'Capacity', 'number'), fi('instructorId', 'Instructor', '', A.list('instructors').map(i => ({ v: i.id, l: i.name }))), fi('accessFrom', 'Content access from', 'date'), fi('accessTo', 'Content access until', 'date'), fi('fee', 'Tuition GHS', 'number'), fi('regFee', 'Registration GHS', 'number'), fi('deposit', 'Due to enrol GHS', 'number'), fi('instalments', 'Instalments after deposit', 'number'), fi('status', 'Status', '', ['Open', 'Running', 'Closed'].map(v => ({ v, l: v })))];
+      out.ncErr = st.ncErr;
+      out.createCohort = () => { if (!nc.name.trim() || !nc.start || !nc.end) return this.setState({ ncErr: 'Add a name, start and end date.' }); if (nc.end < nc.start) return this.setState({ ncErr: 'End date must be after the start date.' }); const num = v => v === '' ? null : Number(v);
+        A.add('cohorts', { id: 'COH-' + A.rnd(5), ...nc, name: nc.name.trim(), capacity: num(nc.capacity), fee: num(nc.fee), regFee: num(nc.regFee), deposit: num(nc.deposit), instalments: num(nc.instalments) || 1 }); A.audit(who, 'Created cohort', nc.name); this.setState({ nc: { ...nc, name: '' }, ncErr: '' }); this.flash('Cohort created.'); };
+    }
+    if (tab === 'assess') {
+      const f = st.subF, list = subsAll.filter(s => f === 'All' || (f === 'Submitted' ? s.status === 'Submitted' : s.status !== 'Submitted'));
+      out.subFilters = ['Submitted', 'Graded', 'All'].map(l => ({ l: l === 'Submitted' ? 'Awaiting grading' : l === 'Graded' ? 'Graded & auto-graded' : 'All', bg: f === l ? '#493126' : 'transparent', fg: f === l ? '#F8F4ED' : '#493126', go: () => this.setState({ subF: l }) }));
+      out.subs = list.slice(0, 60).map(s => ({ student: sName(s.studentId), title: s.itemTitle, kind: s.kind === 'quiz' ? 'Quiz · attempt ' + s.attempt : s.kind === 'video' ? 'Demo video' : 'Assignment', course: (A.course(s.courseId) || {}).code, score: s.score != null ? s.score + '%' : s.status, feedback: s.feedback || (s.status === 'Submitted' ? 'Graded by the course instructor in the portal' : ''), by: s.gradedBy || '' })); out.noSubs = !list.length;
+      const pr = A.list('practicals'); out.pracs = pr.slice(0, 40).map(p => ({ student: sName(p.studentId), label: p.label, result: p.result, c: p.result === 'Competent' ? '#2F4A2B' : '#6B4A12', sup: p.supervised ? 'Supervised' : 'Unsupervised', by: p.by, at: d10(p.created) })); out.noPracs = !pr.length;
+    }
+    if (tab === 'certs') {
+      const certs = A.list('certificates'), rv = ens.filter(e => e.status === 'Active' || (e.status === 'Completed' && !certs.some(c => c.studentId === e.studentId && c.courseId === e.courseId && c.status !== 'Revoked')));
+      out.review = rv.map(e => { const el = A.eligibility(e.studentId, e.courseId); return { name: sName(e.studentId), course: cTitle(e.courseId), checks: el.checks.map(c => ({ t: (c.ok ? '✓ ' : '○ ') + c.label.replace(/ \(.*\)/, '') + ' · ' + c.detail, c: c.ok ? '#2F4A2B' : '#6B665C' })),
+        canConfirm: e.status === 'Active' && el.eligible, canIssue: e.status === 'Completed', state: e.status === 'Completed' ? 'Completed ' + d10(e.completedAt) : el.eligible ? '' : 'Requirements outstanding',
+        confirm: () => this.res(A.confirmCompletion(e.studentId, e.courseId, who), 'Completion confirmed and recorded.'), issue: () => this.res(A.issueCertificate(e.studentId, e.courseId, who), 'Certificate issued — student notified.') }; }); out.noReview = !rv.length;
+      const base = location.href.replace(/Institute%20Admin\.dc\.html.*$|Institute Admin\.dc\.html.*$/, '');
+      out.certs = certs.map(c => ({ id: c.id, name: c.name, course: c.courseTitle, status: c.status, sc: c.status === 'Valid' ? '#2F4A2B' : '#9A3B2A', hist: c.history.map(h => h.action + ' ' + d10(h.at)).join(' · '), verify: base + 'Institute.dc.html#verify/' + c.id, canRevoke: can('certs.revoke') && c.status === 'Valid',
+        revoke: () => { const r = prompt('Reason for revoking ' + c.id + '?'); if (r) this.res(A.setCertificate(c.id, { status: 'Revoked', revokeReason: r }, 'Revoked: ' + r, who), 'Certificate revoked. Verification now shows it as not valid.'); },
+        correct: () => { const n = prompt('Corrected name as it should appear', c.name); if (n && n.trim() && n !== c.name) this.res(A.setCertificate(c.id, { name: n.trim() }, 'Name corrected from “' + c.name + '”', who), 'Certificate corrected.'); } })); out.noCerts = !certs.length;
+    }
+    if (tab === 'finance') {
+      const pays = A.list('payments'), canVerify = can('finance.verify');
+      const pname = p => p.payer || sName(p.studentId);
+      out.canVerify = canVerify;
+      const months = [...new Set(pays.map(p => String(p.verifiedAt || p.created).slice(0, 7)))].sort().reverse(); const per = st.period || months[0] || '';
+      out.period = per; out.setPeriod = e => this.setState({ period: e.target.value }); out.periodOpts = [{ v: 'all', l: 'All time' }, ...months.map(m => ({ v: m, l: new Date(m + '-01T00:00').toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) }))];
+      const inP = p => per === 'all' || String(p.verifiedAt || p.created).slice(0, 7) === per, pv = pays.filter(p => inP(p));
+      const sum = f => A.money(pv.filter(f).reduce((n, p) => n + p.amount, 0));
+      out.periodRows = [['Verified tuition & fees', sum(p => p.status === 'Verified' && !/Discount/.test(p.kind))], ['Application fees', sum(p => p.status === 'Verified' && p.kind === 'Application')], ['Discounts & scholarships', sum(p => p.status === 'Verified' && /Discount/.test(p.kind))], ['Refunds requested / made', sum(p => /Refund/.test(p.status))], ['Pending verification', sum(p => p.status === 'Pending verification')], ['Transactions', String(pv.length)]].map(([l, v]) => ({ l, v }));
+      const rqs = A.list('refund-requests');
+      out.refunds = rqs.map(r => { const p = r.paymentId ? A.get('payments', r.paymentId) : null, done = ['Declined', 'Refunded'].includes(r.status), note = st.rfNotes[r.id] || ''; const nxt = r.status === 'Submitted' ? ['Under review', 'Approved', 'Declined'] : r.status === 'Under review' ? ['Approved', 'Declined'] : r.status === 'Approved' ? ['Refunded'] : [];
+        return { name: sName(r.studentId), id: r.id, payment: p ? A.money(p.amount) + ' ' + p.kind + ' · ' + p.providerRef : 'No payment linked', amount: A.money(r.amount), reason: r.reason, status: r.status, c: r.status === 'Declined' ? '#9A3B2A' : r.status === 'Refunded' ? '#2F4A2B' : '#6B4A12', open: !done && canVerify, note, setNote: e => this.setState({ rfNotes: { ...st.rfNotes, [r.id]: e.target.value } }), actions: nxt.map(s => ({ l: s === 'Refunded' ? 'Mark refunded' : s, go: () => this.res(A.setRefund(r.id, s, who, note), 'Refund updated — student notified.') })) }; });
+      out.noRefunds = !rqs.length;
+      out.finKpis = [['Tuition collected', A.money(M.collected)], ['Outstanding', A.money(M.outstanding)], ['To verify', M.toVerify], ['Refunds', pays.filter(p => /Refund/.test(p.status)).length]].map(([label, value]) => ({ label, value }));
+      const pend = pays.filter(p => p.status === 'Pending verification');
+      out.pending = pend.map(p => ({ payer: pname(p), amount: A.money(p.amount), kind: p.kind, method: p.method, ref: p.providerRef, course: cTitle(p.courseId), verify: () => this.res(A.setPayment(p.id, 'Verified', who), 'Payment verified.'), fail: () => this.res(A.setPayment(p.id, 'Failed', who, 'Not found with provider'), 'Marked as not found. The payer can resubmit.') })); out.noPending = !pend.length;
+      out.balances = ens.filter(e => e.status !== 'Withdrawn').map(e => { const b = A.balance(e.studentId, e.courseId, e.cohortId), s = A.get('students', e.studentId); return { name: sName(e.studentId), course: (A.course(e.courseId) || {}).code, bal: b == null ? 'No fee set' : A.money(b), c: b ? '#9A3B2A' : '#2F4A2B', owes: !!b, remind: () => { A.notify(s, 'Payment reminder', { amount: b, course: cTitle(e.courseId) }); this.flash('Reminder queued for ' + s.name + '.'); } }; });
+      out.enrOpts = ens.map(e => ({ v: e.id, l: sName(e.studentId) + ' · ' + (A.course(e.courseId) || {}).code }));
+      const setMp = {}; ['enr', 'kind', 'amount', 'method', 'ref'].forEach(k => setMp[k] = e => this.setState({ mp: { ...st.mp, [k]: e.target.value } })); out.mp = st.mp; out.setMp = setMp; out.mpErr = st.mpErr; out.payMethods = [...A.PAY_METHODS, 'Authorised discount'];
+      out.recordPay = () => { const m = st.mp, e = ens.find(x => x.id === m.enr); if (!e) return this.setState({ mpErr: 'Choose the student and course.' }); if (!canVerify) return this.setState({ mpErr: 'Only finance can record payments.' });
+        const disc = /Discount/.test(m.kind); if (disc && !A.settings().scholarships && !founder) return this.setState({ mpErr: 'Discounts and scholarships are switched off in Settings.' });
+        const r = A.notifyPayment({ studentId: e.studentId, courseId: e.courseId, cohortId: e.cohortId, payer: sName(e.studentId), kind: m.kind, amount: m.amount, method: disc ? 'Authorised discount' : m.method, providerRef: m.ref || (disc ? 'DISC-' + A.rnd(5) : '') });
+        if (r.error) return this.setState({ mpErr: r.error }); A.setPayment(r.payment.id, 'Verified', who, disc ? 'Authorised by ' + who : 'Recorded by finance'); this.setState({ mp: { ...m, amount: '', ref: '' }, mpErr: '' }); this.flash('Recorded and verified.'); };
+      out.allPays = pays.map(p => ({ payer: pname(p), amount: A.money(p.amount), kind: p.kind, method: p.method, ref: p.providerRef, status: p.status, c: p.status === 'Verified' ? '#2F4A2B' : /Fail|Refund/.test(p.status) ? '#9A3B2A' : '#6B4A12', canRefund: canVerify && (p.status === 'Verified' || p.status === 'Refund requested') && !/Discount/.test(p.kind), refundLabel: p.status === 'Verified' ? 'Refund requested' : 'Mark refunded',
+        refund: () => this.res(A.setPayment(p.id, p.status === 'Verified' ? 'Refund requested' : 'Refunded', who), 'Refund status updated.') }));
+      out.exportPays = () => { csv('academy-payments.csv', [['Payment ID', 'Payer', 'Course', 'Type', 'Amount GHS', 'Method', 'Provider ref', 'Status', 'Verified by', 'Date'], ...pays.map(p => [p.id, pname(p), cTitle(p.courseId), p.kind, p.amount, p.method, p.providerRef, p.status, p.verifiedBy, p.created])]); A.audit(who, 'Exported payments', pays.length + ' rows'); };
+      out.revenue = courses.map(c => ({ course: c.title, n: pays.filter(p => p.courseId === c.id && p.status === 'Verified' && !/Discount/.test(p.kind)).reduce((n, p) => n + p.amount, 0) })).filter(r => r.n).map(r => ({ course: r.course, total: A.money(r.n) }));
+    }
+    if (tab === 'comms') {
+      const setAn = {}; ['courseId', 'title', 'body'].forEach(k => setAn[k] = e => this.setState({ an: { ...st.an, [k]: e.target.value } })); out.an = st.an; out.setAn = setAn;
+      out.courseOpts = courses.filter(c => c.status === 'Published').map(c => ({ v: c.id, l: c.title }));
+      out.postAnn = () => { const a = st.an; if (!a.title.trim() || !a.body.trim()) return this.flash('Add a title and message.', true); A.add('announcements', { id: 'ANN-' + A.rnd(5), ...a, by: who }); this.setState({ an: { courseId: a.courseId, title: '', body: '' } }); this.flash('Announcement posted to the student portal.'); };
+      out.anns = A.list('announcements').slice(0, 5).map(a => ({ title: a.title, meta: (a.courseId ? cTitle(a.courseId) : 'All students') + ' · ' + a.by + ' · ' + d10(a.created) }));
+      out.templates = Object.entries(A.TPL).map(([name, text]) => ({ name, text }));
+      const cm = A.list('comms'); out.comms = cm.slice(0, 50).map(m => ({ to: m.to, channel: m.channel, template: m.template.length > 40 ? 'Custom' : m.template, status: m.status, text: m.text })); out.noComms = !cm.length;
+    }
+    if (tab === 'support') {
+      const t = A.list('support');
+      out.tickets = t.map(x => ({ student: sName(x.studentId), type: x.type, status: x.status, c: x.status === 'Open' ? '#9A3B2A' : '#2F4A2B', body: x.body, reply: x.reply ? 'Reply: ' + x.reply : '', draft: st.drafts[x.id] || '', setDraft: e => this.setState({ drafts: { ...st.drafts, [x.id]: e.target.value } }),
+        send: () => { const r = (st.drafts[x.id] || '').trim(); if (!r) return; A.upd('support', x.id, { reply: r, status: 'Resolved', by: who }); const s = A.get('students', x.studentId); s && A.notify(s, 'Hello {first}, we have replied to your support request: ' + r); A.audit(who, 'Resolved support ' + x.type, x.studentId); this.setState({ drafts: { ...st.drafts, [x.id]: '' } }); } })); out.noTickets = !t.length;
+      const drs = A.list('data-requests');
+      out.dataReqs = drs.map(d => { const s = A.get('students', d.studentId) || {}, f = st.fix[d.id] || { name: s.name || '', email: s.email || '', phone: s.phone || '' }, setFix = k => e => this.setState({ fix: { ...st.fix, [d.id]: { ...f, [k]: e.target.value } } });
+        const close = (status, note) => { A.upd('data-requests', d.id, { status, history: [...(d.history || []), { at: new Date().toISOString(), status, by: who, note: note || '' }] }); s.id && A.notify(s, 'Hello {first}, your data request (' + d.type + ') is now: ' + status + '.'); };
+        return { name: s.name || d.studentId, type: d.type, when: d10(d.created), status: d.status, details: d.details, open: d.status === 'Submitted', isCorr: d.type === 'Correction', fixName: f.name, fixEmail: f.email, fixPhone: f.phone, setFixName: setFix('name'), setFixEmail: setFix('email'), setFixPhone: setFix('phone'),
+          actL: d.type === 'Correction' ? 'Apply correction' : d.type === 'Deletion' ? 'Anonymise person' : 'Prepare copy',
+          act: () => { if (d.type === 'Correction') { A.upd('students', s.id, { name: f.name.trim(), email: f.email.trim().toLowerCase(), phone: window.SOT.ghPhone(f.phone) || f.phone }); A.list('certificates').filter(c => c.studentId === s.id && c.status === 'Valid' && c.name !== f.name.trim()).forEach(c => A.setCertificate(c.id, { name: f.name.trim() }, 'Name corrected via data request', who)); A.audit(who, 'Data correction applied', s.id); close('Completed', 'Correction applied'); }
+            else if (d.type === 'Deletion') { if (!confirm('Anonymise ' + s.name + '? This cannot be undone.')) return; A.anonymise(s.id, who); close('Completed', 'Personal data anonymised'); }
+            else { A.audit(who, 'Data export prepared', s.id); close('Completed', 'Available to download in the student portal'); } this.flash('Request completed.'); },
+          decline: () => { const n = prompt('Reason for declining?'); if (n) close('Declined', n); } }; });
+      out.noDataReq = !drs.length;
+      const ret = (A.settings().retention || {}).appMonths || 24; out.retMonths = String(ret); out.setRetMonths = e => A.setSettings({ retention: { appMonths: Number(e.target.value) || 24 } });
+      const due = A.retentionDue(); out.retNote = due.length ? due.length + ' application(s) past the retention period.' : 'Nothing past the retention period.';
+      out.retDue = due.map(a => ({ id: a.id, status: a.status, when: d10(a.updated || a.created), go: () => A.anonymiseApplication(a.id, who) }));
+      const rp = A.list('reports'); out.reports = rp.map(r => ({ student: sName(r.studentId), by: r.by, body: r.body })); out.noReports = !rp.length;
+    }
+    if (tab === 'reports') {
+      const apps = A.list('applications'), tot = Math.max(1, apps.length);
+      const F = [['Applications', apps.length], ['Reviewed', apps.filter(a => !['Draft', 'Submitted'].includes(a.status)).length], ['Accepted (incl. enrolled)', apps.filter(a => ['Accepted', 'Offer accepted', 'Enrolled'].includes(a.status)).length], ['Offer accepted', apps.filter(a => ['Offer accepted', 'Enrolled'].includes(a.status)).length], ['Enrolled', apps.filter(a => a.status === 'Enrolled').length], ['Completed', ens.filter(e => e.status === 'Completed').length]];
+      out.funnel = F.map(([l, n]) => ({ l, n, w: Math.round(n / tot * 100) + '%' }));
+      const src = {}; [...apps, ...A.list('enquiries')].forEach(a => { const s = a.source || 'Website'; src[s] = (src[s] || 0) + 1; }); const mx = Math.max(1, ...Object.values(src));
+      out.sourcesRep = A.LEAD_SOURCES.map(l => ({ l, n: src[l] || 0, w: Math.round((src[l] || 0) / mx * 100) + '%' }));
+      if (can('finance.view')) { const vp = A.list('payments').filter(p => p.status === 'Verified' && !/Discount/.test(p.kind)); out.prodRep = A.PRODUCTS.map(p => ({ l: p.name, n: A.money(vp.filter(x => (A.course(x.courseId) || {}).product === p.name).reduce((n, x) => n + x.amount, 0)), courses: courses.filter(c => c.product === p.name && c.status === 'Published').length })); } else out.prodRep = [];
+      out.cohHeads = ['Cohort', 'Course', 'Enrolled', 'Avg attendance', 'Completed', 'Collected'];
+      out.cohRep = cohorts.map(h => { const m = ens.filter(e => e.cohortId === h.id), at = m.map(e => A.attendancePct(e.studentId, h.id)).filter(x => x != null); return [h.name, (A.course(h.courseId) || {}).code, m.length, at.length ? Math.round(at.reduce((a, b) => a + b, 0) / at.length) + '%' : '—', m.filter(e => e.status === 'Completed').length, can('finance.view') ? A.money(A.list('payments').filter(p => p.cohortId === h.id && p.status === 'Verified' && !/Discount/.test(p.kind)).reduce((n, p) => n + p.amount, 0)) : '—']; });
+    }
+    if (tab === 'events') {
+      const blankE = { type: 'Workshop', title: '', date: '', time: '10:00', mode: 'In-person', venue: 'Sense of Touch, Tema', capacity: '', fee: '', status: 'Draft', description: '' };
+      const ne = st.ne || blankE; out.ne = ne; out.eventTypes = A.EVENT_TYPES; out.neErr = st.neErr; out.evTitle = st.editEv ? 'Edit event' : 'New event'; out.editingEvent = !!st.editEv;
+      const setNe = {}; Object.keys(blankE).forEach(k => setNe[k] = e => this.setState({ ne: { ...ne, [k]: e.target.value } })); out.setNe = setNe;
+      out.newEvent = () => this.setState({ ne: null, editEv: '', neErr: '' });
+      out.saveEvent = () => { if (!ne.title.trim() || !ne.date) return this.setState({ neErr: 'Add a title and date.' }); const rec = { ...ne, title: ne.title.trim(), capacity: ne.capacity === '' ? null : Number(ne.capacity), fee: ne.fee === '' ? null : Number(ne.fee) }; if (st.editEv) A.upd('events', st.editEv, rec); else A.add('events', { id: 'EVT-' + A.rnd(5), ...rec }); A.audit(who, (st.editEv ? 'Edited' : 'Created') + ' event', rec.title); this.setState({ ne: null, editEv: '', neErr: '' }); this.flash('Event saved' + (rec.status === 'Published' ? ' and published.' : ' as ' + rec.status.toLowerCase() + '.')); };
+      const evs = A.list('events').slice().sort((a, b) => (b.date || '').localeCompare(a.date || '')), regs = A.list('event-regs');
+      out.noEventsA = !evs.length;
+      out.eventRows = evs.map(e => { const rs = regs.filter(r => r.eventId === e.id && r.status !== 'Cancelled'); return { title: e.title, type: e.type, when: d10(e.date) + ' ' + (e.time || ''), mode: e.mode, regs: rs.length + (e.capacity ? ' / ' + e.capacity : '') + ' registered', status: e.status, sc: e.status === 'Published' ? '#2F4A2B' : '#6B665C',
+        edit: () => this.setState({ ne: { ...blankE, ...e, capacity: e.capacity ?? '', fee: e.fee ?? '' }, editEv: e.id, neErr: '' }), toggleL: e.status === 'Published' ? 'Unpublish' : 'Publish', toggle: () => A.upd('events', e.id, { status: e.status === 'Published' ? 'Draft' : 'Published' }),
+        people: rs.map(r => ({ name: r.name, contact: [r.phone, r.email].filter(Boolean).join(' · '), status: r.status })) }; });
+    }
+    if (tab === 'content') {
+      const S3 = A.settings(); out.noticeV = S3.notice || ''; out.setNotice = e => A.setSettings({ notice: e.target.value });
+      const blankA = { category: 'News', title: '', date: A.today(), img: 'assets/web/lounge-group.jpg', summary: '', body: '', status: 'Draft' }; const na = st.na || blankA; out.na = na; out.naErr = st.naErr; out.arTitle = st.editAr ? 'Edit article' : 'New article';
+      const setNa = {}; Object.keys(blankA).forEach(k => setNa[k] = e => this.setState({ na: { ...na, [k]: e.target.value } })); out.setNa = setNa;
+      out.imgOpts = ['lounge-group', 'facial-treatment', 'body-massage', 'wood-therapy', 'lip-closeup', 'founder-studio', 'facial-greenwall', 'robe-green-lounge'].map(x => ({ v: 'assets/web/' + x + '.jpg', l: x.replace(/-/g, ' ') }));
+      out.saveArticle = () => { if (!na.title.trim() || !na.summary.trim()) return this.setState({ naErr: 'Add a title and summary.' }); if (st.editAr) A.upd('articles', st.editAr, na); else A.add('articles', { id: 'ART-' + A.rnd(5), ...na }); A.audit(who, 'Article saved', na.title); this.setState({ na: null, editAr: '', naErr: '' }); this.flash('Article saved.'); };
+      out.articleRows = A.list('articles').map(a => ({ title: a.title, date: d10(a.date), status: (a.category || 'News') + ' · ' + a.status, edit: () => this.setState({ na: { ...blankA, ...a }, editAr: a.id }), remove: () => { if (confirm('Delete this article?')) { A.save('articles', A.list('articles').filter(x => x.id !== a.id)); A.audit(who, 'Article deleted', a.title); } } }));
+      const ns2 = st.ns2; out.ns2 = ns2; out.nsErr = st.nsErr; const setNs2 = {}; ['name', 'course', 'quote'].forEach(k => setNs2[k] = e => this.setState({ ns2: { ...ns2, [k]: e.target.value } })); out.setNs2 = setNs2; out.setNs2Consent = e => this.setState({ ns2: { ...ns2, consent: e.target.checked } });
+      out.saveStory = () => { if (!ns2.name.trim() || !ns2.quote.trim()) return this.setState({ nsErr: 'Add a name and quote.' }); A.add('stories', { id: 'STY-' + A.rnd(5), ...ns2, status: 'Draft', addedBy: who }); this.setState({ ns2: { name: '', course: '', quote: '', consent: false }, nsErr: '' }); this.flash('Story saved as a draft.'); };
+      out.storyRows = A.list('stories').map(s => ({ name: s.name, consent: s.consent ? 'Permission on file · ' + s.status : 'No permission recorded', toggleL: s.status === 'Published' ? 'Unpublish' : 'Publish', toggle: () => { if (s.status !== 'Published' && !s.consent) return this.flash('Record written permission before publishing.', true); A.upd('stories', s.id, { status: s.status === 'Published' ? 'Draft' : 'Published' }); A.audit(who, 'Story ' + (s.status === 'Published' ? 'unpublished' : 'published'), s.name); } }));
+    }
+    if (tab === 'settings') {
+      const S2 = A.settings(); out.canSettings = can('settings.manage'); out.canAudit = can('audit.view');
+      const sv = (k, v) => { A.setSettings({ [k]: v }); A.audit(who, 'Setting changed: ' + k, String(v).slice(0, 60)); };
+      out.setFields = [['org', 'Issuing organisation'], ['signatory', 'Authorised signatory'], ['certPrefix', 'Certificate ID prefix'], ['accreditation', 'Accreditation statement (only with documentary confirmation)']].map(([k, l]) => ({ l, v: S2[k], ph: k === 'accreditation' ? 'Leave blank — no accreditation confirmed' : '', on: e => sv(k, e.target.value) }));
+      const fx = S2.fx || {}; out.feeFields = [{ l: 'Application fee (GHS)', v: S2.appFee ?? '', ph: 'None', on: e => sv('appFee', e.target.value === '' ? null : Number(e.target.value)) }, { l: 'GHS per 1 USD', v: fx.USD ?? '', ph: 'Not set', on: e => sv('fx', { ...fx, USD: e.target.value === '' ? null : Number(e.target.value) }) }, { l: 'GHS per 1 GBP', v: fx.GBP ?? '', ph: 'Not set', on: e => sv('fx', { ...fx, GBP: e.target.value === '' ? null : Number(e.target.value) }) }];
+      out.setToggles = [['autoIssue', 'Issue certificates automatically when completion is confirmed'], ['scholarships', 'Scholarships and discounts are available (shows on the public Admissions page)']].map(([k, l]) => ({ l, on: !!S2[k], toggle: e => sv(k, e.target.checked) }));
+      out.integrations = Object.entries(S2.integrations).map(([name, status]) => ({ name, status, c: /Not/.test(status) ? '#9A3B2A' : '#2F4A2B', test: () => this.flash(/Not/.test(status) ? name + ': not connected. Add credentials on the server, then test again.' : name + ': working.', /Not/.test(status)) }));
+      out.insPending = A.list('instructors').filter(i => i.pending).map(i => ({ name: i.name, title: i.pending.title, bio: i.pending.bio, quals: i.pending.qualifications || '—', photo: i.pending.photo || '', approve: () => this.res(A.reviewProfile(i.id, true, who), 'Profile approved and published.'), reject: () => this.res(A.reviewProfile(i.id, false, who), 'Returned to the instructor.') }));
+      out.insRows = A.list('instructors').map(i => ({ name: i.name, email: i.email, id: i.id, state: i.active ? 'Active' : 'Paused', c: i.active ? '#536B4E' : '#9A3B2A', toggle: () => A.upd('instructors', i.id, { active: !i.active }) }));
+      const setNi = {}; ['name', 'email', 'title'].forEach(k => setNi[k] = e => this.setState({ ni: { ...st.ni, [k]: e.target.value } })); out.ni = st.ni; out.setNi = setNi; out.niErr = st.niErr;
+      out.addIns = () => { const n = st.ni; if (!n.name.trim() || !window.SOT.email(n.email)) return this.setState({ niErr: 'Add a name and a valid email.' }); const id = 'INS-' + A.rnd(4); A.add('instructors', { id, name: n.name.trim(), email: n.email.trim().toLowerCase(), title: n.title.trim() || 'Instructor', bio: '', photo: '', active: true }); A.audit(who, 'Added instructor', id); this.setState({ ni: { name: '', email: '', title: '' }, niErr: '' }); this.flash('Instructor added. Their portal ID is ' + id + '.'); };
+      out.hasSample = A.hasSample(); out.seedLabel = A.hasSample() ? 'Reload sample data' : 'Load sample data';
+      out.seed = () => { A.seedSample(); A.audit(who, 'Loaded sample data'); this.flash('Sample data loaded.'); }; out.clearSample = () => { A.clearSample(); A.audit(who, 'Removed sample data'); this.flash('Sample data removed.'); };
+      const roles = Object.keys(A.ROLES).filter(r => !['Student', 'Alumni'].includes(r));
+      out.roleHeads = roles.map(r => r.replace('Founder / Super Administrator', 'Founder'));
+      out.permRows = Object.entries(A.PERMS).map(([k, label]) => ({ label, cells: roles.map(r => A.can(r, k) ? (r === 'Instructor' ? '● own' : '●') : '') }));
+      const au = A.list('audit'); out.audit = au.slice(0, 50).map(a => ({ at: new Date(a.created).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }), who: a.who, action: a.action, target: a.target })); out.noAudit = !au.length;
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div data-tilt="1" style="display:flex;flex-direction:column;background:#FFFDF9;border:1px solid #E9DDC9;height:100%;font-family:Montserrat,sans-serif;transition:border-color .35s, box-shadow .35s, transform .35s" style-hover="border-color:#C6A15B;box-shadow:0 22px 44px -28px rgba(73,49,38,0.55);transform:translateY(-4px)">
+<a href="{{ p.href }}" style="position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:{{ p.tone }};text-decoration:none">
+<sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ false }}">
+<img data-no-full="1" src="{{ p.img }}" alt="{{ p.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.07)">
+</sc-if>
+<sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:{{ p.ink }};padding:24px;text-align:center">
+<span style="width:96px;height:96px;border:1px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:40px;opacity:0.9">{{ p.mono }}</span>
+<span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase">{{ p.sub }}</span>
+</div>
+</sc-if>
+<div style="position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+<sc-if value="{{ p.hasBadge }}" hint-placeholder-val="{{ false }}">
+<span style="background:#C6A15B;color:#24221D;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;padding:6px 10px">{{ p.badge }}</span>
+</sc-if>
+<span style="margin-left:auto;background:rgba(248,244,237,0.92);color:#493126;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;padding:5px 8px;border:1px dashed #493126">Demo</span>
+</div>
+</a>
+<div style="padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1">
+<span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#536B4E;font-weight:600">{{ p.catLabel }}</span>
+<a href="{{ p.href }}" style="font-family:'Cormorant Garamond',serif;font-size:23px;line-height:1.15;color:#493126;text-decoration:none;text-wrap:pretty">{{ p.name }}</a>
+<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+<span style="font-size:14px;font-weight:600;color:#24221D">{{ p.priceTxt }}</span>
+<sc-if value="{{ p.hasSale }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:12px;color:#493126;text-decoration:line-through;opacity:0.7">{{ p.wasTxt }}</span>
+</sc-if>
+</div>
+<span style="font-size:11px;color:{{ p.stockColor }};font-weight:500">{{ p.stockTxt }}</span>
+<div style="display:flex;gap:8px;margin-top:auto;padding-top:8px">
+<button onClick="{{ p.add }}" disabled="{{ p.soldOut }}" style="flex:1;cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:13px 10px;font-family:Montserrat,sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;transition:background .25s" style-hover="background:#536B4E">{{ p.addLabel }}</button>
+<button onClick="{{ p.wish }}" aria-label="Wishlist" style="width:46px;cursor:pointer;background:transparent;border:1px solid #E9DDC9;color:{{ p.wishColor }};font-size:18px;transition:border-color .25s" style-hover="border-color:#C6A15B">{{ p.wishIcon }}</button>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:300,&quot;height&quot;:560},&quot;p&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;}}"></script>
+</body>
+</html>

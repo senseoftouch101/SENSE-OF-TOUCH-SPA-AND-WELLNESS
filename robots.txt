@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /Admin.dc.html
+Disallow: /Institute%20Admin.dc.html
+Disallow: /CRM.dc.html
+Disallow: /CRM%20v1.dc.html
+Disallow: /Operations.dc.html
+Disallow: /Executive%20Dashboard.dc.html
+Disallow: /Account.dc.html
+Disallow: /Institute%20Portal.dc.html
+Disallow: /Sign%20In.dc.html
+Disallow: /Investor%20Room.dc.html
+Disallow: /Due%20Diligence%20Pack.dc.html
+Disallow: /Financial%20Model.dc.html
+Disallow: /handoff/
+
+Sitemap: https://senseoftouch.co/sitemap.xml

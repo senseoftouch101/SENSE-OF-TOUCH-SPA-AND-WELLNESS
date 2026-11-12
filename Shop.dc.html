@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>The Shop · Sense of Touch</title>
+<meta name="description" content="African-inspired skincare and lip care, delivered across Ghana.">
+<meta property="og:title" content="The Shop · Sense of Touch">
+<meta property="og:description" content="African-inspired skincare and lip care, delivered across Ghana.">
+<meta property="og:image" content="assets/web/robe-green-lounge.jpg">
+<link rel="icon" href="assets/web/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{overflow-x:hidden}@media (max-width:520px){[data-shopname]{display:none!important}}@media (max-width:360px){[data-shoptxt]{width:44px;overflow:hidden;white-space:nowrap;text-indent:60px;position:relative}[data-shoptxt]::before{content:"⌕";position:absolute;left:0;right:0;text-indent:0;text-align:center;font-size:22px;letter-spacing:0}}a[href^="https://wa.me"],a[href^="tel:"],a[href^="mailto:"],a[href*="instagram"],a[style*="border-bottom"],a[style*="text-transform: uppercase"],button,[type=submit]{min-height:44px!important;display:inline-flex;align-items:center}[style*="font-size: 8px"],[style*="font-size: 9px"],[style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"]{font-size:11px!important}p{max-width:min(100%,72ch)!important}p[style*="text-align: center"]{margin-inline:auto!important}h1,h2,h3,p,span,a{overflow-wrap:break-word}:focus-visible{outline:2px solid #C6A15B!important;outline-offset:3px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}@media (pointer:coarse){a[style*="border-bottom"],button{min-height:44px}a[style*="border-bottom"]{display:inline-flex;align-items:center}}img,video,iframe{max-width:100%}@media (max-width:720px){[style*="padding: 112px 32px"]{padding:72px 20px!important}[style*="padding: 96px 32px"]{padding:64px 20px!important}[style*="padding: 80px 32px"]{padding:56px 20px!important}[style*="padding: 72px 32px"]{padding:56px 20px!important}[style*="padding: 96px 56px"]{padding:56px 24px!important}[style*="position: sticky; top: 1"]{position:static!important}[style*="grid-column: span 2"]{grid-column:auto!important}[style*="min-height: 720px"]{min-height:440px!important}[style*="padding: 40px;"]{padding:24px!important}}
+html,body{margin:0;background:#F8F4ED;color:#24221D;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#493126;text-decoration:none}a:hover{color:#536B4E}button{font-family:Montserrat,sans-serif}input,select,textarea{font-family:Montserrat,sans-serif;font-size:14px;color:#24221D}button:disabled{opacity:.45;cursor:not-allowed!important}@keyframes sotFloat{0%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(18px,-26px,0) rotate(14deg)}100%{transform:translate3d(0,0,0) rotate(0deg)}}@keyframes sotShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}@keyframes sotIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style>
+<script src="./motion.js"></script>
+<script src="./sot-auth.js"></script>
+<script src="./sot-store.js?v=20261110b"></script>
+</helmet>
+<div style="min-height:100vh;background:#F8F4ED;position:relative">
+
+<div style="background:#24221D;color:#E9DDC9;font-size:11px;letter-spacing:0.14em">
+<div style="max-width:1320px;margin:0 auto;padding:9px 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center">
+<span style="color:#C6A15B">{{ banner }}</span>
+<div style="display:flex;gap:18px;flex-wrap:wrap">
+<a href="#/track" style="color:#E9DDC9;display:inline-flex;align-items:center;min-height:44px">Track order</a>
+<a href="#/admin" style="color:#E9DDC9;display:inline-flex;align-items:center;min-height:44px">Admin</a>
+<a href="Sense%20of%20Touch%20Homepage.dc.html" style="color:#E9DDC9;display:inline-flex;align-items:center;min-height:44px">Spa website</a>
+<a href="Book.dc.html" style="color:#C6A15B;display:inline-flex;align-items:center;min-height:44px">Book a treatment</a>
+</div>
+</div>
+</div>
+
+<header style="position:sticky;top:0;z-index:30;background:rgba(248,244,237,0.96);backdrop-filter:blur(10px);border-bottom:1px solid #E9DDC9">
+<div style="max-width:1320px;margin:0 auto;padding:10px clamp(12px,3vw,24px);display:flex;flex-wrap:nowrap;align-items:center;row-gap:6px;column-gap:16px;justify-content:space-between">
+<a href="#/" style="display:flex;align-items:center;gap:12px;text-decoration:none;flex:none;min-height:44px">
+<span style="width:44px;height:52px;overflow:hidden;display:block;flex:none;position:relative"><img src="assets/logo-transparent.png" alt="Sense of Touch logo" style="position:absolute;width:144px;height:144px;max-width:none;left:-50px;top:-27px"></span>
+<span data-shopname="1" style="display:flex;flex-direction:column;line-height:1">
+<span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:#493126;letter-spacing:0.04em">Sense of Touch</span>
+<span style="font-size:10px;letter-spacing:0.32em;color:#536B4E;margin-top:4px">THE SHOP</span>
+</span>
+</a>
+<div style="display:flex;align-items:center;gap:2px;margin-left:auto">
+<button onClick="{{ openSearch }}" aria-label="Search" data-shoptxt="1" style="all:unset;cursor:pointer;padding:10px;min-height:44px;box-sizing:border-box;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#493126" style-hover="color:#536B4E">Search</button>
+<a href="#/account" aria-label="Account" style="padding:10px;min-height:44px;box-sizing:border-box;display:inline-flex;align-items:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">{{ accountLabel }}</a>
+<a href="#/shop/wishlist" aria-label="Wishlist" style="padding:10px;min-height:44px;box-sizing:border-box;font-size:15px;display:flex;gap:4px;align-items:center">♡<span style="font-size:11px;font-weight:600">{{ wishCount }}</span></a>
+<button onClick="{{ openCart }}" aria-label="Cart" style="all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;background:#493126;color:#F8F4ED;padding:11px 16px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;margin-left:6px" style-hover="background:#536B4E">Cart<span style="background:#C6A15B;color:#24221D;min-width:20px;height:20px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;padding:0 6px">{{ cartCount }}</span></button>
+</div>
+</div>
+<nav aria-label="Shop categories" style="max-width:1320px;margin:0 auto;padding:0 clamp(12px,3vw,24px);display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="8">
+<a href="{{ n.href }}" style="white-space:nowrap;padding:10px 0 12px;color:{{ n.color }};border-bottom:2px solid {{ n.border }}" style-hover="color:#536B4E">{{ n.label }}</a>
+</sc-for>
+</nav>
+</header>
+
+<sc-if value="{{ searchOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;inset:0;z-index:60;background:rgba(36,34,29,0.55);display:flex;justify-content:center;align-items:flex-start;padding:80px 16px" onClick="{{ closeSearch }}">
+<div onClick="{{ stop }}" style="width:100%;max-width:720px;background:#F8F4ED;border:1px solid #C6A15B;padding:28px;display:flex;flex-direction:column;gap:18px;animation:sotIn .3s ease">
+<div style="display:flex;gap:12px;align-items:center">
+<input autoFocus="{{ true }}" value="{{ q }}" onChange="{{ setQ }}" onKeyDown="{{ searchKey }}" placeholder="Search shea butter, lip scrub, robe…" style="flex:1;border:0;border-bottom:1px solid #493126;background:transparent;padding:12px 0;font-family:'Cormorant Garamond',serif;font-size:28px;outline:none">
+<button onClick="{{ closeSearch }}" style="all:unset;cursor:pointer;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Close</button>
+</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ searchResults }}" as="r" hint-placeholder-count="0">
+<a href="{{ r.href }}" onClick="{{ closeSearch }}" style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #E9DDC9">
+<span style="display:flex;flex-direction:column;gap:3px"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#493126">{{ r.name }}</span><span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#536B4E">{{ r.cat }}</span></span>
+<span style="font-size:14px;font-weight:600">{{ r.price }}</span>
+</a>
+</sc-for>
+<sc-if value="{{ searchEmpty }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#493126">No products match “{{ q }}”.</span></sc-if>
+</div>
+</div>
+</div>
+</sc-if>
+
+<main>
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Shop hero" style="position:relative;isolation:isolate;overflow:hidden;background:#493126;color:#F8F4ED">
+<div data-3d="pureleaves" data-no-reveal="1" style="position:absolute;inset:0;z-index:-1;pointer-events:none"></div>
+<div style="max-width:1320px;margin:0 auto;padding:72px 24px 80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:56px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:22px;animation:sotIn .9s ease both">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">Sense of Touch · The Shop</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(54px,7.4vw,108px);line-height:0.92;text-wrap:balance">Take the glow home.</h1>
+<span style="font-family:Allura,cursive;font-size:clamp(30px,3.4vw,44px);color:#C6A15B;line-height:1.1">Feel the Touch. Experience the Transformation.</span>
+<p style="margin:0;font-size:16px;line-height:1.8;color:#E9DDC9;max-width:500px;text-wrap:pretty">African-inspired skincare and lip care — chosen by the team behind our Tema spa.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+<a href="#/shop" style="background:#C6A15B;color:#24221D;padding:17px 34px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;background-image:linear-gradient(110deg,#C6A15B 40%,#E4C98C 50%,#C6A15B 60%);background-size:200% 100%;animation:sotShimmer 4.5s linear infinite" style-hover="color:#24221D">Shop now</a>
+<a href="#/shop/aftercare" style="border:1px solid #C6A15B;color:#F8F4ED;padding:16px 28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#F8F4ED;color:#493126">AFTERCARE range</a>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div ref="{{ heroRef }}" data-no-reveal="1" style="position:relative;overflow:hidden;aspect-ratio:1/1;width:100%;max-height:600px;background:radial-gradient(circle at 50% 42%, #5E4235 0%, #493126 70%);border:1px solid rgba(198,161,91,0.45);cursor:grab;touch-action:pan-y;user-select:none">
+<span style="position:absolute;z-index:1;bottom:16px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;pointer-events:none">Drag to rotate</span>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+<sc-for list="{{ heroChips }}" as="c" hint-placeholder-count="4">
+<a href="{{ c.href }}" onMouseEnter="{{ c.hover }}" style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;padding:8px 12px;border:1px solid rgba(198,161,91,0.5);color:{{ c.color }};background:{{ c.bg }}">{{ c.label }}</a>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Categories" style="max-width:1320px;margin:0 auto;padding:88px 24px 40px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Shop by ritual</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">Six collections</h2></div>
+<a href="#/shop" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-bottom:1px solid #493126;padding-bottom:4px">Shop all →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px">
+<sc-for list="{{ catTiles }}" as="c" hint-placeholder-count="6">
+<a href="{{ c.href }}" style="background:{{ c.bg }};color:{{ c.ink }};padding:28px 22px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;border:1px solid #E9DDC9;transition:transform .35s, box-shadow .35s" style-hover="transform:translateY(-4px);box-shadow:0 20px 40px -26px rgba(73,49,38,0.6)">
+<span style="font-size:10px;letter-spacing:0.26em;text-transform:uppercase;font-weight:600;opacity:0.85">{{ c.kicker }}</span>
+<span style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1">{{ c.label }}</span><span style="font-size:11px;letter-spacing:0.12em">{{ c.count }}</span></span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section data-screen-label="Featured" style="max-width:1320px;margin:0 auto;padding:56px 24px 96px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">{{ homeTabTitle }}</h2>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<sc-for list="{{ homeTabs }}" as="t" hint-placeholder-count="3">
+<button onClick="{{ t.go }}" style="cursor:pointer;padding:11px 18px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border:1px solid #493126;background:{{ t.bg }};color:{{ t.fg }}">{{ t.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:18px">
+<sc-for list="{{ homeList }}" as="p" hint-placeholder-count="4"><dc-import name="ProductCard" p="{{ p }}" hint-size="100%,520px"></dc-import></sc-for>
+</div>
+</section>
+
+<section data-screen-label="Promo banner" style="background:#536B4E;color:#F8F4ED">
+<div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));align-items:stretch">
+<div style="position:relative;min-height:420px;overflow:hidden"><img src="assets/web/lip-closeup.jpg" alt="Lip Bar result" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+<div style="padding:72px 48px;display:flex;flex-direction:column;gap:20px;justify-content:center">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#E9DDC9;font-weight:600">From the Lip Bar</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,68px);line-height:1">The Lip Bar, now in your bag.</h2>
+<p style="margin:0;font-size:15px;line-height:1.8;color:#E9DDC9;max-width:460px">Balms, scrubs, masks and gloss. The same lip care we use in the Lip Bar chair, ready for home.</p>
+<a href="#/shop/lipbar" style="align-self:flex-start;background:#C6A15B;color:#24221D;padding:17px 32px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#F8F4ED;color:#24221D">Shop The Lip Bar</a>
+</div>
+</div>
+</section>
+
+<section data-screen-label="AFTERCARE collection" style="max-width:1320px;margin:0 auto;padding:96px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:40px">
+<div style="display:flex;flex-direction:column;gap:18px;align-self:start;position:sticky;top:140px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">The AFTERCARE collection</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">African beauty. Inspired care.</h2>
+<span style="font-family:Allura,cursive;font-size:34px;color:#C6A15B">shea · baobab · moringa</span>
+<p style="margin:0;font-size:15px;line-height:1.75;text-wrap:pretty">Skincare inspired by our signature facial ritual, made with the pure West African ingredients we use in the treatment room.</p>
+<div style="position:relative;aspect-ratio:4/3;overflow:hidden;border:1px solid #E9DDC9"><img src="assets/web/facial-treatment.jpg" alt="AFTERCARE facial" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+<a href="#/shop/aftercare" style="align-self:flex-start;border:1px solid #493126;padding:15px 28px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600" style-hover="background:#493126;color:#F8F4ED">Shop AFTERCARE</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:18px;grid-column:span 2">
+<sc-for list="{{ aftercareList }}" as="p" hint-placeholder-count="4"><dc-import name="ProductCard" p="{{ p }}" hint-size="100%,520px"></dc-import></sc-for>
+</div>
+</section>
+
+<section data-screen-label="Lip Bar collection" style="background:#493126;color:#F8F4ED">
+<div style="max-width:1320px;margin:0 auto;padding:96px 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;font-weight:600">Beauty · Care · Confidence</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);line-height:1.05">The Lip Bar collection</h2></div>
+<a href="#/shop/lipbar" style="color:#C6A15B;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-bottom:1px solid #C6A15B;padding-bottom:4px">View all →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:18px">
+<sc-for list="{{ lipList }}" as="p" hint-placeholder-count="4"><dc-import name="ProductCard" p="{{ p }}" hint-size="100%,520px"></dc-import></sc-for>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Body and skincare" style="max-width:1320px;margin:0 auto;padding:96px 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Body &amp; skin</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">Everyday softness</h2></div>
+<a href="#/shop/aftercare" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-bottom:1px solid #493126;padding-bottom:4px">AFTERCARE →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:18px">
+<sc-for list="{{ bodyList }}" as="p" hint-placeholder-count="4"><dc-import name="ProductCard" p="{{ p }}" hint-size="100%,520px"></dc-import></sc-for>
+</div>
+</section>
+
+<section data-screen-label="Special offers" style="background:#E9DDC9">
+<div style="max-width:1320px;margin:0 auto;padding:96px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:18px">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Special offers</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">A little extra, for a little while</h2>
+<div style="border:1px dashed #493126;padding:22px;display:flex;flex-direction:column;gap:6px;background:#F8F4ED">
+<span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#536B4E;font-weight:600">First order · demo code</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#493126;letter-spacing:0.08em">WELCOME10</span>
+<span style="font-size:13px">10% off your first order. Enter it in your cart.</span>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:18px;grid-column:span 2">
+<sc-for list="{{ offerList }}" as="p" hint-placeholder-count="3"><dc-import name="ProductCard" p="{{ p }}" hint-size="100%,520px"></dc-import></sc-for>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Reviews" style="max-width:1320px;margin:0 auto;padding:96px 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Customer reviews · demo</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">In their words</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px">
+<sc-for list="{{ homeReviews }}" as="r" hint-placeholder-count="3">
+<a href="{{ r.href }}" style="background:#FFFDF9;border:1px solid #E9DDC9;padding:30px;display:flex;flex-direction:column;gap:14px;color:#24221D">
+<span style="color:#C6A15B;letter-spacing:0.2em">{{ r.stars }}</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:24px;line-height:1.3;color:#493126;text-wrap:pretty">“{{ r.text }}”</span>
+<span style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#536B4E;font-weight:600;margin-top:auto">{{ r.name }} · {{ r.product }}</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section data-screen-label="Newsletter" style="background:#24221D;color:#F8F4ED;position:relative;isolation:isolate;overflow:hidden">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;z-index:-1;pointer-events:none"></div>
+<div style="max-width:880px;margin:0 auto;padding:96px 24px;display:flex;flex-direction:column;gap:20px;align-items:center;text-align:center">
+<span style="font-family:Allura,cursive;font-size:44px;color:#C6A15B;line-height:1">Stay in touch</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1.1">New arrivals, rituals and members-first offers</h2>
+<sc-if value="{{ nlOpen }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:10px;flex-wrap:wrap;width:100%;max-width:560px;justify-content:center">
+<input value="{{ nl }}" onChange="{{ setNl }}" type="email" placeholder="Your email" style="flex:1;min-width:240px;padding:16px 14px;border:1px solid #C6A15B;background:#F8F4ED">
+<button onClick="{{ joinNl }}" style="cursor:pointer;background:#C6A15B;color:#24221D;border:0;padding:16px 28px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Subscribe</button>
+</div>
+</sc-if>
+<sc-if value="{{ nlDone }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#C6A15B">Thank you. You’re on the list.</span></sc-if>
+<span style="font-size:12px;color:#E9DDC9">You can unsubscribe at any time from your account.</span>
+</div>
+</section>
+
+<section data-screen-label="Instagram" style="max-width:1320px;margin:0 auto;padding:96px 24px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">@senseoftouchgh</span><h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);color:#493126;line-height:1.05">Shop the feed</h2></div>
+<a href="https://www.instagram.com/senseoftouchgh/" target="_blank" rel="noopener" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-bottom:1px solid #493126;padding-bottom:4px">Follow on Instagram ↗</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:8px">
+<sc-for list="{{ insta }}" as="g" hint-placeholder-count="6">
+<a href="{{ g.href }}" style="position:relative;aspect-ratio:1/1;overflow:hidden;display:block;background:#E9DDC9">
+<img src="{{ g.src }}" alt="{{ g.label }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s" style-hover="transform:scale(1.08)">
+<span style="position:absolute;left:10px;bottom:10px;background:rgba(36,34,29,0.75);color:#F8F4ED;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 9px">{{ g.label }}</span>
+</a>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Shop listing" style="position:relative;isolation:isolate;overflow:hidden;background:{{ shopBg }};color:{{ shopInk }}">
+<div data-3d="dust" data-no-reveal="1" style="position:absolute;inset:0;z-index:-1;pointer-events:none"></div>
+<div style="max-width:1320px;margin:0 auto;padding:64px 24px 48px;display:flex;flex-direction:column;gap:14px;animation:sotIn .5s ease">
+<span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;font-weight:600;opacity:0.85">{{ shopKicker }}</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(46px,6vw,84px);line-height:0.95">{{ shopTitle }}</h1>
+<p style="margin:0;font-size:15px;line-height:1.75;max-width:620px">{{ shopBlurb }}</p>
+</div>
+</section>
+<section style="max-width:1320px;margin:0 auto;padding:36px 24px 96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:36px;align-items:start">
+<aside style="display:flex;flex-direction:column;gap:26px;grid-column:span 1;max-width:320px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Search</span>
+<input value="{{ shopQ }}" onChange="{{ setShopQ }}" placeholder="Filter products" style="padding:12px;border:1px solid #E9DDC9;background:#FFFDF9">
+</div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-bottom:6px">Collections</span>
+<sc-for list="{{ catLinks }}" as="c" hint-placeholder-count="8">
+<a href="{{ c.href }}" style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px;color:{{ c.color }};font-weight:{{ c.weight }}">{{ c.label }}<span style="font-size:12px;opacity:0.7">{{ c.count }}</span></a>
+</sc-for>
+</div>
+<sc-if value="{{ hasSubs }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Type</span>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{ subChips }}" as="s" hint-placeholder-count="5">
+<button onClick="{{ s.go }}" style="cursor:pointer;padding:7px 11px;font-size:11px;border:1px solid #C6A15B;background:{{ s.bg }};color:{{ s.fg }}">{{ s.label }}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Max price · {{ maxPriceTxt }}</span>
+<input type="range" min="0" max="{{ priceCeil }}" step="10" value="{{ maxPrice }}" onChange="{{ setMax }}" style="accent-color:#493126">
+</div>
+<label style="display:flex;gap:10px;align-items:center;font-size:14px;cursor:pointer"><input type="checkbox" checked="{{ inStock }}" onChange="{{ toggleStock }}" style="accent-color:#536B4E;width:18px;height:18px"> In stock only</label>
+<label style="display:flex;gap:10px;align-items:center;font-size:14px;cursor:pointer"><input type="checkbox" checked="{{ onSale }}" onChange="{{ toggleSale }}" style="accent-color:#536B4E;width:18px;height:18px"> On offer</label>
+<button onClick="{{ clearFilters }}" style="all:unset;cursor:pointer;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-bottom:1px solid #493126;align-self:flex-start;padding-bottom:3px">Clear filters</button>
+</aside>
+<div style="display:flex;flex-direction:column;gap:22px;grid-column:span 3;min-width:0">
+<div style="display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #E9DDC9;padding-bottom:14px">
+<span style="font-size:13px">{{ shopCount }}</span>
+<label style="display:flex;gap:10px;align-items:center;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Sort
+<select value="{{ sort }}" onChange="{{ setSort }}" style="padding:10px;border:1px solid #E9DDC9;background:#FFFDF9;text-transform:none;letter-spacing:0">
+<option value="popular">Most popular</option><option value="newest">Newest</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option>
+</select></label>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:18px">
+<sc-for list="{{ shopList }}" as="p" hint-placeholder-count="6"><div style="animation:sotIn .45s ease both"><dc-import name="ProductCard" p="{{ p }}" hint-size="100%,520px"></dc-import></div></sc-for>
+</div>
+<sc-if value="{{ shopEmpty }}" hint-placeholder-val="{{ false }}">
+<div style="padding:64px 24px;text-align:center;border:1px dashed #C6A15B;display:flex;flex-direction:column;gap:10px;align-items:center"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">Nothing here yet</span><span style="font-size:14px">New products in this collection will appear here once they’re approved. Try clearing your filters.</span></div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Product detail" style="max-width:1320px;margin:0 auto;padding:28px 24px 72px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;gap:10px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;flex-wrap:wrap"><a href="#/shop">Shop</a><span>/</span><a href="{{ pd.catHref }}">{{ pd.catLabel }}</a><span>/</span><span style="color:#536B4E">{{ pd.sub }}</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:48px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:12px;position:sticky;top:130px">
+<div style="position:relative;aspect-ratio:1/1;width:100%;overflow:hidden;border:1px solid #E9DDC9;background:{{ pd.tone }}">
+<sc-if value="{{ pd.mainImg }}" hint-placeholder-val="{{ false }}">
+<div onMouseMove="{{ zoomMove }}" onMouseLeave="{{ zoomOut }}" style="position:absolute;inset:0;cursor:zoom-in;overflow:hidden"><img data-no-full="1" loading="lazy" src="{{ pd.mainSrc }}" alt="{{ pd.name }}" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease-out"></div>
+<span style="position:absolute;right:12px;bottom:12px;background:rgba(248,244,237,0.9);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;padding:6px 9px;pointer-events:none">Hover to zoom</span>
+</sc-if>
+<sc-if value="{{ pd.main3d }}" hint-placeholder-val="{{ false }}">
+<div ref="{{ pdpRef }}" style="position:absolute;inset:0;cursor:grab;touch-action:pan-y;user-select:none;background:radial-gradient(circle at 50% 42%, #3A3329 0%, #24221D 70%)">
+<span style="position:absolute;z-index:1;bottom:16px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#C6A15B;pointer-events:none">Drag to rotate · packaging concept</span>
+</div>
+</sc-if>
+<sc-if value="{{ pd.mainTile }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:{{ pd.ink }}"><span style="width:160px;height:160px;border:1px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:64px">{{ pd.mono }}</span><span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase">Product photography to come</span></div>
+</sc-if>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ pd.thumbs }}" as="t" hint-placeholder-count="3">
+<button onClick="{{ t.go }}" style="cursor:pointer;width:76px;height:76px;padding:0;border:1px solid {{ t.border }};background:{{ t.bg }};overflow:hidden;position:relative;font-size:11px;letter-spacing:0.16em;font-weight:600;color:#C6A15B">
+<sc-if value="{{ t.isImg }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ t.src }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+{{ t.label }}
+</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;animation:sotIn .5s ease">
+<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+<span style="font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#536B4E;font-weight:600">{{ pd.catLabel }} · {{ pd.sub }}</span>
+<span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;padding:4px 8px;border:1px dashed #493126">Demo product</span>
+</div>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,4.6vw,60px);line-height:1;color:#493126;text-wrap:balance">{{ pd.name }}</h1>
+<a href="#reviews" style="display:flex;gap:10px;align-items:center;font-size:13px"><span style="color:#C6A15B;letter-spacing:0.16em">{{ pd.stars }}</span>{{ pd.reviewTxt }}</a>
+<div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+<span style="font-family:'Cormorant Garamond',serif;font-size:38px;color:#24221D">{{ pd.priceTxt }}</span>
+<sc-if value="{{ pd.hasSale }}" hint-placeholder-val="{{ false }}"><span style="font-size:16px;text-decoration:line-through;opacity:0.7">{{ pd.wasTxt }}</span><span style="background:#C6A15B;color:#24221D;font-size:11px;letter-spacing:0.16em;font-weight:600;padding:5px 9px">{{ pd.saveTxt }}</span></sc-if>
+</div>
+<span style="font-size:13px;font-weight:600;color:{{ pd.stockColor }}">{{ pd.stockTxt }}</span>
+<p style="margin:0;font-size:15px;line-height:1.8;text-wrap:pretty">{{ pd.desc }}</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600">{{ pd.opt }} · <span style="color:#536B4E">{{ pd.vLabel }}</span></span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ pd.variants }}" as="v" hint-placeholder-count="2">
+<button onClick="{{ v.go }}" style="cursor:pointer;padding:12px 18px;font-size:13px;border:1px solid {{ v.border }};background:{{ v.bg }};color:{{ v.fg }}">{{ v.l }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:stretch">
+<div style="display:flex;border:1px solid #493126">
+<button onClick="{{ qtyDown }}" aria-label="Decrease" style="cursor:pointer;width:46px;border:0;background:transparent;font-size:18px">−</button>
+<span style="width:44px;display:flex;align-items:center;justify-content:center;font-weight:600">{{ qty }}</span>
+<button onClick="{{ qtyUp }}" aria-label="Increase" style="cursor:pointer;width:46px;border:0;background:transparent;font-size:18px">+</button>
+</div>
+<button onClick="{{ pdAdd }}" disabled="{{ pd.soldOut }}" style="flex:1;min-width:180px;cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:17px 24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#536B4E">Add to cart</button>
+<button onClick="{{ pdBuy }}" disabled="{{ pd.soldOut }}" style="flex:1;min-width:160px;cursor:pointer;background:#C6A15B;color:#24221D;border:0;padding:17px 24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#E9DDC9">Buy now</button>
+</div>
+<div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">
+<button onClick="{{ pd.wish }}" style="all:unset;cursor:pointer;color:#493126">{{ pd.wishTxt }}</button>
+<button onClick="{{ pd.compare }}" style="all:unset;cursor:pointer;color:#493126">{{ pd.compareTxt }}</button>
+<sc-if value="{{ hasCompare }}" hint-placeholder-val="{{ false }}"><a href="#/compare" style="color:#536B4E">View comparison ({{ compareCount }}) →</a></sc-if>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid #E9DDC9;padding-top:18px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Why you’ll love it</span>
+<sc-for list="{{ pd.benefits }}" as="b" hint-placeholder-count="3"><span style="font-size:14px;line-height:1.6;display:flex;gap:10px"><span style="color:#C6A15B">✦</span>{{ b.t }}</span></sc-for>
+<span style="font-size:11px;line-height:1.6;opacity:0.75">Cosmetic product. Not intended to diagnose, treat or cure any condition. Patch test before first use.</span>
+</div>
+<div style="display:flex;flex-direction:column;border-top:1px solid #493126">
+<sc-for list="{{ pd.tabs }}" as="t" hint-placeholder-count="3">
+<div style="border-bottom:1px solid #E9DDC9">
+<button onClick="{{ t.go }}" style="all:unset;cursor:pointer;width:100%;display:flex;justify-content:space-between;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:24px;color:#493126">{{ t.label }}<span style="font-family:Montserrat,sans-serif;font-size:16px">{{ t.sign }}</span></button>
+<sc-if value="{{ t.open }}" hint-placeholder-val="{{ false }}"><p style="margin:0 0 20px;font-size:14px;line-height:1.8;white-space:pre-line">{{ t.body }}</p></sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+<section id="reviews" data-screen-label="Product reviews" style="background:#E9DDC9">
+<div style="max-width:1320px;margin:0 auto;padding:72px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:44px;color:#493126">Reviews</h2>
+<span style="font-size:14px"><span style="color:#493126;letter-spacing:0.16em">{{ pd.stars }}</span> · {{ pd.reviewTxt }}</span>
+<div style="display:flex;flex-direction:column;gap:10px;background:#F8F4ED;padding:22px;border:1px solid #C6A15B">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Write a review</span>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ rvStars }}" as="s" hint-placeholder-count="5"><button onClick="{{ s.go }}" aria-label="{{ s.n }} stars" style="all:unset;cursor:pointer;font-size:24px;color:{{ s.color }}">★</button></sc-for>
+</div>
+<input value="{{ rv.name }}" onChange="{{ rvSet.name }}" placeholder="Your name" style="padding:12px;border:1px solid #E9DDC9;background:#FFFDF9">
+<textarea value="{{ rv.text }}" onChange="{{ rvSet.text }}" rows="3" placeholder="How did it feel? What did you notice?" style="padding:12px;border:1px solid #E9DDC9;background:#FFFDF9;resize:vertical"></textarea>
+<button onClick="{{ submitReview }}" style="cursor:pointer;align-self:flex-start;background:#493126;color:#F8F4ED;border:0;padding:13px 22px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Submit review</button>
+<sc-if value="{{ rvMsgOn }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#536B4E">{{ rvMsg }}</span></sc-if>
+</div>
+</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ pd.reviews }}" as="r" hint-placeholder-count="2">
+<div style="padding:20px 0;border-bottom:1px solid #C6A15B;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><span style="color:#493126;letter-spacing:0.16em">{{ r.stars }}</span><span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase">{{ r.meta }}</span></div>
+<span style="font-size:15px;line-height:1.7">{{ r.text }}</span>
+<span style="font-size:12px;font-weight:600;color:#536B4E">{{ r.name }}</span>
+</div>
+</sc-for>
+<sc-if value="{{ pd.noReviews }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;padding:20px 0">No reviews yet. Be the first.</span></sc-if>
+</div>
+</div>
+</section>
+<section style="max-width:1320px;margin:0 auto;padding:80px 24px;display:flex;flex-direction:column;gap:28px">
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:44px;color:#493126">You may also like</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:18px">
+<sc-for list="{{ related }}" as="p" hint-placeholder-count="4"><dc-import name="ProductCard" p="{{ p }}" hint-size="100%,520px"></dc-import></sc-for>
+</div>
+<sc-if value="{{ hasRecent }}" hint-placeholder-val="{{ false }}">
+<h2 style="margin:32px 0 0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:36px;color:#493126">Recently viewed</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:18px">
+<sc-for list="{{ recentList }}" as="p" hint-placeholder-count="0"><dc-import name="ProductCard" p="{{ p }}" hint-size="100%,480px"></dc-import></sc-for>
+</div>
+</sc-if>
+</section>
+<sc-if value="{{ mobileBar }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:40;background:#F8F4ED;border-top:1px solid #C6A15B;padding:10px 12px;display:flex;gap:10px;align-items:center;box-shadow:0 -10px 30px -20px rgba(36,34,29,0.5)">
+<span style="display:flex;flex-direction:column;flex:1;min-width:0"><span style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ pd.name }}</span><span style="font-weight:600">{{ pd.priceTxt }}</span></span>
+<button onClick="{{ pdAdd }}" disabled="{{ pd.soldOut }}" style="cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:15px 18px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;min-height:48px">Add to cart</button>
+</div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ isCompare }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Compare" style="max-width:1320px;margin:0 auto;padding:64px 24px 96px;display:flex;flex-direction:column;gap:28px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:56px;color:#493126">Compare products</h1>
+<sc-if value="{{ compareEmpty }}" hint-placeholder-val="{{ false }}"><span style="font-size:15px">Add up to three products from their product pages to compare them side by side.</span></sc-if>
+<div style="overflow-x:auto">
+<div style="display:grid;grid-template-columns:repeat(3,minmax(240px,1fr));gap:18px;min-width:760px">
+<sc-for list="{{ compareList }}" as="c" hint-placeholder-count="0">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:22px;display:flex;flex-direction:column;gap:12px">
+<a href="{{ c.href }}" style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126;line-height:1.1">{{ c.name }}</a>
+<sc-for list="{{ c.rows }}" as="r" hint-placeholder-count="5"><div style="display:flex;flex-direction:column;gap:3px;border-top:1px solid #E9DDC9;padding-top:10px"><span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#536B4E;font-weight:600">{{ r.k }}</span><span style="font-size:13px;line-height:1.6">{{ r.v }}</span></div></sc-for>
+<div style="display:flex;gap:8px;margin-top:auto"><button onClick="{{ c.add }}" disabled="{{ c.soldOut }}" style="flex:1;cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:12px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Add to cart</button><button onClick="{{ c.remove }}" style="cursor:pointer;background:transparent;border:1px solid #E9DDC9;padding:12px;font-size:11px">Remove</button></div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isCheckout }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Checkout" style="max-width:1200px;margin:0 auto;padding:56px 24px 96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:48px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Secure checkout</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:52px;color:#493126;line-height:1">Your details</h1><span style="font-size:13px">{{ checkoutWho }}</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px">
+<sc-for list="{{ coFields }}" as="f" hint-placeholder-count="8">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;grid-column:{{ f.span }}">{{ f.label }}
+<input value="{{ f.value }}" onChange="{{ f.set }}" type="{{ f.type }}" placeholder="{{ f.ph }}" style="padding:14px 12px;border:1px solid {{ f.border }};background:#FFFDF9;text-transform:none;letter-spacing:0;font-weight:400">
+</label>
+</sc-for>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Region
+<select value="{{ co.region }}" onChange="{{ coRegion }}" style="padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;text-transform:none;letter-spacing:0">
+<sc-for list="{{ regions }}" as="r" hint-placeholder-count="16"><option value="{{ r }}">{{ r }}</option></sc-for>
+</select></label>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Delivery</span>
+<sc-for list="{{ zones }}" as="z" hint-placeholder-count="4">
+<button onClick="{{ z.go }}" style="all:unset;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:16px 18px;border:1px solid {{ z.border }};background:{{ z.bg }}">
+<span style="display:flex;flex-direction:column;gap:4px"><span style="font-weight:600;font-size:14px">{{ z.label }}</span><span style="font-size:12px">{{ z.note }}</span></span>
+<span style="font-weight:600;font-size:14px">{{ z.fee }}</span>
+</button>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Payment</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px">
+<sc-for list="{{ payMethods }}" as="m" hint-placeholder-count="4">
+<button onClick="{{ m.go }}" style="all:unset;cursor:pointer;padding:16px;border:1px solid {{ m.border }};background:{{ m.bg }};display:flex;flex-direction:column;gap:4px;min-height:44px"><span style="font-weight:600;font-size:14px">{{ m.label }}</span><span style="font-size:11px">{{ m.note }}</span></button>
+</sc-for>
+</div>
+<sc-if value="{{ isMomo }}" hint-placeholder-val="{{ true }}">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Mobile money number
+<input value="{{ momo }}" onChange="{{ setMomo }}" type="tel" placeholder="024 000 0000" style="padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9;text-transform:none;letter-spacing:0;font-weight:400"></label>
+<span style="font-size:12px;line-height:1.6">You’ll receive a prompt on your phone to approve the payment. Your order is confirmed only after the payment provider verifies it.</span>
+</sc-if>
+<sc-if value="{{ isCard }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;line-height:1.6">You’ll enter card details on the payment provider’s secure page (Paystack). We never see or store your card number.</span></sc-if>
+</div>
+<sc-if value="{{ coErrOn }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#8B3A2B;font-weight:600">{{ coErr }}</span></sc-if>
+</div>
+<aside style="background:#FFFDF9;border:1px solid #E9DDC9;padding:28px;display:flex;flex-direction:column;gap:16px;position:sticky;top:130px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">Order summary</span>
+<sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:13px"><span>{{ l.name }} <span style="opacity:0.7">· {{ l.v }} × {{ l.qty }}</span></span><span style="font-weight:600;white-space:nowrap">{{ l.lineTxt }}</span></div>
+</sc-for>
+<div style="border-top:1px solid #E9DDC9;padding-top:14px;display:flex;flex-direction:column;gap:8px;font-size:14px">
+<div style="display:flex;justify-content:space-between"><span>Subtotal</span><span>{{ t.subTxt }}</span></div>
+<sc-if value="{{ t.hasDisc }}" hint-placeholder-val="{{ false }}"><div style="display:flex;justify-content:space-between;color:#536B4E"><span>Discount · {{ t.code }}</span><span>−{{ t.discTxt }}</span></div></sc-if>
+<div style="display:flex;justify-content:space-between"><span>Delivery · {{ t.zoneLabel }}</span><span>{{ t.shipTxt }}</span></div>
+<div style="display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-size:28px;color:#493126;border-top:1px solid #493126;padding-top:10px;margin-top:4px"><span>Total</span><span>{{ t.totalTxt }}</span></div>
+</div>
+<button onClick="{{ placeOrder }}" disabled="{{ cartEmpty }}" style="cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:18px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#536B4E">{{ payLabel }}</button>
+<span style="font-size:11px;line-height:1.6;opacity:0.8">Demo checkout — no money moves. In production, payment is verified server-side with the provider before an order is marked paid.</span>
+</aside>
+</section>
+</sc-if>
+
+<sc-if value="{{ isOrder }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Order confirmation" style="max-width:1040px;margin:0 auto;padding:64px 24px 96px;display:flex;flex-direction:column;gap:32px">
+<sc-if value="{{ orderMissing }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#493126">We couldn’t find that order.</span></sc-if>
+<sc-if value="{{ orderFound }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px;animation:sotIn .6s ease">
+<span style="font-family:Allura,cursive;font-size:44px;color:#C6A15B;line-height:1">{{ od.greeting }}</span>
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,60px);color:#493126;line-height:1">Order {{ od.id }}</h1>
+<span style="font-size:14px">Placed {{ od.date }} · {{ od.method }}</span>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<span style="padding:8px 14px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;background:{{ od.payBg }};color:{{ od.payFg }}">Payment: {{ od.payment }}</span>
+<span style="padding:8px 14px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;background:#E9DDC9;color:#493126">Status: {{ od.status }}</span>
+</div>
+<sc-if value="{{ od.awaiting }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #C6A15B;background:#FFFDF9;padding:24px;display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Waiting for payment confirmation</span>
+<span style="font-size:14px;line-height:1.7">Approve the prompt on your phone or complete the card page. We’ll confirm your order once the payment provider verifies it, not before.</span>
+<button onClick="{{ od.simulate }}" style="cursor:pointer;align-self:flex-start;background:#536B4E;color:#F8F4ED;border:0;padding:13px 20px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Demo: simulate provider verification</button>
+</div>
+</sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:4px">
+<sc-for list="{{ od.timeline }}" as="s" hint-placeholder-count="6">
+<div style="display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:3px solid {{ s.color }}"><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:{{ s.text }}">{{ s.label }}</span><span style="font-size:11px;opacity:0.75">{{ s.at }}</span></div>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Items</span>
+<sc-for list="{{ od.items }}" as="i" hint-placeholder-count="2"><div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span>{{ i.name }} <span style="opacity:0.7">· {{ i.variant }} × {{ i.qty }}</span></span><span>{{ i.lineTxt }}</span></div></sc-for>
+<div style="border-top:1px solid #E9DDC9;padding-top:10px;display:flex;flex-direction:column;gap:6px;font-size:13px">
+<div style="display:flex;justify-content:space-between"><span>Subtotal</span><span>{{ od.subTxt }}</span></div>
+<div style="display:flex;justify-content:space-between"><span>Discount</span><span>−{{ od.discTxt }}</span></div>
+<div style="display:flex;justify-content:space-between"><span>Delivery</span><span>{{ od.shipTxt }}</span></div>
+<div style="display:flex;justify-content:space-between;font-weight:600;font-size:16px"><span>Total</span><span>{{ od.totalTxt }}</span></div>
+</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.6">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Delivery</span>
+<span>{{ od.name }} · {{ od.phone }}</span>
+<span>{{ od.address }}</span>
+<span>{{ od.zone }}</span>
+<span style="font-size:12px;opacity:0.8">Delivery timing is confirmed by our team when your order is dispatched.</span>
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-top:10px">Notifications</span>
+<span style="font-size:13px">Email updates to {{ od.email }} · WhatsApp updates to {{ od.phone }} (where enabled)</span>
+</div>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><a href="#/shop" style="background:#493126;color:#F8F4ED;padding:15px 26px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Continue shopping</a><a href="https://wa.me/233597182026" target="_blank" rel="noopener" style="border:1px solid #493126;padding:14px 24px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Questions? WhatsApp us</a></div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isTrack }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Track order" style="max-width:640px;margin:0 auto;padding:96px 24px;display:flex;flex-direction:column;gap:18px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,8vw,56px);color:#493126">Track your order</h1>
+<span style="font-size:14px">Enter the order number from your confirmation email, e.g. SOT-261102-AB12.</span>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><input value="{{ track }}" onChange="{{ setTrack }}" placeholder="Order number" style="flex:1;min-width:220px;padding:15px 12px;border:1px solid #493126;background:#FFFDF9;text-transform:uppercase"><button onClick="{{ goTrack }}" style="cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:15px 24px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Track</button></div>
+<sc-if value="{{ trackErrOn }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#8B3A2B">{{ trackErr }}</span></sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isAccount }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Account" style="max-width:1200px;margin:0 auto;padding:56px 24px 96px;display:flex;flex-direction:column;gap:28px">
+<sc-if value="{{ loggedOut }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:16px">
+<h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:56px;color:#493126;line-height:1">{{ authTitle }}</h1>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ authTabs }}" as="a" hint-placeholder-count="3"><button onClick="{{ a.go }}" style="cursor:pointer;padding:10px 14px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #493126;background:{{ a.bg }};color:{{ a.fg }}">{{ a.label }}</button></sc-for>
+</div>
+<sc-if value="{{ authIsRegister }}" hint-placeholder-val="{{ false }}"><input value="{{ af.name }}" onChange="{{ afSet.name }}" placeholder="Full name" style="padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9"></sc-if>
+<input value="{{ af.email }}" onChange="{{ afSet.email }}" type="email" placeholder="Email" style="padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9">
+<sc-if value="{{ authNeedsPass }}" hint-placeholder-val="{{ true }}"><input value="{{ af.pass }}" onChange="{{ afSet.pass }}" type="password" placeholder="Password" style="padding:14px 12px;border:1px solid #E9DDC9;background:#FFFDF9"></sc-if>
+<button onClick="{{ authSubmit }}" style="cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:16px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">{{ authCta }}</button>
+<sc-if value="{{ authMsgOn }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#536B4E;font-weight:600">{{ authMsg }}</span></sc-if>
+<span style="font-size:11px;opacity:0.75">Members use one account across the spa site and the shop. Accounts are saved in this browser for the prototype; production uses Supabase Auth.</span>
+</div>
+<div style="background:#E9DDC9;padding:32px;display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">No account needed</span>
+<span style="font-size:14px;line-height:1.7">Guest checkout is always available. You can track any order with its order number.</span>
+<a href="#/track" style="align-self:flex-start;border:1px solid #493126;padding:13px 22px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Track an order</a>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ loggedIn }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:Allura,cursive;font-size:40px;color:#C6A15B;line-height:1">Welcome back</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:52px;color:#493126;line-height:1">{{ me.name }}</h1></div>
+<button onClick="{{ logout }}" style="all:unset;cursor:pointer;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-bottom:1px solid #493126">Log out</button>
+</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid #E9DDC9;padding-bottom:14px">
+<sc-for list="{{ acctTabs }}" as="a" hint-placeholder-count="5"><button onClick="{{ a.go }}" style="cursor:pointer;padding:11px 16px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #493126;background:{{ a.bg }};color:{{ a.fg }}">{{ a.label }}</button></sc-for>
+</div>
+<sc-if value="{{ tabOrders }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ myOrders }}" as="o" hint-placeholder-count="0">
+<a href="{{ o.href }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;padding:18px 0;border-bottom:1px solid #E9DDC9;font-size:14px;color:#24221D"><span style="font-weight:600;color:#493126">{{ o.id }}</span><span>{{ o.date }}</span><span>{{ o.status }}</span><span style="text-align:right">{{ o.total }}</span></a>
+</sc-for>
+<sc-if value="{{ noOrders }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;padding:20px 0">No orders yet. <a href="#/shop" style="border-bottom:1px solid #493126">Start shopping</a></span></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{ tabWish }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:18px">
+<sc-for list="{{ wishList }}" as="p" hint-placeholder-count="0"><dc-import name="ProductCard" p="{{ p }}" hint-size="100%,520px"></dc-import></sc-for>
+</div>
+<sc-if value="{{ wishEmpty }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px">Tap ♡ on any product to save it here.</span></sc-if>
+</sc-if>
+<sc-if value="{{ tabAddr }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px">
+<sc-for list="{{ myAddresses }}" as="a" hint-placeholder-count="0"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:20px;display:flex;flex-direction:column;gap:6px;font-size:14px"><span style="font-weight:600">{{ a.label }}</span><span>{{ a.line }}</span><button onClick="{{ a.remove }}" style="all:unset;cursor:pointer;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;margin-top:6px;color:#8B3A2B">Remove</button></div></sc-for>
+<div style="background:#E9DDC9;padding:20px;display:flex;flex-direction:column;gap:8px">
+<span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600">Add address</span>
+<input value="{{ na.label }}" onChange="{{ naSet.label }}" placeholder="Label (Home, Work)" style="padding:12px;border:1px solid #C6A15B;background:#FFFDF9">
+<input value="{{ na.line }}" onChange="{{ naSet.line }}" placeholder="Address, city, region, GhanaPost GPS" style="padding:12px;border:1px solid #C6A15B;background:#FFFDF9">
+<button onClick="{{ addAddress }}" style="cursor:pointer;align-self:flex-start;background:#493126;color:#F8F4ED;border:0;padding:12px 18px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Save address</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ tabProfile }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px;max-width:860px">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Name<input value="{{ me.name }}" onChange="{{ meSet.name }}" style="padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;text-transform:none;letter-spacing:0;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Phone<input value="{{ me.phone }}" onChange="{{ meSet.phone }}" style="padding:13px 12px;border:1px solid #E9DDC9;background:#FFFDF9;text-transform:none;letter-spacing:0;font-weight:400"></label>
+<label style="display:flex;gap:10px;align-items:center;font-size:14px;cursor:pointer;grid-column:1/-1"><input type="checkbox" checked="{{ me.newsletter }}" onChange="{{ toggleMyNl }}" style="accent-color:#536B4E;width:18px;height:18px"> Email me new arrivals and offers</label>
+<div style="grid-column:1/-1;background:#FFFDF9;border:1px solid #E9DDC9;padding:22px;display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#536B4E">Need help with an order?</span>
+<textarea value="{{ supportText }}" onChange="{{ setSupport }}" rows="3" placeholder="Tell us what’s happening and include your order number" style="padding:12px;border:1px solid #E9DDC9;background:#F8F4ED;resize:vertical"></textarea>
+<button onClick="{{ sendSupport }}" style="cursor:pointer;align-self:flex-start;background:#493126;color:#F8F4ED;border:0;padding:12px 18px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Send request</button>
+<sc-if value="{{ supportSent }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#536B4E">Sent. We’ll reply by email or WhatsApp.</span></sc-if>
+</div>
+</div>
+</sc-if>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Admin" style="max-width:1400px;margin:0 auto;padding:40px 24px 96px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#536B4E;font-weight:600">Store admin · demo</span><h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:52px;color:#493126;line-height:1">Dashboard</h1></div>
+
+</div>
+<span style="font-size:12px;line-height:1.6;background:#E9DDC9;padding:12px 14px">Demo admin — data lives in this browser. Production access requires an admin role checked by Supabase Row Level Security.</span>
+<div style="display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid #E9DDC9;padding-bottom:14px">
+<sc-for list="{{ adminTabs }}" as="a" hint-placeholder-count="6"><button onClick="{{ a.go }}" style="cursor:pointer;padding:11px 16px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;border:1px solid #493126;background:{{ a.bg }};color:{{ a.fg }}">{{ a.label }}</button></sc-for>
+</div>
+
+<sc-if value="{{ atOverview }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+<sc-for list="{{ kpis }}" as="k" hint-placeholder-count="5"><div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:22px;display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">{{ k.label }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#493126">{{ k.value }}</span></div></sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:18px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Monthly sales report</span>
+<div style="display:flex;align-items:flex-end;gap:10px;height:180px;border-bottom:1px solid #493126">
+<sc-for list="{{ months }}" as="m" hint-placeholder-count="6"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;justify-content:flex-end;height:100%"><span style="font-size:10px">{{ m.short }}</span><div style="width:100%;background:#536B4E;height:{{ m.h }}"></div></div></sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:11px">
+<sc-for list="{{ months }}" as="m" hint-placeholder-count="6"><span style="flex:1;text-align:center">{{ m.label }}</span></sc-for>
+</div>
+<div style="display:flex;flex-direction:column;font-size:12px">
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:6px 0;font-weight:600;border-bottom:1px solid #E9DDC9"><span>Month</span><span>Orders</span><span>Revenue</span><span>New customers</span></div>
+<sc-for list="{{ months }}" as="m" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:6px 0;border-bottom:1px solid #E9DDC9"><span>{{ m.label }}</span><span>{{ m.orders }}</span><span>{{ m.revTxt }}</span><span>{{ m.newC }}</span></div></sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:8px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Bestselling products</span>
+<sc-for list="{{ bestAdmin }}" as="b" hint-placeholder-count="5"><div style="display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;border-bottom:1px solid #E9DDC9"><span>{{ b.name }}</span><span style="font-weight:600">{{ b.sold }} sold</span></div></sc-for>
+</div>
+<div style="background:#FFFDF9;border:1px solid #C6A15B;padding:24px;display:flex;flex-direction:column;gap:8px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#8B3A2B">Low stock</span>
+<sc-for list="{{ lowStock }}" as="b" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;border-bottom:1px solid #E9DDC9"><span>{{ b.name }}</span><span style="font-weight:600">{{ b.stock }} left</span></div></sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ atProducts }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><span style="font-size:13px">{{ adminProdCount }}</span><button onClick="{{ newProduct }}" style="cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:12px 18px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">+ Add product</button></div>
+<sc-if value="{{ editing }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFDF9;border:1px solid #C6A15B;padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
+<span style="grid-column:1/-1;font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">{{ editTitle }}</span>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;grid-column:1/-1">Product name<input value="{{ ed.name }}" onChange="{{ edSet.name }}" style="padding:12px;border:1px solid #E9DDC9;text-transform:none;letter-spacing:0;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Category<select value="{{ ed.cat }}" onChange="{{ edSet.cat }}" style="padding:12px;border:1px solid #E9DDC9;text-transform:none;letter-spacing:0"><sc-for list="{{ catOptions }}" as="c" hint-placeholder-count="6"><option value="{{ c.k }}">{{ c.label }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Sub-category<select value="{{ ed.sub }}" onChange="{{ edSet.sub }}" style="padding:12px;border:1px solid #E9DDC9;text-transform:none;letter-spacing:0"><sc-for list="{{ subOptions }}" as="s" hint-placeholder-count="6"><option value="{{ s }}">{{ s }}</option></sc-for></select></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Option name<input value="{{ ed.opt }}" onChange="{{ edSet.opt }}" placeholder="Size, Shade, Colour" style="padding:12px;border:1px solid #E9DDC9;text-transform:none;letter-spacing:0;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;grid-column:span 2">Variants &amp; prices (GHS)<input value="{{ ed.variantsText }}" onChange="{{ edSet.variantsText }}" placeholder="50 ml:180, 100 ml:290:260 (label:price:sale)" style="padding:12px;border:1px solid #E9DDC9;text-transform:none;letter-spacing:0;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Inventory<input type="number" value="{{ ed.stock }}" onChange="{{ edSet.stock }}" style="padding:12px;border:1px solid #E9DDC9;letter-spacing:0;font-weight:400"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;grid-column:1/-1">Description<textarea value="{{ ed.desc }}" onChange="{{ edSet.desc }}" rows="2" style="padding:12px;border:1px solid #E9DDC9;text-transform:none;letter-spacing:0;font-weight:400"></textarea></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;grid-column:1/-1">Ingredients (full INCI list)<textarea value="{{ ed.ingredients }}" onChange="{{ edSet.ingredients }}" rows="2" style="padding:12px;border:1px solid #E9DDC9;text-transform:none;letter-spacing:0;font-weight:400"></textarea></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Benefits (one per line, evidence-backed)<textarea value="{{ ed.benefitsText }}" onChange="{{ edSet.benefitsText }}" rows="3" style="padding:12px;border:1px solid #E9DDC9;text-transform:none;letter-spacing:0;font-weight:400"></textarea></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;grid-column:span 2">Directions for use<textarea value="{{ ed.directions }}" onChange="{{ edSet.directions }}" rows="3" style="padding:12px;border:1px solid #E9DDC9;text-transform:none;letter-spacing:0;font-weight:400"></textarea></label>
+<div style="grid-column:1/-1;display:flex;gap:20px;flex-wrap:wrap;font-size:14px">
+<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked="{{ ed.featured }}" onChange="{{ edSet.featured }}" style="accent-color:#536B4E;width:18px;height:18px"> Featured</label>
+<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked="{{ ed.best }}" onChange="{{ edSet.best }}" style="accent-color:#536B4E;width:18px;height:18px"> Bestseller</label>
+<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked="{{ ed.isNew }}" onChange="{{ edSet.isNew }}" style="accent-color:#536B4E;width:18px;height:18px"> New arrival</label>
+<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked="{{ ed.gift }}" onChange="{{ edSet.gift }}" style="accent-color:#536B4E;width:18px;height:18px"> Gift set</label>
+<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked="{{ ed.approved }}" onChange="{{ edSet.approved }}" style="accent-color:#536B4E;width:18px;height:18px"> Approved &amp; visible in store</label>
+</div>
+<div style="grid-column:1/-1;display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Product images</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ edImages }}" as="im" hint-placeholder-count="0"><div style="position:relative;width:88px;height:88px;border:1px solid #E9DDC9"><img loading="lazy" src="{{ im.src }}" alt="" style="width:100%;height:100%;object-fit:cover"><button onClick="{{ im.remove }}" style="position:absolute;top:2px;right:2px;cursor:pointer;border:0;background:#24221D;color:#F8F4ED;width:22px;height:22px;font-size:12px">×</button></div></sc-for>
+<label style="width:88px;height:88px;border:1px dashed #493126;display:flex;align-items:center;justify-content:center;font-size:11px;text-align:center;cursor:pointer">Upload<input type="file" accept="image/*" multiple="{{ true }}" onChange="{{ uploadImages }}" style="display:none"></label>
+</div>
+</div>
+<sc-if value="{{ edErrOn }}" hint-placeholder-val="{{ false }}"><span style="grid-column:1/-1;font-size:13px;color:#8B3A2B;font-weight:600">{{ edErr }}</span></sc-if>
+<div style="grid-column:1/-1;display:flex;gap:10px"><button onClick="{{ saveProduct }}" style="cursor:pointer;background:#536B4E;color:#F8F4ED;border:0;padding:13px 22px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Save product</button><button onClick="{{ cancelEdit }}" style="cursor:pointer;background:transparent;border:1px solid #493126;padding:13px 22px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Cancel</button></div>
+</div>
+</sc-if>
+<div style="overflow-x:auto;background:#FFFDF9;border:1px solid #E9DDC9">
+<div style="min-width:900px;display:flex;flex-direction:column;font-size:13px">
+<div style="display:grid;grid-template-columns:2.4fr 1.2fr 1fr .8fr 1fr 1.8fr;gap:10px;padding:12px 16px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #493126"><span>Product</span><span>Category</span><span>Price</span><span>Stock</span><span>Status</span><span>Actions</span></div>
+<sc-for list="{{ adminProducts }}" as="p" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:2.4fr 1.2fr 1fr .8fr 1fr 1.8fr;gap:10px;padding:12px 16px;border-bottom:1px solid #E9DDC9;align-items:center;opacity:{{ p.op }}">
+<span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;color:#493126">{{ p.name }}</span><span style="font-size:11px">{{ p.flags }}</span></span><span>{{ p.cat }}</span><span>{{ p.price }}</span><span style="color:{{ p.stockColor }};font-weight:600">{{ p.stock }}</span><span>{{ p.status }}</span>
+<span style="display:flex;gap:6px;flex-wrap:wrap">
+<button onClick="{{ p.edit }}" style="cursor:pointer;border:1px solid #493126;background:transparent;padding:6px 9px;font-size:11px">Edit</button>
+<button onClick="{{ p.feature }}" style="cursor:pointer;border:1px solid #C6A15B;background:transparent;padding:6px 9px;font-size:11px">{{ p.featureTxt }}</button>
+<button onClick="{{ p.archive }}" style="cursor:pointer;border:1px solid #E9DDC9;background:transparent;padding:6px 9px;font-size:11px">{{ p.archiveTxt }}</button>
+<button onClick="{{ p.del }}" style="cursor:pointer;border:1px solid #8B3A2B;color:#8B3A2B;background:transparent;padding:6px 9px;font-size:11px">Delete</button>
+</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ atOrders }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ orderFilters }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.go }}" style="cursor:pointer;padding:8px 12px;font-size:11px;border:1px solid #C6A15B;background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</button></sc-for></div>
+<button onClick="{{ exportOrders }}" style="cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:12px 18px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Export CSV</button>
+</div>
+<div style="overflow-x:auto;background:#FFFDF9;border:1px solid #E9DDC9">
+<div style="min-width:980px;display:flex;flex-direction:column;font-size:13px">
+<div style="display:grid;grid-template-columns:1.3fr 1fr 1.4fr 1fr 1fr 1.4fr 1.8fr;gap:10px;padding:12px 16px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #493126"><span>Order</span><span>Date</span><span>Customer</span><span>Total</span><span>Payment</span><span>Status</span><span>Actions</span></div>
+<sc-for list="{{ adminOrders }}" as="o" hint-placeholder-count="5">
+<div style="display:grid;grid-template-columns:1.3fr 1fr 1.4fr 1fr 1fr 1.4fr 1.8fr;gap:10px;padding:12px 16px;border-bottom:1px solid #E9DDC9;align-items:center">
+<button onClick="{{ o.view }}" style="all:unset;cursor:pointer;font-weight:600;color:#493126;text-decoration:underline">{{ o.id }}</button><span>{{ o.date }}</span><span>{{ o.customer }}</span><span>{{ o.total }}</span><span style="color:{{ o.payColor }};font-weight:600">{{ o.payment }}</span>
+<select value="{{ o.status }}" onChange="{{ o.setStatus }}" style="padding:7px;border:1px solid #E9DDC9;font-size:12px"><sc-for list="{{ statuses }}" as="s" hint-placeholder-count="8"><option value="{{ s }}">{{ s }}</option></sc-for></select>
+<span style="display:flex;gap:6px;flex-wrap:wrap">
+<sc-if value="{{ o.canVerify }}" hint-placeholder-val="{{ false }}"><button onClick="{{ o.verify }}" style="cursor:pointer;border:1px solid #536B4E;color:#536B4E;background:transparent;padding:6px 9px;font-size:11px">Verify payment</button></sc-if>
+<button onClick="{{ o.invoice }}" style="cursor:pointer;border:1px solid #493126;background:transparent;padding:6px 9px;font-size:11px">Invoice</button>
+<sc-if value="{{ o.canRefund }}" hint-placeholder-val="{{ false }}"><button onClick="{{ o.refund }}" style="cursor:pointer;border:1px solid #8B3A2B;color:#8B3A2B;background:transparent;padding:6px 9px;font-size:11px">Refund</button></sc-if>
+</span>
+</div>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{ hasSelOrder }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFDF9;border:1px solid #C6A15B;padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px;font-size:14px;line-height:1.6">
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#536B4E">Customer</span><span>{{ so.name }}</span><span>{{ so.email }}</span><span>{{ so.phone }}</span><span>{{ so.address }}</span><span style="font-size:12px">{{ so.notes }}</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#536B4E">Items</span><sc-for list="{{ so.items }}" as="i" hint-placeholder-count="2"><span>{{ i.name }} · {{ i.variant }} × {{ i.qty }}</span></sc-for></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#536B4E">History</span><sc-for list="{{ so.history }}" as="h" hint-placeholder-count="2"><span style="font-size:12px">{{ h.at }} · {{ h.s }}</span></sc-for></div>
+</div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ atCustomers }}" hint-placeholder-val="{{ false }}">
+<div style="overflow-x:auto;background:#FFFDF9;border:1px solid #E9DDC9">
+<div style="min-width:760px;display:flex;flex-direction:column;font-size:13px">
+<div style="display:grid;grid-template-columns:1.4fr 1.8fr 1.2fr .8fr 1fr 1fr;gap:10px;padding:12px 16px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#536B4E;border-bottom:1px solid #493126"><span>Name</span><span>Email</span><span>Phone</span><span>Orders</span><span>Spent</span><span>Type</span></div>
+<sc-for list="{{ adminCustomers }}" as="c" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:1.4fr 1.8fr 1.2fr .8fr 1fr 1fr;gap:10px;padding:12px 16px;border-bottom:1px solid #E9DDC9"><span style="font-weight:600">{{ c.name }}</span><span>{{ c.email }}</span><span>{{ c.phone }}</span><span>{{ c.orders }}</span><span>{{ c.spent }}</span><span>{{ c.type }}</span></div></sc-for>
+</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:10px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Support requests</span>
+<sc-for list="{{ supportList }}" as="s" hint-placeholder-count="0"><div style="display:flex;flex-direction:column;gap:4px;padding:10px 0;border-bottom:1px solid #E9DDC9;font-size:13px"><span style="font-weight:600">{{ s.who }} · {{ s.at }}</span><span>{{ s.text }}</span></div></sc-for>
+<sc-if value="{{ noSupport }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px">No open requests.</span></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ atMarketing }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:18px">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:12px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Promotional banner</span>
+<input value="{{ banner }}" onChange="{{ setBanner }}" style="padding:12px;border:1px solid #E9DDC9">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-top:12px">Discount codes</span>
+<sc-for list="{{ couponRows }}" as="c" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #E9DDC9;font-size:13px;opacity:{{ c.op }}"><span><span style="font-weight:600;letter-spacing:0.08em">{{ c.code }}</span> · {{ c.desc }}</span><span style="display:flex;gap:6px"><button onClick="{{ c.toggle }}" style="cursor:pointer;border:1px solid #493126;background:transparent;padding:5px 8px;font-size:11px">{{ c.toggleTxt }}</button><button onClick="{{ c.del }}" style="cursor:pointer;border:1px solid #8B3A2B;color:#8B3A2B;background:transparent;padding:5px 8px;font-size:11px">Delete</button></span></div></sc-for>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<input value="{{ nc.code }}" onChange="{{ ncSet.code }}" placeholder="CODE" style="flex:1;min-width:100px;padding:10px;border:1px solid #E9DDC9;text-transform:uppercase">
+<select value="{{ nc.type }}" onChange="{{ ncSet.type }}" style="padding:10px;border:1px solid #E9DDC9"><option value="pct">% off</option><option value="fixed">GHS off</option><option value="ship">Free delivery</option></select>
+<input value="{{ nc.value }}" onChange="{{ ncSet.value }}" placeholder="Value" type="number" style="width:90px;padding:10px;border:1px solid #E9DDC9">
+<input value="{{ nc.min }}" onChange="{{ ncSet.min }}" placeholder="Min spend" type="number" style="width:110px;padding:10px;border:1px solid #E9DDC9">
+<button onClick="{{ addCoupon }}" style="cursor:pointer;background:#493126;color:#F8F4ED;border:0;padding:10px 14px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Add</button>
+</div>
+</div>
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Newsletter subscribers · {{ subCount }}</span><button onClick="{{ exportSubs }}" style="cursor:pointer;border:1px solid #493126;background:transparent;padding:6px 10px;font-size:11px">Export</button></div>
+<sc-for list="{{ subscribers }}" as="s" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid #E9DDC9"><span>{{ s.email }}</span><span style="opacity:0.7">{{ s.at }}</span></div></sc-for>
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E;margin-top:12px">Featured on homepage</span>
+<span style="font-size:13px;line-height:1.6">{{ featuredNames }}</span>
+<span style="font-size:12px;opacity:0.8">Toggle “Feature” in the Products tab.</span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ atDelivery }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFDF9;border:1px solid #E9DDC9;padding:24px;display:flex;flex-direction:column;gap:14px;max-width:860px">
+<span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#536B4E">Delivery zones · fees are demo placeholders until confirmed</span>
+<sc-for list="{{ zoneSettings }}" as="z" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #E9DDC9">
+<span style="font-weight:600">{{ z.label }}</span>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px">Fee (GHS)<input type="number" value="{{ z.fee }}" onChange="{{ z.setFee }}" style="padding:10px;border:1px solid #E9DDC9"></label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:11px">Time estimate (leave blank until confirmed)<input value="{{ z.est }}" onChange="{{ z.setEst }}" placeholder="e.g. 1–2 working days" style="padding:10px;border:1px solid #E9DDC9"></label>
+</div>
+</sc-for>
+<label style="display:flex;gap:10px;align-items:center;font-size:14px"><input type="checkbox" checked="{{ pickupOn }}" onChange="{{ togglePickup }}" style="accent-color:#536B4E;width:18px;height:18px"> Offer pickup at the spa (Tema Community 25)</label>
+</div>
+</sc-if>
+</section>
+</sc-if>
+</main>
+
+<sc-if value="{{ showFooter }}" hint-placeholder-val="{{ true }}"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></sc-if>
+
+<div onClick="{{ closeCart }}" style="position:fixed;inset:0;z-index:70;background:rgba(36,34,29,0.5);opacity:{{ overlayOp }};pointer-events:{{ overlayPe }};transition:opacity .35s"></div>
+<aside aria-label="Cart" style="position:fixed;top:0;right:0;bottom:0;z-index:71;width:min(440px,100vw);background:#F8F4ED;border-left:1px solid #C6A15B;display:flex;flex-direction:column;transform:{{ drawerX }};transition:transform .45s cubic-bezier(.2,.8,.2,1);box-shadow:-30px 0 60px -40px rgba(36,34,29,0.6)">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid #E9DDC9"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#493126">Your cart</span><button onClick="{{ closeCart }}" style="all:unset;cursor:pointer;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:10px">Close</button></div>
+<div style="flex:1;overflow-y:auto;padding:8px 24px;display:flex;flex-direction:column">
+<sc-for list="{{ lines }}" as="l" hint-placeholder-count="0">
+<div style="display:grid;grid-template-columns:72px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid #E9DDC9">
+<div style="width:72px;height:88px;background:{{ l.tone }};position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:{{ l.ink }};font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px">{{ l.mono }}<sc-if value="{{ l.hasImg }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ l.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></div>
+<div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+<a href="{{ l.href }}" onClick="{{ closeCart }}" style="font-family:'Cormorant Garamond',serif;font-size:20px;line-height:1.15">{{ l.name }}</a>
+<span style="font-size:12px">{{ l.v }} · {{ l.unitTxt }}</span>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+<div style="display:flex;border:1px solid #E9DDC9"><button onClick="{{ l.dec }}" aria-label="Decrease" style="cursor:pointer;width:34px;height:34px;border:0;background:transparent">−</button><span style="width:30px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600">{{ l.qty }}</span><button onClick="{{ l.inc }}" aria-label="Increase" style="cursor:pointer;width:34px;height:34px;border:0;background:transparent">+</button></div>
+<span style="font-weight:600;font-size:14px">{{ l.lineTxt }}</span>
+</div>
+<button onClick="{{ l.remove }}" style="all:unset;cursor:pointer;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8B3A2B;align-self:flex-start">Remove</button>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}"><div style="padding:48px 0;display:flex;flex-direction:column;gap:14px;align-items:flex-start"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126">Your cart is empty</span><a href="#/shop" onClick="{{ closeCart }}" style="border:1px solid #493126;padding:12px 20px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">Continue shopping</a></div></sc-if>
+</div>
+<sc-if value="{{ cartHas }}" hint-placeholder-val="{{ false }}">
+<div style="padding:18px 24px 24px;border-top:1px solid #C6A15B;display:flex;flex-direction:column;gap:10px;background:#FFFDF9">
+<div style="display:flex;gap:6px"><input value="{{ couponIn }}" onChange="{{ setCouponIn }}" placeholder="Discount code" style="flex:1;padding:11px;border:1px solid #E9DDC9;text-transform:uppercase"><button onClick="{{ applyCoupon }}" style="cursor:pointer;border:1px solid #493126;background:transparent;padding:0 16px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Apply</button></div>
+<sc-if value="{{ couponMsgOn }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:{{ couponMsgColor }}">{{ couponMsg }}</span></sc-if>
+<label style="display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px">Delivery to<select value="{{ zone }}" onChange="{{ setZone }}" style="padding:8px;border:1px solid #E9DDC9;background:#F8F4ED"><sc-for list="{{ zones }}" as="z" hint-placeholder-count="4"><option value="{{ z.k }}">{{ z.label }}</option></sc-for></select></label>
+<div style="display:flex;justify-content:space-between;font-size:14px"><span>Subtotal</span><span>{{ t.subTxt }}</span></div>
+<sc-if value="{{ t.hasDisc }}" hint-placeholder-val="{{ false }}"><div style="display:flex;justify-content:space-between;font-size:14px;color:#536B4E"><span>Discount · {{ t.code }}</span><span>−{{ t.discTxt }}</span></div></sc-if>
+<div style="display:flex;justify-content:space-between;font-size:14px"><span>Delivery</span><span>{{ t.shipTxt }}</span></div>
+<div style="display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-size:26px;color:#493126"><span>Total</span><span>{{ t.totalTxt }}</span></div>
+<a href="#/checkout" onClick="{{ closeCart }}" style="text-align:center;background:#493126;color:#F8F4ED;padding:17px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600" style-hover="background:#536B4E;color:#F8F4ED">Checkout</a>
+<button onClick="{{ closeCart }}" style="all:unset;cursor:pointer;text-align:center;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:6px">Continue shopping</button>
+</div>
+</sc-if>
+</aside>
+
+<sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;left:50%;bottom:96px;transform:translateX(-50%);z-index:80;background:#24221D;color:#F8F4ED;padding:14px 20px;display:flex;gap:16px;align-items:center;border:1px solid #C6A15B;animation:sotIn .35s ease;font-size:13px;max-width:calc(100vw - 32px)"><span style="color:#C6A15B">✦</span>{{ toast }}<button onClick="{{ openCart }}" style="all:unset;cursor:pointer;color:#C6A15B;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600">View cart</button></div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const KEY = 'sot-shop-db-v1', CART = 'sot-shop-cart-v1', SESS = 'sot-shop-session-v1', WISH = 'sot-shop-wish-v1', RECENT = 'sot-shop-recent-v1', CMP = 'sot-shop-compare-v1';
+const GHS = n => 'GHS ' + Number(n || 0).toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const CATS = [
+  { k: 'aftercare', label: 'AFTERCARE', kicker: 'African-inspired skincare', blurb: 'Pure skincare inspired by our signature AFTERCARE facial ritual, with shea, baobab and moringa.', subs: ['Facial cleansers', 'Facial toners', 'Facial serums', 'Facial moisturizers', 'Face masks', 'Facial oils', 'Body butters', 'Body oils', 'Exfoliating products', 'pure African skincare', 'Shea butter products', 'Baobab & moringa'], bg: '#536B4E', ink: '#F8F4ED', tone: 'radial-gradient(circle at 50% 38%, #6C8667 0%, #536B4E 72%)' },
+  { k: 'lipbar', label: 'The Lip Bar', kicker: 'Beauty · Care · Confidence', blurb: 'Hydration, nourishment and a soft finish, from the Lip Bar to your bag.', subs: ['Lip gloss', 'Lip balms', 'Lip scrubs', 'Lip masks', 'Lip oils', 'Lip hydration', 'Lip-care gift sets'], bg: '#493126', ink: '#F8F4ED', tone: 'radial-gradient(circle at 50% 38%, #654638 0%, #493126 72%)' },
+  { k: 'body', label: 'Body Care', kicker: 'Head-to-toe softness', blurb: 'Lotions, butters, scrubs and oils for everyday body rituals.', subs: ['Body lotions', 'Body butters', 'Body scrubs', 'Body oils', 'Bath products', 'Body hydration'], bg: '#E9DDC9', ink: '#493126', tone: 'radial-gradient(circle at 50% 38%, #F4EBDD 0%, #E9DDC9 72%)' },
+  { k: 'hair', label: 'Hair & Scalp', kicker: 'Rooted in care', blurb: 'Oils, masks and moisturisers for hair and scalp.', subs: ['Hair oils', 'Scalp oils', 'Hair masks', 'Hair moisturizers', 'Scalp treatments'], bg: '#C6A15B', ink: '#24221D', tone: 'radial-gradient(circle at 50% 38%, #D8B978 0%, #C6A15B 72%)' },
+  { k: 'wellness', label: 'Wellness', kicker: 'Rest & restore', blurb: 'Aromatherapy, bath essentials and relaxation kits for home.', subs: ['Aromatherapy', 'Spa accessories', 'Bath essentials', 'Relaxation kits', 'Wellness gift boxes'], bg: '#24221D', ink: '#F8F4ED', tone: 'radial-gradient(circle at 50% 38%, #3A3329 0%, #24221D 72%)' },
+  { k: 'essentials', label: 'Spa Essentials', kicker: 'The spa, at home', blurb: 'Robes, towels, tools and gift vouchers.', subs: ['Bathrobes', 'Towels', 'Massage accessories', 'Beauty tools', 'Skincare accessories', 'Gift vouchers'], bg: '#F8F4ED', ink: '#493126', tone: 'radial-gradient(circle at 50% 38%, #FFFDF9 0%, #E9DDC9 80%)' }
+];
+const CAT = Object.fromEntries(CATS.map(c => [c.k, c]));
+const NAV = [['HOME', '#/', 'home'], ['SHOP ALL', '#/shop', 'all'], ['AFTERCARE', '#/shop/aftercare', 'aftercare'], ['THE LIP BAR', '#/shop/lipbar', 'lipbar'], ['GIFT VOUCHERS', '#/shop/essentials', 'essentials']];
+const STATUSES = ['Pending Payment', 'Paid', 'Processing', 'Ready for Dispatch', 'Shipped', 'Delivered', 'Cancelled', 'Refunded'];
+const REGIONS = ['Greater Accra', 'Ashanti', 'Central', 'Eastern', 'Western', 'Western North', 'Volta', 'Oti', 'Northern', 'Savannah', 'North East', 'Upper East', 'Upper West', 'Bono', 'Bono East', 'Ahafo'];
+const ZONES = [['tema', 'Tema delivery'], ['accra', 'Greater Accra delivery'], ['other', 'Other regions in Ghana'], ['pickup', 'Pickup at the spa']];
+const PAY = [['mtn', 'MTN MoMo', 'Mobile Money'], ['telecel', 'Telecel Cash', 'Mobile Money'], ['at', 'AT Money', 'Mobile Money'], ['card', 'Debit / credit card', 'Visa · Mastercard']];
+const pr = (id, name, cat, sub, opt, variants, stock, sold, flags, desc, ingredients, benefits, directions, extra = {}) => ({ id, name, cat, sub, opt, variants, stock, sold, featured: flags.includes('f'), best: flags.includes('b'), isNew: flags.includes('n'), gift: flags.includes('g'), approved: true, archived: false, created: extra.created || '2026-07-01', desc, ingredients, benefits, directions, images: extra.images || [], model: extra.model || null, short: extra.short || name });
+const seedProducts = () => [
+  pr('ac-cleanser', 'AFTERCARE Pure Radiance Cleanser', 'aftercare', 'Facial cleansers', 'Size', [{ l: '150 ml', price: 180 }], 0, 0, 'fb', 'A gentle daily cleanser that lifts away the day and leaves skin feeling fresh and bright.', 'Full ingredient list to be confirmed before sale.', ['Cleanses without a stripped, tight feel', 'For morning and evening use', 'Step one of the AFTERCARE ritual'], 'Massage onto damp skin, then rinse with lukewarm water. Use morning and evening.', { created: '2026-06-10', short: 'Pure Radiance Cleanser', model: { type: 'pump', body: 'green', label: '#E9DDC9', ink: '#493126' } }),
+  pr('ac-cleanser2', 'AFTERCARE Pure Balance Cleanser', 'aftercare', 'Facial cleansers', 'Size', [{ l: '150 ml', price: 180 }], 0, 0, 'n', 'A balancing cleanser for skin that tends to feel oily or uneven through the day.', 'Full ingredient list to be confirmed before sale.', ['Leaves skin feeling clean and balanced', 'Gentle enough for daily use', 'Pairs with Pure Hydration Toner'], 'Massage onto damp skin, then rinse with lukewarm water. Use morning and evening.', { created: '2026-11-11', short: 'Pure Balance Cleanser', model: { type: 'pump', body: 'ivory', label: '#536B4E', ink: '#F8F4ED' } }),
+  pr('ac-toner', 'AFTERCARE Radiance Prep Toner', 'aftercare', 'Facial toners', 'Size', [{ l: '150 ml', price: 160 }], 0, 0, 'fn', 'A light toner that preps freshly cleansed skin for serum and moisturiser.', 'Full ingredient list to be confirmed before sale.', ['Refreshes skin after cleansing', 'Helps the next steps glide on', 'Light, watery texture'], 'Sweep over clean skin with a cotton pad, or press in with your palms.', { created: '2026-11-11', short: 'Radiance Prep Toner', model: { type: 'pump', body: 'ivory', label: '#C6A15B', ink: '#24221D' } }),
+  pr('ac-toner2', 'AFTERCARE Pure Hydration Toner', 'aftercare', 'Facial toners', 'Size', [{ l: '150 ml', price: 160 }], 0, 0, 'n', 'A softening toner that adds a first layer of moisture to dry or tight-feeling skin.', 'Full ingredient list to be confirmed before sale.', ['Leaves skin feeling soft and comfortable', 'A first layer of hydration', 'For morning and evening'], 'Press 3–4 drops into clean skin before serum.', { created: '2026-11-11', short: 'Pure Hydration Toner', model: { type: 'pump', body: 'green', label: '#F8F4ED', ink: '#493126' } }),
+  pr('ac-serum', 'AFTERCARE Golden Revival Serum', 'aftercare', 'Facial serums', 'Size', [{ l: '30 ml', price: 320 }], 0, 0, 'fn', 'Our signature golden serum for skin that looks tired or dull.', 'Full ingredient list to be confirmed before sale.', ['Helps skin look brighter and more rested', 'Lightweight, fast-absorbing texture', 'Use under moisturiser'], 'Press 2–3 drops into clean skin after toner, morning and evening.', { created: '2026-11-11', short: 'Golden Revival Serum', model: { type: 'dropper', label: '#C6A15B', ink: '#24221D' } }),
+  pr('ac-serum-c', 'AFTERCARE Vitamin C Serum', 'aftercare', 'Facial serums', 'Size', [{ l: '30 ml', price: 320 }], 0, 0, 'n', 'A vitamin C serum for a brighter-looking, more even complexion.', 'Full ingredient list to be confirmed before sale.', ['Helps skin look brighter and more even', 'Best used in the morning', 'Always follow with sunscreen'], 'Apply 2–3 drops to clean skin in the morning, then moisturise and use sunscreen.', { created: '2026-11-11', short: 'Vitamin C Serum', model: { type: 'dropper', label: '#F8F4ED', ink: '#493126' } }),
+  pr('ac-cream', 'AFTERCARE Cloud Silk Moisturizer', 'aftercare', 'Facial moisturizers', 'Size', [{ l: '50 ml', price: 250 }], 0, 0, 'f', 'A soft, cloud-light moisturiser that leaves skin feeling silky, never heavy.', 'Full ingredient list to be confirmed before sale.', ['Helps skin hold moisture', 'Absorbs without a greasy finish', 'Wear under sunscreen in the morning'], 'Smooth over face and neck after serum, morning and evening.', { created: '2026-07-02', short: 'Cloud Silk Moisturizer', model: { type: 'jar', body: 'ivory', label: '#F8F4ED', ink: '#493126', r: 0.85, h: 1.05 } }),
+  pr('ac-cream2', 'AFTERCARE Silk Hydration Moisturizer', 'aftercare', 'Facial moisturizers', 'Size', [{ l: '50 ml', price: 250 }], 0, 0, 'n', 'A richer moisturiser for skin that feels dry or tight.', 'Full ingredient list to be confirmed before sale.', ['Long-lasting comfort for dry-feeling skin', 'A rich, silky texture', 'Ideal as an evening cream'], 'Smooth over face and neck after serum, especially in the evening.', { created: '2026-11-11', short: 'Silk Hydration Moisturizer', model: { type: 'jar', body: 'choc', label: '#E9DDC9', ink: '#493126', r: 0.85, h: 1.05 } }),
+  pr('ac-oil', 'AFTERCARE Golden Radiance Clearing Oil', 'aftercare', 'Facial oils', 'Size', [{ l: '30 ml', price: 280 }], 0, 0, 'b', 'A clearing facial oil that leaves skin looking clear, smooth and radiant.', 'Full ingredient list to be confirmed before sale.', ['Leaves skin feeling soft and smooth', 'A few drops go a long way', 'Use as the last step of your routine'], 'Warm 2–3 drops between palms and press onto clean skin in the evening.', { created: '2026-10-01', short: 'Golden Radiance Oil', model: { type: 'dropper', label: '#F8F4ED', ink: '#493126' } }),
+  pr('ac-oil2', 'AFTERCARE Golden Touch Clearing Oil', 'aftercare', 'Facial oils', 'Size', [{ l: '30 ml', price: 280 }], 0, 0, 'n', 'A light clearing oil with a soft golden glow.', 'Full ingredient list to be confirmed before sale.', ['Lightweight, non-heavy feel', 'Gives skin a healthy-looking glow', 'Use morning or evening'], 'Press 2–3 drops onto clean skin as the final step.', { created: '2026-11-11', short: 'Golden Touch Oil', model: { type: 'dropper', label: '#C6A15B', ink: '#24221D' } }),
+  pr('ac-mask', 'AFTERCARE Pure Radiance Face Mask', 'aftercare', 'Face masks', 'Size', [{ l: '75 ml', price: 220 }], 0, 0, 'fb', 'The signature mask from our AFTERCARE facial, made for a weekly at-home ritual.', 'Kaolin, aqua, glycerin, adansonia digitata (baobab) seed oil, moringa oleifera seed oil, aloe barbadensis leaf juice, xanthan gum, phenoxyethanol.', ['Kaolin clay helps absorb excess surface oil', 'Leaves skin feeling soft after rinsing', 'Designed for once- or twice-weekly use'], 'Apply an even layer to clean skin, avoiding eyes and lips. Leave for 10 minutes, then rinse with warm water.', { created: '2026-06-10', short: 'Pure Radiance Face Mask', model: { type: 'jar', body: 'choc', label: '#536B4E', ink: '#F8F4ED' } }),
+  pr('ac-butter', 'AFTERCARE Whipped Shea Body Butter', 'aftercare', 'Shea butter products', 'Size', [{ l: '150 ml', price: 160 }, { l: '300 ml', price: 260 }], 0, 0, 'fb', 'Whipped Ghanaian shea for elbows, knees, hands and everywhere in between.', 'Butyrospermum parkii (shea) butter, cocos nucifera (coconut) oil, adansonia digitata (baobab) seed oil, tocopherol.', ['Shea butter is a rich emollient for dry-feeling skin', 'Melts into skin on contact', 'No added water, so a little lasts'], 'Massage a small amount into skin after bathing, focusing on dry areas.', { created: '2026-05-20', short: 'Whipped Shea Body Butter', model: { type: 'jar', body: 'green', label: '#E9DDC9', ink: '#493126', r: 1.15, h: 0.75 } }),
+  pr('ac-butter2', 'AFTERCARE Pure Shea Body Butter', 'aftercare', 'Shea butter products', 'Size', [{ l: '150 ml', price: 160 }, { l: '300 ml', price: 260 }], 0, 0, 'n', 'Pure, unwhipped Ghanaian shea butter: rich, simple care for very dry skin.', 'Butyrospermum parkii (shea) butter, cocos nucifera (coconut) oil, adansonia digitata (baobab) seed oil, tocopherol.', ['Shea butter is a rich emollient for dry-feeling skin', 'Melts into skin on contact', 'No added water, so a little lasts'], 'Massage a small amount into skin after bathing, focusing on dry areas.', { created: '2026-05-20', short: 'Pure Shea Body Butter', model: { type: 'jar', body: 'ivory', label: '#536B4E', ink: '#F8F4ED', r: 1.15, h: 0.75 } }),
+  pr('lb-wose', 'Wosè Lip Gloss', 'lipbar', 'Lip gloss', 'Size', [{ l: 'Standard', price: 120 }], 0, 0, 'f', 'Our signature Lip Bar gloss.', 'Full ingredient list to be confirmed.', ['Our signature Lip Bar gloss'], 'Apply directly to lips. Reapply as desired.', { created: '2026-11-11', short: 'Wosè Lip Gloss' }),
+  pr('lb-kit', 'Lip Aftercare Kit', 'lipbar', 'Lip-care gift sets', 'Set', [{ l: 'Kit', price: 150 }], 0, 0, '', 'Take-home care after your Lip Bar treatment.', 'Contents to be confirmed.', ['Take-home care after your treatment'], 'Use as advised by your Lip Bar specialist.', { created: '2026-11-11', short: 'Lip Aftercare Kit' }),
+  pr('es-voucher', 'Sense of Touch Gift Voucher', 'essentials', 'Gift vouchers', 'Value', [{ l: 'GHS 300', price: 300 }, { l: 'GHS 500', price: 500 }, { l: 'GHS 1,000', price: 1000 }], 999, 0, 'g', 'Give a treatment or shop credit. Redeemable at the spa or online.', 'Digital voucher delivered by email.', ['Redeemable on spa treatments or shop products', 'Delivered by email', 'Choose your value'], 'Present the voucher code at the spa or enter it at checkout.', { created: '2026-04-01' })
+];
+const REV = [];
+const ago = d => new Date(Date.now() - d * 864e5).toISOString();
+const seedOrders = () => [];
+const seed = () => ({ v: 2, products: seedProducts(), orders: [], reviews: [], customers: [], coupons: [], subscribers: [], support: [], banner: 'Delivery across Ghana · Pickup at the spa', fees: { tema: 25, accra: 45, other: 70, pickup: 0 }, est: { tema: 'Fee confirmed on WhatsApp before dispatch', accra: 'Fee confirmed on WhatsApp before dispatch', other: 'Fee confirmed on WhatsApp before dispatch', pickup: 'Ready within 1 business day' }, pickupOn: true });
+const ld = (k, f) => { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? f; } catch (e) { return f; } };
+const sv = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { console.warn('Storage full', e); } };
+const parse = () => { const h = (location.hash || '').replace(/^#\/?/, ''); const [v, a, b] = h.split('/'); return { v: v || 'home', a: a ? decodeURIComponent(a) : '', b: b || '' }; };
+const fmtDate = s => new Date(s).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const stars = n => '★★★★★'.slice(0, Math.round(n)) + '☆☆☆☆☆'.slice(0, 5 - Math.round(n));
+const mono = name => name.replace(/^(AFTERCARE|Lip Bar|Sense of Touch|The)\s+/i, '').split(/\s+/).slice(0, 2).map(w => w[0]).join('');
+
+const HAS_GL = (() => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } })();
+const heroFallback = el => { if (!el || el.querySelector('img')) return; const im = document.createElement('img'); im.src = 'assets/web/facial-treatment.jpg'; im.alt = 'AFTERCARE facial ritual'; im.setAttribute('data-no-full', '1'); Object.assign(im.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', objectFit: 'cover' }); el.prepend(im); const sp = el.querySelector('span'); if (sp) sp.style.display = 'none'; el.style.cursor = 'default'; if (im.animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) im.animate([{ transform: 'scale(1) translate3d(0,0,0)' }, { transform: 'scale(1.08) translate3d(-1.5%,-1%,0)' }], { duration: 14000, direction: 'alternate', iterations: Infinity, easing: 'ease-in-out' }); };
+class Component extends DCLogic {
+  no3d = !HAS_GL;
+  state = { no3d: !HAS_GL, db: (() => { const d = ld(KEY, null); if (!(d && d.v === 2)) return seed(); if (!d.acRange3) { const fresh = seedProducts().filter(p => p.cat === 'aftercare'); const ids = fresh.map(p => p.id); d.products = [...fresh.map(p => { const old = d.products.find(x => x.id === p.id); return old ? { ...old, name: p.name, short: p.short, sub: p.sub, desc: p.desc, ingredients: p.ingredients, benefits: p.benefits, directions: p.directions, model: p.model } : p; }), ...d.products.filter(x => !ids.includes(x.id))]; d.acRange3 = true; sv(KEY, d); } return d; })(), cart: ld(CART, []), wish: ld(WISH, []), recent: ld(RECENT, []), compare: ld(CMP, []), user: ld(SESS, null), route: parse(), cartOpen: false, searchOpen: false, q: '', shopQ: '', sort: 'popular', maxPrice: 1000, inStock: false, onSale: false, sub: '', qty: 1, vi: 0, img: 0, tab: 'ingredients', homeTab: 'featured', couponIn: '', applied: '', couponMsg: '', couponOk: true, zone: 'accra', co: { name: '', email: '', phone: '', address: '', city: '', region: 'Greater Accra', gps: '', notes: '' }, pay: 'mtn', momo: '', coErr: '', coTried: false, toast: '', nl: '', nlDone: false, rv: { name: '', rating: 5, text: '' }, rvMsg: '', acctTab: 'orders', auth: 'login', af: { name: '', email: '', pass: '' }, authMsg: '', track: '', trackErr: '', adminTab: 'overview', edit: null, edErr: '', selOrder: '', orderFilter: 'All', nc: { code: '', type: 'pct', value: '', min: '' }, na: { label: '', line: '' }, supportText: '', supportSent: false, mobile: typeof innerWidth !== 'undefined' && innerWidth < 760, heroI: 0 };
+  heroRef = React.createRef();
+  pdpRef = React.createRef();
+  componentDidMount() {
+    this.onHash = () => { const r = parse(); if (r.v === 'admin' && !this.adminOk()) { location.hash = '#/account'; return; } this.setState({ route: r, sub: '', qty: 1, vi: 0, img: 0, tab: 'ingredients', searchOpen: false, selOrder: '', edit: null, couponMsg: '', coErr: '', trackErr: '' }); if (r.v === 'product') this.pushRecent(r.a); window.scrollTo(0, 0); };
+    window.addEventListener('hashchange', this.onHash);
+    this.onResize = () => { const m = innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m }); };
+    window.addEventListener('resize', this.onResize);
+    this.onStore = e => { if (e.key === KEY) { const d = ld(KEY, null); if (d && d.v === 2) this.setState({ db: d }); } };
+    window.addEventListener('storage', this.onStore);
+    { const st = ld(KEY, null); if (!st || st.v !== 2) sv(KEY, this.state.db); }
+    { const P = this.state.db.products, c = this.state.cart.filter(l => { const p = P.find(x => x.id === l.pid); return p && p.cat !== 'aftercare'; }); if (c.length !== this.state.cart.length) this.persist('cart', CART, c); }
+    const r = this.state.route; if (r.v === 'admin' && !this.adminOk()) location.hash = '#/account';
+    this.authIv = setInterval(() => { const A = window.SOTAuth; if (!A) return; clearInterval(this.authIv); const sync = () => { const ses = A.current(); const em = ses && ses.role === 'member' ? ses.email : null; if (em !== this.state.user) { if (em && !this.state.db.customers.some(c => c.email === em)) this.saveDb(d => { d.customers.push({ email: em, name: ses.name, phone: ses.phone || '', addresses: [], newsletter: false, created: new Date().toISOString() }); return d; }); this.persist('user', SESS, em); } }; sync(); this.offAuth = A.on(sync); }, 100); if (r.v === 'product') this.pushRecent(r.a);
+    this.sync3d();
+  }
+  componentDidUpdate() { this.sync3d(); }
+  componentWillUnmount() { clearInterval(this.authIv); this.offAuth && this.offAuth(); window.removeEventListener('hashchange', this.onHash); window.removeEventListener('resize', this.onResize); window.removeEventListener('storage', this.onStore); clearInterval(this.heroIv); clearTimeout(this.toastT); this.hero?.dispose(); this.pdp?.dispose(); }
+  adminOk() { try { if (window.SOTAuth ? (window.SOTAuth.isAdmin() || (window.SOTAuth.isStaff() && ['General Manager', 'Store Manager'].includes(window.SOTAuth.moduleRole('shop')))) : (sessionStorage.getItem('sot-admin') === '1' && (JSON.parse(localStorage.getItem('sot-auth-session-v1')) || {}).role === 'admin')) return true; } catch (e) {} this.setState({ authMsg: 'Sign in with the admin account, or a General Manager or Store Manager staff login, to open the shop dashboard.', auth: 'login' }); return false; }
+  heroModels() { return this.state.db.products.filter(p => p.model && p.approved && !p.archived).map(p => ({ ...p.model, name: p.short || p.name, id: p.id })); }
+  async sync3d() {
+    const hEl = this.heroRef.current;
+    if (hEl && this.no3d) heroFallback(hEl);
+    if (hEl && !this.hero && !this.heroBusy && !this.no3d) {
+      this.heroBusy = true;
+      try { const m = await import(new URL('product3d.js', document.baseURI).href); const list = this.heroModels(); if (list.length && this.heroRef.current === hEl) { this.hero = await m.mount(hEl, list); this.heroEl = hEl; this.heroIv = setInterval(() => { if (this.heroHold) return; const n = this.heroModels().length; if (!n) return; const i = (this.state.heroI + 1) % n; this.hero && this.hero.show(i); this.setState({ heroI: i }); }, 5000); } } catch (e) { this.no3d = true; this.setState({ no3d: true }); console.warn('Shop 3D hero unavailable — showing photo', e); heroFallback(hEl); }
+      this.heroBusy = false;
+    } else if (this.hero && (!hEl || hEl !== this.heroEl)) { clearInterval(this.heroIv); this.hero.dispose(); this.hero = null; }
+    const pEl = this.pdpRef.current, pid = this.state.route.a;
+    if (pEl && (!this.pdp || this.pdpId !== pid) && !this.pdpBusy && !this.no3d) {
+      const p = this.state.db.products.find(x => x.id === pid); if (!p || !p.model) return;
+      this.pdpBusy = true; this.pdp?.dispose(); this.pdp = null;
+      try { const m = await import(new URL('product3d.js', document.baseURI).href); if (this.pdpRef.current === pEl) { this.pdp = await m.mount(pEl, [{ ...p.model, name: p.short || p.name }]); this.pdpId = pid; this.pdpEl = pEl; } } catch (e) { this.no3d = true; this.setState({ no3d: true }); console.warn('Product 3D unavailable', e); const sp = pEl.querySelector('span'); if (sp) sp.textContent = '3D preview needs WebGL — not available on this device'; }
+      this.pdpBusy = false;
+    } else if (this.pdp && (!pEl || pEl !== this.pdpEl)) { this.pdp.dispose(); this.pdp = null; this.pdpId = null; }
+  }
+  pushRecent(id) { const r = [id, ...this.state.recent.filter(x => x !== id)].slice(0, 8); sv(RECENT, r); this.setState({ recent: r }); }
+  saveDb(fn) { this.setState(s => { const db = fn(JSON.parse(JSON.stringify(s.db))); sv(KEY, db); try { window.dispatchEvent(new Event('sot-change')); } catch (e) {} return { db }; }); }
+  persist(k, key, v) { sv(key, v); this.setState({ [k]: v }); }
+  toastMsg(t) { clearTimeout(this.toastT); this.setState({ toast: t }); this.toastT = setTimeout(() => this.setState({ toast: '' }), 2600); }
+  addToCart(pid, vi, qty) {
+    const p = this.state.db.products.find(x => x.id === pid); if (!p) return;
+    if (p.cat === 'aftercare') return this.toastMsg('AFTERCARE is coming soon. It is not on sale yet.');
+    const inCart = this.state.cart.filter(l => l.pid === pid).reduce((a, l) => a + l.qty, 0);
+    if (inCart + qty > p.stock) return this.toastMsg(p.stock - inCart > 0 ? `Only ${p.stock - inCart} more available` : 'No more stock available');
+    const cart = this.state.cart.some(l => l.pid === pid && l.vi === vi) ? this.state.cart.map(l => l.pid === pid && l.vi === vi ? { ...l, qty: l.qty + qty } : l) : [...this.state.cart, { pid, vi, qty }];
+    this.persist('cart', CART, cart); this.toastMsg(`${p.short || p.name} added to cart`);
+  }
+  toggleWish(pid) { const w = this.state.wish.includes(pid) ? this.state.wish.filter(x => x !== pid) : [...this.state.wish, pid]; this.persist('wish', WISH, w); }
+  verifyOrder(id, by) {
+    this.saveDb(db => { const o = db.orders.find(x => x.id === id); if (!o || o.payment === 'Verified') return db; o.payment = 'Verified'; o.status = 'Paid'; o.history.push({ s: 'Paid', at: new Date().toISOString(), by }); o.items.forEach(i => { const p = db.products.find(x => x.id === i.pid); if (p) { p.stock = Math.max(0, p.stock - i.qty); p.sold += i.qty; } }); return db; });
+  }
+  renderVals() {
+    const s = this.state, db = s.db, r = s.route, S = window.SOT;
+    const live = db.products.filter(p => p.approved && !p.archived);
+    const P = Object.fromEntries(db.products.map(p => [p.id, p]));
+    const vPrice = v => v.sale ?? v.price;
+    const minP = p => Math.min(...p.variants.map(vPrice));
+    const revs = pid => db.reviews.filter(x => x.pid === pid);
+    const avg = pid => { const rv = revs(pid); return rv.length ? rv.reduce((a, b) => a + b.rating, 0) / rv.length : 0; };
+    const stockInfo = p => p.cat === 'aftercare' ? ['Coming soon', '#9A6B12'] : p.stock <= 0 ? ['Sold out', '#8B3A2B'] : p.stock <= 5 ? [`Only ${p.stock} left`, '#8B3A2B'] : ['In stock', '#536B4E'];
+    const card = p => { const c = CAT[p.cat] || CATS[0], v = p.variants[0], sale = v.sale != null, [st, sc] = stockInfo(p), w = s.wish.includes(p.id);
+      return { href: '#/product/' + p.id, tone: c.tone, ink: c.ink, hasImg: !!p.images.length, noImg: !p.images.length, img: p.images[0] || '', mono: mono(p.name), sub: p.sub, hasBadge: sale || p.isNew || p.best, badge: sale ? 'Offer' : p.isNew ? 'New' : 'Bestseller', catLabel: c.label, name: p.name, priceTxt: (p.variants.length > 1 ? 'From ' : '') + GHS(minP(p)), hasSale: sale, wasTxt: sale ? GHS(v.price) : '', stockColor: sc, stockTxt: st, soldOut: p.stock <= 0, addLabel: p.stock <= 0 ? 'Sold out' : 'Add to cart', add: () => this.addToCart(p.id, 0, 1), wish: () => this.toggleWish(p.id), wishColor: w ? '#8B3A2B' : '#493126', wishIcon: w ? '♥' : '♡' }; };
+    const pop = (a, b) => b.sold - a.sold;
+    const v = r.v, isHome = v === 'home', isShop = v === 'shop', isProduct = v === 'product', isCompare = v === 'compare', isCheckout = v === 'checkout', isOrder = v === 'order', isTrack = v === 'track', isAccount = v === 'account', isAdmin = v === 'admin';
+    const navKey = isShop ? (r.a || 'all') : isHome ? 'home' : isProduct && P[r.a] ? P[r.a].cat : '';
+    const user = s.user ? db.customers.find(c => c.email === s.user) : null;
+    // cart & totals
+    const lines = s.cart.filter(l => P[l.pid]).map((l, i) => { const p = P[l.pid], vv = p.variants[l.vi] || p.variants[0], c = CAT[p.cat] || CATS[0], unit = vPrice(vv), img = vv.img != null ? p.images[vv.img] : p.images[0];
+      const set = q => this.persist('cart', CART, q <= 0 ? s.cart.filter((_, j) => j !== i) : s.cart.map((x, j) => j === i ? { ...x, qty: Math.min(q, p.stock) } : x));
+      return { pid: p.id, name: p.name, v: vv.l, qty: l.qty, unit, lineTxt: GHS(unit * l.qty), unitTxt: GHS(unit), tone: c.tone, ink: c.ink, mono: mono(p.name), hasImg: !!img, img: img || '', href: '#/product/' + p.id, dec: () => set(l.qty - 1), inc: () => set(l.qty + 1), remove: () => set(0) }; });
+    const sub = lines.reduce((a, l) => a + l.unit * l.qty, 0);
+    const coupon = db.coupons.find(c => c.code === s.applied && c.active && sub >= (c.min || 0));
+    const disc = coupon ? coupon.type === 'pct' ? Math.round(sub * coupon.value) / 100 : coupon.type === 'fixed' ? Math.min(sub, coupon.value) : 0 : 0;
+    const zoneOk = s.zone !== 'pickup' || db.pickupOn, zone = zoneOk ? s.zone : 'accra';
+    const ship = coupon && coupon.type === 'ship' ? 0 : (db.fees[zone] || 0);
+    const total = Math.max(0, sub - disc) + (lines.length ? ship : 0);
+    const zoneLabel = (ZONES.find(z => z[0] === zone) || [])[1];
+    const t = { subTxt: GHS(sub), hasDisc: disc > 0, code: coupon ? coupon.code : '', discTxt: GHS(disc), zoneLabel, shipTxt: ship ? GHS(ship) : 'Free', totalTxt: GHS(total) };
+    const zones = ZONES.filter(z => z[0] !== 'pickup' || db.pickupOn).map(([k, label]) => ({ k, label, go: () => this.setState({ zone: k }), border: zone === k ? '#493126' : '#E9DDC9', bg: zone === k ? '#FFFDF9' : 'transparent', note: k === 'pickup' ? 'Tema Community 25' + (db.est[k] ? ' · ' + db.est[k] : '') : db.est[k] || 'Timing confirmed at dispatch', fee: db.fees[k] ? GHS(db.fees[k]) : 'Free' }));
+    const out = {
+      banner: db.banner, accountLabel: user ? user.name.split(' ')[0] : 'Account', wishCount: s.wish.length || '', cartCount: s.cart.reduce((a, l) => a + l.qty, 0),
+      openSearch: () => this.setState({ searchOpen: true, q: '' }), closeSearch: () => this.setState({ searchOpen: false }), stop: e => e.stopPropagation(), searchOpen: s.searchOpen,
+      openCart: () => this.setState({ cartOpen: true }), closeCart: () => this.setState({ cartOpen: false }),
+      nav: NAV.map(([label, href, k]) => ({ label, href, color: navKey === k ? '#493126' : '#6B665C', border: navKey === k ? '#C6A15B' : 'transparent' })),
+      q: s.q, setQ: e => this.setState({ q: e.target.value }), searchKey: e => { if (e.key === 'Escape') this.setState({ searchOpen: false }); if (e.key === 'Enter') { const f = out.searchResults[0]; if (f) { location.hash = f.href; } } },
+      isHome, isShop, isProduct, isCompare, isCheckout, isOrder, isTrack, isAccount, isAdmin, showFooter: !isAdmin,
+      heroRef: this.heroRef, pdpRef: this.pdpRef,
+      lines, t, zones, zone, setZone: e => this.setState({ zone: e.target.value }), cartEmpty: !lines.length, cartHas: lines.length > 0,
+      overlayOp: s.cartOpen ? 1 : 0, overlayPe: s.cartOpen ? 'auto' : 'none', drawerX: s.cartOpen ? 'translateX(0)' : 'translateX(105%)',
+      couponIn: s.couponIn, setCouponIn: e => this.setState({ couponIn: e.target.value.toUpperCase() }),
+      applyCoupon: () => { const c = db.coupons.find(x => x.code === s.couponIn.trim() && x.active); if (!c) return this.setState({ couponMsg: 'That code isn’t valid.', couponOk: false }); if (sub < (c.min || 0)) return this.setState({ couponMsg: `Spend ${GHS(c.min)} to use ${c.code}.`, couponOk: false }); this.setState({ applied: c.code, couponMsg: c.code + ' applied.', couponOk: true }); },
+      couponMsgOn: !!s.couponMsg, couponMsg: s.couponMsg, couponMsgColor: s.couponOk ? '#536B4E' : '#8B3A2B',
+      toastOn: !!s.toast, toast: s.toast, waBottom: isProduct && s.mobile ? '84px' : '18px', mobileBar: isProduct && s.mobile && !!P[r.a]
+    };
+    const qq = s.q.trim().toLowerCase();
+    out.searchResults = qq.length < 2 ? [] : live.filter(p => [p.name, p.sub, CAT[p.cat]?.label].join(' ').toLowerCase().includes(qq)).slice(0, 8).map(p => ({ href: '#/product/' + p.id, name: p.name, cat: CAT[p.cat]?.label, price: GHS(minP(p)) }));
+    out.searchEmpty = qq.length >= 2 && !out.searchResults.length;
+    if (isHome) {
+      const hm = this.heroModels();
+      const lists = { featured: live.filter(p => p.featured), best: live.filter(p => p.best).sort(pop), new: live.filter(p => p.isNew).sort((a, b) => b.created.localeCompare(a.created)) };
+      const HT = [['featured', 'Featured'], ['best', 'Bestsellers'], ['new', 'New arrivals']];
+      Object.assign(out, {
+        heroChips: hm.map((m, i) => ({ href: '#/product/' + m.id, label: m.name, hover: () => { this.heroHold = true; this.hero && this.hero.show(i); this.setState({ heroI: i }); clearTimeout(this.holdT); this.holdT = setTimeout(() => { this.heroHold = false; }, 6000); }, color: s.heroI === i ? '#24221D' : '#E9DDC9', bg: s.heroI === i ? '#C6A15B' : 'transparent' })),
+        catTiles: CATS.filter(c => live.some(p => p.cat === c.k)).map(c => ({ href: '#/shop/' + c.k, bg: c.bg, ink: c.ink, kicker: c.kicker, label: c.label, count: live.filter(p => p.cat === c.k).length + ' products' })),
+        homeTabTitle: (HT.find(x => x[0] === s.homeTab) || HT[0])[1], homeTabs: HT.map(([k, label]) => ({ label, go: () => this.setState({ homeTab: k }), bg: s.homeTab === k ? '#493126' : 'transparent', fg: s.homeTab === k ? '#F8F4ED' : '#493126' })),
+        homeList: (lists[s.homeTab] || []).slice(0, 8).map(card), aftercareList: live.filter(p => p.cat === 'aftercare').sort(pop).slice(0, 4).map(card), lipList: live.filter(p => p.cat === 'lipbar').sort(pop).slice(0, 4).map(card), bodyList: live.filter(p => p.cat === 'body' || p.cat === 'hair').sort(pop).slice(0, 4).map(card), offerList: live.filter(p => p.variants.some(x => x.sale != null)).slice(0, 4).map(card),
+        homeReviews: db.reviews.filter(x => x.rating >= 4 && P[x.pid]).slice(0, 3).map(x => ({ href: '#/product/' + x.pid, stars: stars(x.rating), text: x.text, name: x.name, product: P[x.pid].short || P[x.pid].name })),
+        nlOpen: !s.nlDone, nlDone: s.nlDone, nl: s.nl, setNl: e => this.setState({ nl: e.target.value }),
+        joinNl: () => { const em = s.nl.trim().toLowerCase(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) return this.toastMsg('Enter a valid email address'); if (!db.subscribers.some(x => x.email === em)) this.saveDb(d => { d.subscribers.unshift({ email: em, at: new Date().toISOString(), consent: 'Newsletter form' }); return d; }); this.setState({ nlDone: true }); },
+        insta: [['lip-result-1.jpg', 'Lip Bar'], ['facial-greenwall.jpg', 'Facials'], ['robe-green-lounge.jpg', 'Robes'], ['lip-selfie-1.jpg', 'Lip care'], ['body-massage.jpg', 'Body'], ['robe-red-portrait.jpg', 'Lounge']].map(([f, label]) => ({ href: 'https://www.instagram.com/senseoftouchgh/', src: 'assets/web/' + f, label }))
+      });
+    }
+    if (isShop) {
+      const ck = r.a, c = CAT[ck], gifts = ck === 'gifts';
+      const ceil = Math.max(100, Math.ceil(Math.max(...live.map(minP), 0) / 100) * 100), maxP = Math.min(s.maxPrice, ceil);
+      const sq = s.shopQ.trim().toLowerCase();
+      let list = live.filter(p => (!ck || ck === 'all' ? true : gifts ? p.gift : p.cat === ck) && (!s.sub || p.sub === s.sub) && minP(p) <= maxP && (!s.inStock || p.stock > 0) && (!s.onSale || p.variants.some(x => x.sale != null)) && (!sq || (p.name + ' ' + p.sub).toLowerCase().includes(sq)));
+      list.sort({ popular: pop, newest: (a, b) => b.created.localeCompare(a.created), low: (a, b) => minP(a) - minP(b), high: (a, b) => minP(b) - minP(a) }[s.sort] || pop);
+      Object.assign(out, {
+        shopBg: c ? c.bg : '#E9DDC9', shopInk: c ? c.ink : '#493126', shopKicker: c ? c.kicker : gifts ? 'Ready to give' : 'The Shop', shopTitle: c ? c.label : gifts ? 'Gift sets' : 'Shop all', shopBlurb: c ? c.blurb : gifts ? 'Boxed sets, kits and vouchers for every occasion.' : 'Every collection from Sense of Touch, in one place.',
+        shopQ: s.shopQ, setShopQ: e => this.setState({ shopQ: e.target.value }),
+        catLinks: [['', 'All products', live.length], ...CATS.map(x => [x.k, x.label, live.filter(p => p.cat === x.k).length]), ['gifts', 'Gift sets', live.filter(p => p.gift).length]].map(([k, label, n]) => { const on = (ck || '') === k || (k === '' && ck === 'all'); return { href: '#/shop' + (k ? '/' + k : ''), label, count: n, color: on ? '#493126' : '#24221D', weight: on ? 600 : 400 }; }),
+        hasSubs: !!c, subChips: c ? c.subs.filter(x => live.some(p => p.cat === ck && p.sub === x)).map(x => ({ label: x, go: () => this.setState({ sub: s.sub === x ? '' : x }), bg: s.sub === x ? '#493126' : 'transparent', fg: s.sub === x ? '#F8F4ED' : '#493126' })) : [],
+        priceCeil: ceil, maxPrice: maxP, maxPriceTxt: GHS(maxP), setMax: e => this.setState({ maxPrice: Number(e.target.value) }),
+        inStock: s.inStock, toggleStock: e => this.setState({ inStock: e.target.checked }), onSale: s.onSale, toggleSale: e => this.setState({ onSale: e.target.checked }),
+        clearFilters: () => this.setState({ shopQ: '', sub: '', maxPrice: 1000, inStock: false, onSale: false }),
+        shopCount: list.length + ' product' + (list.length === 1 ? '' : 's'), sort: s.sort, setSort: e => this.setState({ sort: e.target.value }), shopList: list.map(card), shopEmpty: !list.length
+      });
+    }
+    if (isProduct) {
+      const p = P[r.a] && !P[r.a].archived ? P[r.a] : null;
+      if (!p) { out.isProduct = false; out.isOrder = true; out.orderMissing = true; out.orderFound = false; }
+      else {
+        const c = CAT[p.cat] || CATS[0], vi = Math.min(s.vi, p.variants.length - 1), vv = p.variants[vi], sale = vv.sale != null, [st, sc] = stockInfo(p);
+        const has3d = !!p.model && !s.no3d, nImg = p.images.length, thumbsN = nImg + (has3d ? 1 : 0), img = Math.min(s.img, Math.max(0, thumbsN - 1));
+        const on3d = has3d && img === nImg, rv = revs(p.id), a = avg(p.id), w = s.wish.includes(p.id), cmp = s.compare.includes(p.id);
+        const tabs = [['ingredients', 'Ingredients', p.ingredients], ['directions', 'How to use', p.directions], ['delivery', 'Delivery & returns', 'Delivery across Ghana; fees are shown at checkout. Pickup at the spa in Tema Community 25 where available.\nUnopened items can be returned within 14 days. Contact us on WhatsApp with your order number.']];
+        out.pd = {
+          catHref: '#/shop/' + p.cat, catLabel: c.label, sub: p.sub, tone: c.tone, ink: c.ink, mono: mono(p.name), name: p.name,
+          mainImg: !on3d && nImg > 0, mainSrc: p.images[vv.img != null && s.img === 0 ? vv.img : img] || '', main3d: !!on3d, mainTile: !nImg && !has3d,
+          thumbs: [...p.images.map((src, i) => ({ isImg: true, src, label: '', go: () => this.setState({ img: i }), border: img === i ? '#493126' : '#E9DDC9', bg: '#E9DDC9' })), ...(has3d ? [{ isImg: false, src: '', label: '3D', go: () => this.setState({ img: nImg }), border: on3d ? '#493126' : '#E9DDC9', bg: '#24221D' }] : [])],
+          stars: stars(a), reviewTxt: rv.length ? a.toFixed(1) + ' · ' + rv.length + ' review' + (rv.length > 1 ? 's' : '') : 'No reviews yet',
+          priceTxt: GHS(vPrice(vv)), hasSale: sale, wasTxt: sale ? GHS(vv.price) : '', saveTxt: sale ? 'Save ' + GHS(vv.price - vv.sale) : '',
+          stockColor: sc, stockTxt: st, soldOut: p.stock <= 0, desc: p.desc, opt: p.opt, vLabel: vv.l,
+          variants: p.variants.map((x, i) => ({ l: x.l, go: () => this.setState({ vi: i, img: x.img != null ? x.img : s.img }), border: vi === i ? '#493126' : '#E9DDC9', bg: vi === i ? '#493126' : 'transparent', fg: vi === i ? '#F8F4ED' : '#493126' })),
+          wish: () => this.toggleWish(p.id), wishTxt: w ? '♥ Saved' : '♡ Add to wishlist',
+          compare: () => { const n = cmp ? s.compare.filter(x => x !== p.id) : [...s.compare, p.id].slice(-3); this.persist('compare', CMP, n); }, compareTxt: cmp ? '✓ In comparison' : '+ Compare',
+          benefits: p.benefits.map(b => ({ t: b })),
+          tabs: tabs.map(([k, label, body]) => ({ label, body, open: s.tab === k, sign: s.tab === k ? '−' : '+', go: () => this.setState({ tab: s.tab === k ? '' : k }) })),
+          reviews: rv.map(x => ({ stars: stars(x.rating), text: x.text, name: x.name, meta: fmtDate(x.at) + (x.demo ? ' · demo' : ' · unverified') })), noReviews: !rv.length
+        };
+        Object.assign(out, {
+          qty: s.qty, qtyDown: () => this.setState({ qty: Math.max(1, s.qty - 1) }), qtyUp: () => this.setState({ qty: Math.min(Math.max(1, p.stock), s.qty + 1) }),
+          pdAdd: () => this.addToCart(p.id, vi, s.qty), pdBuy: () => { this.addToCart(p.id, vi, s.qty); location.hash = '#/checkout'; },
+          zoomMove: e => { const el = e.currentTarget, im = el.firstChild, b = el.getBoundingClientRect(); if (im) { im.style.transformOrigin = `${(e.clientX - b.left) / b.width * 100}% ${(e.clientY - b.top) / b.height * 100}%`; im.style.transform = 'scale(1.8)'; } },
+          zoomOut: e => { const im = e.currentTarget.firstChild; if (im) im.style.transform = 'none'; },
+          hasCompare: s.compare.length > 0, compareCount: s.compare.length,
+          rvStars: [1, 2, 3, 4, 5].map(n => ({ n, color: n <= s.rv.rating ? '#C6A15B' : '#B8B2A6', go: () => this.setState({ rv: { ...s.rv, rating: n } }) })),
+          rv: s.rv, rvSet: { name: e => this.setState({ rv: { ...s.rv, name: e.target.value } }), text: e => this.setState({ rv: { ...s.rv, text: e.target.value } }) },
+          submitReview: () => { if (!s.rv.name.trim() || s.rv.text.trim().length < 10) return this.setState({ rvMsg: 'Add your name and a few words (10+ characters).' }); const bought = db.orders.some(o => o.payment === 'Verified' && o.items.some(i => i.pid === p.id) && user && o.customer.email === user.email); this.saveDb(d => { d.reviews.unshift({ pid: p.id, name: s.rv.name.trim(), rating: s.rv.rating, text: s.rv.text.trim(), at: new Date().toISOString(), verified: bought }); return d; }); this.setState({ rv: { name: '', rating: 5, text: '' }, rvMsg: 'Thank you — your review is posted.' }); },
+          rvMsgOn: !!s.rvMsg, rvMsg: s.rvMsg,
+          related: live.filter(x => x.cat === p.cat && x.id !== p.id).sort(pop).slice(0, 4).map(card)
+        });
+        const rec = s.recent.filter(x => x !== p.id && P[x] && !P[x].archived).slice(0, 4);
+        out.hasRecent = rec.length > 0; out.recentList = rec.map(x => card(P[x]));
+      }
+    }
+    if (isCompare) {
+      const list = s.compare.map(x => P[x]).filter(Boolean);
+      Object.assign(out, { compareEmpty: !list.length, compareList: list.map(p => ({ href: '#/product/' + p.id, name: p.name, soldOut: p.stock <= 0, add: () => this.addToCart(p.id, 0, 1), remove: () => this.persist('compare', CMP, s.compare.filter(x => x !== p.id)), rows: [['Price', p.variants.map(x => x.l + ' · ' + GHS(vPrice(x))).join('\n')], ['Collection', (CAT[p.cat] || {}).label + ' · ' + p.sub], ['Key benefits', p.benefits.join(' · ')], ['Rating', revs(p.id).length ? avg(p.id).toFixed(1) + ' / 5' : 'No reviews'], ['Availability', stockInfo(p)[0]]].map(([k, v2]) => ({ k, v: v2 })) })) });
+    }
+    if (isCheckout) {
+      const co = s.co, need = { name: 1, phone: 1, email: 1, address: zone !== 'pickup', city: zone !== 'pickup' };
+      const bad = k => s.coTried && need[k] && (k === 'phone' ? !S?.ghPhone(co.phone) : k === 'email' ? !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(co.email.trim()) : !co[k].trim());
+      const F = [['name', 'Full name *', 'text', '', '1/-1'], ['email', 'Email *', 'email', '', 'auto'], ['phone', 'Phone (Ghana) *', 'tel', '024 123 4567', 'auto'], ['address', zone === 'pickup' ? 'Address (optional for pickup)' : 'Delivery address *', 'text', 'House no., street, landmark', '1/-1'], ['city', 'Town / city' + (zone === 'pickup' ? '' : ' *'), 'text', 'Tema', 'auto'], ['gps', 'GhanaPost GPS', 'text', 'GT-000-0000', 'auto'], ['notes', 'Delivery notes', 'text', 'Optional', '1/-1']];
+      const pm = PAY.find(x => x[0] === s.pay) || PAY[0];
+      Object.assign(out, {
+        checkoutWho: user ? 'Signed in as ' + user.email : 'Checking out as a guest — sign in from Account to save your details.',
+        coFields: F.map(([k, label, type, ph, span]) => ({ label, type, ph, span, value: co[k], border: bad(k) ? '#8B3A2B' : '#E9DDC9', set: e => this.setState({ co: { ...co, [k]: e.target.value } }) })),
+        co, coRegion: e => this.setState({ co: { ...co, region: e.target.value } }), regions: REGIONS,
+        payMethods: PAY.map(([k, label, note]) => ({ label, note, go: () => this.setState({ pay: k }), border: s.pay === k ? '#493126' : '#E9DDC9', bg: s.pay === k ? '#FFFDF9' : 'transparent' })),
+        isMomo: s.pay !== 'card', isCard: s.pay === 'card', momo: s.momo, setMomo: e => this.setState({ momo: e.target.value }),
+        coErrOn: !!s.coErr, coErr: s.coErr, payLabel: lines.length ? 'Pay ' + GHS(total) + ' · ' + pm[1] : 'Cart is empty',
+        placeOrder: () => {
+          const missing = Object.keys(need).filter(k => need[k] && (k === 'phone' ? !S?.ghPhone(co.phone) : k === 'email' ? !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(co.email.trim()) : !co[k].trim()));
+          if (missing.length) return this.setState({ coTried: true, coErr: 'Please complete the highlighted fields. Phone must be a Ghana number.' });
+          if (s.pay !== 'card' && !S?.ghPhone(s.momo || co.phone)) return this.setState({ coErr: 'Enter a valid mobile money number.' });
+          const short = lines.find(l => l.qty > P[l.pid].stock); if (short) return this.setState({ coErr: `Only ${P[short.pid].stock} of ${short.name} left — please update your cart.` });
+          const d = new Date(), id = 'SOT-' + String(d.getFullYear()).slice(2) + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+          const order = { id, created: d.toISOString(), customer: { ...co, name: co.name.trim(), email: co.email.trim().toLowerCase(), phone: S.ghPhone(co.phone) }, items: lines.map(l => ({ pid: l.pid, name: l.name, variant: l.v, unit: l.unit, qty: l.qty })), subtotal: sub, discount: disc, coupon: coupon ? coupon.code : '', shipping: ship, total, zone, method: pm[1], momo: s.pay !== 'card' ? S.ghPhone(s.momo || co.phone) : '', payment: 'Awaiting verification', status: 'Pending Payment', history: [{ s: 'Pending Payment', at: d.toISOString(), by: 'Customer' }], account: user ? user.email : '' };
+          this.saveDb(x => { x.orders.unshift(order); return x; });
+          try { localStorage.setItem('sot-v1-me', JSON.stringify(order.customer.phone)); } catch (e) {}
+          sv(CART, []); this.setState({ cart: [], applied: '', couponIn: '', coTried: false, coErr: '' }); location.hash = '#/order/' + id;
+        }
+      });
+    }
+    if (isOrder && r.v === 'order') {
+      const o = db.orders.find(x => x.id.toUpperCase() === r.a.toUpperCase());
+      out.orderMissing = !o; out.orderFound = !!o;
+      if (o) { const flow = STATUSES.slice(0, 6), idx = flow.indexOf(o.status), hist = Object.fromEntries(o.history.map(h => [h.s, h.at])); const ok = o.payment === 'Verified';
+        out.od = { greeting: 'Thank you, ' + o.customer.name.split(' ')[0], id: o.id, date: fmtDate(o.created), method: o.method, payment: o.payment, status: o.status, payBg: ok ? '#536B4E' : /Refund/.test(o.payment) ? '#8B3A2B' : '#C6A15B', payFg: ok || /Refund/.test(o.payment) ? '#F8F4ED' : '#24221D', awaiting: o.status === 'Pending Payment',
+          simulate: () => this.verifyOrder(o.id, 'Demo verification'),
+          timeline: /Cancel|Refund/.test(o.status) ? [{ label: o.status, at: hist[o.status] ? fmtDate(hist[o.status]) : '', color: '#8B3A2B', text: '#8B3A2B' }] : flow.map((st, i) => ({ label: st, at: hist[st] ? fmtDate(hist[st]) : '', color: i <= idx ? '#536B4E' : '#E9DDC9', text: i <= idx ? '#493126' : '#6B665C' })),
+          items: o.items.map(i => ({ ...i, lineTxt: GHS(i.unit * i.qty) })), subTxt: GHS(o.subtotal), discTxt: GHS(o.discount), shipTxt: o.shipping ? GHS(o.shipping) : 'Free', totalTxt: GHS(o.total),
+          name: o.customer.name, phone: o.customer.phone, email: o.customer.email, address: [o.customer.address, o.customer.city, o.customer.region, o.customer.gps].filter(Boolean).join(', ') || '—', zone: (ZONES.find(z => z[0] === o.zone) || [])[1] || '' };
+      }
+    }
+    if (isTrack) Object.assign(out, { track: s.track, setTrack: e => this.setState({ track: e.target.value, trackErr: '' }), trackErrOn: !!s.trackErr, trackErr: s.trackErr, goTrack: () => { const o = db.orders.find(x => x.id.toUpperCase() === s.track.trim().toUpperCase()); if (o) location.hash = '#/order/' + o.id; else this.setState({ trackErr: 'No order found with that number. Check your confirmation message.' }); } });
+    if (isAccount) {
+      const af = s.af, A = [['login', 'Sign in'], ['register', 'Create account'], ['reset', 'Forgot password']];
+      const hash = pw => { let h = 5381; for (const ch of 'sot:' + pw) h = ((h << 5) + h + ch.charCodeAt(0)) | 0; return 'h' + (h >>> 0).toString(36); };
+      const tab = r.a === 'wishlist' ? 'wish' : s.acctTab;
+      Object.assign(out, {
+        loggedOut: !user, loggedIn: !!user, authTitle: (A.find(x => x[0] === s.auth) || A[0])[1],
+        authTabs: A.map(([k, label]) => ({ label, go: () => this.setState({ auth: k, authMsg: '' }), bg: s.auth === k ? '#493126' : 'transparent', fg: s.auth === k ? '#F8F4ED' : '#493126' })),
+        authIsRegister: s.auth === 'register', authNeedsPass: s.auth !== 'reset', af, afSet: { name: e => this.setState({ af: { ...af, name: e.target.value } }), email: e => this.setState({ af: { ...af, email: e.target.value } }), pass: e => this.setState({ af: { ...af, pass: e.target.value } }) },
+        authCta: s.auth === 'register' ? 'Create account' : s.auth === 'reset' ? 'Send reset link' : 'Sign in', authMsgOn: !!s.authMsg, authMsg: s.authMsg,
+        authSubmit: () => { const em = af.email.trim().toLowerCase(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) return this.setState({ authMsg: 'Enter a valid email.' });
+          if (s.auth === 'reset') return this.setState({ authMsg: 'Password reset emails start once an email provider is connected. Until then, ask us on WhatsApp.' });
+          const A = window.SOTAuth; if (!A) return this.setState({ authMsg: 'Sign-in is still loading. Try again in a moment.' });
+          const res = s.auth === 'register' ? A.register({ name: af.name, email: em, pass: af.pass }) : A.login(em, af.pass);
+          if (res.error) return this.setState({ authMsg: res.error });
+          if (res.pending) { this.setState({ authMsg: '' }); res.done.then(ses => { if (!ses) return; if (ses.role === 'admin' || ses.role === 'staff') { this.setState({ af: { name: '', email: '', pass: '' } }); if (this.adminOk()) location.hash = '#/admin'; else location.href = 'Admin.dc.html'; return; } if (!this.state.db.customers.some(c => c.email === ses.email)) this.saveDb(d => { d.customers.push({ email: ses.email, name: ses.name, phone: ses.phone || '', addresses: [], newsletter: false, created: new Date().toISOString() }); return d; }); this.persist('user', SESS, ses.email); this.setState({ af: { name: '', email: '', pass: '' }, authMsg: '' }); }); return; }
+          if (res.session.role === 'admin' || res.session.role === 'staff') { this.setState({ af: { name: '', email: '', pass: '' }, authMsg: '' }); if (this.adminOk()) location.hash = '#/admin'; else location.href = 'Admin.dc.html'; return; }
+          if (!db.customers.some(c => c.email === em)) this.saveDb(d => { d.customers.push({ email: em, name: res.session.name, phone: res.session.phone || '', addresses: [], newsletter: false, created: new Date().toISOString() }); return d; });
+          this.persist('user', SESS, em); this.setState({ af: { name: '', email: '', pass: '' }, authMsg: '' }); },
+        me: user || { name: '', phone: '', newsletter: false }, logout: () => { window.SOTAuth && window.SOTAuth.logout(); this.persist('user', SESS, null); },
+        acctTabs: [['orders', 'Orders'], ['wish', 'Wishlist'], ['addr', 'Addresses'], ['profile', 'Profile & help']].map(([k, label]) => ({ label, go: () => { this.setState({ acctTab: k }); if (r.a) location.hash = '#/account'; }, bg: tab === k ? '#493126' : 'transparent', fg: tab === k ? '#F8F4ED' : '#493126' })),
+        tabOrders: tab === 'orders', tabWish: tab === 'wish', tabAddr: tab === 'addr', tabProfile: tab === 'profile'
+      });
+      if (user) {
+        const ph = S?.ghPhone(user.phone);
+        const mine = db.orders.filter(o => o.customer.email === user.email || o.account === user.email || (ph && S.ghPhone(o.customer.phone) === ph));
+        const upd = fn => this.saveDb(d => { const c = d.customers.find(x => x.email === user.email); fn(c, d); return d; });
+        Object.assign(out, {
+          myOrders: mine.map(o => ({ href: '#/order/' + o.id, id: o.id, date: fmtDate(o.created), status: o.status, total: GHS(o.total) })), noOrders: !mine.length,
+          wishList: s.wish.map(x => P[x]).filter(Boolean).map(card), wishEmpty: !s.wish.length,
+          myAddresses: (user.addresses || []).map((a, i) => ({ ...a, remove: () => upd(c => { c.addresses.splice(i, 1); }) })),
+          na: s.na, naSet: { label: e => this.setState({ na: { ...s.na, label: e.target.value } }), line: e => this.setState({ na: { ...s.na, line: e.target.value } }) },
+          addAddress: () => { if (!s.na.line.trim()) return; upd(c => { c.addresses = [...(c.addresses || []), { label: s.na.label.trim() || 'Address', line: s.na.line.trim() }]; }); this.setState({ na: { label: '', line: '' } }); },
+          meSet: { name: e => { const v2 = e.target.value; upd(c => { c.name = v2; }); }, phone: e => { const v2 = e.target.value; upd(c => { c.phone = v2; }); } },
+          toggleMyNl: e => { const on = e.target.checked; upd((c, d) => { c.newsletter = on; d.subscribers = d.subscribers.filter(x => x.email !== c.email); if (on) d.subscribers.unshift({ email: c.email, at: new Date().toISOString(), consent: 'Account settings' }); }); },
+          supportText: s.supportText, setSupport: e => this.setState({ supportText: e.target.value, supportSent: false }), supportSent: s.supportSent,
+          sendSupport: () => { const tx = s.supportText.trim(); if (!tx) return; this.saveDb(d => { d.support.unshift({ who: user.name || user.email, email: user.email, text: tx, at: new Date().toISOString(), status: 'Open' }); return d; }); if (S) S.add('enquiries', { type: 'Shop support', name: user.name || user.email, reach: S.ghPhone(user.phone) || user.email, message: tx, status: 'New' }, 'EN'); this.setState({ supportText: '', supportSent: true }); }
+        });
+      } else Object.assign(out, { myOrders: [], wishList: [], myAddresses: [], na: s.na, naSet: {}, meSet: {} });
+    }
+    if (isAdmin) {
+      const AT = [['overview', 'Overview'], ['products', 'Products'], ['orders', 'Orders'], ['customers', 'Customers'], ['marketing', 'Marketing'], ['delivery', 'Delivery']];
+      const at = s.adminTab, paid = db.orders.filter(o => o.payment === 'Verified' && !/Refund|Cancel/.test(o.status));
+      const ord = db.orders;
+      Object.assign(out, {
+        resetDemo: () => { if (!window.confirm('Reset the shop to demo data? Orders, products and accounts in this browser will be replaced.')) return; const d = seed(); sv(KEY, d); this.setState({ db: d }); },
+        adminTabs: AT.map(([k, label]) => ({ label, go: () => this.setState({ adminTab: k, edit: null }), bg: at === k ? '#493126' : 'transparent', fg: at === k ? '#F8F4ED' : '#493126' })),
+        atOverview: at === 'overview', atProducts: at === 'products', atOrders: at === 'orders', atCustomers: at === 'customers', atMarketing: at === 'marketing', atDelivery: at === 'delivery', statuses: STATUSES
+      });
+      if (at === 'overview') {
+        const months = Array.from({ length: 6 }, (_, i) => { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - 5 + i); return d; });
+        const mk = d => d.toISOString().slice(0, 7), rev = months.map(d => paid.filter(o => o.created.slice(0, 7) === mk(d)).reduce((a, o) => a + o.total, 0)), mx = Math.max(1, ...rev);
+        Object.assign(out, {
+          kpis: [['Verified revenue', GHS(paid.reduce((a, o) => a + o.total, 0))], ['Orders', ord.length], ['Awaiting payment', ord.filter(o => o.status === 'Pending Payment').length], ['Customers', new Set(ord.map(o => o.customer.email)).size], ['Low / out of stock', db.products.filter(p => !p.archived && p.stock <= 5).length]].map(([label, value]) => ({ label, value })),
+          months: months.map((d, i) => ({ label: d.toLocaleDateString('en-GB', { month: 'short' }), short: rev[i] ? (rev[i] >= 1000 ? (rev[i] / 1000).toFixed(1) + 'k' : Math.round(rev[i])) : '', h: Math.round(rev[i] / mx * 85) + '%', orders: ord.filter(o => o.created.slice(0, 7) === mk(d)).length, revTxt: GHS(rev[i]), newC: db.customers.filter(c => (c.created || '').slice(0, 7) === mk(d)).length })),
+          bestAdmin: db.products.filter(p => !p.archived).sort(pop).slice(0, 5).map(p => ({ name: p.name, sold: p.sold })),
+          lowStock: db.products.filter(p => !p.archived && p.stock <= 5).map(p => ({ name: p.name, stock: p.stock }))
+        });
+      }
+      if (at === 'products') {
+        const ed = s.edit, edSet = {}; ['name', 'cat', 'sub', 'opt', 'variantsText', 'stock', 'desc', 'ingredients', 'benefitsText', 'directions'].forEach(k => { edSet[k] = e => this.setState({ edit: { ...ed, [k]: e.target.value, ...(k === 'cat' ? { sub: (CAT[e.target.value] || CATS[0]).subs[0] } : {}) }, edErr: '' }); }); ['featured', 'best', 'isNew', 'gift', 'approved'].forEach(k => { edSet[k] = e => this.setState({ edit: { ...ed, [k]: e.target.checked } }); });
+        const toEd = p => ({ ...p, variantsText: p.variants.map(x => x.l + ':' + x.price + (x.sale != null ? ':' + x.sale : '')).join(', '), benefitsText: p.benefits.join('\n'), stock: String(p.stock), images: [...p.images] });
+        Object.assign(out, {
+          adminProdCount: db.products.length + ' products · ' + live.length + ' live', newProduct: () => this.setState({ edit: { id: '', name: '', cat: 'aftercare', sub: CATS[0].subs[0], opt: 'Size', variantsText: '', stock: '0', desc: '', ingredients: '', benefitsText: '', directions: '', featured: false, best: false, isNew: true, gift: false, approved: false, images: [] }, edErr: '' }),
+          editing: !!ed, editTitle: ed && ed.id ? 'Edit product' : 'New product', ed: ed || {}, edSet, catOptions: CATS.map(c => ({ k: c.k, label: c.label })), subOptions: ed ? (CAT[ed.cat] || CATS[0]).subs : [],
+          edImages: ed ? ed.images.map((src, i) => ({ src, remove: () => this.setState({ edit: { ...ed, images: ed.images.filter((_, j) => j !== i) } }) })) : [],
+          uploadImages: e => { [...e.target.files].slice(0, 6).forEach(f => { if (!/^image\//.test(f.type) || f.size > 8e6) return this.setState({ edErr: 'Images only, up to 8 MB each.' }); const rd = new FileReader(); rd.onload = () => { const im = new Image(); im.onload = () => { const k = Math.min(1, 900 / Math.max(im.width, im.height)), cv = document.createElement('canvas'); cv.width = im.width * k; cv.height = im.height * k; cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height); const url = cv.toDataURL('image/jpeg', 0.82); this.setState(st => ({ edit: st.edit ? { ...st.edit, images: [...st.edit.images, url] } : st.edit })); }; im.src = rd.result; }; rd.readAsDataURL(f); }); e.target.value = ''; },
+          edErrOn: !!s.edErr, edErr: s.edErr, cancelEdit: () => this.setState({ edit: null }),
+          saveProduct: () => { const vs = ed.variantsText.split(',').map(x => x.trim()).filter(Boolean).map(x => { const [l, pr2, sl] = x.split(':').map(y => y.trim()); return { l, price: Number(pr2), ...(sl ? { sale: Number(sl) } : {}) }; });
+            if (!ed.name.trim()) return this.setState({ edErr: 'Add a product name.' }); if (!vs.length || vs.some(x => !x.l || !(x.price > 0) || (x.sale != null && !(x.sale > 0 && x.sale < x.price)))) return this.setState({ edErr: 'Variants need label:price, e.g. “50 ml:180”. Sale price must be lower than price.' });
+            const stock = parseInt(ed.stock, 10); if (!(stock >= 0)) return this.setState({ edErr: 'Inventory must be 0 or more.' });
+            if (ed.approved && !ed.ingredients.trim()) return this.setState({ edErr: 'Add the verified ingredient list before approving a product for the store.' });
+            const rec = { name: ed.name.trim(), cat: ed.cat, sub: ed.sub, opt: ed.opt || 'Option', variants: vs, stock, desc: ed.desc.trim(), ingredients: ed.ingredients.trim(), benefits: ed.benefitsText.split('\n').map(x => x.trim()).filter(Boolean), directions: ed.directions.trim(), featured: ed.featured, best: ed.best, isNew: ed.isNew, gift: ed.gift, approved: ed.approved, images: ed.images };
+            this.saveDb(d => { if (ed.id) Object.assign(d.products.find(p => p.id === ed.id), rec); else d.products.push({ ...rec, id: ed.cat.slice(0, 2) + '-' + Date.now().toString(36), sold: 0, archived: false, created: new Date().toISOString().slice(0, 10), model: null, short: rec.name }); return d; }); this.setState({ edit: null }); },
+          adminProducts: db.products.map(p => { const [, sc] = stockInfo(p); const upd = fn => this.saveDb(d => { fn(d.products.find(x => x.id === p.id), d); return d; }); return { name: p.name, flags: [p.featured && 'Featured', p.best && 'Bestseller', p.isNew && 'New', p.gift && 'Gift', p.demo && 'Demo'].filter(Boolean).join(' · '), cat: (CAT[p.cat] || {}).label, price: GHS(minP(p)), stock: p.stock, stockColor: sc, status: p.archived ? 'Archived' : p.approved ? 'Live' : 'Draft', op: p.archived ? 0.5 : 1,
+            edit: () => this.setState({ edit: toEd(p), edErr: '' }), feature: () => upd(x => { x.featured = !x.featured; }), featureTxt: p.featured ? 'Unfeature' : 'Feature', archive: () => upd(x => { x.archived = !x.archived; }), archiveTxt: p.archived ? 'Restore' : 'Archive',
+            del: () => { if (db.orders.some(o => o.items.some(i => i.pid === p.id))) return window.alert('This product appears in orders — archive it instead so order history stays intact.'); if (window.confirm('Delete ' + p.name + '?')) this.saveDb(d => { d.products = d.products.filter(x => x.id !== p.id); return d; }); } }; })
+        });
+      }
+      if (at === 'orders') {
+        const OF = ['All', 'Pending Payment', 'Paid', 'Processing', 'Shipped', 'Delivered', 'Refunded'];
+        const list = ord.filter(o => s.orderFilter === 'All' || o.status === s.orderFilter);
+        const restock = (d, o) => o.items.forEach(i => { const p = d.products.find(x => x.id === i.pid); if (p) { p.stock += i.qty; p.sold = Math.max(0, p.sold - i.qty); } });
+        const so = ord.find(o => o.id === s.selOrder);
+        Object.assign(out, {
+          orderFilters: OF.map(f => ({ label: f, go: () => this.setState({ orderFilter: f }), bg: s.orderFilter === f ? '#493126' : 'transparent', fg: s.orderFilter === f ? '#F8F4ED' : '#493126' })),
+          exportOrders: () => { const esc = x => '"' + String(x ?? '').replace(/"/g, '""') + '"'; const csv = ['Order,Date,Customer,Email,Phone,Items,Total (GHS),Payment,Status', ...list.map(o => [o.id, o.created.slice(0, 10), o.customer.name, o.customer.email, o.customer.phone, o.items.map(i => i.qty + 'x ' + i.name).join('; '), o.total.toFixed(2), o.payment, o.status].map(esc).join(','))].join('\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'sot-orders.csv'; a.click(); },
+          adminOrders: list.map(o => ({ id: o.id, date: fmtDate(o.created), customer: o.customer.name, total: GHS(o.total), payment: o.payment, payColor: o.payment === 'Verified' ? '#536B4E' : '#8B3A2B', status: o.status,
+            view: () => this.setState({ selOrder: s.selOrder === o.id ? '' : o.id }),
+            setStatus: e => { const st = e.target.value; if (st === o.status) return; if (['Paid', 'Processing', 'Ready for Dispatch', 'Shipped', 'Delivered'].includes(st) && o.payment !== 'Verified') return window.alert('Verify the payment before moving this order forward.'); if (st === 'Refunded') return out.adminOrders.find(x => x.id === o.id).refund(); this.saveDb(d => { const x = d.orders.find(y => y.id === o.id); if (st === 'Cancelled' && x.payment === 'Verified') { window.alert('Paid orders must be refunded, not cancelled.'); return d; } x.status = st; x.history.push({ s: st, at: new Date().toISOString(), by: 'Store admin' }); return d; }); },
+            canVerify: o.payment !== 'Verified' && o.status === 'Pending Payment', verify: () => { if (window.confirm('Only verify after the payment provider confirms this transaction. Continue?')) this.verifyOrder(o.id, 'Store admin'); },
+            invoice: () => { const w = window.open('', '_blank'); if (!w) return; w.document.write(`<title>${o.id}</title><body style="font-family:sans-serif;padding:40px;color:#24221D"><h1 style="font-weight:400">Sense of Touch · Invoice ${o.id}</h1><p>${fmtDate(o.created)} · ${o.payment}</p><p>${o.customer.name}<br>${o.customer.email}<br>${o.customer.phone || ''}</p><table style="width:100%;border-collapse:collapse">${o.items.map(i => `<tr><td style="padding:6px 0;border-bottom:1px solid #ddd">${i.name} · ${i.variant} × ${i.qty}</td><td style="text-align:right">${GHS(i.unit * i.qty)}</td></tr>`).join('')}<tr><td>Discount</td><td style="text-align:right">−${GHS(o.discount)}</td></tr><tr><td>Delivery</td><td style="text-align:right">${GHS(o.shipping)}</td></tr><tr><td><b>Total</b></td><td style="text-align:right"><b>${GHS(o.total)}</b></td></tr></table><p style="font-size:12px;margin-top:30px">Tema Community 25, Ghana · info@senseoftouch.co</p></body>`); w.document.close(); w.print(); },
+            canRefund: o.payment === 'Verified' && o.status !== 'Refunded', refund: () => { if (!window.confirm('Mark ' + o.id + ' as refunded and return items to stock? Process the refund with the payment provider first.')) return; this.saveDb(d => { const x = d.orders.find(y => y.id === o.id); x.status = 'Refunded'; x.payment = 'Refunded'; x.history.push({ s: 'Refunded', at: new Date().toISOString(), by: 'Store admin' }); restock(d, x); return d; }); } })),
+          hasSelOrder: !!so, so: so ? { name: so.customer.name, email: so.customer.email, phone: so.customer.phone, address: [so.customer.address, so.customer.city, so.customer.region, so.customer.gps].filter(Boolean).join(', '), notes: so.customer.notes, items: so.items, history: so.history.map(h => ({ s: h.s + (h.by ? ' · ' + h.by : ''), at: fmtDate(h.at) })) } : { items: [], history: [] }
+        });
+      }
+      if (at === 'customers') {
+        const M = {}; db.customers.forEach(c => { M[c.email] = { name: c.name, email: c.email, phone: c.phone || '—', orders: 0, spent: 0, type: 'Account' }; });
+        ord.forEach(o => { const e = o.customer.email, c = M[e] || (M[e] = { name: o.customer.name, email: e, phone: o.customer.phone, orders: 0, spent: 0, type: 'Guest' }); c.orders++; if (o.payment === 'Verified' && !/Refund/.test(o.status)) c.spent += o.total; });
+        Object.assign(out, { adminCustomers: Object.values(M).sort((a, b) => b.spent - a.spent).map(c => ({ ...c, spent: GHS(c.spent) })), supportList: db.support.map(x => ({ who: x.who, at: fmtDate(x.at), text: x.text })), noSupport: !db.support.length });
+      }
+      if (at === 'marketing') {
+        const nc = s.nc, ncSet = {}; ['code', 'type', 'value', 'min'].forEach(k => { ncSet[k] = e => this.setState({ nc: { ...nc, [k]: k === 'code' ? e.target.value.toUpperCase().replace(/\s/g, '') : e.target.value } }); });
+        Object.assign(out, {
+          setBanner: e => { const v2 = e.target.value; this.saveDb(d => { d.banner = v2; return d; }); },
+          couponRows: db.coupons.map((c, i) => ({ code: c.code, op: c.active ? 1 : 0.5, desc: (c.type === 'pct' ? c.value + '% off' : c.type === 'fixed' ? GHS(c.value) + ' off' : 'Free delivery') + (c.min ? ' · min ' + GHS(c.min) : ''), toggleTxt: c.active ? 'Pause' : 'Activate', toggle: () => this.saveDb(d => { d.coupons[i].active = !d.coupons[i].active; return d; }), del: () => this.saveDb(d => { d.coupons.splice(i, 1); return d; }) })),
+          nc, ncSet, addCoupon: () => { const val = Number(nc.value) || 0, min = Number(nc.min) || 0; if (!/^[A-Z0-9]{3,16}$/.test(nc.code)) return this.toastMsg('Code: 3–16 letters or numbers'); if (db.coupons.some(c => c.code === nc.code)) return this.toastMsg('That code already exists'); if (nc.type !== 'ship' && !(val > 0) || (nc.type === 'pct' && val > 90)) return this.toastMsg('Enter a sensible discount value'); this.saveDb(d => { d.coupons.push({ code: nc.code, type: nc.type, value: val, min, active: true }); return d; }); this.setState({ nc: { code: '', type: 'pct', value: '', min: '' } }); },
+          subCount: db.subscribers.length, subscribers: db.subscribers.map(x => ({ email: x.email, at: fmtDate(x.at) })),
+          exportSubs: () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['Email,Subscribed,Consent\n' + db.subscribers.map(x => [x.email, x.at.slice(0, 10), x.consent || ''].join(',')).join('\n')], { type: 'text/csv' })); a.download = 'sot-subscribers.csv'; a.click(); },
+          featuredNames: live.filter(p => p.featured).map(p => p.name).join(' · ') || 'None'
+        });
+      }
+      if (at === 'delivery') Object.assign(out, {
+        zoneSettings: ZONES.map(([k, label]) => ({ label, fee: db.fees[k], est: db.est[k], setFee: e => { const n = Math.max(0, Number(e.target.value) || 0); this.saveDb(d => { d.fees[k] = n; return d; }); }, setEst: e => { const v2 = e.target.value; this.saveDb(d => { d.est[k] = v2; return d; }); } })),
+        pickupOn: db.pickupOn, togglePickup: e => { const on = e.target.checked; this.saveDb(d => { d.pickupOn = on; return d; }); }
+      });
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>
